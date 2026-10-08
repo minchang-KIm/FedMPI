@@ -1,0 +1,138 @@
+WARNING:__main__:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961297 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961298 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961299 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961300 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961301 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961302 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961303 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961304 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961305 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961306 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961307 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961309 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961310 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961312 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961313 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961314 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961315 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961316 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961317 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961318 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961319 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961322 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961328 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961331 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961335 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961338 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961341 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961343 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961347 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961348 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961349 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961353 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961355 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961357 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961359 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961362 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961364 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961366 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961367 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961368 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961370 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961372 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961375 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961376 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961378 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961381 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961383 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961384 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961387 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961388 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961391 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961393 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961394 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961396 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961398 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961401 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961403 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961405 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961407 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961408 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961413 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961414 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961416 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961418 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961421 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961424 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961426 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961427 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961430 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961431 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961433 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961435 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961436 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961440 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961441 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961443 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961445 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961452 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961459 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961470 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961472 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961478 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961491 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961503 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961513 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961526 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961531 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961553 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961564 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961577 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961580 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961581 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961584 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961586 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961588 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961590 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961592 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961593 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961595 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2961597 closing signal SIGTERM
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: -11) local_rank: 60 (pid: 2961411) of binary: /home/wise-175/anaconda3/envs/FL/bin/python3
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 765, in <module>
+    main()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 345, in wrapper
+    return f(*args, **kwargs)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 761, in main
+    run(args)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 752, in run
+    elastic_launch(
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 245, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+=========================================================
+Start.py FAILED
+---------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+---------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-08_16:43:24
+  host      : wise-175
+  rank      : 60 (local_rank: 60)
+  exitcode  : -11 (pid: 2961411)
+  error_file: <N/A>
+  traceback : Signal 11 (SIGSEGV) received by PID 2961411
+=========================================================
