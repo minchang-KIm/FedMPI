@@ -1,0 +1,858 @@
+                                                        Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+                                                                      Contents lists available at ScienceDirect
+
+
+                                           Journal of Parallel and Distributed Computing
+                                                             journal homepage: www.elsevier.com/locate/jpdc
+
+
+
+
+Staleness aware semi-asynchronous federated learning
+Miri Yu, Jiheon Choi, Jaehyun Lee, Sangyoon Oh ∗
+Department of Artiﬁcial Intelligence, Ajou University, Suwon, 16499, Republic of Korea
+
+
+
+
+A R T I C L E             I N F O                           A B S T R A C T
+
+Keywords:                                                   As the attempts to distribute deep learning using personal data have increased, the importance of federated
+Federated learning                                          learning (FL) has also increased. Attempts have been made to overcome the core challenges of federated learning
+Semi-asynchronous                                           (i.e., statistical and system heterogeneity) using synchronous or asynchronous protocols. However, stragglers
+Staleness
+                                                            reduce training eﬃciency in terms of latency and accuracy in each protocol, respectively. To solve straggler issues,
+                                                            a semi-asynchronous protocol that combines the two protocols can be applied to FL; however, eﬀectively handling
+                                                            the staleness of the local model is a diﬃcult problem. We proposed SASAFL to solve the training ineﬃciency
+                                                            caused by staleness in semi-asynchronous FL. SASAFL enables stable training by considering the quality of the
+                                                            global model to synchronise the servers and clients. In addition, it achieves high accuracy and low latency by
+                                                            adjusting the number of participating clients in response to changes in global loss and immediately processing
+                                                            clients that did not to participate in the previous round. An evaluation was conducted under various conditions
+                                                            to verify the eﬀectiveness of the SASAFL. SASAFL achieved 19.69%p higher accuracy than the baseline, 2.32
+                                                            times higher round-to-accuracy and 2.24 times higher latency-to-accuracy. Additionally, SASAFL always achieved
+                                                            target accuracy that the baseline can’t reach.
+
+
+
+
+1. Introduction                                                                               protect privacy by exclusively exchanging model parameters between
+                                                                                              participating servers and clients without sharing raw training data. This
+    One crucial factor determining the performance of machine learning                        privacy-preserving mechanism stands contrast to traditional distributed
+is the quantity and quality of data. In particular, to take advantage of ex-                  deep learning frameworks, which are susceptible to privacy breaches
+ponentially growing data, distributed deep-learning techniques that use                       due to the direct sharing of client-speciﬁc data.
+high-performance computing resources have rapidly advanced. Further-                              Among the two types of FL, there are challenges in cross-device FL,
+more, numerous attempts have been made to perform distributed deep                            in which hundreds of millions of small devices participate [1]. (1) High
+learning in federated learning (FL) environments, which oﬀer beneﬁts                          communication cost: The devices used by clients and servers in FL
+in terms of computational resource eﬃciency, training diverse data, and                       are typically connected through unstable networks, such as cellular net-
+privacy.                                                                                      works or Wi-Fi. Thus, as the size of the training model increases, the
+    FL leverages constrained computational resources and individual                           process of uploading and downloading model requires more time. Unsta-
+data generated from small-scale devices, such as IoT devices or mo-                           ble networks can also result in lost of the model during the transmission
+bile phones, to oﬀer tailored services. The server responsible for up-                        process. (2) Statistical heterogeneity: The FL training data were gen-
+dating the global model in FL does not directly participate in model                          erated based on the usage patterns of diﬀerent device users, resulting
+training; rather, it aggregates local models received from client de-                         in training data that did not follow an independent and identical distri-
+vices. Consequently, FL eliminates the need for resource intensive of                         bution (non-i.i.d.). This could result in either an increased training time
+high-performance computing infrastructure. Additionally, by encourag-                         owing to more frequent updates required for convergence or the risk of
+ing increased client participation in model training, FL facilitates the                      the divergence of the global model. (3) System heterogeneity: Because
+integration of data from a more diverse distribution, thereby yielding                        computation and communication resources are heterogeneous, training
+a more intelligent model. In contrast to conventional distributed deep                        performance may be limited by slowest client, leading to delays in the
+learning, where training data is collected at a centralized repository, FL                    training time. (4) Privacy: Even if training data is not shared, there
+
+
+ * Corresponding author.
+   E-mail addresses: zztiok@ajou.ac.kr (M. Yu), unidev@ajou.ac.kr (J. Choi), dlwogus8888@ajou.ac.kr (J. Lee), syoh@ajou.ac.kr (S. Oh).
+
+https://doi.org/10.1016/j.jpdc.2024.104950
+Received 19 December 2023; Received in revised form 1 May 2024; Accepted 24 June 2024
+Available online 1 July 2024
+0743-7315/© 2024 Elsevier Inc. All rights are reserved, including those for text and data mining, AI training, and similar technologies.
+M. Yu, J. Choi, J. Lee et al.                                                                            Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+is a possibility of personal information being leaked through the local            2. Background and related work
+model uploaded to the server. In addition, the training model may not
+converge because of model poisoning by an attacker.                                    FL trains a global model by sharing only the model between the
+    Synchronous protocol can address the issues of statistical hetero-             server and client. After the server distributes the global model to all
+geneity in FL. Attempts have also been made to apply asynchronous                  clients, each client performs local updates using its local dataset to train
+protocols to address the issue of delayed training speed owing to system           the received global model and create a local model. These local models
+heterogeneity in synchronous protocol. However, this further increases             are uploaded back to the server. The server subsequently replaces the
+the communication cost imposed on the server and results the slow con-             global model to the results of aggregating the received local models. In
+                                                                                   this study, we deﬁned a round as the cycle from distribution to updat-
+vergence of the global model. This is owing to the stale local model,
+                                                                                   ing the global model. Each index of the round corresponds to a version
+which was trained based on an outdated global model. This problem
+                                                                                   of the global model. Three protocols are applicable between the server
+is exacerbated when clients are slow because it cannot receive global
+                                                                                   and client in FL: synchronous, asynchronous, and semi-asynchronous.
+model frequently. Recently, several studies have addressed the prob-
+                                                                                       Synchronous FL The server selects the clients to participate in each
+lem of poor training performance of slow clients in both protocols by
+                                                                                   round. Once all selected clients upload their local models, the aggre-
+applying semi-asynchronous protocols. This protocol can alleviate the              gation process starts updating the global model (Fig. 1-(a)). Because
+problem of increased staleness from slow clients by synchronising some             all selected clients begin local updates using the same global model, the
+clients with the server, similar to synchronous FL, while allowing other           global model can converge to a high accuracy within a few rounds. How-
+clients to perform local updates independently, similar to asynchronous            ever, owing to system heterogeneity, which is one of the challenges of
+FL.                                                                                FL, the number of rounds is limited to the speed of the slowest client,
+    The semi-asynchronous protocol forcibly synchronises the stale local           also known as a straggler. This limitation leads to an increase in the train-
+model with the latest global model when staleness exceeds a threshold.             ing latency.
+This was performed to resolve the performance degradation of the global                Several FL studies have assumed a synchronous protocol. FedAvg
+model by improving the quality of the local model. However, if the qual-           [2] randomly selected participating clients in every round. To reduce
+ity of the latest global model is low, the quality of the synchronised local       the latency caused by stragglers, [3] measured the computation and
+model will also be low. These problems have not been addressed in ex-              communication latencies of clients to select clients capable of upload-
+isting studies.                                                                    ing local models within the deadline of each round. [4] clustered clients
+    Increasing the number of participating clients in the aggregation can          with similar latency into tiers and randomly selected clients from one
+address the decline in accuracy caused by stale local models. There are            tier, aiming for a similar latency among participating clients in each
+two approaches for this. One is determining the deadline for the waiting           round. [5,6] allowed diﬀerent numbers of local epochs to adapt to the
+time, allowing as many clients as possible to upload the local model.              computational capabilities of each client. Conversely, to address statis-
+                                                                                   tical heterogeneity, [7,8] calculated the utility (i.e., contribution to the
+Alternatively, the number of participating clients must be determined.
+                                                                                   global model) of each client based on the local loss. This ensured that
+However, as more clients participated, the waiting time required per
+                                                                                   only clients with high utility participate in each round. In addition, [9]
+round increased. Therefore, having several participating clients is not
+                                                                                   adjusted the local epoch for each client based on the local loss between
+always optimal. It is necessary to increase or decrease the number of
+                                                                                   two adjacent rounds.
+participating clients adaptively based on the training progress of the                 Asynchronous FL In asynchronous FL, all clients perform local up-
+global model.                                                                      dates and receive the global model from the server independently.
+    The number of participating clients of the some previous semi-                 Therefore, there is no need to wait for other clients to complete the
+asynchronous method is ﬁxed. Consequently, even if many clients up-                local updates. Whenever one client uploads a local model, the server
+load their local models, some of them remain unnecessarily stale be-               updates the global model only using that. Subsequently, the server im-
+cause they are unable to participate in the aggregation owing to ﬁxed              mediately sends the updated global model to that client (Fig. 1-(b)).
+number of participating clients. Thus, strict constraints on the number            Each client performs a local update from a diﬀerent state (i.e., version)
+of participating clients must be avoided.                                          of a global model, called the base global model. In addition, as the number
+    In this study, we proposed staleness aware semi asynchronous fed-              of clients increases, there is a signiﬁcant diﬀerence between the states
+erated learning (SASAFL), which aims to solve the problem of reduced               of the global and local model (i.e., the stale local model). This diﬀerence
+training eﬃciency caused by staleness. SASAFL actively uses the global             increases the staleness of the local model. Staleness refers to the diﬀer-
+loss to increase the training eﬃciency of the global model. To improve             ence of state between the global and local models. This can be calculated
+the quality of the local model, it considers staleness of local model and          as the diﬀerence in version between the current and base global models
+global loss when synchronising the server and client. It also adjusts              of each client. In particular, stragglers received the global model less fre-
+the number of participating clients, as required, based on changes in              quently than other clients, resulting in increased staleness and quality
+the global loss, to improve the accuracy of the global model with low              deterioration of local model. [10] applied a decay coeﬃcient to local
+                                                                                   models that had tolerable staleness to solve the problem of slow con-
+latency. In addition, by setting the minimum number of participating
+                                                                                   vergence of the global model caused by the staleness of clients. [11]
+clients, it is possible to allow more local models can be aggregated. This
+                                                                                   allows partial model training to solve the staleness of the straggler’s
+aids to eliminate unnecessary stale local models.
+                                                                                   local model, and has a similar approach to SASAFL, which will be ex-
+    The contributions of SASAFL are as follows:
+                                                                                   plained later. However, it does not solve the problem of staleness caused
+                                                                                   by frequently updated global models due to many clients.
+   • Considering the training ineﬃciency problem caused by staleness
+                                                                                       Semi-asynchronous FL The semi-asynchronous protocol can ad-
+     in semi-asynchronous protocols, we proposed SASAFL, which im-                 dress the issues of increased training latency in synchronous FL and the
+     proves the quality of local models and global models degraded                 problem of decreased training accuracy in the asynchronous FL owing
+     owing to staleness problems.                                                  to the straggler. In this protocol, some clients receive the latest global
+   • We built a multicore and multinode-based FL experimental environ-             model by synchronising with the server, like synchronous FL. Mean-
+     ment to evaluate the SASAFL. Through our evaluation, we demon-                while, other clients continue to perform local updates based on the
+     strated that SASAFL provides stability in training by increasing the          outdated global model rather than the latest global model, similar to
+     quality of the local model and enables eﬃcient training in terms of           the asynchronous FL (Fig. 1-(c)). That is, the local models used for ag-
+     accuracy and latency by increasing the quality of the global model.           gregation may or may not be trained based on the same global models.
+
+                                                                               2
+M. Yu, J. Choi, J. Lee et al.                                                                            Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+
+
+                                         Fig. 1. Illustration of the synchronous, asynchronous and semi-asynchronous FL.
+
+
+
+
+    Fig. 2. Comparison of synchronous, asynchronous and semi-asynchronous FL. The left corresponds to accuracy, and the right corresponds to wall clock time.
+
+
+    Fig. 2 compares the accuracy and wall clock time of synchronous,                3. Motivation
+asynchronous, and semi-asynchronous FL over 500 rounds using the
+MNIST [12] dataset. The number of rounds for asynchronous FL is mea-                    To address the training ineﬃciency caused by staleness, a semi-
+sured as the number of the update for global model. Semi-asynchronous               asynchronous Federated Learning (FL) approach is employed, which
+FL had a ﬁnal accuracy of 91.6%, which was 6%p lower than syn-                      means that both synchronous FL and asynchronous FL are utilized “par-
+chronous FL (Fig. 2-(a)), but latency performance was approximately                 tially”. [19] trains asynchronously, but changes to synchronous protocol
+three times faster than synchronous FL (Fig. 2-(b)). Additionally, with             when the model discrepancy deﬁned by the EMD value exceeds the
+the target accuracy set to 90%, the latency of semi-asynchronous FL                 threshold. During this process, there’s an overhead involved in calcu-
+was lower, taking approximately 143 min, while synchronous FL took                  lating the EMD value, and the challenge lies in the inability to mitigate
+approximately 177 min. Conversely, it achieved a 10%p higher ﬁnal                   the straggler problem that arises during the synchronous FL. [20] also
+accuracy while maintaining the same latency as asynchronous FL. In                  has similar approach. After clustering based on processing time of each
+semi-asynchronous FL, the server can receive local models during ag-                client, local model is updated synchronously inside the cluster, but clus-
+gregation. These local models may impact on the next aggregation.                   ter model is aggregated with global model asynchronously. This solution
+Therefore, as training progresses in semi-asynchronous FL, the wait-                also has the limitations described above in terms of straggler. Addition-
+                                                                                    ally, clusters containing stragglers continue to have low contributions,
+ing time for the server to receive local models may become shorter or
+                                                                                    so the global model cannot suﬃciently train the training data of the clus-
+even nonexistent in some cases, resulting in latency almost the same as
+                                                                                    ter. However, the semi-asynchronous protocol which merged between
+asynchronous FL. This experiment shows that the same global model in
+                                                                                    synchronous and asynchronous FL as described in Section 2 might solve
+which participating clients perform local updates has a signiﬁcant im-
+                                                                                    the ineﬃciency training problem owing to staleness.
+pact on accuracy, and that independent local updates of all clients have
+                                                                                        In semi-asynchronous FL, the global model is updated by aggregat-
+a signiﬁcant impact on latency. In other words, semi-asynchronous FL
+                                                                                    ing local models. This implies that the convergence of the global model
+is superior to synchronous FL in terms of latency and asynchronous FL
+                                                                                    is determined by the quality of the local model. In addition, because the
+in terms of accuracy.
+                                                                                    base of local model is a global model, it is also important to consider
+    However, because of the presence of stragglers, their staleness more
+                                                                                    which global model the client will initiate local updates. Therefore, also
+increases. In addition, there is an issue with the deterioration of the             the base global model of the local model is related to FL process per-
+global model training performance in terms of accuracy and latency due              formance. A previous study [15] which emphasised the signiﬁcance of
+to stragglers. One possible approach for solving the staleness problem              high-quality local models for the convergence of the global model sug-
+of semi-asynchronous protocols is to set a deadline for a round. This               gested forcibly synchronising the too-stale-local model with the latest
+deadline encompasses the time receiving local models. In [13], static               global model. This approach enabled the ongoing training of the local
+deadlines were set and the computing and communication latencies of                 model without being too stale.
+clients were measured. Clients were clustered based on the latency of                   [21] adjusts the importance of local models based on staleness and
+model training and uploading. All local model of clients in the clusters            the impact of local loss to solve ineﬃcient training due to staleness,
+that could be uploaded within deadline were used for aggregation. In                and has an approach close to SASAFL, which will be explained later.
+[14,15], the maximum deadline for each round was dynamically deter-                 They proposed a solution that uses reinforcement learning to deter-
+mined based on the maximum computation and communication latency                    mine the time slot that interpolates the local model and the fresh global
+of the clients. Another approach is to determine the number of clients              model. However, because even the latest global model cannot guaran-
+participating in the aggregation. In [16], the time required for one round          tee quality, the quality of the local model cannot be always improved
+for each client was measured to determine the number of participat-                 by synchronising it with the latest global model. If only some of the to-
+ing clients adaptively. [17] used deep reinforcement learning (DRL) to              tal clients frequently participate in aggregation, a global model may be
+consider the latency of the clients. Additionally, [18] employed DRL to             overﬁtted to the local datasets of these clients. In this case, synchronisa-
+consider latency and accuracy simultaneously.                                       tion with the latest global model may further deteriorate the quality of
+
+                                                                                3
+M. Yu, J. Choi, J. Lee et al.                                                                             Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+
+
+Fig. 3. Accuracy and loss of the global model when setting the ratio of participating clients in one round among 30 clients in the semi-asynchronous FL process to
+10%, 30%, and 50%.
+
+
+the local model. To address this issue, the SASAFL synchronises a local             did not strictly enforce the number of participating clients in a round to
+model with the latest global model considering not only the staleness of            solve this problem.
+the local model and but also the global loss. Here, global loss refers to
+the loss value obtained by evaluating the global model using test dataset           4. SASAFL: staleness aware semi asynchronous federated learning
+of the server. The SASAFL determines that the quality of a global model
+is better when it has a lower global loss.                                              Semi-asynchronous FL protocol allos stale local models to be aggre-
+    Another important factor for improving the quality of the global                gated, thereby reducing the training performance of the global models.
+model is the number of participating clients. In previous studies using             To solve this problem, (1) clients in SASAFL decided whether to receive
+the semi-asynchronous protocol, only some clients (i.e., clients partici-           the global model based on its quality. This decision aimed at improving
+pated in previous round or their staleness of local model are too large)            the quality of local model. (2) The SASAFL allowed adaptive aggrega-
+are synchronized with the server while the rest perform local updates               tion by adjusting the number of clients participating in the aggregation
+independently [13–16,18]. As the number of local models synchronised                based on changes in global loss. Through these two approaches, SASAFL
+to the same state increases (i.e., the number of participating clients in-          enabled eﬃcient semi-asynchronous FL while allowing the use of stale
+creases), it gets closer to the synchronous FL and can converge to high             local models.
+accuracy in fewer rounds. Fig. 3 shows the accuracy and loss when the                   Fig. 4 shows an overview of the SASAFL with six clients. First, the
+ratio of the number of clients participating in the aggregation among               server distributed the global model to all the clients. Each client then de-
+the 30 clients in the semi-asynchronous FL process is set to 10%, 30%,              cided whether to receive the global model based on its reception policy.
+and 50%. When comparing 10% and 50% participation, the more clients                 However, all clients initially received the global model, and then began
+participate in the aggregation, the faster it converges to high accuracy            to make local updates based on it. After distributing the global model,
+(Fig. 3-(a)) and low loss (Fig. 3-(b)). However, the time required for              the server determined the minimum number of clients required to par-
+each round increases.                                                               ticipate in the aggregation in next round. This was performed based on
+    To solve this issue, existing studies [14,15] measured the latency by           the policy of adjusting the number of participating clients. Once a lo-
+proﬁling the client’s resources (CPU, GPU, memory, network bandwidth,               cal update was completed, the client uploaded the local model to the
+etc.) to determine the deadlines or number of participating clients in one          server. The server collected the local model in a buﬀer whenever it
+round. However, the quality of the global model could be improved by                was received. Once the local model was received from the determined
+considering not only the client’s latency but also its accuracy or loss.            minimum number of clients, the aggregation for updating global model
+    Another limitation of existing studies is that they do not consider that        began. Assuming that the server could receive the local model during
+aggregation and local model reception can be performed in parallel. In              aggregation, it also collected the local models during aggregation. The
+the case of a method for adjusting the number of participating clients,             collected local models were then used to aggregate in the next round.
+if the determined number of clients participate, the local model recep-             The updated global model was distributed to all the clients again, as
+tion is stopped and aggregation begins. If many clients participate in the          before.
+FL process, many can upload local models for aggregation in a short pe-                 In this section, we introduce a policy for global model reception and
+riod of time. However, they cannot be received in the current round, but            adjusting the number of participating clients in the aggregation to ex-
+only in the after. The number of these clients aﬀects the ﬁxed number of            plain the SASAFL details using Fig. 4.
+participating clients. It results that aggregation is frequently performed,
+further increasing the staleness of clients. Even if it is assumed that ag-         4.1. Global model reception policy
+gregation and local model reception are performed in parallel, only a
+strictly ﬁxed number of clients is used for each aggregation, resulting in              Various types of clients In SASAFL, when a new round begins, the
+other clients becoming unnecessarily stale.                                         server distributes the global model to all clients. Therefore, all the clients
+    As shown in Fig. 4, we assume that the aggregation and local model              decide whether to receive a global model in every round. Currently, the
+reception are performed in parallel. Six clients uploaded their local               clients are classiﬁed into several types. First, the clients are divided into
+model in round four. Among them, only clients A and D participated                  two categories: waiting and active clients. This categorization is based
+in aggregation, because the determined number of participating clients              on whether a local model has been uploaded. Waiting clients include
+were two in that round. Consequently, the remaining clients (i.e., clients          up-to-date, tolerable, and undrafted clients, deﬁned as follows:
+B, C, E, and F) cannot participate to aggregation of round four. When ag-
+gregation in round four is completed, there are four local models in the              • Up-to-date: Clients who completed a local update based on the lat-
+buﬀer. If the number of participating clients in round ﬁve is less than                 est global model and then uploaded their local model to the server
+four, the client who fails to participate in round ﬁve cannot participate               in the previous round. (e.g. clients C and D in round two as shown
+once again. For example, if the number of participating clients in round                in Fig. 4).
+ﬁve is two, clients E and F, which were received last, cannot participate             • Tolerable: Clients who completed a local update based on the not-
+again, resulting in higher staleness. As explained in detail later, SASAFL              too-outdated global model and then uploaded the local model to
+
+                                                                                4
+M. Yu, J. Choi, J. Lee et al.                                                                           Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+
+
+                                                              Fig. 4. The workﬂow of SASAFL.
+
+
+     the server in the previous round. (e.g. clients B and E in round two         aggregation may decrease the accuracy of the global model. This can
+     as shown in Fig. 4).                                                         lead to a problem in that it reduces the local model quality for the clients
+   • Undrafted: Clients who uploaded a local model before the previous            receiving the global model. Therefore, the deprecated clients should re-
+     round but did not participate in the aggregation of the previous             ceive the global model.
+     round. Consequently, they were still waiting to receive the global               Inferior-tolerable clients also received a global model. Even they up-
+     model (e.g. client A in rounds one and two as shown in Fig. 4).              date the local model using a not-too-outdated global model, it needs
+                                                                                  to consider that they may become deprecated clients because of their
+    Active clients include deprecated, inferior-tolerable, and superior-          slower computation speed compared with that of up-to-date clients. If
+tolerable clients, deﬁned as follows:                                             they become deprecated clients, they are replaced by the latest global
+                                                                                  model. However, as previously mentioned, this may be replaced by a
+   • Deprecated: Clients who still update the local model based on the            global model of lower quality. Therefore, if a client has tolerable stal-
+     outdated global model (e.g. client F in round two as shown in                eness and can replace the base model to a global model with a lower
+     Fig. 4).                                                                     global loss, it can improve the quality of local model.
+   • Inferior-tolerable: Clients who update the local model based on the              In SASAFL, a deprecated and inferior-tolerable client initiates a new
+     not-too-outdated global model. The base global loss was higher than          local update using the received global model; however, this client per-
+                                                                                  forms a smaller quota (local epoch) than before. For example, assume
+     the latest global loss. (e.g., clients B and E in rounds two as shown
+                                                                                  that the default local update quota (i.e., local epoch) is ﬁve. If the global
+     in Fig. 4).
+                                                                                  model is received before the completion of the local update, the local
+   • Superior-tolerable: Clients who update the local model based on the
+                                                                                  update is performed with four local epochs, which is one less than the
+     not-too-outdated global model, which has a lower base global loss
+                                                                                  previous quota. A tolerable client is more likely to become a deprecated
+     than the latest global loss. (e.g., clients A and D in rounds ﬁve and
+                                                                                  client because of its slower computation speed compared with an up-
+     six as shown in Fig. 4).
+                                                                                  to-date client. That is, performing the same number of local updates
+                                                                                  whenever a client receive the global model can result in become strag-
+Here, the base global loss means that the loss of base global model of
+                                                                                  glers. Consequently, the global model cannot be trained local datasets
+each client and the latest global loss means that the loss of latest global
+                                                                                  held by these clients. To prevent this problem, a deprecated and inferior-
+model.                                                                            tolerance client performs a local update that is less than the previous
+    Details of global model reception policy Among the six types of               local epoch.
+clients, waiting clients that participated in the previous round, and dep-            Clients classiﬁed as superior tolerable had an acceptable level of stal-
+recated clients received and replaced the local model with the global             eness. These clients performed local updates using a global model with
+model. Subsequently, they conducted a new local update. For the wait-             a lower base global loss than that of the latest global loss. That is, there
+ing clients who participated in the previous round, the local update              is no need to receive a global model, because the quality of the local
+can begin based on an global model trained from their local dataset. In           model can be guaranteed even without receiving the global model.
+other words, this approach allows for eﬃcient local updates by a suit-                As shown in Fig. 4, one of the up-to-date clients is client D in round
+able global model for each participating client. Waiting clients who do           one. Client D received G0 (i.e., the global model of version 0) and suc-
+not participate automatically participate in the next round, as explained         cessfully uploaded the local model in round one. Client E received G0
+later. Therefore, if they wait for only one round, they can begin a local         and uploaded the local model in round two with a staleness of 1 while
+update using a global model that trained from their local dataset.                the lag tolerance set to 2. Therefore, the client E considered it tolerable.
+    Deprecated clients continue to update their local models using an             Client A in round one received G0 and successfully uploaded the local
+excessively outdated global model. Consequently, participation in the             model in round one. However, it did not participate in round one, but in
+
+                                                                              5
+M. Yu, J. Choi, J. Lee et al.                                                                              Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+round two. Therefore, it becomes an undrafted client in round one and                 the number of clients participating to improve the quality of the global
+two. These three clients participated in round two. Based on the recep-               model. This allowed the server to be trained using various local datasets.
+tion policy for waiting clients, they received G2 and began a new local               On the contrary, if the global loss of the updated global model was
+update based on the global model in round three.                                      lower than that of the previous round, it indicated an improvement in
+    Client F in round two was marked as a deprecated client because                   quality of the global model and resulted in a reduction in the number
+it failed to complete the local update in two consecutive rounds. This                of participating clients. If the FL process involved a larger number of
+implies that the staleness of the local model of client F in round three              participating clients, it could converge to high accuracy more quickly.
+was greater than the lag tolerance which was set to 2 in this example.                Although this approach leads to increased latency, as the quality of
+Therefore, it needs to receive a global model. After receiving G2 in round            the global model improves, the training can progress stably. Therefore,
+three, client F started with the less amount of local update than round               there was no necessity to increase the number of clients when the global
+two. However, the global loss of G3 was reduced from 2.68 to 2.56,                    loss decreased. If the global loss increased again when aggregation was
+resulting in clients A, D, E, and F become inferior-tolerable clients. This
+                                                                                      performed with a reduced number of participating clients, the quality
+indicates that, these clients also receive G3.
+                                                                                      of the global model could be improved by increasing the number of
+    Finally, clients A and D in round six were considered superior-
+                                                                                      participating clients. In summary, the SASAFL increases the number of
+tolerable clients. They received G4. However, because the latest global
+                                                                                      participating clients as required based on an increase in global loss.
+loss increased from 1.98 to 2.21, they did not receive the global model.
+                                                                                          The number of participating clients increases or decreases propor-
+                                                                                      tionally to the rate of the global loss change. If the global loss increased
+  Algorithm 1: Global model reception policy.                                         more than that in the previous round, the number of clients in the next
+   Input: local model version 𝑣𝑘 , global model version 𝑟, latest global loss         aggregation would increase at the same rate as the increase in the global
+           𝑔𝑙𝑟 , base global loss 𝑔𝑙𝑣𝑘 , lag tolerance 𝜏 , local epoch 𝐸              loss. Currently, the maximum number of participating clients is limited
+   /* active client                                                        */         by the total number of clients. On the contrary, if the global loss in
+ 1 if client k still updating local model then
+                                                                                      the current round is lower than that in the previous round, the num-
+       /* deprecated client                                                */
+ 2     if 𝑟 − 𝑣𝑘 ≥ 𝜏 then                                                             ber of clients is reduced by the reduction ratio of the global loss. The
+ 3          receive global model 𝑤𝑟                                                   minimum number of participating clients is a hyperparameter and is
+  4           𝑤𝑘 ← 𝑤𝑟                                                                 the same as the number of participating clients used in previous semi-
+  5           𝐸 𝑘 ← min(𝐸 𝑘 - 1, 𝐸2 )                                                 asynchronous FL. The formula for adjusting the number of participating
+         /* inferior-tolerable client                                       */        clients in SASAFL is as follows:
+ 6       else if 𝑔𝑙𝑟 < 𝑔𝑙𝑣𝑘 then
+  7          receive global model 𝑤𝑟                                                         ⎧            𝑔𝑙𝑟
+  8           𝑤𝑘 ← 𝑤𝑟                                                                        ⎪min ( 𝑃𝑟 × 𝑔𝑙𝑟−1 , 𝐾 )    if 𝑔𝑙𝑟 > 𝑔𝑙𝑟−1 ,
+                                                                                      𝑃𝑟+1 = ⎨            𝑔𝑙𝑟
+                                                                                                                                                                      (1)
+  9           𝐸 𝑘 ← min(𝐸 𝑘 - 1, 𝐸2 )                                                        ⎪max ( 𝑃𝑟 × 𝑔𝑙𝑟−1 , 𝑃𝑚𝑖𝑛 ) if 𝑔𝑙𝑟 < 𝑔𝑙𝑟−1
+       /* superior-tolerable client                                          */
+                                                                                             ⎩
+10     else                                                                           where 𝑃𝑟 denotes the number of participating clients in round 𝑟, 𝑔𝑙𝑟
+11         not receive global model                                                   denotes the global loss of version 𝑟 (i.e., round 𝑟), 𝐾 is the total number
+12     end
+                                                                                      of clients, and 𝑃𝑚𝑖𝑛 is the minimum number of participating clients.
+   /* waiting client                                                         */           SASAFL assumes that the server performs aggregation and receives
+13 else if client k participated in the aggregation of the previous round then
+                                                                                      local models in parallel. The local models received during aggregation
+14     receive global model 𝑤𝑟
+15       𝑤𝑘 ← 𝑤𝑟                                                                      were collected in the buﬀer. When the next round began, all the local
+16 end                                                                                models stored in the buﬀer were used for aggregation. That is, clients
+                                                                                      with local models stored in the buﬀer automatically participated in the
+                                                                                      next round. As SASAFL does not strictly enforce the number of partici-
+    Algorithm 1 describes the global model reception policy of the                    pating clients in the aggregation, it allows more clients participate than
+SASAFL. In the case of the deprecated and inferior-tolerable clients, they            the quota which is calculated using Eq. (1). However, if there are more
+received a global model (lines 3 and 7) and adjusted their local epoch to             local models in a buﬀer than in a quota, the aggregation begins imme-
+𝐸 𝑘 − 1 for start reduced local update (lines 5 and 9) where 𝐸 𝑘 denotes              diately with all the local models in the buﬀer.
+the quota of previous local update of client 𝑘. Note that, it is reduced                  As shown in Fig. 4, the global loss of G1 is 3.97, which is 1.72 times
+until the minimum local epoch where underﬁtting will not occur. The                   higher than G0. According to Eq. (1), three clients participated in the
+minimum local epoch is hyperparameter, and we set it to half of the ori-
+                                                                                      aggregation for G2, which is a 1.72 times increased quota from the ag-
+gin quota 𝐸 empirically. In the case of superior-tolerable clients, they
+                                                                                      gregation for G1. Currently, the local model of undrafted client A from
+do not receive a global model (line 11). Among the waiting clients, those
+                                                                                      round one is utilised for the aggregation of round two. Therefore, the
+who participated in the previous round performed a new local update
+                                                                                      server waited until two clients other than Client A participated. Because
+after receiving the global model (lines 14 and 15). Lag tolerance is a hy-
+                                                                                      clients D and E uploaded their local models in round two, the aggre-
+perparameter, and to identify the optimal value, we adjust 𝜏 from 1 to
+                                                                                      gation started immediately after receiving the local model of client E.
+10 in the experiments section.
+                                                                                      During the aggregation for G2, the server received local models from
+4.2. Adjusting number of participating clients                                        clients B and C. Consequently, two local models were stored in the buﬀer
+                                                                                      at the end of round two. Because global loss of G2 decreased by 0.67
+    Details of adjusting number of participating clients After aggre-                 times compared with G1, the number of clients participating in round
+gation, the server calculates the number of clients participating in the              three became two, which was a 0.67 times decreased from the three
+new round. The number of participating clients was adjusted based on                  clients participating in the round two. However, because there were
+the quality of the global model. This adjustment was made to address                  two undrafted clients, the aggregation for G3 began again as soon as
+the problem of increased time required for one round when many clients                the aggregation for G2 completed. In the case of the G5 aggregation,
+participated each time. As aforementioned, in the SASAFL, the quality                 the calculated quota was two. However, because four local models were
+of the global model is deﬁned as a loss. If the global loss after aggrega-            received during the aggregation for G4, two additional clients (clients E
+tion increased compared with the previous round, the SASAFL increases                 and F) participated, and the aggregation process started immediately.
+
+                                                                                  6
+M. Yu, J. Choi, J. Lee et al.                                                                               Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+  Algorithm 2: SASAFL.                                                                     After the server reﬁned the local models of the participating clients,
+   Input: local model buﬀer 𝐵 , minimum number of participating client                 the aggregation for the global model is begun using the same formula
+          𝑃𝑚𝑖𝑛 , global model version 𝑟, participating clients set 𝑃 (𝑟),              as in [2] (line 14). The aggregated result becomes the global model
+          global model 𝑤, global loss 𝑔𝑙𝑟                                              for the next round. The number of participants in the next round was
+ 1 Server process:                                                                     determined using to Eq. (1) when the global model was updated (line
+ 2        𝑟=0                                                                          15). This process completes one round (line 16).
+ 3        𝑃𝑟 = 𝑃𝑚𝑖𝑛
+ 4        𝐵=∅                                                                          5. Experiment and evaluation
+ 5        Listening thread:
+ 6             Receive 𝑤𝑘 from client 𝑘
+                                                                                       5.1. Experiment setup
+ 7             Push 𝑤𝑘 in 𝐵
+ 8        Aggregation thread:
+ 9             Distribute 𝑤𝑟 , 𝑔𝑙𝑟 and 𝑟 to all clients                                    Testbed. To validate the eﬀectiveness of SASAFL, we developed an
+10             Wait for 𝑙𝑒𝑛(𝐵) ≥ 𝑃𝑟                                                    FL testbed platform on a Nurion [22] CPU cluster in Korea Institute of
+11              𝑃 (𝑟) = 𝐵                                                              Science and Technology Information (KISTI). Servers and clients were
+12              𝐵=∅                                                                    deployed on a KNL CPU cluster, where each node had 68 cores. This
+13              Reﬁne 𝑃 (𝑟) according to Eq. (2)                                       testbed platform was implemented on PyTorch 1.12 [23], and com-
+14              𝑤𝑟+1 = Aggregate 𝑃 (𝑟)                                                 munication between the server and client was implemented using the
+15              Update 𝑃𝑟+1 according to Eq. (1)                                       distributed communication package in PyTorch [24], with a built-in
+16              𝑟=𝑟+1                                                                  backend gloo for CPU training.
+17 Client process:
+                                                                                           For system heterogeneity, each client executes an FL process with
+18        Listening thread:
+                                                                                       one or more cores. Clients were assigned to one of the ﬁve categories.
+19             Receive global model according to Alg. 1
+20        Local update thread:
+                                                                                       Therefore, when K is 30, six clients were assigned to each category, and
+21        /* Whenever the global model received                         */
+                                                                                       when K is 100, twenty clients were assigned to each category. When K
+22             LocalUpdate(𝑤𝑘 , 𝐸 𝑘 )                                                  is 30, the numbers of cores assigned to each category were 1, 2, 3, 4,
+23             Send local model 𝑤𝑘 to server                                           and 8, and when K is 100, they were the same, except that ﬁve cores
+                                                                                       were used instead of four.
+                                                                                           For statistical heterogeneity, we prepared a non-IID conﬁguration
+4.3. The SASAFL protocol                                                               with diﬀerent distributions and numbers of data points for each client.
+                                                                                       The quantity of data for each client was randomly determined, following
+                                                                                       a Gaussian distribution. The divided datasets were sequentially allo-
+    For poor convergence performance owing to the staleness of the local
+                                                                                       cated based on the client index. Therefore, each client had one or two
+model, SASAFL applied the global model reception policy on the client
+                                                                                       labels.
+and adjusted the number of participating client policies on the server.
+                                                                                           Benchmarks. To evaluate the SASAFL, we implemented the follow-
+Algorithm 2 represents the workﬂow of the SASAFL.
+                                                                                       ing semi-asynchronous benchmarks in our testbed, and compared the
+    When the FL process began, the server initialised the index of the
+                                                                                       performance of each method.
+round (i.e., global model version) to zero, the number of participating
+clients for the ﬁrst round to 𝑃𝑚𝑖𝑛 , and the local model buﬀer to an empty
+                                                                                         • Basic semi-asynchronous FL (BSA): It is identical to the SASAFL
+set (lines 2-4). When a new round starts, the server distributes the global
+                                                                                           except the global model reception policy and adjusting number of
+model 𝑤𝑟 , global loss 𝑔𝑙𝑟 , and index of round (i.e., global model version)
+                                                                                           participating client algorithm. In other words, even if the number of
+𝑟 to all clients (line 9). Simultaneously, the listening thread is running
+                                                                                           local models received during aggregation is greater than the deter-
+to receive the local model from any clients (line 6 and 7). In the client
+                                                                                           mined number of local models, the server only uses ﬁxed number of
+process, the global model is received in a listening thread, while the
+                                                                                           local models for aggregation. In common with SASAFL, the aggre-
+local update is performed in a local update thread. These threads run
+                                                                                           gation and the local model reception in server perform in parallel.
+in parallel, similar to a server. Whenever a client receives the global
+                                                                                           Additionally, a penalty is applied when aggregating the local mod-
+model, by global model reception policy, they also update their local
+                                                                                           els, according to Eq. (2).
+epoch and replace local model as needed (line 19) and then begin the
+                                                                                         • SAFA [15]: It is state-of-the-art solutions for the semi-asynchronous
+local update (line 22). If a local update is successfully completed, the
+                                                                                           FL considering accuracy and latency. Among the clients, the depre-
+local model is sent to the server (line 23). This locally sent model is
+                                                                                           cated and up-to-date clients are synchronised with the server. And
+then received in the listening thread of the server (lines 6 and 7). The
+                                                                                           there are crashed clients who cannot participate in training each
+server waits until the number of local models in the buﬀer 𝐵 meets the
+                                                                                           round. Considering the latency, the maximum waiting time for one
+threshold 𝑃𝑟 (line 10). This indicates that the server waits until at least
+                                                                                           round was limited to the slowest client among all clients or a user-
+𝑃𝑟 clients can participate in aggregation.
+                                                                                           deﬁned deadline.
+    Before the aggregation, the server reﬁnes local models in the buﬀer
+(line 13). The formula [17,18] for reﬁning the local model is as follows:
+                                                                                           Model and datasets. In this experiment, we used CNN models iden-
+  𝑘      𝑠𝑘   𝑘             𝑠𝑘                                                         tical to those in [2] and three benchmark datasets, MNIST [12], Fash-
+𝑤 = 𝜁 𝑤 + (1 − 𝜁 )𝑤𝑟                                                         (2)
+                                                                                       ionMNIST [25], and CIFAR-10 [26]. The models employed for training
+where 𝜁 denotes the decay coeﬃcient, and 𝑠𝑘 denotes the staleness (i.e.,               the MNIST and FashionMNIST datasets were identical.
+the diﬀerence in version between the local and global models) of the                       Training parameters. The following parameters were used in the
+client 𝑘.                                                                              experiments: We set the total number of clients 𝐾 to 30 and 100, and
+    The purpose of reﬁning the local model is to reduce the pollution                  the (minimum) participating ratio 𝐶 of the clients to 0.1 [2], 0.3 [8],
+caused by the staleness of the local model in the global model. Although               and 0.5. In algorithm 2, 𝑃𝑚𝑖𝑛 is calculated by multiplying 𝐶 and 𝐾 .
+SASAFL has attempted to improve the quality of the local model through                 The learning rate was 0.01 for MNIST, 0.001 for FashionMNIST, and
+the global model reception policy, the presence of a stale local model                 CIFAR-10 showing the highest performance for all methods in our ex-
+prevents the attainment of an optimally updated global model. There-                   perimental setting. The number of local epochs 𝐸 was set to ﬁve, and
+fore, a penalty must be imposed on the local model based on the degree                 the minimum local epoch was set to half of 𝐸 , which is threshold at
+of staleness.                                                                          which the local model avoids underﬁtting. The minimum local epoch is
+
+                                                                                   7
+M. Yu, J. Choi, J. Lee et al.                                                                             Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+
+
+                                                                                    Fig. 6. Training curve on MNIST comparison with SAFA (blue) and SASAFL
+                                                                                    (red) when K set to 100. The solid, dotted, and dashed line correspond to C set
+                                                                                    to 0.1, 0.3, and 0.5, respectively.
+
+
+Fig. 5. Accuracy of global model according to lag tolerance changes from 1 to                 Table 1
+10 on SASAFL.                                                                                 Wall clock time comparison between SAFA and SASAFL on
+                                                                                              MNIST when K set to 100. Each value represents the wall
+a speciﬁc hyperparameter in SASAFL. If user wants that communication                          clock time in minutes required to complete 25 rounds.
+overhead should be low, it should be set close to the default local epoch                       Method                   SAFA                      SASAFL
+for avoid frequently receiving global model. Otherwise, it is better to set
+                                                                                                C=0.1                    21.21                     16.48
+it as small as possible in order to receive global model frequently. The                        C=0.3                    21.26                     16.3
+batch size that the clients used for the local updates was set to 32. The                       C=0.5                    21.21                     16.8
+number of rounds constituting the FL process diﬀered for each dataset,
+and the experiment was conducted until the global model converged.
+The number of rounds was 500 for both MNIST and FashionMNIST. For                   better to manually search from 1 to 10 according to their model and
+CIFAR-10, 3000 rounds were used. The decay coeﬃcient 𝜁 in Eq. (2)                   datasets.
+was set to 0.9. All the experiments were performed with an average of                   Training curve In the comparison between SAFA and SASAFL, the
+ten repetitions per setting.                                                        experimental settings are diﬀerent with described above. First, we use
+    Metrics. To evaluate SASAFL, we used metrics deﬁned as follows:                 only MNIST datasets and the learning rate was conﬁgured at 0.001,
+                                                                                    while the batch size was established at 40. The total number of clients
+   • Accuracy: The highest test accuracy was achieved during the FL                 used in the evaluation was 100. In addition, in the settings in section 5.1,
+     process. The purpose was to evaluate the accuracy of the SASAFL.               both the distribution and size of local datasets were set to be heteroge-
+   • Round-to-accuracy [27]: Number of rounds required to reach the                 neous, but in comparison with SAFA, the only sizes of local datasets were
+     target accuracy. The purpose was to evaluate communication eﬃ-                 set to randomly follow Gaussian distribution. The reason for changing
+     ciency which is related to latency performances.                               the settings is to make it the same as the experimental setting introduced
+   • Time-to-accuracy [27]: Elapsed time required to reach the target               by SAFA.
+     accuracy in minutes. The purpose was to evaluate the speed eﬃ-                     Fig. 6 shows the training curves of SAFA and SASAFL using MNIST.
+     ciency which is also related to the latency performances.                      SASAFL reached an accuracy of over 90% from the beginning of training
+                                                                                    regardless of the participating ratio 𝐶 . In a setting where C set to 0.3
+5.2. Experiment results                                                             and 0.5, SASAFL converged to the target accuracy of 98% in 22 rounds.
+                                                                                    In other settings (i.e., C set to 0.1), convergence to target accuracy was
+    Lag tolerance SASAFL and SAFA require lag tolerance values. In the              achieved in 25 rounds. On the other hand, SAFA reached 93%, which is
+case of the SAFA, because the authors set the lag tolerance to ﬁve which            lower than the target accuracy in all C settings.
+could not a high communication cost and loss of the global model, we                    In particular, it can be seen that the higher the participating client
+also set the lag tolerance of the SAFA to ﬁve. For the SASAFL, the lag              ratio, the convergence to higher accuracy was achieved, albeit slightly.
+tolerance was varied from 1 to 10 to determine the optimal value.                   The reasons why SASAFL was able to show higher performance than
+    Fig. 5 shows that the accuracy of the global model has a large vari-            SAFA are as follows. Unlike SAFA, SASAFL determines the number of
+ation and low accuracy when the lag tolerances are 5, 6, and 7. If the              participating clients based on global loss. Given that global loss might
+lag tolerance is small value (i.e., 1, 2, 3, or 4), the clients can be peri-        often increase during the initial phases of FL process, improving the
+odically synchronised with the server. On the other hand, if the value              quality of the global model involves maximising client participation as
+is large (i.e., 8, 9, or 10), there is a higher chance of engaging in lo-           much as possible.
+cal training using a more recent and higher-quality global model. This                  Table 1 compares the wall clock time of SAFA and SASAFL to com-
+leads to lower variations in the accuracy of the global model and the               plete 25 rounds on MNIST when K set to 100. SASAFL showed shorter
+likelihood of achieving a higher accuracy.                                          wall clock time than SAFA in all C settings. Unlike SASAFL, SAFA con-
+    Based on these observations, it is crucial for the overall training to          siders crashed clients, and because all clients except crashed clients
+set a lag tolerance that allows minimal latency while ensuring high                 participate in each round, the time required for one round is long. How-
+accuracy. This approach also contributes to maintaining stability in                ever, SASAFL can reduce the time required for each round because the
+the overall training process by minimising variation in the accuracy                number of participating clients increases only when the global loss in-
+of global model. For optimal training performance, the lag tolerance                creases.
+must be set as follows: 1) allowing a high lag tolerance to minimise the                Furthermore, SAFA converged to reasonable accuracy only when size
+communication overhead, 2) ensuring high accuracy through periodic                  of the local dataset was heterogeneous. It was also observed that the
+synchronisation with the server, and 3) minimising the variation in the             global model was not trained at when the distribution of local dataset
+accuracy of the global model for training stability. Therefore, we set the          was heterogeneous. Therefore, in future experimental results, the per-
+lag tolerance to nine which shows the highest accuracy of the global                formance was evaluated only with BSA in our heterogeneity settings,
+model. However, to determine the optimal lag tolerance for user, it is              excluding SAFA.
+
+                                                                                8
+M. Yu, J. Choi, J. Lee et al.                                                                             Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+
+
+Fig. 7. Training curve on MNIST (the above two) and FashionMNIST (the below two) comparison with BSA (green) and SASAFL (red). The solid, dotted, and dashed
+lines are corresponding to C set to 0.1, 0.3, and 0.5, respectively. Left and right correspond to K set to 30 and 100. (All graphs were ﬂoated every 5 rounds.)
+
+
+
+
+Fig. 8. Training curve on CIFAR10 comparison with BSA (green) and SASAFL (red). The solid line, dotted line, and dashed line denotes C set to 0.1, 0.3, and 0.5,
+respectively. Left and Right correspond to K set to 30 and 100 each. (All graphs ﬂoats every ten rounds.)
+
+
+    Fig. 7 shows the training curve for the benchmark on BSA, and
+SASAFL with MNIST ((a) and (b)) and FashionMNIST ((c) and (d)) when
+the total number of clients is 30 (left) and 100 (right). All four graphs
+showed similar trends in the training curves. SASAFL outperformed the
+accuracy performance of BSA in all settings except for the setting BSA
+with C set to 0.5 whose accuracy was 98.27% (Table 2).
+    Note that the SASAFL converged to a high accuracy even if the frac-
+tion of clients participating in aggregation among all clients is small
+(i.e., C set to 0.1). This is because the policy of adjusting the number
+of participating clients in SASAFL does not strictly limit the number of
+participating clients, allowing for the rapid aggregation of stored local
+models in the buﬀer. However, the ﬂuctuation in the training curve was             Fig. 9. Training curve on CIFAR10 of SASAFL when K set to 30. The yellow line,
+greater than in settings with a high fraction of participating clients. This       blue line, and purple line denotes C set to 0.1, 0.3, and 0.5, respectively. (This
+training curve is the same in BSA. This is because, as the participating           graph was ﬂoated every one round.)
+ratio decreases, the frequency with which the global model was updated
+increased, thereby increasing the staleness of the clients’ local models.          BSA in terms of accuracy under all settings. In particular, the lowest
+Fig. 7-(c) and (d) demonstrate that as more than 10% of clients partici-           accuracy among the three SASAFL settings and the highest accuracy
+pate (i.e., C set to 0.3 and 0.5), the training curve converges steadily.          among the three BSA settings were the same. It is worth noting that the
+    Meanwhile, SASAFL’s global model reception policy has an advan-                highest accuracy when C set to 0.1 of SASAFL, which has the lowest
+tage in that the ﬂuctuation in accuracy of SASAFL was lower than that              ratio of participating clients. However, Fig. 9 shows that the training
+of BSA, except Fig. 7-(c). In other words, it can be observed that receiv-         curve of C set to 0.1 is more unstable than C set to 0.3 and 0.5. This
+ing a global model with high quality by considering global loss increases          reason is the same as that explained above, and it can be observed once
+the stability of training.                                                         again that the training curve becomes more stable as more clients par-
+    Fig. 8 shows the training curve for CIFAR-10 which is a more com-              ticipate in aggregation. However, there is no signiﬁcant diﬀerence in
+plex dataset than the MNIST and FashionMNIST. SASAFL outperformed                  the accuracy of SASAFL even when the participating ratio changes.
+
+                                                                               9
+M. Yu, J. Choi, J. Lee et al.                                                                              Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+                                    Table 2
+                                    Performance results of accuracy, round-to-accuracy, and time-to-accuracy on three
+                                    benchmark datasets which are MNIST, FashionMNIST, and CIFAR-10 comparison to
+                                    BSA with C set to 0.1, 0.3, and 0.5, and K set to 30.
+
+                                     Dataset              MNIST              FashionMNIST           CIFAR-10
+                                     Method               BSA      SASAFL    BSA         SASAFL     BSA           SASAFL
+
+                                     C                    0.1
+
+                                     Accuracy             93.78    98.23     54.72       74.09      42.5          58.59
+                                     Round-to-accuracy    -        116       -           248        -             1,490
+                                     Time-to-accuracy     -        53.86     -           105.24     -             1,104.42
+
+                                     C                    0.3
+
+                                     Accuracy             97.14    98.07     66          71.59      51.08         58.25
+                                     Round-to-accuracy    211      132       -           420        -             1,728
+                                     Time-to-accuracy     101.44   66.71     -           178.8      -             1,281.03
+
+                                     C                    0.5
+
+                                     Accuracy             98.27    98.24     73.834      73.94      56.82         56.77
+                                     Round-to-accuracy    96       131       376         283        2,348         2,140
+                                     Time-to-accuracy     60.98    88.77     185.34      142.21     1,809.73      1,680.49
+
+
+
+                                    Table 3
+                                    Performance results of accuracy, round-to-accuracy, and time-to-accuracy on three
+                                    benchmark datasets which are MNIST, FashionMNIST, and CIFAR-10 comparison to
+                                    BSA with C set to 0.1, 0.3, and 0.5, and K set to 100.
+
+                                      Dataset             MNIST              FashionMNIST          CIFAR-10
+                                      Method              BSA      SASAFL    BSA        SASAFL     BSA            SASAFL
+
+                                      C                   0.1
+
+                                      Accuracy            92.47    98.56     65.4       71.74      38.26          57.95
+                                      Round-to-accuracy   -        119       -          382        -              2,418
+                                      Time-to-accuracy    -        65.99     -          214.04     -              2,384.51
+
+                                      C                   0.3
+
+                                      Accuracy            97.31    98.52     66.08      71.87      49.65          56.41
+                                      Round-to-accuracy   244      105       -          416        -              2,522
+                                      Time-to-accuracy    131.37   58.5      -          268.08     -              2,356.59
+
+                                      C                   0.5
+
+                                      Accuracy            98.27    98.36     69.99      70.57      55             56.31
+                                      Round-to-accuracy   131      133       -          416        2,670          2,563
+                                      Time-to-accuracy    82.65    74.81     -          371.15     2,287.45       2,354.96
+
+
+
+    Accuracy and latency performance Table 2 and 3 compare the
+accuracy and latency performance of BSA and SASAFL when the total
+number of clients is 30 and 100, respectively. To compare latency perfor-
+mance, two metrics which are round-to-accuracy and time-to-accuracy
+are measured. The target accuracy was set to 95% for MNIST, 70%
+for FashionMNIST, and 55% for CIFAR-10. In all cases, except for the
+setting in which the participating client ratio was 50%, SASAFL outper-
+formed the accuracy and latency of BSA. When the ratio of participating
+clients was small, BSA failed to converge on the target accuracy, whereas
+SASAFL reached all target accuracies. However, in a setting where half
+of all clients participated (i.e., C set to 0.5) on MNIST when K set to
+30, the accuracy, round-to-accuracy, and time-to-accuracy performance
+of BSA was higher than SASAFL although the accuracy performance
+between BSA and SASAFL is almost same. We analyzed that, if many
+                                                                                  Fig. 10. Wall clock time of SASAFL according to the same setting as in Table 4.
+clients can participate, the simpler dataset like MNIST, the more over-
+head the policies applied to SASAFL become in training. However, in
+another dataset setting where half of the clients participate in aggrega-
+tion, SASAFL showed similar performance compared to BSA in terms of               round-to-accuracy and time-to-accuracy were 2.32 times and 2.24 times
+accuracy and higher performance in terms of latency except when C set             higher than BSA’s, respectively. Again, the participating client ratio in
+to 0.5 and K set to 100 on CIFAR-10.                                              SASAFL is intended to determine the minimum number of clients that
+    Among all settings, when the participating ratio is 10% and total             can participate in aggregation, so, more clients can participate than de-
+number of client is 100 on CIFAR-10, the accuracy performance of                  termined number of participating clients. Based on these observations,
+SASAFL was 19.69%p higher than that of BSA. Additionally, among                   SASAFL increased the stability of training through a global model re-
+settings where both BSA and SASAFL reached target accuracy, in the                ception policy and improved the accuracy and latency performance of
+MNIST setting, where 30% of all 30 clients participated, SASAFL’s                 training by adjusting number of participating clients policy.
+
+                                                                            10
+M. Yu, J. Choi, J. Lee et al.                                                                               Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+                                       Table 4
+                                       Wall clock time of SASAFL as the total number of clients increases for three
+                                       benchmark datasets and the participating ratio. SASAFL was run for 300 rounds
+                                       on MNIST, 500 rounds on FashionMNIST, and 1000 rounds on CIFAR-10.
+
+                                         Dataset   MNIST               FashionMNIST             CIFAR-10
+                                         C         0.1     0.3   0.5   0.1    0.3       0.5     0.1        0.3       0.5
+
+                                         K=30      139     151   204   212    213       251     741        742       787
+                                         K=100     166     167   168   280    322       326     989        993       1,000
+                                         K=200     267     280   270   446    448       444     1,384      1,351     1,421
+                                         K=500     521     527   518   894    876       930     2,423      2,533     2,512
+
+
+
+                                                                                  of clients; however, this can be resolved by setting a deadline for each
+                                                                                  round. Therefore, our future work will involve adjusting the deadline to
+                                                                                  ensure accuracy and latency.
+
+                                                                                  CRediT authorship contribution statement
+
+                                                                                     Miri Yu: Writing – original draft, Methodology, Investigation, Con-
+                                                                                  ceptualization. Jiheon Choi: Writing – original draft, Investigation,
+                                                                                  Conceptualization. Jaehyun Lee: Software, Data curation. Sangyoon
+                                                                                  Oh: Writing – review & editing, Validation, Supervision, Funding ac-
+                                                                                  quisition, Conceptualization.
+
+Fig. 11. Comparison of wall clock time between BSA and SASAFL on Fashion-
+                                                                                  Declaration of competing interest
+MNIST during 500 rounds.
+
+                                                                                      The authors declare the following ﬁnancial interests/personal rela-
+    Table 4 and Fig. 10 depicts the wall clock time of SASAFL in relation         tionships which may be considered as potential competing interests:
+to the augmented total number of clients for 300 rounds for MNIST,                Sangyoon Oh reports ﬁnancial support was provided by Institute of In-
+500 rounds for FashionMNIST, and 1,000 rounds for CIFAR-10. For all               formation and Communications Technology Planning and Evaluation
+datasets, an increase in both the participating ratio (C) and the total           (IITP). Miri Yu reports equipment, drugs, or supplies was provided by
+number of clients (K) leads to a rise in the wall clock time for the same         Korea Institute of Science and Technology Information (KISTI). Sangy-
+workload. It is due to the concurrent rise in the communication overhead          oon Oh reports a relationship with National Science Foundation of Korea
+with the increase of number of clients. Remarkably, the accuracy of the           (NRF-Korea) that includes: consulting or advisory and funding grants. If
+global model remains consistent across various settings, similar to the           there are other authors, they declare that they have no known compet-
+results observed in Table 3 and Table 4. Thus, SASAFL demonstrates                ing ﬁnancial interests or personal relationships that could have appeared
+signiﬁcant scalability, though accompanied by an inevitable increase in           to inﬂuence the work reported in this paper.
+communication overhead as the scale increases.
+    Limitation of SASAFL However, the SASAFL has limitation in terms              Acknowledgments
+of latency. According to Eq. (1), the number of clients participating in
+aggregation can be increased by the total number of clients. Similar                  This work was jointly supported by the Korea Institute of Science
+to synchronous FL, the wall clock time of this round is bound to the              and Technology Information (KISTI) (KSC2022-CRE-0406), NRF-Korea
+slowest client among all clients. If the global model is trained unstable,        grant funded by the Korea government (MSIT) (RS-2023-00283799),
+the overall training speed may slow down because of this limitation. For          and Artiﬁcial Intelligence Convergence Innovation Human Resources
+example, Fig. 7-(c) shows a relatively unstable training curve, therefore         Development by the Institute of Information and Communications Tech-
+it can be observed that the wall clock time of the SASAFL was high under          nology Planning and Evaluation (IITP-2023-No.RS-2023-00255968).
+this setting, as shown in Fig. 11. SASAFL had the longer wall clock time          The authors would like to thank Editage (www.editage.co.kr) for En-
+than BSA, except for the setting in which the total number of clients was         glish language editing.
+100 and the participating client ratio was 50%. However, this limitation
+can be solved by setting a maximum deadline within one round, as in               References
+SAFA.
+                                                                                    [1] P. Kairouz, H.B. McMahan, et al., Advances and open problems in federated learning,
+6. Conclusion and future works                                                          Found. Trends Mach. Learn. 14 (2021) 1–210.
+                                                                                    [2] B. McMahan, E. Moore, D. Ramage, S. Hampson, B.A. y Arcas, Communication-
+    In this study, we proposed the SASAFL to solve staleness issues in                  eﬃcient learning of deep networks from decentralized data, in: Artiﬁcial Intelligence
+                                                                                        and Statistics, PMLR, 2017, pp. 1273–1282.
+semi-asynchronous FL. A global model reception policy that considers                [3] T. Nishio, R. Yonetani, Client selection for federated learning with heterogeneous
+the global loss and lag tolerance can stabilise training by increasing the              resources in mobile edge, in: ICC 2019-2019 IEEE International Conference on Com-
+quality of the local model, which is closely related to the performance                 munications (ICC), IEEE, 2019, pp. 1–7.
+of the global model. In addition, the eﬃciency of training was increased            [4] Z. Chai, A. Ali, S. Zawad, et al., Tiﬂ: a tier-based federated learning system, in:
+                                                                                        Proceedings of the 29th International Symposium on High-Performance Parallel and
+by allowing clients who failed to participate in the previous round to
+                                                                                        Distributed Computing, 2020, pp. 125–136.
+participate in the next round, along with adjusting the number of par-              [5] T. Li, A.K. Sahu, M. Zaheer, M. Sanjabi, A. Talwalkar, V. Smith, Federated optimiza-
+ticipating clients according to the changes in global loss. We evaluated                tion in heterogeneous networks, Proc. Mach. Learn. Syst. 2 (2020) 429–450.
+the performance of the SASAFL under various conditions and datasets.                [6] J. Park, D. Yoon, S. Yeo, S. Oh, Amble: adjusting mini-batch and local epoch for fed-
+The SASAFL achieved up to 19.69% higher accuracy and in terms of la-                    erated learning with heterogeneous devices, J. Parallel Distrib. Comput. 170 (2022)
+                                                                                        13–23.
+tency, it achieved 2.32 times higher round-to-accuracy and 2.24 times               [7] F. Lai, X. Zhu, H.V. Madhyastha, M. Chowdhury, Oort: eﬃcient federated learning
+higher time-to-accuracy than baseline. There is a latency limitation in                 via guided participant selection, in: 15th USENIX Symposium on Operating Systems
+that the number of participating clients can be equal to the total number               Design and Implementation (OSDI 21), 2021, pp. 19–35.
+
+
+                                                                             11
+M. Yu, J. Choi, J. Lee et al.                                                                                                 Journal of Parallel and Distributed Computing 193 (2024) 104950
+
+
+ [8] Y.J. Cho, J. Wang, G. Joshi, Towards understanding biased client selection in fed-             [24] Distributed communication package - torch.distributed (Online), https://pytorch.
+     erated learning, in: International Conference on Artiﬁcial Intelligence and Statistics,             org/docs/stable/distributed.html. (Accessed 5 December 2023), 2023.
+     2022, pp. 10351–10375.                                                                         [25] H. Xiao, K. Rasul, R. Vollgraf, Fashion-mnist: a novel image dataset for benchmarking
+ [9] J. Zhang, X. Cheng, et al., Fedada: fast-convergent adaptive federated learning in                  machine learning algorithms, arXiv preprint, arXiv:1708.07747, 2017.
+     heterogeneous mobile edge computing environment, World Wide Web 25 (2022)                      [26] A. Krizhevsky, G. Hinton, et al., Learning Multiple Layers of Features from Tiny
+     1971–1998.                                                                                          Images, 2009.
+[10] C. Xie, S. Koyejo, I. Gupta, Asynchronous federated optimization, arXiv preprint,              [27] J. Shin, Y. Li, Y. Liu, S.-J. Lee, Fedbalancer: data and pace control for eﬃcient feder-
+     arXiv:1903.03934, 2019.                                                                             ated learning on heterogeneous clients, in: Proceedings of the 20th Annual Interna-
+[11] T. Zhang, L. Gao, S. Lee, M. Zhang, S. Avestimehr, Timelyﬂ: heterogeneity-aware                     tional Conference on Mobile Systems, Applications and Services, 2022, pp. 436–449.
+     asynchronous federated learning with adaptive partial training, in: Proceedings of
+     the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)
+     Workshops, 2023, pp. 5064–5073.                                                                                            Miri Yu received the master degree from the Department of
+[12] L. Deng, The mnist database of handwritten digit images for machine learning re-                                       Artiﬁcial Intelligence at the Ajou University. Her research interests
+     search [best of the web], IEEE Signal Process. Mag. 29 (2012) 141–142.                                                 include federated learning and distributed computing in heteroge-
+[13] L. Yu, X. Sun, R. Albelaihi, C. Yi, Latency-aware semi-synchronous client selection                                    neous environments.
+     and model aggregation for wireless federated learning, Future Internet 15 (2023)
+     352.
+[14] F. Liang, Q. Yang, R. Liu, J. Wang, K. Sato, J. Guo, Semi-synchronous federated
+     learning protocol with dynamic aggregation in Internet of vehicles, IEEE Trans. Veh.
+     Technol. 71 (2022) 4677–4691.
+[15] W. Wu, L. He, W. Lin, R. Mao, C. Maple, S. Jarvis, Safa: a semi-asynchronous pro-                                            Jiheon Choi received his B.S in the Department of Software
+     tocol for fast federated learning with low overhead, IEEE Trans. Comput. 70 (2020)                                      Engineering from the Ajou University in 2023. Currently, he is a
+     655–668.                                                                                                                Master student of the Department of Artiﬁcial Intelligence at the
+[16] Q. Ma, Y. Xu, H. Xu, Z. Jiang, L. Huang, H. Huang, Fedsa: a semi-asynchronous                                           Ajou University. His research interests include oﬀensive security,
+     federated learning mechanism in heterogeneous edge computing, IEEE J. Sel. Areas                                        cloud computing security, adapt security suited for MLOps and
+                                                                                                                             distributed systems.
+     Commun. 39 (2021) 3654–3672.
+[17] J. Liu, H. Xu, L. Wang, Y. Xu, C. Qian, J. Huang, H. Huang, Adaptive asynchronous
+     federated learning in resource-constrained edge computing, IEEE Trans. Mob. Com-
+     put. 22 (2023) 674–690.
+[18] J. Yu, R. Zhou, C. Chen, B. Li, F. Dong, Asﬂ: adaptive semi-asynchronous federated                                          Jaehyun Lee received his B.S in the Department of Software
+     learning for balancing model accuracy and total latency in mobile edge networks, in:                                    Engineering from the Ajou University in 2023. Currently, he is
+     Proceedings of the 52nd International Conference on Parallel Processing, Association                                    a Master student of the Department of Artiﬁcial Intelligence at
+     for Computing Machinery, 2023, pp. 443–451.                                                                             the Ajou University. His research interests include big data, cloud
+[19] Y. Zhang, D. Liu, M. Duan, L. Li, X. Chen, A. Ren, Y. Tan, C. Wang, Fedmds: an                                          computing, and distributed systems.
+     eﬃcient model discrepancy-aware semi-asynchronous clustered federated learning
+     framework, IEEE Trans. Parallel Distrib. Syst. 34 (2023) 1007–1019.
+[20] B. Fan, X. Su, S. Tarkoma, P. Hui, Behave diﬀerently when clustering: a semi-
+     asynchronous federated learning approach for iot, ACM Trans. Sens. Netw. 20 (2024)
+     1–28.                                                                                                                        Sangyoon Oh received the PhD degree from the Computer
+[21] J. Liu, J. Jia, T. Che, C. Huo, J. Ren, Y. Zhou, H. Dai, D. Dou, Fedasmu: eﬃcient asyn-                                 Science Department, Indiana University, Bloomington, Indiana.
+     chronous federated learning with dynamic staleness-aware model update, in: Pro-                                         He is currently a professor of the School of Information and Com-
+     ceedings of the AAAI Conference on Artiﬁcial Intelligence, 2024, pp. 13900–13908.                                       puter Engineering, Ajou University, South Korea. Before joining
+[22] Nurion (Online), https://www.ksc.re.kr/eng/resources/nurion. (Accessed 5 Decem-                                         Ajou University, he worked for SK Telecom, South Korea. His
+     ber 2023), 2023.                                                                                                        main research interests include high-performance computing, dis-
+[23] Pytorch (Online), https://pytorch.org/. (Accessed 5 December 2023), 2023.                                               tributed deep learning, and graph data.
+
+
+
+
+                                                                                               12
+
