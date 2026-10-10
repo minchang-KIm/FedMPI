@@ -1,0 +1,103 @@
+{
+  "signature": "(self, current_global_loss, current_num_picked_client, miminum_num_picked_client)",
+  "K": 100,
+  "P_min": 10,
+  "trace": [
+    {
+      "round": 1,
+      "global_loss": 3.12,
+      "P_r": 10,
+      "P_next": 13,
+      "connected": 100,
+      "deadlock_if_no_buffer": false
+    },
+    {
+      "round": 2,
+      "global_loss": 4.056,
+      "P_r": 13,
+      "P_next": 16,
+      "connected": 96,
+      "deadlock_if_no_buffer": false
+    },
+    {
+      "round": 3,
+      "global_loss": 5.273,
+      "P_r": 16,
+      "P_next": 20,
+      "connected": 92,
+      "deadlock_if_no_buffer": false
+    },
+    {
+      "round": 4,
+      "global_loss": 6.855,
+      "P_r": 20,
+      "P_next": 26,
+      "connected": 88,
+      "deadlock_if_no_buffer": false
+    },
+    {
+      "round": 5,
+      "global_loss": 8.911,
+      "P_r": 26,
+      "P_next": 33,
+      "connected": 84,
+      "deadlock_if_no_buffer": false
+    },
+    {
+      "round": 6,
+      "global_loss": 11.584,
+      "P_r": 33,
+      "P_next": 42,
+      "connected": 80,
+      "deadlock_if_no_buffer": false
+    },
+    {
+      "round": 7,
+      "global_loss": 15.06,
+      "P_r": 42,
+      "P_next": 54,
+      "connected": 76,
+      "deadlock_if_no_buffer": false
+    },
+    {
+      "round": 8,
+      "global_loss": 19.578,
+      "P_r": 54,
+      "P_next": 70,
+      "connected": 72,
+      "deadlock_if_no_buffer": false
+    },
+    {
+      "round": 9,
+      "global_loss": 25.451,
+      "P_r": 70,
+      "P_next": 90,
+      "connected": 68,
+      "deadlock_if_no_buffer": true
+    },
+    {
+      "round": 10,
+      "global_loss": 33.086,
+      "P_r": 90,
+      "P_next": 100,
+      "connected": 64,
+      "deadlock_if_no_buffer": true
+    },
+    {
+      "round": 11,
+      "global_loss": 43.012,
+      "P_r": 100,
+      "P_next": 100,
+      "connected": 60,
+      "deadlock_if_no_buffer": true
+    },
+    {
+      "round": 12,
+      "global_loss": 55.915,
+      "P_r": 100,
+      "P_next": 100,
+      "connected": 56,
+      "deadlock_if_no_buffer": true
+    }
+  ]
+}

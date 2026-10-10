@@ -1,0 +1,19 @@
+{
+  "name": "S1_single_paperCats_SASAFL",
+  "outcome": "completed",
+  "returncode": 0,
+  "wall_min": 5.37,
+  "rounds_done": 20,
+  "rounds_requested": 20,
+  "best_acc": 56.96,
+  "last_acc": 54.31,
+  "errors": {
+    "is_set_corruption": 0,
+    "segfault": 0,
+    "abort": 0,
+    "connection_closed": 0,
+    "gloo_timeout": 0,
+    "traceback": 0,
+    "child_failed": 0
+  }
+}

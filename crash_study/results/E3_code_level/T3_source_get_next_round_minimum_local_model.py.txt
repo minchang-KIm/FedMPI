@@ -1,0 +1,9 @@
+    def get_next_round_minimum_local_model(self, current_global_loss, current_num_picked_client, miminum_num_picked_client):
+        if current_global_loss > self.last_global_loss:
+            next_num_picked_client = min(int(current_num_picked_client*current_global_loss/self.last_global_loss), self.num_clients)
+
+        else:
+            next_num_picked_client = max(int(current_num_picked_client*current_global_loss/self.last_global_loss), miminum_num_picked_client)
+
+        self.last_global_loss = current_global_loss
+        return next_num_picked_client

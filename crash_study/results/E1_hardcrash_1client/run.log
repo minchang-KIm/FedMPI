@@ -1,0 +1,487 @@
+Process 0 uses 2 threads
+Process 8 uses 2 threads
+Process 4 uses 2 threads
+Process 10 uses 2 threads
+Process 9 uses 2 threads
+Process 3 uses 2 threads
+Process 6 uses 2 threadsProcess 2 uses 2 threads
+
+Process 5 uses 2 threads
+Process 7 uses 2 threads
+Process 1 uses 2 threads
+[2026-10-10 14:49:19.019525] MAIN >> I am client in wise-175 rank 6
+[2026-10-10 14:49:19.019541] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.032656] MAIN >> I am server in wise-175 rank 0
+[2026-10-10 14:49:19.032674] SERVER >> global model을 초기화 합니다.
+[2026-10-10 14:49:19.032684] MAIN >> I am client in wise-175 rank 10
+[2026-10-10 14:49:19.032700] CLIENT 10 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.035559] MAIN >> I am client in wise-175 rank 2
+[2026-10-10 14:49:19.035577] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.035686] MAIN >> I am client in wise-175 rank 4
+[2026-10-10 14:49:19.035703] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.038567] MAIN >> I am client in wise-175 rank 1
+[2026-10-10 14:49:19.038585] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.039591] MAIN >> I am client in wise-175 rank 9
+[2026-10-10 14:49:19.039609] CLIENT 9 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.039605] MAIN >> I am client in wise-175 rank 5
+[2026-10-10 14:49:19.039623] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.039656] MAIN >> I am client in wise-175 rank 3
+[2026-10-10 14:49:19.039667] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.040955] MAIN >> I am client in wise-175 rank 7
+[2026-10-10 14:49:19.040974] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.045737] MAIN >> I am client in wise-175 rank 8
+[2026-10-10 14:49:19.045760] CLIENT 8 >> 빈 모델을 생성합니다.
+[2026-10-10 14:49:19.060660] SERVER >> 데이터셋을 다운받습니다.
+[2026-10-10 14:49:19.102031] SERVER >> 각 client들이 가져갈 data 개수 = [6358, 6066, 6570, 5531, 5712, 6330, 5217, 6155, 4813, 7248]
+[2026-10-10 14:49:19.125249] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-10 14:49:19.132241] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.139144] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.145037] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.150221] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.158023] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.165393] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.175720] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.186217] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.192750] CLIENT 9 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.199243] CLIENT 10 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:49:19.200002] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-10 14:49:19.200274] CLIENT 1 >> communication delay는 0입니다.
+[2026-10-10 14:49:19.200283] CLIENT 2 >> communication delay는 0입니다.
+[2026-10-10 14:49:19.200297] CLIENT 4 >> communication delay는 0입니다.[2026-10-10 14:49:19.200296] CLIENT 3 >> communication delay는 0입니다.
+
+[2026-10-10 14:49:19.200329] CLIENT 8 >> communication delay는 0입니다.[2026-10-10 14:49:19.200333] CLIENT 9 >> communication delay는 0입니다.
+
+[2026-10-10 14:49:19.200338] CLIENT 10 >> communication delay는 0입니다.
+[2026-10-10 14:49:19.200376] CLIENT 7 >> communication delay는 0입니다.[2026-10-10 14:49:19.200376] CLIENT 5 >> communication delay는 0입니다.
+
+[2026-10-10 14:49:19.200385] CLIENT 6 >> communication delay는 0입니다.
+[2026-10-10 14:49:20.352497] SERVER >> 0번째 글로벌 모델 
+                                => test_accuracy: 9.47% 
+                                => test_loss: 2.3046
+[2026-10-10 14:49:20.421174] SERVER >> 현재까지 받은 로컬 모델 개수: 0
+[2026-10-10 14:49:20.421203] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:49:20.438879] CLIENT 8 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:20.440801] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:20.442607] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:20.446629] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:20.448510] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:20.449913] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:20.451653] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:49:20.452252] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:49:20.452806] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:49:20.455063] CLIENT 8 >> 로컬 학습을 시작합니다.
+
+
+
+[2026-10-10 14:49:20.459513] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:20.461059] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:20.463852] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:20.468590] CLIENT 5 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:49:20.470495] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:49:20.481575] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:20.483424] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:20.483812] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:20.484224] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:20.500040] CLIENT 5 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:23.728715] CLIENT 8 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:23.766700] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:25.324207] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:25.696513] CLIENT 5 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:25.996482] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:26.004854] CLIENT 8 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:26.004912] CLIENT 8 >> local utility: 0.10777766906304032
+[W init.cpp:1506] Warning: ProcessGroup::Work::source_rank API is being deprecated, please ping https://github.com/pytorch/pytorch/issues/46291 if you see this warning (function operator())
+[2026-10-10 14:49:26.068151] SERVER >> CLIENT 8에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.1077776700258255
+[2026-10-10 14:49:26.125066] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:26.125117] CLIENT 1 >> local utility: 0.0935406530273249
+[2026-10-10 14:49:26.187543] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.09354065358638763
+[2026-10-10 14:49:26.543557] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:26.877738] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:28.533468] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:28.533511] CLIENT 6 >> local utility: 0.22201238732756765
+[2026-10-10 14:49:28.597076] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.22201238572597504
+[2026-10-10 14:49:28.597292] SERVER >> picked client list : [8, 1, 6]
+[2026-10-10 14:49:28.631870] SERVER >> picked clients info: 
+CLIENT 8의 staleness: 0.0
+CLIENT 1의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+
+[2026-10-10 14:49:28.631897] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:49:29.359241] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:29.359299] CLIENT 9 >> local utility: 0.17070151157859315
+[2026-10-10 14:49:29.457773] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.1707015186548233
+[2026-10-10 14:49:30.098189] CLIENT 5 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:30.098240] CLIENT 5 >> local utility: 0.12704741650518042
+[2026-10-10 14:49:30.156501] SERVER >> CLIENT 5에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.12704741954803467
+[2026-10-10 14:49:30.217016] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:30.217059] CLIENT 10 >> local utility: 0.17055184758188294
+[2026-10-10 14:49:30.272517] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.1705518513917923
+[2026-10-10 14:49:31.343086] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:31.343125] CLIENT 3 >> local utility: 0.18842569673100476
+[2026-10-10 14:49:31.387469] SERVER >> 1번째 글로벌 모델 
+                                 => test_accuracy: 32.73% 
+                                 => test_loss: 3.2279
+                                => 클라이언트8의 staleness: 1.0, 로컬 utility: 0.1077776700258255, coefficient: 0.32664650002653506
+                               => 클라이언트1의 staleness: 1.0, 로컬 utility: 0.09354065358638763, coefficient: 0.3374197314652656
+                               => 클라이언트6의 staleness: 1.0, 로컬 utility: 0.22201238572597504, coefficient: 0.33593376850819934
+
+[2026-10-10 14:49:31.419764] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.1884256899356842
+[2026-10-10 14:49:31.480507] CLIENT 4 >> gl: 3.227931022644043, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:31.483207] CLIENT 2 >> gl: 3.227931022644043, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:31.486749] CLIENT 7 >> gl: 3.227931022644043, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:31.487725] SERVER >> 현재까지 받은 로컬 모델 개수: 4
+[2026-10-10 14:49:31.487751] SERVER >> 이번 라운드에서 4개의 로컬 모델을 사용합니다.
+[2026-10-10 14:49:31.487769] SERVER >> picked client list : [9, 5, 10, 3]
+[2026-10-10 14:49:31.519784] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:31.520444] SERVER >> picked clients info: 
+CLIENT 9의 staleness: 1.0
+CLIENT 5의 staleness: 1.0
+CLIENT 10의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+
+[2026-10-10 14:49:31.520463] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:49:31.524918] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:31.531048] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:31.535986] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:31.540780] CLIENT 8 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:31.567363] CLIENT 8 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:33.628450] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:34.039288] SERVER >> 2번째 글로벌 모델 
+                                 => test_accuracy: 17.85% 
+                                 => test_loss: 2.5888
+                                => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.1707015186548233, coefficient: 0.19771597584521217
+                               => 클라이언트5의 staleness: 2.0, 로컬 utility: 0.12704741954803467, coefficient: 0.23464651029043257
+                               => 클라이언트10의 staleness: 2.0, 로컬 utility: 0.1705518513917923, coefficient: 0.2977447315450027
+                               => 클라이언트3의 staleness: 2.0, 로컬 utility: 0.1884256899356842, coefficient: 0.2698927823193526
+
+[2026-10-10 14:49:34.096699] CLIENT 8 >> gl: 2.5887627601623535, gl^r-si: 3.227931022644043 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:49:34.101352] CLIENT 6 >> gl: 2.5887627601623535, gl^r-si: 3.227931022644043 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:49:34.102979] CLIENT 7 >> gl: 2.5887627601623535, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:34.107382] CLIENT 2 >> gl: 2.5887627601623535, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:34.109422] CLIENT 4 >> gl: 2.5887627601623535, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:34.113491] CLIENT 1 >> gl: 2.5887627601623535, gl^r-si: 3.227931022644043 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:49:34.115203] SERVER >> 현재까지 받은 로컬 모델 개수: 0
+[2026-10-10 14:49:34.115232] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:49:34.120014] CLIENT 5 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:34.141483] CLIENT 5 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:34.156985] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:49:34.157333] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:49:34.172820] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:34.188642] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:34.188937] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:34.199622] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:35.169192] CLIENT 8 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:35.170028] CLIENT 8 >> global model version 2로 교체했습니다.
+[2026-10-10 14:49:35.889190] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:35.889240] CLIENT 6 >> local utility: 0.07087941596935964
+[2026-10-10 14:49:35.951645] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 1.0 
+                                    => 로컬 utility: 0.07087941467761993
+[2026-10-10 14:49:36.549779] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:36.551153] CLIENT 1 >> global model version 2로 교체했습니다.
+[2026-10-10 14:49:37.328045] CLIENT 8 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:38.217349] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:38.557872] CLIENT 5 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:39.337818] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:39.537360] CLIENT 8 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:39.537407] CLIENT 8 >> local utility: 2.9327619866385977
+[2026-10-10 14:49:39.613556] SERVER >> CLIENT 8에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 2.9327619075775146
+[2026-10-10 14:49:39.996168] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:41.603753] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:41.712989] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:41.713042] CLIENT 3 >> local utility: 0.0777888512657051
+[2026-10-10 14:49:41.774941] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.07778885215520859
+[2026-10-10 14:49:41.775063] SERVER >> picked client list : [6, 8, 3]
+[2026-10-10 14:49:41.804011] SERVER >> picked clients info: 
+CLIENT 6의 staleness: 1.0
+CLIENT 8의 staleness: 0.0
+CLIENT 3의 staleness: 0.0
+
+[2026-10-10 14:49:41.804041] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:49:42.203685] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:42.203740] CLIENT 9 >> local utility: 0.0411297868739478
+[2026-10-10 14:49:42.304458] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.041129786521196365
+[2026-10-10 14:49:42.851896] CLIENT 5 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:42.851937] CLIENT 5 >> local utility: 0.04773651946345136
+[2026-10-10 14:49:42.906453] SERVER >> CLIENT 5에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.0477365180850029
+[2026-10-10 14:49:43.293755] SERVER >> 3번째 글로벌 모델 
+                                 => test_accuracy: 30.61% 
+                                 => test_loss: 2.5854
+                                => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.07087941467761993, coefficient: 0.33219627394384676
+                               => 클라이언트8의 staleness: 1.0, 로컬 utility: 2.9327619075775146, coefficient: 0.3230123327210706
+                               => 클라이언트3의 staleness: 1.0, 로컬 utility: 0.07778885215520859, coefficient: 0.34479139333508263
+
+[2026-10-10 14:49:43.350114] CLIENT 10 >> gl: 2.58540678024292, gl^r-si: 2.5887627601623535 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:49:43.354907] CLIENT 2 >> gl: 2.58540678024292, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:43.356509] CLIENT 7 >> gl: 2.58540678024292, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:43.357764] CLIENT 1 >> gl: 2.58540678024292, gl^r-si: 2.5887627601623535 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:49:43.360674] SERVER >> 현재까지 받은 로컬 모델 개수: 2
+[2026-10-10 14:49:43.360707] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:49:43.362329] CLIENT 4 >> gl: 2.58540678024292, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:43.368797] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:43.375963] CLIENT 8 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:43.400164] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:43.402394] CLIENT 8 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:43.414302] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:43.445858] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:43.446779] CLIENT 6 >> global model version 3로 교체했습니다.
+[2026-10-10 14:49:45.641977] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:45.642077] CLIENT 10 >> local utility: 0.0683634582474122
+[2026-10-10 14:49:45.744701] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.06836345791816711
+[2026-10-10 14:49:45.744854] SERVER >> picked client list : [9, 5, 10]
+[2026-10-10 14:49:45.776194] SERVER >> picked clients info: 
+CLIENT 9의 staleness: 1.0
+CLIENT 5의 staleness: 1.0
+CLIENT 10의 staleness: 1.0
+
+[2026-10-10 14:49:45.776229] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:49:45.794528] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:45.834594] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:46.613880] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:46.613937] CLIENT 1 >> local utility: 4.110793924810898
+[2026-10-10 14:49:46.707852] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 4.1107940673828125
+[2026-10-10 14:49:47.959166] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:47.959214] CLIENT 6 >> local utility: 4.100573784173137
+[2026-10-10 14:49:48.013828] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 3.0 
+                                    => 로컬 utility: 4.100574016571045
+[2026-10-10 14:49:48.067833] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:49:48.067874] CLIENT 3 >> local utility: 0.03724595060049572
+[2026-10-10 14:49:48.121679] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 3.0 
+                                    => 로컬 utility: 0.03724595159292221
+[2026-10-10 14:49:48.317535] SERVER >> 4번째 글로벌 모델 
+                                 => test_accuracy: 27.03% 
+                                 => test_loss: 2.8564
+                                => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.041129786521196365, coefficient: 0.2708040285826816
+                               => 클라이언트5의 staleness: 2.0, 로컬 utility: 0.0477365180850029, coefficient: 0.3213863725876329
+                               => 클라이언트10의 staleness: 2.0, 로컬 utility: 0.06836345791816711, coefficient: 0.4078095988296855
+
+[2026-10-10 14:49:48.408061] CLIENT 4 >> gl: 2.8563640117645264, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:48.409664] CLIENT 7 >> gl: 2.8563640117645264, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:48.409838] CLIENT 8 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:48.415301] CLIENT 2 >> gl: 2.8563640117645264, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:48.416396] SERVER >> 현재까지 받은 로컬 모델 개수: 3
+[2026-10-10 14:49:48.416423] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:49:48.416439] SERVER >> picked client list : [1, 6, 3]
+[2026-10-10 14:49:48.417793] CLIENT 8 >> gl: 2.8563640117645264, gl^r-si: 2.58540678024292이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:48.426331] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:48.427436] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:48.438566] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:48.440432] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:48.442500] CLIENT 10 >> global model version 4로 교체했습니다.
+[2026-10-10 14:49:48.444674] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 2.0
+CLIENT 6의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+
+[2026-10-10 14:49:48.444702] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:49:48.467280] CLIENT 5 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:48.493829] CLIENT 5 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:49:50.588777] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:51.124089] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:49:51.378731] SERVER >> 5번째 글로벌 모델 
+                                 => test_accuracy: 31.98% 
+                                 => test_loss: 2.4849
+                                => 클라이언트1의 staleness: 3.0, 로컬 utility: 4.1107940673828125, coefficient: 0.3301485097102503
+                               => 클라이언트6의 staleness: 2.0, 로컬 utility: 4.100574016571045, coefficient: 0.32869456849101675
+                               => 클라이언트3의 staleness: 2.0, 로컬 utility: 0.03724595159292221, coefficient: 0.34115692179873297
+
+[2026-10-10 14:49:51.434707] CLIENT 2 >> gl: 2.4849250316619873, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:49:51.436598] CLIENT 4 >> gl: 2.4849250316619873, gl^r-si: 2.30456805229187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+Traceback (most recent call last):
+  File "/home/wise-175/Mando/FedMPI/crash_study/harness/sasafl_entry.py", line 50, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 105, in init_FL
+    method.runServer(Server)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 58, in runServer
+    Server.send_global_model_to_clients(clients_idx, picked_client_idx, global_loss)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLServer.py", line 112, in send_global_model_to_clients
+    dist.send(tensor=torch.cat([global_model_info, torch.tensor([1])]), dst=idx) # 글로벌 모델, 현재 라운드, global loss 전송, 선택되었음 전송
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 959, in send
+    default_pg.send([tensor], dst, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:32181
+[2026-10-10 14:49:51.438602] CLIENT 10 >> gl: 2.4849250316619873, gl^r-si: 2.8563640117645264 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:49:51.498521] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:49:51.530355] CLIENT 6 >> 로컬 학습을 시작합니다.
+Exception in thread Exception in thread Thread-1:
+Thread-1:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread Thread-1:
+Exception in thread Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+Exception in thread Thread-1:
+Traceback (most recent call last):
+      File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+self.run()    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+        self._target(*self._args, **self._kwargs)dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+        self._target(*self._args, **self._kwargs)self.run()
+
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    pg.recv([tensor], src, tag).wait()
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:20657
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:3509
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:13029
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:18116
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:62633
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:61644
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:7322
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:57771
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:31939
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065159 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065160 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065162 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065163 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065164 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065165 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065166 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065167 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065168 closing signal SIGTERM
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 3065158) of binary: /home/wise-175/anaconda3/envs/FL/bin/python
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 765, in <module>
+    main()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 345, in wrapper
+    return f(*args, **kwargs)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 761, in main
+    run(args)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 752, in run
+    elastic_launch(
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 245, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/home/wise-175/Mando/FedMPI/crash_study/harness/sasafl_entry.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2026-10-10_14:49:52
+  host      : wise-175
+  rank      : 3 (local_rank: 3)
+  exitcode  : -9 (pid: 3065161)
+  error_file: <N/A>
+  traceback : Signal 9 (SIGKILL) received by PID 3065161
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-10_14:49:52
+  host      : wise-175
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 3065158)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

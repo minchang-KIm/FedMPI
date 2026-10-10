@@ -1,0 +1,7 @@
+scenario,description,K,C,P_min,fault,fault_t_sec,rounds_completed,restarts,outcome,end_t_sec,sec_without_progress_at_end,server_stack_at_end
+E0_baseline,E0 장애 없음 (기준선),10,0.3,3,-,,30,0,정상 종료,216.2,5.8,
+E1_hardcrash_1client,E1 차량 1대 hard crash (SIGKILL),10,0.3,3,KILL rank [3] @round 5,34.6,5,0,job 전체 비정상 종료 (exit 1),36.0,0.7,
+E1b_hardcrash_restart,E1b hard crash + torchrun 재시작 허용,10,0.3,3,KILL rank [3] @round 5,37.3,24,1,진행 정지 → 관측 종료 후 강제 종료,283.3,70.5,[background] SASAFLServer.py 37 in receive_local_model_from_any_clients / [main] SASAFLServer.py 59 in wait_until_can_update_global_model ← SASAFL.py 60 in runServer
+E2a_silentdrop_1client,E2a 차량 1대 silent drop (SIGSTOP),10,0.3,3,STOP rank [3] @round 5,47.8,6,0,진행 정지 → 관측 종료 후 강제 종료,533.5,482.3,[background] SASAFLServer.py 37 in receive_local_model_from_any_clients / [main] distributed_c10d.py 959 in send ← SASAFLServer.py 112 in send_global_model_to_clients
+E2b_silentdrop_below_pmin,E2b 생존 4대 < P_min 5 (SIGSTOP 6대),10,0.5,5,"STOP rank [5, 6, 7, 8, 9, 10] @round 5",48.3,6,0,진행 정지 → 관측 종료 후 강제 종료,533.6,477.6,[background] SASAFLServer.py 37 in receive_local_model_from_any_clients / [main] distributed_c10d.py 959 in send ← SASAFLServer.py 114 in send_global_model_to_clients
+E2c_silentdrop_timeout90s,E2c silent drop + gloo timeout 90초,10,0.3,3,STOP rank [3] @round 5,35.3,6,0,job 전체 비정상 종료 (exit 1),166.2,123.6,
