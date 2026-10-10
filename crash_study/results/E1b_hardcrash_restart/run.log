@@ -1,0 +1,1911 @@
+Process 0 uses 2 threads
+Process 10 uses 2 threads
+Process 1 uses 2 threads
+Process 2 uses 2 threads
+Process 5 uses 2 threads
+Process 6 uses 2 threads
+Process 3 uses 2 threads
+Process 4 uses 2 threads
+Process 9 uses 2 threads
+Process 7 uses 2 threadsProcess 8 uses 2 threads
+
+[2026-10-10 14:50:02.738572] MAIN >> I am server in wise-175 rank 0
+[2026-10-10 14:50:02.738587] SERVER >> global model을 초기화 합니다.
+[2026-10-10 14:50:02.753589] MAIN >> I am client in wise-175 rank 8[2026-10-10 14:50:02.753589] MAIN >> I am client in wise-175 rank 10
+
+[2026-10-10 14:50:02.753601] CLIENT 10 >> 빈 모델을 생성합니다.[2026-10-10 14:50:02.753602] CLIENT 8 >> 빈 모델을 생성합니다.
+
+[2026-10-10 14:50:02.754567] MAIN >> I am client in wise-175 rank 9
+[2026-10-10 14:50:02.754580] CLIENT 9 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:02.754644] MAIN >> I am client in wise-175 rank 7
+[2026-10-10 14:50:02.754658] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:02.755561] MAIN >> I am client in wise-175 rank 2
+[2026-10-10 14:50:02.755563] MAIN >> I am client in wise-175 rank 1
+[2026-10-10 14:50:02.755575] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:02.755579] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:02.757614] MAIN >> I am client in wise-175 rank 4
+[2026-10-10 14:50:02.757619] MAIN >> I am client in wise-175 rank 3
+[2026-10-10 14:50:02.757632] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:02.757636] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:02.757927] MAIN >> I am client in wise-175 rank 6
+[2026-10-10 14:50:02.757945] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:02.760800] MAIN >> I am client in wise-175 rank 5
+[2026-10-10 14:50:02.760820] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:02.771754] SERVER >> 데이터셋을 다운받습니다.
+[2026-10-10 14:50:02.810674] SERVER >> 각 client들이 가져갈 data 개수 = [6144, 6358, 6367, 6021, 5882, 6608, 6095, 6334, 5922, 4269]
+[2026-10-10 14:50:02.835169] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-10 14:50:02.843353] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.849310] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.854290] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.859114] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.866289] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.871906] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.877290] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.882477] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.888184] CLIENT 9 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.893503] CLIENT 10 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:02.894013] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-10 14:50:02.894176] CLIENT 1 >> communication delay는 0입니다.
+[2026-10-10 14:50:02.894296] CLIENT 2 >> communication delay는 0입니다.
+[2026-10-10 14:50:02.894306] CLIENT 3 >> communication delay는 0입니다.
+[2026-10-10 14:50:02.894319] CLIENT 4 >> communication delay는 0입니다.
+[2026-10-10 14:50:02.894320] CLIENT 5 >> communication delay는 0입니다.
+[2026-10-10 14:50:02.894334] CLIENT 7 >> communication delay는 0입니다.
+[2026-10-10 14:50:02.894343] CLIENT 9 >> communication delay는 0입니다.
+[2026-10-10 14:50:02.894346] CLIENT 8 >> communication delay는 0입니다.[2026-10-10 14:50:02.894350] CLIENT 10 >> communication delay는 0입니다.
+
+[2026-10-10 14:50:02.894385] CLIENT 6 >> communication delay는 0입니다.
+[2026-10-10 14:50:04.258496] SERVER >> 0번째 글로벌 모델 
+                                => test_accuracy: 10.26% 
+                                => test_loss: 2.3091
+[2026-10-10 14:50:04.324827] SERVER >> 현재까지 받은 로컬 모델 개수: 0
+[2026-10-10 14:50:04.324858] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:50:04.333576] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:04.340068] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:04.344686] CLIENT 10 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:50:04.357168] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:04.359702] CLIENT 5 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:04.361044] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:04.363265] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:50:04.367643] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:04.371524] CLIENT 9 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:50:04.373766] CLIENT 8 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:04.376515] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:04.378363] CLIENT 3 >> 로컬 학습을 시작합니다.
+
+
+[2026-10-10 14:50:04.382357] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:04.389609] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:04.391106] CLIENT 5 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:04.392469] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:04.398964] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:04.400112] CLIENT 8 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:04.403632] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:04.408131] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:07.569410] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:07.648972] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:07.918568] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:10.200405] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:10.227985] CLIENT 5 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:10.266243] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:10.266287] CLIENT 1 >> local utility: 0.08893058159702498
+[W init.cpp:1506] Warning: ProcessGroup::Work::source_rank API is being deprecated, please ping https://github.com/pytorch/pytorch/issues/46291 if you see this warning (function operator())
+[2026-10-10 14:50:10.334680] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.08893058449029922
+[2026-10-10 14:50:10.480798] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:10.480874] CLIENT 6 >> local utility: 0.1579243831684057
+[2026-10-10 14:50:10.544651] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.15792438387870789
+[2026-10-10 14:50:10.632605] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:10.632665] CLIENT 3 >> local utility: 0.18477955986671432
+[2026-10-10 14:50:10.697721] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.184779554605484
+[2026-10-10 14:50:10.697789] SERVER >> picked client list : [1, 6, 3]
+[2026-10-10 14:50:10.733379] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+CLIENT 3의 staleness: 0.0
+
+[2026-10-10 14:50:10.733423] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:50:10.756236] CLIENT 8 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:10.918882] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:10.987090] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:12.907175] CLIENT 8 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:12.907231] CLIENT 8 >> local utility: 0.13035658962061544
+[2026-10-10 14:50:12.965132] SERVER >> CLIENT 8에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.1303565949201584
+[2026-10-10 14:50:13.394959] SERVER >> 1번째 글로벌 모델 
+                                 => test_accuracy: 35.77% 
+                                 => test_loss: 2.6273
+                                => 클라이언트1의 staleness: 1.0, 로컬 utility: 0.08893058449029922, coefficient: 0.3213557194413934
+                               => 클라이언트6의 staleness: 1.0, 로컬 utility: 0.15792438387870789, coefficient: 0.34562477117004026
+                               => 클라이언트3의 staleness: 1.0, 로컬 utility: 0.184779554605484, coefficient: 0.33301950938856634
+
+[2026-10-10 14:50:13.449207] CLIENT 4 >> gl: 2.6273109912872314, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:13.452140] CLIENT 9 >> gl: 2.6273109912872314, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:13.453086] CLIENT 7 >> gl: 2.6273109912872314, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:13.455730] CLIENT 5 >> gl: 2.6273109912872314, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:13.462833] CLIENT 10 >> gl: 2.6273109912872314, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:13.464637] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:50:13.464666] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:50:13.466149] CLIENT 2 >> gl: 2.6273109912872314, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:13.484973] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:13.496736] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:13.501392] CLIENT 6 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:50:13.519524] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:13.528725] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:13.530824] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:15.062194] CLIENT 5 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:15.062291] CLIENT 5 >> local utility: 0.16309989998836957
+[2026-10-10 14:50:15.098721] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:15.098781] CLIENT 9 >> local utility: 0.18434644780016593
+[2026-10-10 14:50:15.128239] SERVER >> CLIENT 5에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.16309989988803864
+[2026-10-10 14:50:15.211439] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.18434645235538483
+[2026-10-10 14:50:15.211543] SERVER >> picked client list : [8, 5, 9]
+[2026-10-10 14:50:15.246725] SERVER >> picked clients info: 
+CLIENT 8의 staleness: 1.0
+CLIENT 5의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+
+[2026-10-10 14:50:15.246766] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:50:15.992497] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:16.225468] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:16.225538] CLIENT 4 >> local utility: 0.10305524551856987
+[2026-10-10 14:50:16.323727] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.10305524617433548
+[2026-10-10 14:50:16.463881] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:16.463949] CLIENT 7 >> local utility: 0.11200539634393329
+[2026-10-10 14:50:16.561492] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.11200539767742157
+[2026-10-10 14:50:16.736939] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:18.268915] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:18.268956] CLIENT 6 >> local utility: 0.047129970315884874
+[2026-10-10 14:50:18.325371] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 1.0 
+                                    => 로컬 utility: 0.04712997004389763
+[2026-10-10 14:50:18.380267] SERVER >> 2번째 글로벌 모델 
+                                 => test_accuracy: 22.41% 
+                                 => test_loss: 3.4996
+                                => 클라이언트8의 staleness: 2.0, 로컬 utility: 0.1303565949201584, coefficient: 0.3492115999558937
+                               => 클라이언트5의 staleness: 2.0, 로컬 utility: 0.16309989988803864, coefficient: 0.32429154261770865
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.18434645235538483, coefficient: 0.3264968574263976
+
+[2026-10-10 14:50:18.475538] CLIENT 1 >> gl: 3.4995851516723633, gl^r-si: 2.6273109912872314이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:18.478134] CLIENT 10 >> gl: 3.4995851516723633, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:18.479634] CLIENT 2 >> gl: 3.4995851516723633, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:18.482232] CLIENT 3 >> gl: 3.4995851516723633, gl^r-si: 2.6273109912872314이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:18.483816] SERVER >> 현재까지 받은 로컬 모델 개수: 3
+[2026-10-10 14:50:18.483844] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:50:18.483861] SERVER >> picked client list : [4, 7, 6]
+[2026-10-10 14:50:18.499570] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:18.510723] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:18.514545] SERVER >> picked clients info: 
+CLIENT 4의 staleness: 2.0
+CLIENT 7의 staleness: 2.0
+CLIENT 6의 staleness: 1.0
+
+[2026-10-10 14:50:18.514577] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:50:18.521672] CLIENT 5 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:18.547109] CLIENT 8 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:18.553566] CLIENT 5 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:18.578852] CLIENT 8 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:18.650935] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:18.916518] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:18.916564] CLIENT 3 >> local utility: 0.05890836722231248
+[2026-10-10 14:50:18.984861] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 1.0 
+                                    => 로컬 utility: 0.0589083656668663
+[2026-10-10 14:50:21.848812] SERVER >> 3번째 글로벌 모델 
+                                 => test_accuracy: 18.31% 
+                                 => test_loss: 3.1701
+                                => 클라이언트4의 staleness: 3.0, 로컬 utility: 0.10305524617433548, coefficient: 0.32156590472121344
+                               => 클라이언트7의 staleness: 3.0, 로컬 utility: 0.11200539767742157, coefficient: 0.32551805169835507
+                               => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.04712997004389763, coefficient: 0.35291604358043155
+
+[2026-10-10 14:50:21.946694] CLIENT 8 >> gl: 3.170056104660034, gl^r-si: 3.4995851516723633 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:50:21.952443] CLIENT 5 >> gl: 3.170056104660034, gl^r-si: 3.4995851516723633 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:50:21.954472] CLIENT 1 >> gl: 3.170056104660034, gl^r-si: 2.6273109912872314이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:21.960873] CLIENT 9 >> gl: 3.170056104660034, gl^r-si: 3.4995851516723633 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:50:21.963949] CLIENT 2 >> gl: 3.170056104660034, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:21.964899] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:50:21.964928] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:50:21.966397] CLIENT 10 >> gl: 3.170056104660034, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:21.970205] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:21.986711] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:21.994060] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:22.017855] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:22.026018] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:22.045165] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:22.694266] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:22.694306] CLIENT 1 >> local utility: 0.012454906413295191
+[2026-10-10 14:50:22.761808] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 1.0 
+                                    => 로컬 utility: 0.012454906478524208
+[2026-10-10 14:50:23.379503] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:23.380704] CLIENT 9 >> global model version 3로 교체했습니다.
+[2026-10-10 14:50:23.407794] CLIENT 5 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:23.408959] CLIENT 5 >> global model version 3로 교체했습니다.
+[2026-10-10 14:50:23.791539] CLIENT 8 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:23.792771] CLIENT 8 >> global model version 3로 교체했습니다.
+[2026-10-10 14:50:26.672350] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:27.102669] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:27.231516] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:28.209254] CLIENT 5 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:28.230842] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:29.176278] CLIENT 8 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:31.363620] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:31.363670] CLIENT 4 >> local utility: 0.024444076815391316
+[2026-10-10 14:50:31.426928] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 3.0 
+                                    => 로컬 utility: 0.024444077163934708
+[2026-10-10 14:50:31.427086] SERVER >> picked client list : [3, 1, 4]
+[2026-10-10 14:50:31.456228] SERVER >> picked clients info: 
+CLIENT 3의 staleness: 2.0
+CLIENT 1의 staleness: 2.0
+CLIENT 4의 staleness: 0.0
+
+[2026-10-10 14:50:31.456262] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:50:32.005686] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:32.005743] CLIENT 7 >> local utility: 0.010505008188119877
+[2026-10-10 14:50:32.059805] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 3.0 
+                                    => 로컬 utility: 0.01050500851124525
+[2026-10-10 14:50:32.352784] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:32.352827] CLIENT 6 >> local utility: 0.04388210978578317
+[2026-10-10 14:50:32.407829] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 3.0 
+                                    => 로컬 utility: 0.043882109224796295
+[2026-10-10 14:50:32.905891] CLIENT 5 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:32.905933] CLIENT 5 >> local utility: 3.3763230248637823
+[2026-10-10 14:50:32.961686] SERVER >> CLIENT 5에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 3.0 
+                                    => 로컬 utility: 3.3763229846954346
+[2026-10-10 14:50:33.014365] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:33.014421] CLIENT 9 >> local utility: 4.358082479046237
+[2026-10-10 14:50:33.108583] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 3.0 
+                                    => 로컬 utility: 4.358082294464111
+[2026-10-10 14:50:34.259448] CLIENT 8 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:34.259502] CLIENT 8 >> local utility: 2.270075266409402
+[2026-10-10 14:50:34.363311] SERVER >> CLIENT 8에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 3.0 
+                                    => 로컬 utility: 2.2700753211975098
+[2026-10-10 14:50:34.492517] SERVER >> 4번째 글로벌 모델 
+                                 => test_accuracy: 11.67% 
+                                 => test_loss: 3.4752
+                                => 클라이언트3의 staleness: 3.0, 로컬 utility: 0.0589083656668663, coefficient: 0.3435678825814807
+                               => 클라이언트1의 staleness: 3.0, 로컬 utility: 0.012454906478524208, coefficient: 0.3315346427800561
+                               => 클라이언트4의 staleness: 1.0, 로컬 utility: 0.024444077163934708, coefficient: 0.3248974746384632
+
+[2026-10-10 14:50:34.565631] CLIENT 2 >> gl: 3.4752488136291504, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:34.570219] CLIENT 10 >> gl: 3.4752488136291504, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:34.574612] SERVER >> 현재까지 받은 로컬 모델 개수: 5
+[2026-10-10 14:50:34.574641] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:50:34.574659] SERVER >> picked client list : [7, 6, 5, 9, 8]
+[2026-10-10 14:50:34.594504] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:34.600464] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:34.620892] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:34.623878] SERVER >> picked clients info: 
+CLIENT 7의 staleness: 1.0
+CLIENT 6의 staleness: 1.0
+CLIENT 5의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+CLIENT 8의 staleness: 1.0
+
+[2026-10-10 14:50:34.623908] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:50:34.631908] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:34.633858] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:34.665324] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:36.739807] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:37.673844] SERVER >> 5번째 글로벌 모델 
+                                 => test_accuracy: 24.81% 
+                                 => test_loss: 3.7092
+                                => 클라이언트7의 staleness: 2.0, 로컬 utility: 0.01050500851124525, coefficient: 0.19762653610453618
+                               => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.043882109224796295, coefficient: 0.21426023799487695
+                               => 클라이언트5의 staleness: 2.0, 로컬 utility: 3.3763229846954346, coefficient: 0.1907201452611783
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 4.358082294464111, coefficient: 0.1920171200674427
+                               => 클라이언트8의 staleness: 2.0, 로컬 utility: 2.2700753211975098, coefficient: 0.2053759605719659
+
+Traceback (most recent call last):
+  File "/home/wise-175/Mando/FedMPI/crash_study/harness/sasafl_entry.py", line 50, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 105, in init_FL
+    method.runServer(Server)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 58, in runServer
+    Server.send_global_model_to_clients(clients_idx, picked_client_idx, global_loss)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLServer.py", line 114, in send_global_model_to_clients
+    dist.send(tensor=torch.cat([global_model_info, torch.tensor([0])]), dst=idx) # 글로벌 모델, 현재 라운드, global loss 전송, 선택되지 않음 전송
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 959, in send
+    default_pg.send([tensor], dst, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:51633
+[2026-10-10 14:50:37.775340] CLIENT 2 >> gl: 3.709230899810791, gl^r-si: 2.3090999126434326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:37.829670] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:37.830480] CLIENT 5 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:37.831429] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:37.833647] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+
+
+[2026-10-10 14:50:37.858131] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:37.861218] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:37.861996] CLIENT 5 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:37.865529] CLIENT 9 >> 로컬 학습을 시작합니다.
+Exception in thread Thread-1Exception in thread :
+Traceback (most recent call last):
+Thread-1:
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+            self.run()self.run()self.run()
+
+
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+    self.run()  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    self._target(*self._args, **self._kwargs)
+      File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+        dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    pg.recv([tensor], src, tag).wait()
+        dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]RuntimeErrorself._target(*self._args, **self._kwargs)
+: 
+[/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:39040
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:156
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:27564
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:58065
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:10129
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:6057
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:421
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:8089
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 42, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0) #global_model_info=[flatten_model.buffer, 글로벌 모델 버전(라운드), global loss, 평균 staleness, 선택 여부]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:13526
+[2026-10-10 14:50:38.534632] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:39.156584] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:40.849172] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:40.849227] CLIENT 4 >> local utility: 0.01142287857673514
+Traceback (most recent call last):
+  File "/home/wise-175/Mando/FedMPI/crash_study/harness/sasafl_entry.py", line 50, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 28, in runClient
+    Client.send_local_model_to_server(utility)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLClient.py", line 148, in send_local_model_to_server
+    dist.send(tensor=local_model_info, dst=0)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 959, in send
+    default_pg.send([tensor], dst, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:39040
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065773 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065774 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065776 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065777 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065778 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065779 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065780 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065781 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3065783 closing signal SIGTERM
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 0 (pid: 3065772) of binary: /home/wise-175/anaconda3/envs/FL/bin/python
+Process 0 uses 2 threads
+Process 10 uses 2 threads
+Process 4 uses 2 threads
+Process 1 uses 2 threads
+Process 8 uses 2 threads
+Process 2 uses 2 threads
+Process 9 uses 2 threads
+Process 3 uses 2 threads
+Process 6 uses 2 threads
+Process 7 uses 2 threads
+Process 5 uses 2 threads
+[2026-10-10 14:50:42.933621] MAIN >> I am server in wise-175 rank 0
+[2026-10-10 14:50:42.933643] SERVER >> global model을 초기화 합니다.
+[2026-10-10 14:50:42.939619] MAIN >> I am client in wise-175 rank 2
+[2026-10-10 14:50:42.939664] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.940534] MAIN >> I am client in wise-175 rank 9
+[2026-10-10 14:50:42.940594] CLIENT 9 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.942552] MAIN >> I am client in wise-175 rank 6
+[2026-10-10 14:50:42.942566] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.942661] MAIN >> I am client in wise-175 rank 7
+[2026-10-10 14:50:42.942676] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.944582] MAIN >> I am client in wise-175 rank 3
+[2026-10-10 14:50:42.944595] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.944638] MAIN >> I am client in wise-175 rank 4
+[2026-10-10 14:50:42.944655] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.945017] MAIN >> I am client in wise-175 rank 8
+[2026-10-10 14:50:42.945036] CLIENT 8 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.945695] MAIN >> I am client in wise-175 rank 1
+[2026-10-10 14:50:42.945715] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.946767] MAIN >> I am client in wise-175 rank 10
+[2026-10-10 14:50:42.946780] CLIENT 10 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.948589] MAIN >> I am client in wise-175 rank 5
+[2026-10-10 14:50:42.948601] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-10 14:50:42.966303] SERVER >> 데이터셋을 다운받습니다.
+[2026-10-10 14:50:43.004658] SERVER >> 각 client들이 가져갈 data 개수 = [6546, 6458, 6032, 5872, 5596, 5631, 6068, 5479, 6322, 5996]
+[2026-10-10 14:50:43.027852] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-10 14:50:43.036536] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.044123] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.051813] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.059054] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.064288] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.069628] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.076275] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.081378] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.086714] CLIENT 9 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.094438] CLIENT 10 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 14:50:43.094937] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-10 14:50:43.095269] CLIENT 2 >> communication delay는 0입니다.
+[2026-10-10 14:50:43.095291] CLIENT 4 >> communication delay는 0입니다.
+[2026-10-10 14:50:43.095343] CLIENT 3 >> communication delay는 0입니다.
+[2026-10-10 14:50:43.095355] CLIENT 1 >> communication delay는 0입니다.
+[2026-10-10 14:50:43.095446] CLIENT 7 >> communication delay는 0입니다.
+[2026-10-10 14:50:43.095455] CLIENT 10 >> communication delay는 0입니다.
+[2026-10-10 14:50:43.095461] CLIENT 5 >> communication delay는 0입니다.
+[2026-10-10 14:50:43.095519] CLIENT 6 >> communication delay는 0입니다.
+[2026-10-10 14:50:43.095537] CLIENT 9 >> communication delay는 0입니다.[2026-10-10 14:50:43.095537] CLIENT 8 >> communication delay는 0입니다.
+
+[2026-10-10 14:50:45.357177] SERVER >> 0번째 글로벌 모델 
+                                => test_accuracy: 9.81% 
+                                => test_loss: 2.3056
+[2026-10-10 14:50:45.420416] SERVER >> 현재까지 받은 로컬 모델 개수: 0
+[2026-10-10 14:50:45.420449] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:50:45.432874] CLIENT 5 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:45.438528] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:45.438671] CLIENT 5 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:45.439504] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:45.441676] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:50:45.445317] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:45.452236] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:45.454737] CLIENT 6 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:50:45.457893] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:45.460768] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:45.461547] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:45.464799] CLIENT 8 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:50:45.470449] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:50:45.473018] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:45.476680] CLIENT 7 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:50:45.478544] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:45.491078] CLIENT 8 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:45.492895] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:45.501789] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:45.504303] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:48.180406] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:50.457398] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:50.457451] CLIENT 7 >> local utility: 0.11016043571301116
+[W init.cpp:1506] Warning: ProcessGroup::Work::source_rank API is being deprecated, please ping https://github.com/pytorch/pytorch/issues/46291 if you see this warning (function operator())
+[2026-10-10 14:50:50.534488] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.11016043275594711
+[2026-10-10 14:50:50.996428] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:51.166366] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:51.387524] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:51.435265] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:51.666530] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:51.893252] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:52.081058] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:50:55.833193] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:55.833249] CLIENT 10 >> local utility: 0.13963493214334372
+[2026-10-10 14:50:55.908468] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.13963493704795837
+[2026-10-10 14:50:56.090686] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:56.090749] CLIENT 6 >> local utility: 0.17103917512973899
+[2026-10-10 14:50:56.198637] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.1710391789674759
+[2026-10-10 14:50:56.198769] SERVER >> picked client list : [7, 10, 6]
+[2026-10-10 14:50:56.224983] SERVER >> picked clients info: 
+CLIENT 7의 staleness: 0.0
+CLIENT 10의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+
+[2026-10-10 14:50:56.225008] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:50:56.226251] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:56.226293] CLIENT 1 >> local utility: 0.09525590732957381
+[2026-10-10 14:50:56.285213] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.09525590389966965
+[2026-10-10 14:50:56.330962] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:56.331029] CLIENT 3 >> local utility: 0.16374607255855433
+[2026-10-10 14:50:56.392213] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.16374607384204865
+[2026-10-10 14:50:56.493399] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:56.493465] CLIENT 4 >> local utility: 0.1237452419412571
+[2026-10-10 14:50:56.589607] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.12374524027109146
+[2026-10-10 14:50:56.745340] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:56.745385] CLIENT 2 >> local utility: 0.13461335927110155
+[2026-10-10 14:50:56.803129] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.13461336493492126
+[2026-10-10 14:50:57.068369] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:50:57.068412] CLIENT 9 >> local utility: 0.1385018936502405
+[2026-10-10 14:50:57.122719] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 0.0 
+                                    => 로컬 utility: 0.13850189745426178
+[2026-10-10 14:50:58.631367] SERVER >> 1번째 글로벌 모델 
+                                 => test_accuracy: 21.69% 
+                                 => test_loss: 3.4577
+                                => 클라이언트7의 staleness: 1.0, 로컬 utility: 0.11016043275594711, coefficient: 0.3429217293020627
+                               => 클라이언트10의 staleness: 1.0, 로컬 utility: 0.13963493704795837, coefficient: 0.33885278327211077
+                               => 클라이언트6의 staleness: 1.0, 로컬 utility: 0.1710391789674759, coefficient: 0.3182254874258265
+
+[2026-10-10 14:50:58.684043] CLIENT 5 >> gl: 3.4576916694641113, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:58.686361] CLIENT 8 >> gl: 3.4576916694641113, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:50:58.690851] SERVER >> 현재까지 받은 로컬 모델 개수: 5
+[2026-10-10 14:50:58.690878] SERVER >> 이번 라운드에서 4개의 로컬 모델을 사용합니다.
+[2026-10-10 14:50:58.690893] SERVER >> picked client list : [1, 3, 4, 2, 9]
+[2026-10-10 14:50:58.700571] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:58.716736] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:58.736247] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:58.745723] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+CLIENT 4의 staleness: 1.0
+CLIENT 2의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+
+[2026-10-10 14:50:58.745754] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:50:58.748719] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:50:58.757808] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:50:58.780600] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:01.790327] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:02.012579] SERVER >> 2번째 글로벌 모델 
+                                 => test_accuracy: 29.44% 
+                                 => test_loss: 2.402
+                                => 클라이언트1의 staleness: 2.0, 로컬 utility: 0.09525590389966965, coefficient: 0.2096061479346782
+                               => 클라이언트3의 staleness: 2.0, 로컬 utility: 0.16374607384204865, coefficient: 0.1931476144732629
+                               => 클라이언트4의 staleness: 2.0, 로컬 utility: 0.12374524027109146, coefficient: 0.18802433557476786
+                               => 클라이언트2의 staleness: 2.0, 로컬 utility: 0.13461336493492126, coefficient: 0.20678834454050593
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.13850189745426178, coefficient: 0.20243355747678515
+
+[2026-10-10 14:51:02.116253] CLIENT 5 >> gl: 2.402003765106201, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:02.123717] CLIENT 8 >> gl: 2.402003765106201, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:02.127696] CLIENT 6 >> gl: 2.402003765106201, gl^r-si: 3.4576916694641113 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:02.131499] SERVER >> 현재까지 받은 로컬 모델 개수: 0
+[2026-10-10 14:51:02.131533] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:02.131527] CLIENT 10 >> gl: 2.402003765106201, gl^r-si: 3.4576916694641113 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:02.133098] CLIENT 7 >> gl: 2.402003765106201, gl^r-si: 3.4576916694641113 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:02.135442] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:02.146424] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:02.159237] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:02.172916] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:02.185729] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:51:02.187431] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:51:02.189317] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:02.190794] CLIENT 4 >> 로컬 학습을 시작합니다.
+
+
+[2026-10-10 14:51:02.207525] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:02.214580] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:03.447052] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:03.448512] CLIENT 7 >> global model version 2로 교체했습니다.
+[2026-10-10 14:51:03.715413] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:03.717005] CLIENT 10 >> global model version 2로 교체했습니다.
+[2026-10-10 14:51:06.077019] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:06.599837] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:06.965220] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:07.019241] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:07.019320] CLIENT 6 >> local utility: 0.06526770679343744
+[2026-10-10 14:51:07.139005] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 1.0 
+                                    => 로컬 utility: 0.06526770442724228
+[2026-10-10 14:51:07.751543] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:08.041820] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:08.463929] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:08.463977] CLIENT 1 >> local utility: 0.024049378774891855
+[2026-10-10 14:51:08.525533] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.02404937893152237
+[2026-10-10 14:51:08.702298] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:09.220442] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:11.423089] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:11.423136] CLIENT 3 >> local utility: 0.05020513188321188
+[2026-10-10 14:51:11.484284] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.050205130130052567
+[2026-10-10 14:51:11.484405] SERVER >> picked client list : [6, 1, 3]
+[2026-10-10 14:51:11.504292] SERVER >> picked clients info: 
+CLIENT 6의 staleness: 1.0
+CLIENT 1의 staleness: 0.0
+CLIENT 3의 staleness: 0.0
+
+[2026-10-10 14:51:11.504316] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:11.890727] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:11.890779] CLIENT 2 >> local utility: 0.039611001097666916
+[2026-10-10 14:51:11.948525] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.03961100056767464
+[2026-10-10 14:51:12.983233] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:12.983286] CLIENT 4 >> local utility: 0.0352067503717199
+[2026-10-10 14:51:13.079570] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.03520675003528595
+[2026-10-10 14:51:13.436953] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:13.437004] CLIENT 9 >> local utility: 0.05831415496982347
+[2026-10-10 14:51:13.479628] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:13.479669] CLIENT 7 >> local utility: 3.9010924050682467
+[2026-10-10 14:51:13.529049] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 0.05831415578722954
+[2026-10-10 14:51:13.534902] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 3.901092290878296
+[2026-10-10 14:51:13.847321] SERVER >> 3번째 글로벌 모델 
+                                 => test_accuracy: 21.15% 
+                                 => test_loss: 2.9636
+                                => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.06526770442724228, coefficient: 0.30924268219012574
+                               => 클라이언트1의 staleness: 1.0, 로컬 utility: 0.02404937893152237, coefficient: 0.35949255862485585
+                               => 클라이언트3의 staleness: 1.0, 로컬 utility: 0.050205130130052567, coefficient: 0.3312647591850184
+
+[2026-10-10 14:51:13.902692] CLIENT 5 >> gl: 2.9636318683624268, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:13.906502] CLIENT 10 >> gl: 2.9636318683624268, gl^r-si: 2.402003765106201이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:13.906549] SERVER >> 현재까지 받은 로컬 모델 개수: 4
+[2026-10-10 14:51:13.906567] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:13.906578] SERVER >> picked client list : [2, 4, 9, 7]
+[2026-10-10 14:51:13.907474] CLIENT 8 >> gl: 2.9636318683624268, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:13.926303] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:51:13.928798] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 1.0
+CLIENT 4의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+CLIENT 7의 staleness: 1.0
+
+[2026-10-10 14:51:13.928816] SERVER >> global aggregation을 진행합니다.
+
+[2026-10-10 14:51:13.939705] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:51:13.944641] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:51:13.958114] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:13.971060] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:13.971132] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:13.972727] CLIENT 6 >> global model version 3로 교체했습니다.
+[2026-10-10 14:51:14.074483] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:14.074536] CLIENT 10 >> local utility: 3.794437456638255
+[2026-10-10 14:51:14.132927] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 2.0 
+                                    => 로컬 utility: 3.7944374084472656
+[2026-10-10 14:51:15.255309] SERVER >> 4번째 글로벌 모델 
+                                 => test_accuracy: 26.32% 
+                                 => test_loss: 2.2468
+                                => 클라이언트2의 staleness: 2.0, 로컬 utility: 0.03961100056767464, coefficient: 0.2612459546925566
+                               => 클라이언트4의 staleness: 2.0, 로컬 utility: 0.03520675003528595, coefficient: 0.23754045307443367
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.05831415578722954, coefficient: 0.2557443365695793
+                               => 클라이언트7의 staleness: 2.0, 로컬 utility: 3.901092290878296, coefficient: 0.24546925566343042
+
+[2026-10-10 14:51:15.310927] CLIENT 1 >> gl: 2.2468440532684326, gl^r-si: 2.9636318683624268 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:15.315374] CLIENT 3 >> gl: 2.2468440532684326, gl^r-si: 2.9636318683624268 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:15.319103] CLIENT 6 >> gl: 2.2468440532684326, gl^r-si: 2.9636318683624268 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:15.319455] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:51:15.319473] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:15.320818] CLIENT 8 >> gl: 2.2468440532684326, gl^r-si: 2.3055663108825684 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:15.321332] CLIENT 5 >> gl: 2.2468440532684326, gl^r-si: 2.3055663108825684 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:15.327519] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:15.339107] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:15.364601] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:51:15.368925] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:51:15.376665] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:15.395575] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:15.396312] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:15.408507] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:15.921108] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:15.922021] CLIENT 6 >> global model version 4로 교체했습니다.
+[2026-10-10 14:51:18.110367] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:18.371230] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:18.372257] CLIENT 1 >> global model version 4로 교체했습니다.
+[2026-10-10 14:51:19.085478] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:19.086663] CLIENT 3 >> global model version 4로 교체했습니다.
+[2026-10-10 14:51:20.137704] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:20.137761] CLIENT 6 >> local utility: 3.883229836821556
+[2026-10-10 14:51:20.200224] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 4.0 
+                                    => 로컬 utility: 3.8832297325134277
+[2026-10-10 14:51:20.375171] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:20.533489] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:20.933534] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:21.220444] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:22.614592] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:22.614638] CLIENT 7 >> local utility: 0.06489456756496924
+[2026-10-10 14:51:22.685817] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 4.0 
+                                    => 로컬 utility: 0.06489456444978714
+[2026-10-10 14:51:22.685911] SERVER >> picked client list : [10, 6, 7]
+[2026-10-10 14:51:22.720438] SERVER >> picked clients info: 
+CLIENT 10의 staleness: 2.0
+CLIENT 6의 staleness: 0.0
+CLIENT 7의 staleness: 0.0
+
+[2026-10-10 14:51:22.720480] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:23.500997] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:23.915276] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:25.420067] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:25.420121] CLIENT 2 >> local utility: 0.03195032791534524
+[2026-10-10 14:51:25.473832] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 4.0 
+                                    => 로컬 utility: 0.03195032849907875
+[2026-10-10 14:51:25.925550] SERVER >> 5번째 글로벌 모델 
+                                 => test_accuracy: 18.99% 
+                                 => test_loss: 3.4682
+                                => 클라이언트10의 staleness: 3.0, 로컬 utility: 3.7944374084472656, coefficient: 0.33885278327211077
+                               => 클라이언트6의 staleness: 1.0, 로컬 utility: 3.8832297325134277, coefficient: 0.3182254874258265
+                               => 클라이언트7의 staleness: 1.0, 로컬 utility: 0.06489456444978714, coefficient: 0.3429217293020627
+
+[2026-10-10 14:51:26.020607] CLIENT 8 >> gl: 3.4682204723358154, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:26.021984] CLIENT 3 >> gl: 3.4682204723358154, gl^r-si: 2.2468440532684326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:26.025011] CLIENT 4 >> gl: 3.4682204723358154, gl^r-si: 2.2468440532684326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:26.028986] CLIENT 9 >> gl: 3.4682204723358154, gl^r-si: 2.2468440532684326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:26.030769] CLIENT 1 >> gl: 3.4682204723358154, gl^r-si: 2.2468440532684326이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:26.033026] CLIENT 5 >> gl: 3.4682204723358154, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:26.037605] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:51:26.037633] SERVER >> 이번 라운드에서 4개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:26.052499] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:26.067687] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:51:26.068697] CLIENT 6 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:51:26.081231] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:26.094809] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:26.102780] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:26.181401] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:26.181471] CLIENT 4 >> local utility: 0.03621600871833964
+[2026-10-10 14:51:26.295125] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 4.0 
+                                    => 로컬 utility: 0.03621600940823555
+[2026-10-10 14:51:26.732365] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:26.732440] CLIENT 9 >> local utility: 0.01877520332896948
+[2026-10-10 14:51:26.841638] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 4.0 
+                                    => 로컬 utility: 0.018775204196572304
+[2026-10-10 14:51:28.159080] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:28.466912] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:28.466964] CLIENT 1 >> local utility: 2.248242913804403
+[2026-10-10 14:51:28.529792] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 4.0 
+                                    => 로컬 utility: 2.2482428550720215
+[2026-10-10 14:51:28.529882] SERVER >> picked client list : [2, 4, 9, 1]
+[2026-10-10 14:51:28.559575] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 1.0
+CLIENT 4의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+CLIENT 1의 staleness: 1.0
+
+[2026-10-10 14:51:28.559603] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:28.611104] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:28.611149] CLIENT 3 >> local utility: 2.441728401436377
+[2026-10-10 14:51:28.666865] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 4.0 
+                                    => 로컬 utility: 2.441728353500366
+[2026-10-10 14:51:29.976599] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:29.976644] CLIENT 6 >> local utility: 0.15238664387652534
+[2026-10-10 14:51:30.028497] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 5.0 
+                                    => 로컬 utility: 0.1523866504430771
+[2026-10-10 14:51:30.517349] SERVER >> 6번째 글로벌 모델 
+                                 => test_accuracy: 34.99% 
+                                 => test_loss: 2.3373
+                                => 클라이언트2의 staleness: 2.0, 로컬 utility: 0.03195032849907875, coefficient: 0.2562901817604572
+                               => 클라이언트4의 staleness: 2.0, 로컬 utility: 0.03621600940823555, coefficient: 0.23303436780696882
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.018775204196572304, coefficient: 0.25089292801015955
+                               => 클라이언트1의 staleness: 2.0, 로컬 utility: 2.2482428550720215, coefficient: 0.25978252242241445
+
+[2026-10-10 14:51:30.574650] CLIENT 10 >> gl: 2.33728289604187, gl^r-si: 3.4682204723358154 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:30.576947] CLIENT 7 >> gl: 2.33728289604187, gl^r-si: 3.4682204723358154 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:30.578778] CLIENT 8 >> gl: 2.33728289604187, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:30.581742] CLIENT 5 >> gl: 2.33728289604187, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:30.583785] SERVER >> 현재까지 받은 로컬 모델 개수: 2
+[2026-10-10 14:51:30.583809] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:30.598533] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:30.609693] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:30.610691] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:30.621524] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:30.635000] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:30.642211] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:30.653086] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:30.661641] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:30.692749] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:30.693507] CLIENT 7 >> global model version 6로 교체했습니다.
+[2026-10-10 14:51:30.974049] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:30.975319] CLIENT 10 >> global model version 6로 교체했습니다.
+[2026-10-10 14:51:33.085332] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:33.140773] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:35.310286] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:35.369062] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:35.369111] CLIENT 7 >> local utility: 3.0867670184687563
+[2026-10-10 14:51:35.430774] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 6.0 
+                                    => 로컬 utility: 3.0867669582366943
+[2026-10-10 14:51:35.430860] SERVER >> picked client list : [3, 6, 7]
+[2026-10-10 14:51:35.459716] SERVER >> picked clients info: 
+CLIENT 3의 staleness: 2.0
+CLIENT 6의 staleness: 1.0
+CLIENT 7의 staleness: 0.0
+
+[2026-10-10 14:51:35.459748] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:35.512293] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:35.512336] CLIENT 9 >> local utility: 0.05169161201919993
+[2026-10-10 14:51:35.566396] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 6.0 
+                                    => 로컬 utility: 0.05169161036610603
+[2026-10-10 14:51:35.865698] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:36.220247] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:36.327343] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:37.502351] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:37.502401] CLIENT 4 >> local utility: 0.010882083329855286
+[2026-10-10 14:51:37.569812] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 6.0 
+                                    => 로컬 utility: 0.01088208332657814
+[2026-10-10 14:51:38.630786] SERVER >> 7번째 글로벌 모델 
+                                 => test_accuracy: 8.94% 
+                                 => test_loss: 2.9601
+                                => 클라이언트3의 staleness: 3.0, 로컬 utility: 2.441728353500366, coefficient: 0.3401951384580678
+                               => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.1523866504430771, coefficient: 0.31757938074558684
+                               => 클라이언트7의 staleness: 1.0, 로컬 utility: 3.0867669582366943, coefficient: 0.3422254807963454
+
+[2026-10-10 14:51:38.725807] CLIENT 8 >> gl: 2.960148572921753, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:38.732686] CLIENT 5 >> gl: 2.960148572921753, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:38.734712] CLIENT 1 >> gl: 2.960148572921753, gl^r-si: 2.33728289604187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:38.737052] CLIENT 2 >> gl: 2.960148572921753, gl^r-si: 2.33728289604187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:38.741297] CLIENT 10 >> gl: 2.960148572921753, gl^r-si: 2.33728289604187이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:38.741732] SERVER >> 현재까지 받은 로컬 모델 개수: 2
+[2026-10-10 14:51:38.741762] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:38.745781] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:38.754574] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:38.756875] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:38.759476] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:38.770205] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:38.776017] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:39.126825] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:39.126877] CLIENT 10 >> local utility: 4.13826559959574
+[2026-10-10 14:51:39.186891] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 6.0 
+                                    => 로컬 utility: 4.138265609741211
+[2026-10-10 14:51:39.187091] SERVER >> picked client list : [9, 4, 10]
+[2026-10-10 14:51:39.217756] SERVER >> picked clients info: 
+CLIENT 9의 staleness: 1.0
+CLIENT 4의 staleness: 1.0
+CLIENT 10의 staleness: 1.0
+
+[2026-10-10 14:51:39.217791] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:40.723848] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:40.723894] CLIENT 2 >> local utility: 0.021585384579777996
+[2026-10-10 14:51:40.777516] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 6.0 
+                                    => 로컬 utility: 0.021585384383797646
+[2026-10-10 14:51:41.842745] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:41.842803] CLIENT 1 >> local utility: 0.02880735754385746
+[2026-10-10 14:51:41.946797] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 6.0 
+                                    => 로컬 utility: 0.02880735695362091
+[2026-10-10 14:51:42.335127] SERVER >> 8번째 글로벌 모델 
+                                 => test_accuracy: 19.98% 
+                                 => test_loss: 3.7107
+                                => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.05169161036610603, coefficient: 0.3475536008796042
+                               => 클라이언트4의 staleness: 2.0, 로컬 utility: 0.01088208332657814, coefficient: 0.3228147333699835
+                               => 클라이언트10의 staleness: 2.0, 로컬 utility: 4.138265609741211, coefficient: 0.3296316657504123
+
+[2026-10-10 14:51:42.440116] CLIENT 8 >> gl: 3.710683822631836, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:42.443576] CLIENT 6 >> gl: 3.710683822631836, gl^r-si: 2.960148572921753이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:42.447240] CLIENT 5 >> gl: 3.710683822631836, gl^r-si: 2.3055663108825684이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:42.449039] CLIENT 3 >> gl: 3.710683822631836, gl^r-si: 2.960148572921753이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:42.449977] SERVER >> 현재까지 받은 로컬 모델 개수: 2
+[2026-10-10 14:51:42.450008] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:42.451259] CLIENT 7 >> gl: 3.710683822631836, gl^r-si: 2.960148572921753이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:42.481593] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:51:42.484603] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:51:42.493340] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:42.512937] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:42.516151] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:42.525255] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:42.653607] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:43.660258] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:43.776308] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:44.790241] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:44.790288] CLIENT 3 >> local utility: 0.08264195010458396
+[2026-10-10 14:51:44.853142] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 7.0 
+                                    => 로컬 utility: 0.08264195173978806
+[2026-10-10 14:51:44.853216] SERVER >> picked client list : [2, 1, 3]
+[2026-10-10 14:51:44.885349] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 2.0
+CLIENT 1의 staleness: 2.0
+CLIENT 3의 staleness: 1.0
+
+[2026-10-10 14:51:44.885387] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:45.681885] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:46.354768] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:47.387395] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:47.944777] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:47.944822] CLIENT 4 >> local utility: 0.05195173479880134
+[2026-10-10 14:51:48.003637] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 8.0 
+                                    => 로컬 utility: 0.05195173621177673
+[2026-10-10 14:51:48.212240] SERVER >> 9번째 글로벌 모델 
+                                 => test_accuracy: 29.71% 
+                                 => test_loss: 3.1091
+                                => 클라이언트2의 staleness: 3.0, 로컬 utility: 0.021585384383797646, coefficient: 0.33925194368564826
+                               => 클라이언트1의 staleness: 3.0, 로컬 utility: 0.02880735695362091, coefficient: 0.34387476360579955
+                               => 클라이언트3의 staleness: 2.0, 로컬 utility: 0.08264195173978806, coefficient: 0.3168732927085522
+
+[2026-10-10 14:51:48.309622] CLIENT 8 >> 로컬 staleness 9 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:48.315607] CLIENT 6 >> gl: 3.1090784072875977, gl^r-si: 2.960148572921753이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:48.322928] CLIENT 9 >> gl: 3.1090784072875977, gl^r-si: 3.710683822631836 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:48.325218] CLIENT 10 >> gl: 3.1090784072875977, gl^r-si: 3.710683822631836 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:48.328657] CLIENT 5 >> 로컬 staleness 9 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:48.331504] CLIENT 7 >> gl: 3.1090784072875977, gl^r-si: 2.960148572921753이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:51:48.332613] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:51:48.332637] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:48.336019] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:48.348876] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:48.352535] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:48.353765] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:48.365303] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:48.380941] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:48.474742] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:48.474833] CLIENT 6 >> local utility: 0.0462041226554158
+[2026-10-10 14:51:48.585003] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 7.0 
+                                    => 로컬 utility: 0.04620412364602089
+[2026-10-10 14:51:48.833289] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:48.833333] CLIENT 10 >> local utility: 0.09380135097711188
+[2026-10-10 14:51:48.893458] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 8.0 
+                                    => 로컬 utility: 0.093801349401474
+[2026-10-10 14:51:48.893621] SERVER >> picked client list : [4, 6, 10]
+[2026-10-10 14:51:48.924637] SERVER >> picked clients info: 
+CLIENT 4의 staleness: 1.0
+CLIENT 6의 staleness: 2.0
+CLIENT 10의 staleness: 1.0
+
+[2026-10-10 14:51:48.924689] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:48.961171] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:48.961233] CLIENT 7 >> local utility: 0.05053267497007351
+[2026-10-10 14:51:49.068504] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 7.0 
+                                    => 로컬 utility: 0.05053267627954483
+[2026-10-10 14:51:50.688972] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:50.730233] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:51.314620] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:51.314673] CLIENT 9 >> local utility: 0.008610620601647304
+[2026-10-10 14:51:51.368088] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 8.0 
+                                    => 로컬 utility: 0.0086106201633811
+[2026-10-10 14:51:51.939248] SERVER >> 10번째 글로벌 모델 
+                                 => test_accuracy: 19.7% 
+                                 => test_loss: 2.3862
+                                => 클라이언트4의 staleness: 2.0, 로컬 utility: 0.05195173621177673, coefficient: 0.3355620321161209
+                               => 클라이언트6의 staleness: 3.0, 로컬 utility: 0.04620412364602089, coefficient: 0.32178981656094635
+                               => 클라이언트10의 staleness: 2.0, 로컬 utility: 0.093801349401474, coefficient: 0.34264815132293275
+
+[2026-10-10 14:51:52.041806] CLIENT 2 >> gl: 2.3862218856811523, gl^r-si: 3.1090784072875977 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:52.046975] CLIENT 5 >> 로컬 staleness 10 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:52.048840] CLIENT 3 >> gl: 2.3862218856811523, gl^r-si: 3.1090784072875977 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:52.053829] CLIENT 1 >> gl: 2.3862218856811523, gl^r-si: 3.1090784072875977 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:52.055671] CLIENT 8 >> 로컬 staleness 10 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:52.061542] SERVER >> 현재까지 받은 로컬 모델 개수: 2
+[2026-10-10 14:51:52.061579] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:52.073621] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:51:52.074525] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:51:52.105333] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:52.106162] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:52.107764] CLIENT 10 >> global model version 10로 교체했습니다.
+[2026-10-10 14:51:52.112321] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:52.144056] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:53.545668] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:53.545717] CLIENT 1 >> local utility: 0.006521802240832784
+[2026-10-10 14:51:53.607640] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 9.0 
+                                    => 로컬 utility: 0.006521802395582199
+[2026-10-10 14:51:53.607745] SERVER >> picked client list : [7, 9, 1]
+[2026-10-10 14:51:53.642162] SERVER >> picked clients info: 
+CLIENT 7의 staleness: 3.0
+CLIENT 9의 staleness: 2.0
+CLIENT 1의 staleness: 1.0
+
+[2026-10-10 14:51:53.642205] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:53.646707] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:53.647416] CLIENT 2 >> global model version 10로 교체했습니다.
+[2026-10-10 14:51:53.912183] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:53.912241] CLIENT 3 >> local utility: 0.038778462328808876
+[2026-10-10 14:51:53.970339] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 9.0 
+                                    => 로컬 utility: 0.03877846151590347
+[2026-10-10 14:51:54.282660] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:55.913234] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:56.347665] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:56.347712] CLIENT 4 >> local utility: 0.010769297509104154
+[2026-10-10 14:51:56.404426] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 10.0 
+                                    => 로컬 utility: 0.010769297368824482
+[2026-10-10 14:51:56.424659] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:56.724282] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:51:56.732950] SERVER >> 11번째 글로벌 모델 
+                                 => test_accuracy: 50.06% 
+                                 => test_loss: 1.5134
+                                => 클라이언트7의 staleness: 4.0, 로컬 utility: 0.05053267627954483, coefficient: 0.3204478242501056
+                               => 클라이언트9의 staleness: 3.0, 로컬 utility: 0.0086106201633811, coefficient: 0.33386142796789187
+                               => 클라이언트1의 staleness: 2.0, 로컬 utility: 0.006521802395582199, coefficient: 0.34569074778200254
+
+[2026-10-10 14:51:56.820572] CLIENT 8 >> 로컬 staleness 11 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:56.824704] CLIENT 5 >> 로컬 staleness 11 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:56.828091] CLIENT 6 >> gl: 1.5133999586105347, gl^r-si: 2.3862218856811523 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:56.831291] CLIENT 10 >> gl: 1.5133999586105347, gl^r-si: 2.3862218856811523 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:56.834200] CLIENT 2 >> gl: 1.5133999586105347, gl^r-si: 2.3862218856811523 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:51:56.835413] SERVER >> 현재까지 받은 로컬 모델 개수: 2
+[2026-10-10 14:51:56.835446] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:51:56.858460] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:56.869629] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:56.870474] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:56.871807] CLIENT 1 >> global model version 11로 교체했습니다.
+[2026-10-10 14:51:56.886860] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:56.893438] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:51:56.915009] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:51:56.916353] CLIENT 9 >> global model version 11로 교체했습니다.
+[2026-10-10 14:51:58.662947] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:58.662998] CLIENT 6 >> local utility: 0.06953970980537799
+[2026-10-10 14:51:58.722988] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 10.0 
+                                    => 로컬 utility: 0.06953971087932587
+[2026-10-10 14:51:58.723152] SERVER >> picked client list : [3, 4, 6]
+[2026-10-10 14:51:58.752941] SERVER >> picked clients info: 
+CLIENT 3의 staleness: 2.0
+CLIENT 4의 staleness: 1.0
+CLIENT 6의 staleness: 1.0
+
+[2026-10-10 14:51:58.752974] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:51:59.128889] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:59.128930] CLIENT 10 >> local utility: 4.98779089146472
+[2026-10-10 14:51:59.187447] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 10.0 
+                                    => 로컬 utility: 4.987791061401367
+[2026-10-10 14:51:59.940760] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:51:59.940822] CLIENT 2 >> local utility: 2.4548998764245815
+[2026-10-10 14:52:00.034140] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 10.0 
+                                    => 로컬 utility: 2.454899787902832
+[2026-10-10 14:52:00.419528] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:00.817958] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:01.823355] SERVER >> 12번째 글로벌 모델 
+                                 => test_accuracy: 38.58% 
+                                 => test_loss: 1.9607
+                                => 클라이언트3의 staleness: 3.0, 로컬 utility: 0.03877846151590347, coefficient: 0.3439977188480183
+                               => 클라이언트4의 staleness: 2.0, 로컬 utility: 0.010769297368824482, coefficient: 0.3348731109210151
+                               => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.06953971087932587, coefficient: 0.32112917023096665
+
+[2026-10-10 14:52:01.862246] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:01.922812] CLIENT 7 >> gl: 1.9606667757034302, gl^r-si: 1.5133999586105347이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:01.929532] CLIENT 5 >> 로컬 staleness 12 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:01.931315] CLIENT 1 >> gl: 1.9606667757034302, gl^r-si: 1.5133999586105347이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:01.933506] CLIENT 9 >> gl: 1.9606667757034302, gl^r-si: 1.5133999586105347이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:01.934121] SERVER >> 현재까지 받은 로컬 모델 개수: 2
+[2026-10-10 14:52:01.934144] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:01.934778] CLIENT 8 >> 로컬 staleness 12 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:01.934891] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:01.942076] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:52:01.945886] CLIENT 4 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:52:01.968604] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:01.971100] CLIENT 3 >> global model version 12로 교체했습니다.
+[2026-10-10 14:52:01.985461] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:02.017487] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:02.019482] CLIENT 6 >> global model version 12로 교체했습니다.
+[2026-10-10 14:52:02.745578] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:02.745639] CLIENT 1 >> local utility: 3.4648108552141887
+[2026-10-10 14:52:02.816962] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 11.0 
+                                    => 로컬 utility: 3.464810848236084
+[2026-10-10 14:52:02.817086] SERVER >> picked client list : [10, 2, 1]
+[2026-10-10 14:52:02.853301] SERVER >> picked clients info: 
+CLIENT 10의 staleness: 2.0
+CLIENT 2의 staleness: 2.0
+CLIENT 1의 staleness: 1.0
+
+[2026-10-10 14:52:02.853337] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:52:03.125471] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:03.125518] CLIENT 9 >> local utility: 3.979947683787105
+[2026-10-10 14:52:03.179609] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 11.0 
+                                    => 로컬 utility: 3.979947566986084
+[2026-10-10 14:52:05.436395] SERVER >> 13번째 글로벌 모델 
+                                 => test_accuracy: 53.37% 
+                                 => test_loss: 1.6797
+                                => 클라이언트10의 staleness: 3.0, 로컬 utility: 4.987791061401367, coefficient: 0.31557894736842107
+                               => 클라이언트2의 staleness: 3.0, 로컬 utility: 2.454899787902832, coefficient: 0.33989473684210525
+                               => 클라이언트1의 staleness: 2.0, 로컬 utility: 3.464810848236084, coefficient: 0.3445263157894737
+
+[2026-10-10 14:52:05.494712] CLIENT 5 >> 로컬 staleness 13 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:05.496382] CLIENT 7 >> gl: 1.6796551942825317, gl^r-si: 1.5133999586105347이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:05.501967] CLIENT 3 >> gl: 1.6796551942825317, gl^r-si: 1.9606667757034302 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:05.504573] CLIENT 8 >> 로컬 staleness 13 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:05.506391] CLIENT 4 >> gl: 1.6796551942825317, gl^r-si: 1.9606667757034302 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:05.507997] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:52:05.508031] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:05.508501] CLIENT 6 >> gl: 1.6796551942825317, gl^r-si: 1.9606667757034302 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:05.513591] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:05.525052] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:05.526456] CLIENT 2 >> global model version 13로 교체했습니다.
+[2026-10-10 14:52:05.546354] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:05.554082] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:05.577569] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:05.580706] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:05.582893] CLIENT 10 >> global model version 13로 교체했습니다.
+[2026-10-10 14:52:05.957731] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:05.958604] CLIENT 6 >> global model version 13로 교체했습니다.
+[2026-10-10 14:52:06.653347] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:06.654783] CLIENT 4 >> global model version 13로 교체했습니다.
+[2026-10-10 14:52:06.759467] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:06.759553] CLIENT 7 >> local utility: 0.012963378493001481
+[2026-10-10 14:52:06.838681] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:06.840153] CLIENT 3 >> global model version 13로 교체했습니다.
+[2026-10-10 14:52:06.866170] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 11.0 
+                                    => 로컬 utility: 0.012963378801941872
+[2026-10-10 14:52:07.919122] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:09.845570] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:09.845641] CLIENT 6 >> local utility: 1.8985363753004507
+[2026-10-10 14:52:09.905344] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 13.0 
+                                    => 로컬 utility: 1.8985363245010376
+[2026-10-10 14:52:09.905444] SERVER >> picked client list : [9, 7, 6]
+[2026-10-10 14:52:09.927751] SERVER >> picked clients info: 
+CLIENT 9의 staleness: 2.0
+CLIENT 7의 staleness: 2.0
+CLIENT 6의 staleness: 0.0
+
+[2026-10-10 14:52:09.927778] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:52:10.337336] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:10.646603] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:10.813390] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:11.475255] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:11.871980] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:12.647485] SERVER >> 14번째 글로벌 모델 
+                                 => test_accuracy: 48.38% 
+                                 => test_loss: 1.5977
+                                => 클라이언트9의 staleness: 3.0, 로컬 utility: 3.979947566986084, coefficient: 0.35081294045835415
+                               => 클라이언트7의 staleness: 3.0, 로컬 utility: 0.012963378801941872, coefficient: 0.33671827312579766
+                               => 클라이언트6의 staleness: 1.0, 로컬 utility: 1.8985363245010376, coefficient: 0.3124687864158482
+
+[2026-10-10 14:52:12.706179] CLIENT 1 >> gl: 1.5977381467819214, gl^r-si: 1.6796551942825317 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.708831] CLIENT 3 >> gl: 1.5977381467819214, gl^r-si: 1.6796551942825317 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.710740] CLIENT 10 >> gl: 1.5977381467819214, gl^r-si: 1.6796551942825317 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.712672] CLIENT 2 >> gl: 1.5977381467819214, gl^r-si: 1.6796551942825317 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.714486] CLIENT 5 >> 로컬 staleness 14 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.716349] CLIENT 4 >> gl: 1.5977381467819214, gl^r-si: 1.6796551942825317 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.719181] CLIENT 8 >> 로컬 staleness 14 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.720054] SERVER >> 현재까지 받은 로컬 모델 개수: 0
+[2026-10-10 14:52:12.720078] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:12.725893] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.735550] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.737201] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:12.746945] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:12.779356] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:12.811397] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:14.131887] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:14.131935] CLIENT 1 >> local utility: 0.026285614715874678
+[2026-10-10 14:52:14.193068] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 13.0 
+                                    => 로컬 utility: 0.02628561481833458
+[2026-10-10 14:52:15.504189] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:15.504270] CLIENT 10 >> local utility: 2.6206534061026066
+[2026-10-10 14:52:15.626868] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 13.0 
+                                    => 로컬 utility: 2.6206533908843994
+[2026-10-10 14:52:16.146618] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:16.489769] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:16.489844] CLIENT 2 >> local utility: 0.4556778703290637
+[2026-10-10 14:52:16.520062] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:16.589780] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:16.589842] CLIENT 4 >> local utility: 0.7586478267026984
+[2026-10-10 14:52:16.600834] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 13.0 
+                                    => 로컬 utility: 0.45567786693573
+[2026-10-10 14:52:16.600931] SERVER >> picked client list : [1, 10, 2]
+[2026-10-10 14:52:16.636147] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 1.0
+CLIENT 10의 staleness: 1.0
+CLIENT 2의 staleness: 1.0
+
+[2026-10-10 14:52:16.636188] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:52:16.692211] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 13.0 
+                                    => 로컬 utility: 0.7586477994918823
+[2026-10-10 14:52:16.869224] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:17.157869] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:17.157924] CLIENT 3 >> local utility: 1.146327504405269
+[2026-10-10 14:52:17.249207] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 13.0 
+                                    => 로컬 utility: 1.1463274955749512
+[2026-10-10 14:52:18.442823] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:18.442871] CLIENT 6 >> local utility: 0.08756096126472296
+[2026-10-10 14:52:18.494984] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 14.0 
+                                    => 로컬 utility: 0.08756095916032791
+[2026-10-10 14:52:19.339611] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:19.339670] CLIENT 9 >> local utility: 0.04912307789668881
+[2026-10-10 14:52:19.424385] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 14.0 
+                                    => 로컬 utility: 0.04912307858467102
+[2026-10-10 14:52:19.671482] SERVER >> 15번째 글로벌 모델 
+                                 => test_accuracy: 21.75% 
+                                 => test_loss: 2.8417
+                                => 클라이언트1의 staleness: 2.0, 로컬 utility: 0.02628561481833458, coefficient: 0.3445263157894737
+                               => 클라이언트10의 staleness: 2.0, 로컬 utility: 2.6206533908843994, coefficient: 0.31557894736842107
+                               => 클라이언트2의 staleness: 2.0, 로컬 utility: 0.45567786693573, coefficient: 0.33989473684210525
+
+[2026-10-10 14:52:19.760663] CLIENT 5 >> 로컬 staleness 15 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:19.766377] CLIENT 8 >> 로컬 staleness 15 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:19.766745] SERVER >> 현재까지 받은 로컬 모델 개수: 4
+[2026-10-10 14:52:19.766769] SERVER >> 이번 라운드에서 5개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:19.767609] CLIENT 7 >> gl: 2.8417458534240723, gl^r-si: 1.5977381467819214이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:19.783549] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:52:19.785827] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:52:19.791567] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:19.792951] CLIENT 1 >> global model version 15로 교체했습니다.
+[2026-10-10 14:52:19.815114] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:19.816157] CLIENT 2 >> global model version 15로 교체했습니다.
+[2026-10-10 14:52:19.824816] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:19.856317] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:19.857430] CLIENT 10 >> global model version 15로 교체했습니다.
+[2026-10-10 14:52:21.508846] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:21.508895] CLIENT 7 >> local utility: 0.010883933127741474
+[2026-10-10 14:52:21.603865] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 14.0 
+                                    => 로컬 utility: 0.010883932933211327
+[2026-10-10 14:52:21.603977] SERVER >> picked client list : [4, 3, 6, 9, 7]
+[2026-10-10 14:52:21.635206] SERVER >> picked clients info: 
+CLIENT 4의 staleness: 2.0
+CLIENT 3의 staleness: 2.0
+CLIENT 6의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+CLIENT 7의 staleness: 1.0
+
+[2026-10-10 14:52:21.635229] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:52:24.068695] SERVER >> 16번째 글로벌 모델 
+                                 => test_accuracy: 62.54% 
+                                 => test_loss: 1.2745
+                                => 클라이언트4의 staleness: 3.0, 로컬 utility: 0.7586477994918823, coefficient: 0.19622389306599833
+                               => 클라이언트3의 staleness: 3.0, 로컬 utility: 1.1463274955749512, coefficient: 0.2015705931495405
+                               => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.08756095916032791, coefficient: 0.1881704260651629
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.04912307858467102, coefficient: 0.21126148705096073
+                               => 클라이언트7의 staleness: 2.0, 로컬 utility: 0.010883932933211327, coefficient: 0.20277360066833752
+
+[2026-10-10 14:52:24.124555] CLIENT 10 >> gl: 1.2744805812835693, gl^r-si: 2.8417458534240723 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:24.128694] CLIENT 8 >> 로컬 staleness 16 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:24.130966] CLIENT 1 >> gl: 1.2744805812835693, gl^r-si: 2.8417458534240723 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:24.133204] SERVER >> 현재까지 받은 로컬 모델 개수: 0
+[2026-10-10 14:52:24.133232] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:24.133325] CLIENT 5 >> 로컬 staleness 16 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:24.134116] CLIENT 2 >> gl: 1.2744805812835693, gl^r-si: 2.8417458534240723 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:24.143048] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:24.143701] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:52:24.145992] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:52:24.157384] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:24.164575] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:24.166006] CLIENT 4 >> global model version 16로 교체했습니다.
+[2026-10-10 14:52:24.170087] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:24.177777] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:24.184048] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:24.193285] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:24.225459] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:24.227555] CLIENT 3 >> global model version 16로 교체했습니다.
+[2026-10-10 14:52:24.243441] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:24.244917] CLIENT 10 >> global model version 16로 교체했습니다.
+[2026-10-10 14:52:24.649571] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:24.651345] CLIENT 2 >> global model version 16로 교체했습니다.
+[2026-10-10 14:52:25.078467] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:25.080227] CLIENT 1 >> global model version 16로 교체했습니다.
+[2026-10-10 14:52:26.417660] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:28.503796] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:28.503840] CLIENT 6 >> local utility: 0.044853019499813934
+[2026-10-10 14:52:28.565254] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 16.0 
+                                    => 로컬 utility: 0.04485302045941353
+[2026-10-10 14:52:29.215286] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:29.324841] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:29.601889] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:29.635198] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:30.020310] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:30.303276] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:31.481232] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:31.868223] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:31.868294] CLIENT 2 >> local utility: 1.072796464851587
+[2026-10-10 14:52:31.930127] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 16.0 
+                                    => 로컬 utility: 1.0727964639663696
+[2026-10-10 14:52:33.444655] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:33.444699] CLIENT 9 >> local utility: 0.01936776053184641
+[2026-10-10 14:52:33.502831] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 16.0 
+                                    => 로컬 utility: 0.01936776004731655
+[2026-10-10 14:52:33.502901] SERVER >> picked client list : [6, 2, 9]
+[2026-10-10 14:52:33.532894] SERVER >> picked clients info: 
+CLIENT 6의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+
+[2026-10-10 14:52:33.532929] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:52:34.033821] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:34.033882] CLIENT 10 >> local utility: 1.6749607476782291
+[2026-10-10 14:52:34.087226] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 16.0 
+                                    => 로컬 utility: 1.674960732460022
+[2026-10-10 14:52:34.832609] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:34.832654] CLIENT 3 >> local utility: 0.5228886594848027
+[2026-10-10 14:52:34.890620] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 16.0 
+                                    => 로컬 utility: 0.5228886604309082
+[2026-10-10 14:52:34.917781] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:34.917838] CLIENT 4 >> local utility: 1.5661535807277844
+[2026-10-10 14:52:35.021282] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 16.0 
+                                    => 로컬 utility: 1.5661535263061523
+[2026-10-10 14:52:35.142314] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:35.142359] CLIENT 7 >> local utility: 0.013072684247102243
+[2026-10-10 14:52:35.207983] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 16.0 
+                                    => 로컬 utility: 0.013072684407234192
+[2026-10-10 14:52:36.658829] SERVER >> 17번째 글로벌 모델 
+                                 => test_accuracy: 49.86% 
+                                 => test_loss: 1.8064
+                                => 클라이언트6의 staleness: 1.0, 로컬 utility: 0.04485302045941353, coefficient: 0.30584976372820594
+                               => 클라이언트2의 staleness: 1.0, 로컬 utility: 1.0727964639663696, coefficient: 0.35076856227255443
+                               => 클라이언트9의 staleness: 1.0, 로컬 utility: 0.01936776004731655, coefficient: 0.3433816739992396
+
+[2026-10-10 14:52:36.748121] CLIENT 5 >> 로컬 staleness 17 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:36.751139] CLIENT 8 >> 로컬 staleness 17 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:36.759642] SERVER >> 현재까지 받은 로컬 모델 개수: 4
+[2026-10-10 14:52:36.759676] SERVER >> 이번 라운드에서 4개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:36.759693] SERVER >> picked client list : [10, 3, 4, 7]
+[2026-10-10 14:52:36.759744] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:36.760766] CLIENT 1 >> gl: 1.806406021118164, gl^r-si: 1.2744805812835693이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:36.761425] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:36.795525] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:36.803290] SERVER >> picked clients info: 
+CLIENT 10의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+CLIENT 4의 staleness: 1.0
+CLIENT 7의 staleness: 1.0
+
+[2026-10-10 14:52:36.803320] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:52:36.819375] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:36.826992] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:36.852439] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:37.015264] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:37.015328] CLIENT 1 >> local utility: 1.6507518099575509
+[2026-10-10 14:52:37.111116] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 16.0 
+                                    => 로컬 utility: 1.6507518291473389
+[2026-10-10 14:52:38.908973] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:39.775557] SERVER >> 18번째 글로벌 모델 
+                                 => test_accuracy: 34.62% 
+                                 => test_loss: 1.8292
+                                => 클라이언트10의 staleness: 2.0, 로컬 utility: 1.674960732460022, coefficient: 0.2501668891855808
+                               => 클라이언트3의 staleness: 2.0, 로컬 utility: 0.5228886604309082, coefficient: 0.25166889185580776
+                               => 클라이언트4의 staleness: 2.0, 로컬 utility: 1.5661535263061523, coefficient: 0.24499332443257676
+                               => 클라이언트7의 staleness: 2.0, 로컬 utility: 0.013072684407234192, coefficient: 0.2531708945260347
+
+[2026-10-10 14:52:39.864717] CLIENT 8 >> 로컬 staleness 18 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:39.867170] CLIENT 2 >> gl: 1.8291733264923096, gl^r-si: 1.806406021118164이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:39.873841] CLIENT 6 >> gl: 1.8291733264923096, gl^r-si: 1.806406021118164이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:39.875544] CLIENT 5 >> 로컬 staleness 18 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:39.879288] CLIENT 9 >> gl: 1.8291733264923096, gl^r-si: 1.806406021118164이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:39.880464] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:52:39.880490] SERVER >> 이번 라운드에서 4개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:39.884517] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:39.892393] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:52:39.895672] CLIENT 4 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:52:39.904438] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:39.918269] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:39.942457] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:52:39.945091] CLIENT 3 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:52:39.974300] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:40.971061] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:41.240959] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:41.241004] CLIENT 2 >> local utility: 0.03193354074921607
+[2026-10-10 14:52:41.336799] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 17.0 
+                                    => 로컬 utility: 0.03193354234099388
+[2026-10-10 14:52:41.744384] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:43.080873] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:43.080921] CLIENT 6 >> local utility: 0.02498373147574801
+[2026-10-10 14:52:43.140776] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 17.0 
+                                    => 로컬 utility: 0.024983732029795647
+[2026-10-10 14:52:44.569597] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:44.666610] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:44.794803] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:44.977973] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:46.705138] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:46.705181] CLIENT 9 >> local utility: 0.00847112288127017
+[2026-10-10 14:52:46.763179] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 17.0 
+                                    => 로컬 utility: 0.008471122942864895
+[2026-10-10 14:52:46.763252] SERVER >> picked client list : [1, 2, 6, 9]
+[2026-10-10 14:52:46.804396] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 2.0
+CLIENT 2의 staleness: 1.0
+CLIENT 6의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+
+[2026-10-10 14:52:46.804435] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:52:49.158678] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:49.158721] CLIENT 10 >> local utility: 0.04871589551993573
+[2026-10-10 14:52:49.211330] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 18.0 
+                                    => 로컬 utility: 0.048715896904468536
+[2026-10-10 14:52:49.258899] SERVER >> 19번째 글로벌 모델 
+                                 => test_accuracy: 63.37% 
+                                 => test_loss: 1.0711
+                                => 클라이언트1의 staleness: 3.0, 로컬 utility: 1.6507518291473389, coefficient: 0.26229114076211085
+                               => 클라이언트2의 staleness: 2.0, 로컬 utility: 0.03193354234099388, coefficient: 0.2587650759306006
+                               => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.024983732029795647, coefficient: 0.22562808029811277
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.008471122942864895, coefficient: 0.2533157030091758
+
+[2026-10-10 14:52:49.313666] CLIENT 4 >> gl: 1.0711485147476196, gl^r-si: 1.8291733264923096 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:49.315897] CLIENT 8 >> 로컬 staleness 19 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:49.317253] CLIENT 7 >> gl: 1.0711485147476196, gl^r-si: 1.8291733264923096 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:49.319061] CLIENT 5 >> 로컬 staleness 19 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:49.321059] CLIENT 3 >> gl: 1.0711485147476196, gl^r-si: 1.8291733264923096 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:49.322250] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:52:49.322276] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:49.333095] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:52:49.337024] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:49.337826] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:52:49.343043] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:49.350802] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:49.359424] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:49.359714] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:49.372575] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:49.388245] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:49.388305] CLIENT 4 >> local utility: 0.025747977304355553
+[2026-10-10 14:52:49.413205] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:49.413260] CLIENT 3 >> local utility: 0.055016388036800354
+[2026-10-10 14:52:49.475832] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 18.0 
+                                    => 로컬 utility: 0.05501638725399971
+[2026-10-10 14:52:49.518392] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 18.0 
+                                    => 로컬 utility: 0.025747977197170258
+[2026-10-10 14:52:49.518484] SERVER >> picked client list : [10, 3, 4]
+[2026-10-10 14:52:49.552189] SERVER >> picked clients info: 
+CLIENT 10의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+CLIENT 4의 staleness: 1.0
+
+[2026-10-10 14:52:49.552227] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:52:49.859971] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:49.860026] CLIENT 7 >> local utility: 0.002539125654804689
+[2026-10-10 14:52:49.961608] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 18.0 
+                                    => 로컬 utility: 0.0025391257368028164
+[2026-10-10 14:52:51.757528] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:52.556830] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:52.754680] SERVER >> 20번째 글로벌 모델 
+                                 => test_accuracy: 23.54% 
+                                 => test_loss: 2.9087
+                                => 클라이언트10의 staleness: 2.0, 로컬 utility: 0.048715896904468536, coefficient: 0.33497206703910615
+                               => 클라이언트3의 staleness: 2.0, 로컬 utility: 0.05501638725399971, coefficient: 0.3369832402234637
+                               => 클라이언트4의 staleness: 2.0, 로컬 utility: 0.025747977197170258, coefficient: 0.32804469273743014
+
+[2026-10-10 14:52:52.852637] CLIENT 6 >> gl: 2.9086878299713135, gl^r-si: 1.0711485147476196이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:52.854095] CLIENT 8 >> 로컬 staleness 20 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:52.856287] CLIENT 2 >> gl: 2.9086878299713135, gl^r-si: 1.0711485147476196이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:52.858847] CLIENT 9 >> gl: 2.9086878299713135, gl^r-si: 1.0711485147476196이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:52.862098] CLIENT 5 >> 로컬 staleness 20 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:52:52.867316] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:52:52.867346] SERVER >> 이번 라운드에서 8개의 로컬 모델을 사용합니다.
+[2026-10-10 14:52:52.868069] CLIENT 1 >> gl: 2.9086878299713135, gl^r-si: 1.0711485147476196이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:52:52.870972] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:52.892718] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:52.894416] CLIENT 3 >> global model version 20로 교체했습니다.
+[2026-10-10 14:52:52.897548] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:52.920326] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:52:52.929428] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:52.947058] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:52:52.948765] CLIENT 4 >> global model version 20로 교체했습니다.
+[2026-10-10 14:52:54.414305] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:54.580276] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:54.692788] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:54.692854] CLIENT 6 >> local utility: 0.023722551592444772
+[2026-10-10 14:52:54.802496] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 19.0 
+                                    => 로컬 utility: 0.02372255176305771
+[2026-10-10 14:52:56.634362] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:57.166303] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:57.558307] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:57.558369] CLIENT 2 >> local utility: 0.010515597359591254
+[2026-10-10 14:52:57.618954] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 19.0 
+                                    => 로컬 utility: 0.010515597648918629
+[2026-10-10 14:52:57.991189] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:52:59.286660] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:59.286728] CLIENT 10 >> local utility: 0.025736678023745154
+[2026-10-10 14:52:59.345361] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 20.0 
+                                    => 로컬 utility: 0.025736678391695023
+[2026-10-10 14:52:59.628374] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:59.628438] CLIENT 1 >> local utility: 0.022451761111802374
+[2026-10-10 14:52:59.714357] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:59.714408] CLIENT 3 >> local utility: 0.7761754879245052
+[2026-10-10 14:52:59.721697] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 19.0 
+                                    => 로컬 utility: 0.02245176024734974
+[2026-10-10 14:52:59.770579] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 20.0 
+                                    => 로컬 utility: 0.7761754989624023
+[2026-10-10 14:52:59.871719] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:52:59.871757] CLIENT 9 >> local utility: 0.017681942298503315
+[2026-10-10 14:52:59.932778] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 19.0 
+                                    => 로컬 utility: 0.017681941390037537
+[2026-10-10 14:53:01.350649] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:01.350688] CLIENT 4 >> local utility: 1.9432994438254314
+[2026-10-10 14:53:01.407121] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 20.0 
+                                    => 로컬 utility: 1.943299412727356
+[2026-10-10 14:53:01.407248] SERVER >> picked client list : [7, 6, 2, 10, 1, 3, 9, 4]
+[2026-10-10 14:53:01.446848] SERVER >> picked clients info: 
+CLIENT 7의 staleness: 2.0
+CLIENT 6의 staleness: 1.0
+CLIENT 2의 staleness: 1.0
+CLIENT 10의 staleness: 0.0
+CLIENT 1의 staleness: 1.0
+CLIENT 3의 staleness: 0.0
+CLIENT 9의 staleness: 1.0
+CLIENT 4의 staleness: 0.0
+
+[2026-10-10 14:53:01.446870] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:53:02.617956] SERVER >> 21번째 글로벌 모델 
+                                 => test_accuracy: 74.11% 
+                                 => test_loss: 0.7765
+                                => 클라이언트7의 staleness: 3.0, 로컬 utility: 0.0025391257368028164, coefficient: 0.12402657128257537
+                               => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.02372255176305771, coefficient: 0.11509453244762391
+                               => 클라이언트2의 staleness: 2.0, 로컬 utility: 0.010515597648918629, coefficient: 0.13199795605518652
+                               => 클라이언트10의 staleness: 1.0, 로컬 utility: 0.025736678391695023, coefficient: 0.12255493101686254
+                               => 클라이언트1의 staleness: 2.0, 로컬 utility: 0.02245176024734974, coefficient: 0.13379662749105775
+                               => 클라이언트3의 staleness: 1.0, 로컬 utility: 0.7761754989624023, coefficient: 0.12329075114971896
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.017681941390037537, coefficient: 0.12921819110884006
+                               => 클라이언트4의 staleness: 1.0, 로컬 utility: 1.943299412727356, coefficient: 0.1200204394481349
+
+[2026-10-10 14:53:02.669961] CLIENT 8 >> 로컬 staleness 21 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:53:02.671180] CLIENT 5 >> 로컬 staleness 21 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:53:02.675680] SERVER >> 현재까지 받은 로컬 모델 개수: 0
+[2026-10-10 14:53:02.675705] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:53:02.683396] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:02.688654] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:02.689738] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:02.690604] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:02.690915] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:02.694522] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:02.695960] CLIENT 7 >> global model version 21로 교체했습니다.
+[2026-10-10 14:53:02.699553] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:53:02.701076] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:02.701721] CLIENT 9 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:53:02.707758] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:02.709784] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:02.710750] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:02.734167] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:53:02.738020] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:53:02.756011] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:02.764929] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:05.287846] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:07.776548] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:07.776612] CLIENT 2 >> local utility: 0.010650650172699375
+[2026-10-10 14:53:07.838235] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 21.0 
+                                    => 로컬 utility: 0.010650650598108768
+[2026-10-10 14:53:07.889828] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:07.931290] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:08.095991] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:08.224377] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:08.345956] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:08.419373] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:08.655877] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:10.131812] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:10.131880] CLIENT 7 >> local utility: 0.415313185202448
+[2026-10-10 14:53:10.203917] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 21.0 
+                                    => 로컬 utility: 0.415313184261322
+[2026-10-10 14:53:12.191951] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:12.191999] CLIENT 6 >> local utility: 0.058692931790685084
+[2026-10-10 14:53:12.251611] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 21.0 
+                                    => 로컬 utility: 0.05869293212890625
+[2026-10-10 14:53:12.251680] SERVER >> picked client list : [2, 7, 6]
+[2026-10-10 14:53:12.273519] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 0.0
+CLIENT 7의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+
+[2026-10-10 14:53:12.273543] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:53:13.050411] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:13.050458] CLIENT 4 >> local utility: 0.018818086244478248
+[2026-10-10 14:53:13.104918] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 21.0 
+                                    => 로컬 utility: 0.0188180860131979
+[2026-10-10 14:53:13.213019] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:13.213061] CLIENT 9 >> local utility: 0.010772295923537959
+[2026-10-10 14:53:13.264793] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 21.0 
+                                    => 로컬 utility: 0.010772296227514744
+[2026-10-10 14:53:13.516815] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:13.516875] CLIENT 10 >> local utility: 0.02812692163423593
+[2026-10-10 14:53:13.602596] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 21.0 
+                                    => 로컬 utility: 0.028126921504735947
+[2026-10-10 14:53:13.614445] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:13.614492] CLIENT 3 >> local utility: 0.0376506156370606
+[2026-10-10 14:53:13.704155] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 21.0 
+                                    => 로컬 utility: 0.037650614976882935
+[2026-10-10 14:53:14.076852] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:14.076903] CLIENT 1 >> local utility: 0.0061118145857928935
+[2026-10-10 14:53:14.160424] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 21.0 
+                                    => 로컬 utility: 0.0061118146404623985
+[2026-10-10 14:53:15.015307] SERVER >> 22번째 글로벌 모델 
+                                 => test_accuracy: 53.61% 
+                                 => test_loss: 1.9723
+                                => 클라이언트2의 staleness: 1.0, 로컬 utility: 0.010650650598108768, coefficient: 0.355675497053478
+                               => 클라이언트7의 staleness: 1.0, 로컬 utility: 0.415313184261322, coefficient: 0.33419617778267335
+                               => 클라이언트6의 staleness: 1.0, 로컬 utility: 0.05869293212890625, coefficient: 0.31012832516384864
+
+[2026-10-10 14:53:15.116910] CLIENT 8 >> 로컬 staleness 22 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:53:15.128240] CLIENT 5 >> 로컬 staleness 22 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:53:15.129267] SERVER >> 현재까지 받은 로컬 모델 개수: 5
+[2026-10-10 14:53:15.129292] SERVER >> 이번 라운드에서 7개의 로컬 모델을 사용합니다.
+[2026-10-10 14:53:15.145527] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:15.147020] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:15.156443] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:15.158307] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:15.168211] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:15.185525] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:17.248869] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:19.172769] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:19.172810] CLIENT 7 >> local utility: 0.007893781791489418
+[2026-10-10 14:53:19.231143] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 22.0 
+                                    => 로컬 utility: 0.00789378210902214
+[2026-10-10 14:53:19.493295] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:19.572517] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:21.631358] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:21.631397] CLIENT 2 >> local utility: 0.008629964353099014
+[2026-10-10 14:53:21.687866] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 22.0 
+                                    => 로컬 utility: 0.008629964664578438
+[2026-10-10 14:53:21.687935] SERVER >> picked client list : [4, 9, 10, 3, 1, 7, 2]
+[2026-10-10 14:53:21.757166] SERVER >> picked clients info: 
+CLIENT 4의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+CLIENT 10의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+CLIENT 1의 staleness: 1.0
+CLIENT 7의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+
+[2026-10-10 14:53:21.757198] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:53:23.806084] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:23.806134] CLIENT 6 >> local utility: 0.01538997987729958
+[2026-10-10 14:53:23.894288] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 22.0 
+                                    => 로컬 utility: 0.01538997981697321
+[2026-10-10 14:53:24.622970] SERVER >> 23번째 글로벌 모델 
+                                 => test_accuracy: 83.29% 
+                                 => test_loss: 0.5361
+                                => 클라이언트4의 staleness: 2.0, 로컬 utility: 0.0188180860131979, coefficient: 0.1356308033445743
+                               => 클라이언트9의 staleness: 2.0, 로컬 utility: 0.010772296227514744, coefficient: 0.14602485332840578
+                               => 클라이언트10의 staleness: 2.0, 로컬 utility: 0.028126921504735947, coefficient: 0.1384949415623412
+                               => 클라이언트3의 staleness: 2.0, 로컬 utility: 0.037650614976882935, coefficient: 0.13932646556104772
+                               => 클라이언트1의 staleness: 2.0, 로컬 utility: 0.0061118146404623985, coefficient: 0.15119878043146856
+                               => 클라이언트7의 staleness: 1.0, 로컬 utility: 0.00789378210902214, coefficient: 0.14015798955975423
+                               => 클라이언트2의 staleness: 1.0, 로컬 utility: 0.008629964664578438, coefficient: 0.1491661662124082
+
+[2026-10-10 14:53:24.716198] CLIENT 8 >> 로컬 staleness 23 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:53:24.720243] CLIENT 5 >> 로컬 staleness 23 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:53:24.721821] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:53:24.721841] SERVER >> 이번 라운드에서 3개의 로컬 모델을 사용합니다.
+[2026-10-10 14:53:24.735474] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:24.736557] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:24.739182] CLIENT 3 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:24.747242] CLIENT 2 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:53:24.751506] CLIENT 7 >> 로컬 학습을 시작합니다.
+
+[2026-10-10 14:53:24.752790] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:24.759450] CLIENT 4 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:53:24.760252] CLIENT 3 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:24.763680] CLIENT 10 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:53:24.768854] CLIENT 2 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:24.775146] CLIENT 10 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:24.778701] CLIENT 9 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:24.786703] CLIENT 4 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:24.805819] CLIENT 9 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:27.273164] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:27.436430] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:29.646154] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:29.646210] CLIENT 7 >> local utility: 0.00461418425288288
+[2026-10-10 14:53:29.709524] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 23.0 
+                                    => 로컬 utility: 0.004614184144884348
+[2026-10-10 14:53:29.972710] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:29.972754] CLIENT 1 >> local utility: 0.013595097127434213
+[2026-10-10 14:53:29.973487] CLIENT 4 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:30.039078] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 23.0 
+                                    => 로컬 utility: 0.0135950967669487
+[2026-10-10 14:53:30.039165] SERVER >> picked client list : [6, 7, 1]
+[2026-10-10 14:53:30.075020] SERVER >> picked clients info: 
+CLIENT 6의 staleness: 1.0
+CLIENT 7의 staleness: 0.0
+CLIENT 1의 staleness: 0.0
+
+[2026-10-10 14:53:30.075056] SERVER >> global aggregation을 진행합니다.
+[2026-10-10 14:53:30.208286] CLIENT 3 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:30.272629] CLIENT 10 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:30.406254] CLIENT 9 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:30.657916] CLIENT 2 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:32.419138] CLIENT 3 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:32.419182] CLIENT 3 >> local utility: 0.021626317976317113
+[2026-10-10 14:53:32.471742] SERVER >> CLIENT 3에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 23.0 
+                                    => 로컬 utility: 0.021626317873597145
+[2026-10-10 14:53:32.818325] SERVER >> 24번째 글로벌 모델 
+                                 => test_accuracy: 45.81% 
+                                 => test_loss: 2.2855
+                                => 클라이언트6의 staleness: 2.0, 로컬 utility: 0.01538997981697321, coefficient: 0.30863250205535764
+                               => 클라이언트7의 staleness: 1.0, 로컬 utility: 0.004614184144884348, coefficient: 0.3325842696629214
+                               => 클라이언트1의 staleness: 1.0, 로컬 utility: 0.0135950967669487, coefficient: 0.35878322828172104
+
+[2026-10-10 14:53:32.876086] CLIENT 10 >> gl: 2.285464286804199, gl^r-si: 0.53614342212677이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:53:32.877658] CLIENT 2 >> gl: 2.285464286804199, gl^r-si: 0.53614342212677이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:53:32.880211] CLIENT 4 >> gl: 2.285464286804199, gl^r-si: 0.53614342212677이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:53:32.882217] CLIENT 9 >> gl: 2.285464286804199, gl^r-si: 0.53614342212677이므로 최신 글로벌 모델을 받지 않고 로컬 업데이트를 이어갑니다.
+[2026-10-10 14:53:32.885277] SERVER >> 현재까지 받은 로컬 모델 개수: 1
+[2026-10-10 14:53:32.885314] SERVER >> 이번 라운드에서 10개의 로컬 모델을 사용합니다.
+[2026-10-10 14:53:32.885652] CLIENT 8 >> 로컬 staleness 24 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:53:32.886414] CLIENT 5 >> 로컬 staleness 24 이므로 최신 글로벌 모델을 받습니다.
+[2026-10-10 14:53:32.924069] CLIENT 7 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.[2026-10-10 14:53:32.925588] CLIENT 1 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+
+[2026-10-10 14:53:32.945221] CLIENT 6 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+[2026-10-10 14:53:32.950443] CLIENT 7 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:32.957190] CLIENT 1 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:32.977031] CLIENT 6 >> 로컬 학습을 시작합니다.
+[2026-10-10 14:53:34.890498] CLIENT 4 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:34.890550] CLIENT 4 >> local utility: 0.008262053542226016
+[2026-10-10 14:53:34.951249] SERVER >> CLIENT 4에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 23.0 
+                                    => 로컬 utility: 0.00826205313205719
+[2026-10-10 14:53:35.352146] CLIENT 1 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:35.520315] CLIENT 10 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:35.520404] CLIENT 10 >> local utility: 0.019605163712256814
+[2026-10-10 14:53:35.636741] SERVER >> CLIENT 10에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 23.0 
+                                    => 로컬 utility: 0.019605163484811783
+[2026-10-10 14:53:35.703207] CLIENT 9 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:35.703253] CLIENT 9 >> local utility: 0.012560576338218268
+[2026-10-10 14:53:35.773108] SERVER >> CLIENT 9에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 23.0 
+                                    => 로컬 utility: 0.01256057620048523
+[2026-10-10 14:53:36.144092] CLIENT 2 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:36.144172] CLIENT 2 >> local utility: 0.008230734945629033
+[2026-10-10 14:53:36.245192] SERVER >> CLIENT 2에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 23.0 
+                                    => 로컬 utility: 0.00823073461651802
+[2026-10-10 14:53:37.049243] CLIENT 7 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:37.645565] CLIENT 1 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:37.645612] CLIENT 1 >> local utility: 0.002514714484810034
+[2026-10-10 14:53:37.702678] SERVER >> CLIENT 1에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 24.0 
+                                    => 로컬 utility: 0.0025147143751382828
+[2026-10-10 14:53:37.729976] CLIENT 6 >> 1 epoch을 수행했습니다.
+[2026-10-10 14:53:38.929656] CLIENT 7 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:38.929695] CLIENT 7 >> local utility: 0.003953774681929639
+[2026-10-10 14:53:38.989612] SERVER >> CLIENT 7에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 24.0 
+                                    => 로컬 utility: 0.003953774459660053
+[2026-10-10 14:53:41.823003] CLIENT 6 >> 2 epoch을 수행했습니다.
+[2026-10-10 14:53:41.823052] CLIENT 6 >> local utility: 0.04899308258638319
+[2026-10-10 14:53:41.914042] SERVER >> CLIENT 6에게 로컬 모델을 받음 
+                                    => 로컬 모델 버전: 24.0 
+                                    => 로컬 utility: 0.048993080854415894
+Thread 0x00007b0c47fe7640 (most recent call first):
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLServer.py", line 37 in receive_local_model_from_any_clients
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870 in run
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932 in _bootstrap_inner
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 890 in _bootstrap
+
+Current thread 0x00007b0cf0d5d480 (most recent call first):
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLServer.py", line 59 in wait_until_can_update_global_model
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 60 in runServer
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 105 in init_FL
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 120 in init_process
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 152 in <module>
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87 in _run_code
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 97 in _run_module_code
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 265 in run_path
+  File "/home/wise-175/Mando/FedMPI/crash_study/harness/sasafl_entry.py", line 50 in <module>

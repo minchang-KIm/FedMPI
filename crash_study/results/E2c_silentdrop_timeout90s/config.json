@@ -1,0 +1,19 @@
+{
+  "name": "E2c_silentdrop_timeout90s",
+  "clients": 10,
+  "ratio": 0.3,
+  "rounds": 30,
+  "lag_tolerance": 9,
+  "threads": 2,
+  "max_restarts": 0,
+  "pg_timeout_sec": 90,
+  "fault": {
+    "signal": "STOP",
+    "ranks": [
+      3
+    ],
+    "at_round": 5
+  },
+  "observe_after_fault_sec": 360,
+  "max_wall_sec": 900
+}

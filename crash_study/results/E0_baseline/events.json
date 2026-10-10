@@ -1,0 +1,16 @@
+[
+  {
+    "t": 0.0,
+    "wall": "14:45:12",
+    "event": "start",
+    "cmd": "--standalone --nnodes=1 --nproc_per_node=11 --max_restarts=0"
+  },
+  {
+    "t": 216.213,
+    "wall": "14:48:48",
+    "event": "end",
+    "type": "exited",
+    "returncode": 0,
+    "last_round": 30
+  }
+]

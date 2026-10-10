@@ -1,0 +1,19 @@
+{
+  "name": "E2a_silentdrop_1client",
+  "clients": 10,
+  "ratio": 0.3,
+  "rounds": 30,
+  "lag_tolerance": 9,
+  "threads": 2,
+  "max_restarts": 0,
+  "pg_timeout_sec": null,
+  "fault": {
+    "signal": "STOP",
+    "ranks": [
+      3
+    ],
+    "at_round": 5
+  },
+  "observe_after_fault_sec": 480,
+  "max_wall_sec": 900
+}

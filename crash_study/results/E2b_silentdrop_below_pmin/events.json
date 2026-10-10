@@ -1,0 +1,45 @@
+[
+  {
+    "t": 0.0,
+    "wall": "15:03:52",
+    "event": "start",
+    "cmd": "--standalone --nnodes=1 --nproc_per_node=11 --max_restarts=0"
+  },
+  {
+    "t": 48.317,
+    "wall": "15:04:40",
+    "event": "fault_injected",
+    "signal": "STOP",
+    "ranks": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "pids": [
+      3068833,
+      3068834,
+      3068835,
+      3068836,
+      3068837,
+      3068838
+    ],
+    "at_round": 5
+  },
+  {
+    "t": 528.574,
+    "wall": "15:12:40",
+    "event": "stack_dump_requested",
+    "pid": 3068828
+  },
+  {
+    "t": 533.586,
+    "wall": "15:12:45",
+    "event": "end",
+    "type": "stalled_killed_by_orchestrator",
+    "rounds_at_end": 6,
+    "last_round": 6
+  }
+]

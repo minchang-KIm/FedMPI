@@ -1,0 +1,10 @@
+{
+  "K": 10,
+  "P_r": 3,
+  "buffered_local_models": 2,
+  "connected_clients": 2,
+  "observe_sec": 15.01,
+  "returned": false,
+  "cpu_sec_consumed": 15.01,
+  "cpu_utilisation_pct": 100.0
+}

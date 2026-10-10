@@ -1,0 +1,19 @@
+{
+  "name": "S2_two_paperCats_SASAFL",
+  "outcome": "crashed",
+  "returncode": 1,
+  "wall_min": 2.04,
+  "rounds_done": 15,
+  "rounds_requested": 20,
+  "best_acc": 54.28,
+  "last_acc": 38.78,
+  "errors": {
+    "is_set_corruption": 1,
+    "segfault": 0,
+    "abort": 0,
+    "connection_closed": 34,
+    "gloo_timeout": 0,
+    "traceback": 37,
+    "child_failed": 4
+  }
+}

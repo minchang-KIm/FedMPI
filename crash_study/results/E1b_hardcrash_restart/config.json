@@ -1,0 +1,19 @@
+{
+  "name": "E1b_hardcrash_restart",
+  "clients": 10,
+  "ratio": 0.3,
+  "rounds": 30,
+  "lag_tolerance": 9,
+  "threads": 2,
+  "max_restarts": 3,
+  "pg_timeout_sec": null,
+  "fault": {
+    "signal": "KILL",
+    "ranks": [
+      3
+    ],
+    "at_round": 5
+  },
+  "observe_after_fault_sec": 240,
+  "max_wall_sec": 900
+}

@@ -1,0 +1,9 @@
+
+===== S1_single_paperCats_SASAFL : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3,4,8
+===== S1_single_paperCats_SASAFL -> {"name": "S1_single_paperCats_SASAFL", "outcome": "completed", "returncode": 0, "wall_min": 5.37, "rounds_done": 20, "rounds_requested": 20, "best_acc": 56.96, "last_acc": 54.31, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+
+===== S2_two_paperCats_SASAFL : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3,4,8
+===== S2_two_paperCats_SASAFL -> {"name": "S2_two_paperCats_SASAFL", "outcome": "crashed", "returncode": 1, "wall_min": 2.04, "rounds_done": 15, "rounds_requested": 20, "best_acc": 54.28, "last_acc": 38.78, "errors": {"is_set_corruption": 1, "segfault": 0, "abort": 0, "connection_closed": 34, "gloo_timeout": 0, "traceback": 37, "child_failed": 4}}
+
+===== S3_two_paperCats_BSA : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 30 two 1,2,3,4,8
+===== S3_two_paperCats_BSA -> {"name": "S3_two_paperCats_BSA", "outcome": "completed", "returncode": 0, "wall_min": 1.87, "rounds_done": 20, "rounds_requested": 20, "best_acc": 65.96, "last_acc": 23.46, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}

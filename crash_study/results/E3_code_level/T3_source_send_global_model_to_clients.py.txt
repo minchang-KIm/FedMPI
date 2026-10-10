@@ -1,0 +1,18 @@
+    def send_global_model_to_clients(self, clients_idx, picked_clients_idx, global_loss):
+        flatten_model = TensorBuffer(list(self.model.state_dict().values()))
+
+        shuffled_clients_idx = copy.deepcopy(clients_idx)
+        random.shuffle(shuffled_clients_idx)
+    
+
+        global_model_info = flatten_model.buffer.tolist()
+        global_model_info.append(self.current_round)
+        global_model_info.append(global_loss)
+        global_model_info = torch.tensor(global_model_info)
+
+
+        for idx in shuffled_clients_idx:
+            if idx in picked_clients_idx:
+                dist.send(tensor=torch.cat([global_model_info, torch.tensor([1])]), dst=idx) # 글로벌 모델, 현재 라운드, global loss 전송, 선택되었음 전송
+            else:
+                dist.send(tensor=torch.cat([global_model_info, torch.tensor([0])]), dst=idx) # 글로벌 모델, 현재 라운드, global loss 전송, 선택되지 않음 전송

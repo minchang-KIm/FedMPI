@@ -1,0 +1,29 @@
+[
+  {
+    "t": 0.0,
+    "wall": "15:12:53",
+    "event": "start",
+    "cmd": "--standalone --nnodes=1 --nproc_per_node=11 --max_restarts=0"
+  },
+  {
+    "t": 35.32,
+    "wall": "15:13:28",
+    "event": "fault_injected",
+    "signal": "STOP",
+    "ranks": [
+      3
+    ],
+    "pids": [
+      3070773
+    ],
+    "at_round": 5
+  },
+  {
+    "t": 166.172,
+    "wall": "15:15:39",
+    "event": "end",
+    "type": "exited",
+    "returncode": 1,
+    "last_round": 6
+  }
+]
