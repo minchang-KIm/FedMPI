@@ -28,3 +28,8 @@
 - 2026-10-12 10:20 E2 실행 시작: FMNIST_BSA_C0.3 (시도 1/2)
 
 ===== FMNIST_BSA_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.3 30 single 1,2,3,4,8
+===== FMNIST_BSA_C0.3 -> {"name": "FMNIST_BSA_C0.3", "outcome": "completed", "returncode": 0, "wall_min": 192.14, "rounds_done": 500, "rounds_requested": 500, "best_acc": 74.5, "last_acc": 54.9, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-12 13:32 E2 실행 종료: FMNIST_BSA_C0.3 → completed, 500/500라운드, 최고 74.5%, 192.14분
+- 2026-10-12 13:32 E2 실행 시작: FMNIST_BSA_C0.5 (시도 1/2)
+
+===== FMNIST_BSA_C0.5 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.5 30 single 1,2,3,4,8
