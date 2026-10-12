@@ -1,0 +1,61 @@
+# K=30 재현 파이프라인 진행 기록
+
+- 2026-10-10 16:43 파이프라인 시작 (E1, E2, E3, E4, E5, E6, report_only=True)
+- 2026-10-10 16:43 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-10 16:43 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-10 16:43 === E3 정리 완료 → experiments/E3_Fig2_sync_async_semi/SUMMARY.md
+- 2026-10-10 16:43 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-10 16:43 E5 정리 중 오류 → /home/wise-175/Mando/FedMPI/k30_reproduction/experiments/E5_Fig5_lag_tolerance/report_error.log
+- 2026-10-10 16:43 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-10 16:43 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-10 16:43 파이프라인 종료
+- 2026-10-10 16:44 파이프라인 시작 (E5, report_only=True)
+- 2026-10-10 16:44 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-10 16:44 파이프라인 종료
+- 2026-10-10 19:24 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=True)
+- 2026-10-10 19:24 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-10 19:24 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-10 19:24 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-10 19:24 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-10 19:24 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-10 19:24 파이프라인 종료
+- 2026-10-10 19:26 파이프라인 시작 (E4, E6, report_only=True)
+- 2026-10-10 19:26 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-10 19:26 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-10 19:26 파이프라인 종료
+- 2026-10-10 19:30 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=True)
+- 2026-10-10 19:31 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-10 19:31 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-10 19:31 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-10 19:31 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-10 19:31 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-10 19:31 파이프라인 종료
+- 2026-10-10 19:31 파이프라인 시작 (E4, E6, report_only=True)
+- 2026-10-10 19:31 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-10 19:31 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-10 19:31 파이프라인 종료
+- 2026-10-10 20:43 파이프라인 시작 (E1, E6, report_only=True)
+- 2026-10-10 20:43 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-10 20:43 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-10 20:43 파이프라인 종료
+- 2026-10-11 14:26 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=False)
+- 2026-10-11 14:26 === E1 시작: MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
+- 2026-10-11 14:26 E1 실행 시작: T2_MNIST_SASAFL_C0.5_single_cats12348 (시도 1/2)
+- 2026-10-12 00:27 E1 실행 종료: T2_MNIST_SASAFL_C0.5_single_cats12348 → max_wall, 464/500라운드, 최고 98.84%, 600.12분
+- 2026-10-12 00:27 E1 실행 시작: T2_MNIST_SASAFL_C0.5_single_cats12348 (시도 2/2)
+- 2026-10-12 09:48 E1 실행 종료: T2_MNIST_SASAFL_C0.5_single_cats12348 → completed, 500/500라운드, 최고 98.84%, 561.03분
+- 2026-10-12 09:48 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-12 09:48 === E2 시작: FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
+- 2026-10-12 09:48 E2 실행 시작: FMNIST_BSA_C0.1 (시도 1/2)
+- 2026-10-12 10:20 E2 실행 종료: FMNIST_BSA_C0.1 → completed, 500/500라운드, 최고 63.64%, 31.9분
+- 2026-10-12 10:20 설정 변경(실행 시간 상한 600→1500분) 적용을 위해 파이프라인 재시작
+- 2026-10-12 10:20 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=False)
+- 2026-10-12 10:20 === E1 시작: MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
+- 2026-10-12 10:20 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-12 10:20 === E2 시작: FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
+- 2026-10-12 10:20 E2 실행 시작: FMNIST_BSA_C0.3 (시도 1/2)
+- 2026-10-12 10:21 파이프라인 시작 (E1, E2, E6, report_only=True)
+- 2026-10-12 10:21 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-12 10:21 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-12 10:21 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-12 10:21 파이프라인 종료

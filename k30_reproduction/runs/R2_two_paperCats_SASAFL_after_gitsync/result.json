@@ -1,0 +1,19 @@
+{
+  "name": "R2_two_paperCats_SASAFL_after_gitsync",
+  "outcome": "crashed",
+  "returncode": 1,
+  "wall_min": 0.9,
+  "rounds_done": 5,
+  "rounds_requested": 20,
+  "best_acc": 45.96,
+  "last_acc": 45.96,
+  "errors": {
+    "is_set_corruption": 1,
+    "segfault": 0,
+    "abort": 0,
+    "connection_closed": 18,
+    "gloo_timeout": 0,
+    "traceback": 21,
+    "child_failed": 4
+  }
+}

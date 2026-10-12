@@ -1,0 +1,4 @@
+host=wise-175 procs=30 seconds=300.0 total_threads=108
+reported=30 abnormal_reports=0 died=[]
+total_recv=94198 total_train=5153
+RESULT: PASS

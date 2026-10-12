@@ -47,6 +47,11 @@ STAGES = {
         {"name": "F3_single_cats123_SASAFL", "method": "SASAFL", "C": 0.1, "mode": "single", "cats": SMALL_CATS},
     ],
 }
+# git 동기화(176 → 175와 같은 커밋 31288d0) 후 S2 구성 재테스트 3회
+STAGES["resync"] = [
+    {"name": f"R{i}_two_paperCats_SASAFL_after_gitsync", "method": "SASAFL", "C": 0.1, "mode": "two", "cats": PAPER_CATS}
+    for i in (1, 2, 3)
+]
 # 3단계: 논문 Table 2 MNIST 열 (BSA vs SASAFL × C) — 노드/카테고리는 --mode/--cats로 지정
 for method, tag in (("SemiAsync", "BSA"), ("SASAFL", "SASAFL")):
     for c in (0.1, 0.3, 0.5):
@@ -131,17 +136,19 @@ class Run:
         cfg = self.cfg
         run_id = f"{cfg['name']}_{int(time.time())}"
         env = os.environ.copy()
+        # 실험별 설정(cfg)이 COMMON 기본값보다 우선한다
+        settings = {**COMMON, **{k: cfg[k] for k in ("K", "dataset", "lr", "batch", "epochs", "tau") if k in cfg}}
         env.update({
             "ROUNDS": str(cfg.get("rounds", SMOKE_ROUNDS)),
             "TARGET_ACCURACY": str(cfg.get("target", 1.0)),
-            "DATASET": COMMON["dataset"], "LEARNING_RATE": str(COMMON["lr"]),
-            "BATCH_SIZE": str(COMMON["batch"]), "LOCAL_EPOCHS": str(COMMON["epochs"]),
-            "LAG_TOLERANCE": str(COMMON["tau"]), "IID": "False", "SPLIT": "gaussian",
+            "DATASET": settings["dataset"], "LEARNING_RATE": str(settings["lr"]),
+            "BATCH_SIZE": str(settings["batch"]), "LOCAL_EPOCHS": str(settings["epochs"]),
+            "LAG_TOLERANCE": str(settings["tau"]), "IID": "False", "SPLIT": "gaussian",
             "MASTER_PORT": str(self.port), "RUN_ID": run_id,
             "K30_PID_DIR": str(self.out / "pids"),
         })
-        cmd = ["bash", str(HERE / "launch.sh"), cfg["method"], str(cfg["C"]), str(COMMON["K"]), cfg["mode"], cfg["cats"]]
-        meta = {**cfg, **COMMON, "rounds": int(env["ROUNDS"]), "cmd": " ".join(cmd), "run_id": run_id,
+        cmd = ["bash", str(HERE / "launch.sh"), cfg["method"], str(cfg["C"]), str(settings["K"]), cfg["mode"], cfg["cats"]]
+        meta = {**cfg, **settings, "rounds": int(env["ROUNDS"]), "cmd": " ".join(cmd), "run_id": run_id,
                 "start": datetime.now().isoformat(timespec="seconds")}
         (self.out / "config.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False))
         print(f"\n===== {cfg['name']} : {meta['cmd']}", flush=True)

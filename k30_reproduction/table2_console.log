@@ -1,0 +1,18 @@
+
+===== T2_MNIST_BSA_C0.1_single_cats12348 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 30 single 1,2,3,4,8
+===== T2_MNIST_BSA_C0.1_single_cats12348 -> {"name": "T2_MNIST_BSA_C0.1_single_cats12348", "outcome": "completed", "returncode": 0, "wall_min": 38.14, "rounds_done": 500, "rounds_requested": 500, "best_acc": 96.9, "last_acc": 94.93, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+
+===== T2_MNIST_BSA_C0.3_single_cats12348 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.3 30 single 1,2,3,4,8
+===== T2_MNIST_BSA_C0.3_single_cats12348 -> {"name": "T2_MNIST_BSA_C0.3_single_cats12348", "outcome": "completed", "returncode": 0, "wall_min": 181.79, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.28, "last_acc": 96.46, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+
+===== T2_MNIST_BSA_C0.5_single_cats12348 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.5 30 single 1,2,3,4,8
+===== T2_MNIST_BSA_C0.5_single_cats12348 -> {"name": "T2_MNIST_BSA_C0.5_single_cats12348", "outcome": "completed", "returncode": 0, "wall_min": 318.21, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.86, "last_acc": 98.76, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+
+===== T2_MNIST_SASAFL_C0.1_single_cats12348 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3,4,8
+===== T2_MNIST_SASAFL_C0.1_single_cats12348 -> {"name": "T2_MNIST_SASAFL_C0.1_single_cats12348", "outcome": "completed", "returncode": 0, "wall_min": 164.04, "rounds_done": 500, "rounds_requested": 500, "best_acc": 95.18, "last_acc": 92.91, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+
+===== T2_MNIST_SASAFL_C0.3_single_cats12348 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8
+===== T2_MNIST_SASAFL_C0.3_single_cats12348 -> {"name": "T2_MNIST_SASAFL_C0.3_single_cats12348", "outcome": "completed", "returncode": 0, "wall_min": 413.2, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.53, "last_acc": 97.71, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+
+===== T2_MNIST_SASAFL_C0.5_single_cats12348 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 30 single 1,2,3,4,8
+===== T2_MNIST_SASAFL_C0.5_single_cats12348 -> {"name": "T2_MNIST_SASAFL_C0.5_single_cats12348", "outcome": "stalled", "returncode": -9, "wall_min": 184.05, "rounds_done": 134, "rounds_requested": 500, "best_acc": 97.63, "last_acc": 90.51, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
