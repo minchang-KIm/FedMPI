@@ -59,3 +59,5 @@
 - 2026-10-12 10:21 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
 - 2026-10-12 10:21 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
 - 2026-10-12 10:21 파이프라인 종료
+- 2026-10-12 13:32 E2 실행 종료: FMNIST_BSA_C0.3 → completed, 500/500라운드, 최고 74.5%, 192.14분
+- 2026-10-12 13:32 E2 실행 시작: FMNIST_BSA_C0.5 (시도 1/2)

@@ -1,6 +1,6 @@
 # E2. FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
 
-마지막 갱신: 2026-10-12 10:21
+마지막 갱신: 2026-10-12 13:32
 
 **재현 설정**: K=30, wise-175 단일 노드, CPU 카테고리 1·2·3·4·8코어 × 6명(논문 K=30 구성), batch 32, local epoch 5, τ=9, ζ=0.9, non-IID(gaussian), 1회 실행
 
@@ -9,7 +9,7 @@
 | 실행 | 방법 | C | 상태 | 소요(분) |
 |---|---|---:|---|---:|
 | `FMNIST_BSA_C0.1` | BSA | 0.1 | 완료: 500/500라운드 | 31.7 |
-| `FMNIST_BSA_C0.3` | BSA | 0.3 | 미실행 | - |
+| `FMNIST_BSA_C0.3` | BSA | 0.3 | 완료: 500/500라운드 | 192.0 |
 | `FMNIST_BSA_C0.5` | BSA | 0.5 | 미실행 | - |
 | `FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
 | `FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
@@ -24,16 +24,15 @@
 | Round-to-accuracy | - | **248** | - | - |
 | Time-to-accuracy | - | **105.24** | - | - |
 | **C = 0.3** | | | | |
-| Accuracy | 66.00 | **71.59** | - | - |
-| Round-to-accuracy | - | **420** | - | - |
-| Time-to-accuracy | - | **178.80** | - | - |
+| Accuracy | 66.00 | **71.59** | **74.50** | - |
+| Round-to-accuracy | - | **420** | **354** | - |
+| Time-to-accuracy | - | **178.80** | **136.50** | - |
 | **C = 0.5** | | | | |
 | Accuracy | 73.83 | **73.94** | - | - |
 | Round-to-accuracy | 376 | **283** | - | - |
 | Time-to-accuracy | 185.34 | **142.21** | - | - |
 
 주의:
-- FMNIST_BSA_C0.3: 미실행
 - FMNIST_BSA_C0.5: 미실행
 - FMNIST_SASAFL_C0.1: 미실행
 - FMNIST_SASAFL_C0.3: 미실행
