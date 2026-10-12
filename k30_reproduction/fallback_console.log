@@ -1,2 +1,9 @@
 
 ===== F1_two_cats123_SASAFL : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3
+===== F1_two_cats123_SASAFL -> {"name": "F1_two_cats123_SASAFL", "outcome": "completed", "returncode": 0, "wall_min": 1.97, "rounds_done": 20, "rounds_requested": 20, "best_acc": 58.47, "last_acc": 56.61, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+
+===== F2_two_cats123_BSA : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 30 two 1,2,3
+===== F2_two_cats123_BSA -> {"name": "F2_two_cats123_BSA", "outcome": "completed", "returncode": 0, "wall_min": 1.7, "rounds_done": 20, "rounds_requested": 20, "best_acc": 45.22, "last_acc": 37.56, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+
+===== F3_single_cats123_SASAFL : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3
+===== F3_single_cats123_SASAFL -> {"name": "F3_single_cats123_SASAFL", "outcome": "completed", "returncode": 0, "wall_min": 3.44, "rounds_done": 20, "rounds_requested": 20, "best_acc": 67.87, "last_acc": 65.66, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}

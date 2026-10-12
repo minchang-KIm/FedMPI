@@ -1,0 +1,4 @@
+host=wise-175 procs=32 seconds=300.0
+total_iterations=541189 mismatches=0 distinct_reference_hashes=1 crashed_workers=[]
+reported_workers=32/32 (exitcode -11 = SIGSEGV)
+RESULT: PASS (모든 계산 결과 동일)

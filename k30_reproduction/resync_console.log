@@ -1,0 +1,9 @@
+
+===== R1_two_paperCats_SASAFL_after_gitsync : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3,4,8
+===== R1_two_paperCats_SASAFL_after_gitsync -> {"name": "R1_two_paperCats_SASAFL_after_gitsync", "outcome": "crashed", "returncode": 1, "wall_min": 1.3, "rounds_done": 9, "rounds_requested": 20, "best_acc": 35.05, "last_acc": 33.59, "errors": {"is_set_corruption": 2, "segfault": 0, "abort": 1, "connection_closed": 30, "gloo_timeout": 0, "traceback": 34, "child_failed": 4}}
+
+===== R2_two_paperCats_SASAFL_after_gitsync : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3,4,8
+===== R2_two_paperCats_SASAFL_after_gitsync -> {"name": "R2_two_paperCats_SASAFL_after_gitsync", "outcome": "crashed", "returncode": 1, "wall_min": 0.9, "rounds_done": 5, "rounds_requested": 20, "best_acc": 45.96, "last_acc": 45.96, "errors": {"is_set_corruption": 1, "segfault": 0, "abort": 0, "connection_closed": 18, "gloo_timeout": 0, "traceback": 21, "child_failed": 4}}
+
+===== R3_two_paperCats_SASAFL_after_gitsync : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3,4,8
+===== R3_two_paperCats_SASAFL_after_gitsync -> {"name": "R3_two_paperCats_SASAFL_after_gitsync", "outcome": "crashed", "returncode": 1, "wall_min": 1.03, "rounds_done": 7, "rounds_requested": 20, "best_acc": 37.61, "last_acc": 23.42, "errors": {"is_set_corruption": 2, "segfault": 0, "abort": 1, "connection_closed": 20, "gloo_timeout": 0, "traceback": 25, "child_failed": 4}}

@@ -1,0 +1,19 @@
+{
+  "name": "F3_single_cats123_SASAFL",
+  "outcome": "completed",
+  "returncode": 0,
+  "wall_min": 3.44,
+  "rounds_done": 20,
+  "rounds_requested": 20,
+  "best_acc": 67.87,
+  "last_acc": 65.66,
+  "errors": {
+    "is_set_corruption": 0,
+    "segfault": 0,
+    "abort": 0,
+    "connection_closed": 0,
+    "gloo_timeout": 0,
+    "traceback": 0,
+    "child_failed": 0
+  }
+}

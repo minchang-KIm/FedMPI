@@ -1,0 +1,19 @@
+{
+  "mode": "single",
+  "cats": "1,2,3,4,8",
+  "K": 30,
+  "batch": 32,
+  "epochs": 5,
+  "target": 1.0,
+  "tau": 9,
+  "name": "T2_MNIST_SASAFL_C0.5_single_cats12348",
+  "method": "SASAFL",
+  "C": 0.5,
+  "dataset": "MNIST",
+  "lr": 0.01,
+  "rounds": 500,
+  "max_wall_min": 600,
+  "cmd": "bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 30 single 1,2,3,4,8",
+  "run_id": "T2_MNIST_SASAFL_C0.5_single_cats12348_1791732440",
+  "start": "2026-10-12T00:27:20"
+}

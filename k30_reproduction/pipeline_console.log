@@ -1,0 +1,30 @@
+[2026-10-10 16:45:10] Table 2 작업 종료 대기
+[2026-10-11 14:26:58] 파이프라인 시작
+- 2026-10-11 14:26 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=False)
+- 2026-10-11 14:26 === E1 시작: MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
+- 2026-10-11 14:26 E1 실행 시작: T2_MNIST_SASAFL_C0.5_single_cats12348 (시도 1/2)
+
+===== T2_MNIST_SASAFL_C0.5_single_cats12348 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 30 single 1,2,3,4,8
+===== T2_MNIST_SASAFL_C0.5_single_cats12348 -> {"name": "T2_MNIST_SASAFL_C0.5_single_cats12348", "outcome": "max_wall", "returncode": -9, "wall_min": 600.12, "rounds_done": 464, "rounds_requested": 500, "best_acc": 98.84, "last_acc": 98.54, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-12 00:27 E1 실행 종료: T2_MNIST_SASAFL_C0.5_single_cats12348 → max_wall, 464/500라운드, 최고 98.84%, 600.12분
+- 2026-10-12 00:27 E1 실행 시작: T2_MNIST_SASAFL_C0.5_single_cats12348 (시도 2/2)
+
+===== T2_MNIST_SASAFL_C0.5_single_cats12348 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 30 single 1,2,3,4,8
+===== T2_MNIST_SASAFL_C0.5_single_cats12348 -> {"name": "T2_MNIST_SASAFL_C0.5_single_cats12348", "outcome": "completed", "returncode": 0, "wall_min": 561.03, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.84, "last_acc": 98.31, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-12 09:48 E1 실행 종료: T2_MNIST_SASAFL_C0.5_single_cats12348 → completed, 500/500라운드, 최고 98.84%, 561.03분
+- 2026-10-12 09:48 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-12 09:48 === E2 시작: FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
+- 2026-10-12 09:48 E2 실행 시작: FMNIST_BSA_C0.1 (시도 1/2)
+
+===== FMNIST_BSA_C0.1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 30 single 1,2,3,4,8
+===== FMNIST_BSA_C0.1 -> {"name": "FMNIST_BSA_C0.1", "outcome": "completed", "returncode": 0, "wall_min": 31.9, "rounds_done": 500, "rounds_requested": 500, "best_acc": 63.64, "last_acc": 38.08, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-12 10:20 E2 실행 종료: FMNIST_BSA_C0.1 → completed, 500/500라운드, 최고 63.64%, 31.9분
+[2026-10-12 10:20:34] Table 2 작업 종료 대기
+[2026-10-12 10:20:34] 파이프라인 시작
+- 2026-10-12 10:20 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=False)
+- 2026-10-12 10:20 === E1 시작: MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
+- 2026-10-12 10:20 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-12 10:20 === E2 시작: FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
+- 2026-10-12 10:20 E2 실행 시작: FMNIST_BSA_C0.3 (시도 1/2)
+
+===== FMNIST_BSA_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.3 30 single 1,2,3,4,8

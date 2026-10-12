@@ -1,0 +1,407 @@
+[k30] mode=single method=SASAFL C=0.1 K=30 categories=1,2,3,4,8 threads=1824444212348838131322411388321
+Process 0 uses 1 threads
+Process 6 uses 4 threadsProcess 9 uses 2 threads
+
+Process 15 uses 8 threads
+Process 26 uses 8 threads
+Process 20 uses 2 threadsProcess 29 uses 2 threads
+
+Process 27 uses 8 threads
+Process 12 uses 8 threadsProcess 8 uses 1 threadsProcess 2 uses 2 threads
+
+
+Process 11 uses 4 threads
+Process 19 uses 3 threads
+Process 24 uses 1 threads
+Process 4 uses 4 threads
+Process 10 uses 3 threadsProcess 5 uses 4 threadsProcess 22 uses 4 threads
+
+
+Process 13 uses 8 threads
+Process 25 uses 3 threadsProcess 14 uses 3 threadsProcess 7 uses 2 threadsProcess 21 uses 2 threadsProcess 16 uses 1 threads
+Process 17 uses 3 threads
+
+
+
+
+Process 23 uses 1 threads
+Process 18 uses 1 threads
+Process 30 uses 1 threads
+Process 28 uses 3 threads
+Process 3 uses 4 threads
+Process 1 uses 8 threads
+[2026-10-10 17:15:05.851682] MAIN >> I am client in wise-176 rank 24
+[2026-10-10 17:15:05.851712] CLIENT 24 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.864711] MAIN >> I am server in wise-176 rank 0
+[2026-10-10 17:15:05.864737] SERVER >> global model을 초기화 합니다.
+[2026-10-10 17:15:05.868546] MAIN >> I am client in wise-176 rank 18
+[2026-10-10 17:15:05.868595] CLIENT 18 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.870625] MAIN >> I am client in wise-176 rank 12
+[2026-10-10 17:15:05.870645] CLIENT 12 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.884081] MAIN >> I am client in wise-176 rank 8
+[2026-10-10 17:15:05.884101] CLIENT 8 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.885602] MAIN >> I am client in wise-176 rank 3
+[2026-10-10 17:15:05.885625] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.888719] MAIN >> I am client in wise-176 rank 1
+[2026-10-10 17:15:05.888743] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.899918] MAIN >> I am client in wise-176 rank 7
+[2026-10-10 17:15:05.899942] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.901629] MAIN >> I am client in wise-176 rank 6
+[2026-10-10 17:15:05.901648] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.901683] MAIN >> I am client in wise-176 rank 30
+[2026-10-10 17:15:05.901704] CLIENT 30 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.904567] MAIN >> I am client in wise-176 rank 26
+[2026-10-10 17:15:05.904582] CLIENT 26 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.905625] MAIN >> I am client in wise-176 rank 11
+[2026-10-10 17:15:05.905635] MAIN >> I am client in wise-176 rank 25
+[2026-10-10 17:15:05.905646] CLIENT 11 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.905652] CLIENT 25 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.905670] MAIN >> I am client in wise-176 rank 23
+[2026-10-10 17:15:05.905688] CLIENT 23 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.907636] MAIN >> I am client in wise-176 rank 16
+[2026-10-10 17:15:05.907653] CLIENT 16 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.908605] MAIN >> I am client in wise-176 rank 9
+[2026-10-10 17:15:05.908628] CLIENT 9 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.909658] MAIN >> I am client in wise-176 rank 19
+[2026-10-10 17:15:05.909675] CLIENT 19 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.909685] MAIN >> I am client in wise-176 rank 17
+[2026-10-10 17:15:05.909700] CLIENT 17 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.909724] MAIN >> I am client in wise-176 rank 29[2026-10-10 17:15:05.909720] MAIN >> I am client in wise-176 rank 27
+
+[2026-10-10 17:15:05.909739] CLIENT 29 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.909740] CLIENT 27 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.909740] MAIN >> I am client in wise-176 rank 14
+[2026-10-10 17:15:05.909755] CLIENT 14 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.911639] MAIN >> I am client in wise-176 rank 15
+[2026-10-10 17:15:05.911664] CLIENT 15 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.914767] MAIN >> I am client in wise-176 rank 4
+[2026-10-10 17:15:05.914795] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.915602] MAIN >> I am client in wise-176 rank 10
+[2026-10-10 17:15:05.915628] CLIENT 10 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.915642] MAIN >> I am client in wise-176 rank 13
+[2026-10-10 17:15:05.915666] CLIENT 13 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.919446] MAIN >> I am client in wise-176 rank 20
+[2026-10-10 17:15:05.919467] CLIENT 20 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.921365] MAIN >> I am client in wise-176 rank 28
+[2026-10-10 17:15:05.921382] CLIENT 28 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.921545] MAIN >> I am client in wise-176 rank 21
+[2026-10-10 17:15:05.921560] CLIENT 21 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.922703] MAIN >> I am client in wise-176 rank 2
+[2026-10-10 17:15:05.922722] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.923647] MAIN >> I am client in wise-176 rank 22
+[2026-10-10 17:15:05.923668] CLIENT 22 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.928636] MAIN >> I am client in wise-176 rank 5
+[2026-10-10 17:15:05.928664] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-10 17:15:05.972992] SERVER >> 데이터셋을 다운받습니다.
+[2026-10-10 17:15:06.011248] SERVER >> 각 client들이 가져갈 data 개수 = [2340, 1983, 2112, 1075, 1832, 2420, 1706, 2131, 2018, 1958, 1820, 2154, 2252, 2222, 2057, 2341, 1369, 2510, 1730, 2060, 1854, 1638, 1678, 1553, 1319, 2214, 2762, 1998, 2381, 2513]
+[2026-10-10 17:15:06.052339] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-10 17:15:06.054997] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.057486] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.060047] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.061780] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.063694] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.065681] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.068074] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.070376] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.072351] CLIENT 9 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.074638] CLIENT 10 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.076636] CLIENT 11 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.078817] CLIENT 12 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.081044] CLIENT 13 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.083482] CLIENT 14 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.085656] CLIENT 15 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.089417] CLIENT 16 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.090889] CLIENT 17 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.094220] CLIENT 18 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.095839] CLIENT 19 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.097703] CLIENT 20 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.100262] CLIENT 21 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.102751] CLIENT 22 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.105828] CLIENT 23 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.107851] CLIENT 24 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.109714] CLIENT 25 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.111264] CLIENT 26 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.113949] CLIENT 27 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.116138] CLIENT 28 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.119089] CLIENT 29 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.122426] CLIENT 30 >> 로컬데이터셋을 받았습니다.
+[2026-10-10 17:15:06.122736] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-10 17:15:06.122917] CLIENT 1 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.122934] CLIENT 2 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.122963] CLIENT 3 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.122980] CLIENT 4 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123047] CLIENT 5 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123069] CLIENT 6 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123090] CLIENT 7 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123111] CLIENT 8 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123134] CLIENT 9 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123165] CLIENT 10 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123198] CLIENT 11 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123209] CLIENT 12 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123232] CLIENT 13 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123250] CLIENT 14 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123275] CLIENT 15 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123309] CLIENT 17 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123308] CLIENT 16 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123351] CLIENT 18 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123378] CLIENT 19 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123385] CLIENT 20 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123402] CLIENT 21 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123429] CLIENT 22 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123463] CLIENT 23 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123478] CLIENT 24 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123506] CLIENT 25 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123518] CLIENT 26 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123532] CLIENT 27 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123572] CLIENT 28 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123593] CLIENT 29 >> communication delay는 0입니다.
+[2026-10-10 17:15:06.123608] CLIENT 30 >> communication delay는 0입니다.
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 29, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-176/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 21, in runClient
+    if terminate_FL_flag.is_set():
+AttributeError: 'SASAFL' object has no attribute 'is_set'
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 29, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-176/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 23, in runClient
+    if is_ongoing_local_update_flag.is_set():
+AttributeError: 'SASAFL' object has no attribute 'is_set'
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 29, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-176/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 23, in runClient
+    if is_ongoing_local_update_flag.is_set():
+AttributeError: 'SASAFL' object has no attribute 'is_set'
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 29, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-176/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 21, in runClient
+    if terminate_FL_flag.is_set():
+AttributeError: 'SASAFL' object has no attribute 'is_set'
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 29, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-176/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 23, in runClient
+    if is_ongoing_local_update_flag.is_set():
+AttributeError: 'SASAFL' object has no attribute 'is_set'
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 29, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-176/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 23, in runClient
+    if is_ongoing_local_update_flag.is_set():
+AttributeError: 'SASAFL' object has no attribute 'is_set'
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 29, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-176/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 21, in runClient
+    if terminate_FL_flag.is_set():
+AttributeError: 'SASAFL' object has no attribute 'is_set'
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 29, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-176/Mando/FedMPI/Start.py", line 111, in init_FL
+    method.runClient(Client)
+  File "/home/wise-176/Mando/FedMPI/methods/SASAFL/SASAFL.py", line 23, in runClient
+    if is_ongoing_local_update_flag.is_set():
+AttributeError: 'SASAFL' object has no attribute 'is_set'
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213268 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213269 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213270 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213272 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213273 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213274 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213275 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213276 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213277 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213278 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213279 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213280 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213281 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213283 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213285 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213288 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213294 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213297 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213306 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213310 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213311 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213313 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 3213316 closing signal SIGTERM
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 3 (pid: 3213271) of binary: /home/wise-176/miniconda3/envs/FL/bin/python
+Traceback (most recent call last):
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 765, in <module>
+    main()
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 345, in wrapper
+    return f(*args, **kwargs)
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 761, in main
+    run(args)
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 752, in run
+    elastic_launch(
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/wise-176/miniconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 245, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+k30_reproduction/harness_entry.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2026-10-10_17:15:09
+  host      : wise-176
+  rank      : 14 (local_rank: 14)
+  exitcode  : 1 (pid: 3213282)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2026-10-10_17:15:09
+  host      : wise-176
+  rank      : 17 (local_rank: 17)
+  exitcode  : 1 (pid: 3213286)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2026-10-10_17:15:09
+  host      : wise-176
+  rank      : 19 (local_rank: 19)
+  exitcode  : 1 (pid: 3213292)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[4]:
+  time      : 2026-10-10_17:15:09
+  host      : wise-176
+  rank      : 22 (local_rank: 22)
+  exitcode  : -6 (pid: 3213301)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 3213301
+[5]:
+  time      : 2026-10-10_17:15:09
+  host      : wise-176
+  rank      : 24 (local_rank: 24)
+  exitcode  : 1 (pid: 3213308)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[6]:
+  time      : 2026-10-10_17:15:09
+  host      : wise-176
+  rank      : 29 (local_rank: 29)
+  exitcode  : 1 (pid: 3213319)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[7]:
+  time      : 2026-10-10_17:15:09
+  host      : wise-176
+  rank      : 30 (local_rank: 30)
+  exitcode  : -6 (pid: 3213320)
+  error_file: <N/A>
+  traceback : Signal 6 (SIGABRT) received by PID 3213320
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-10_17:15:09
+  host      : wise-176
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 3213271)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

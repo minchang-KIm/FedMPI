@@ -1,0 +1,19 @@
+{
+  "name": "T2_MNIST_SASAFL_C0.5_single_cats12348",
+  "outcome": "max_wall",
+  "returncode": -9,
+  "wall_min": 600.12,
+  "rounds_done": 464,
+  "rounds_requested": 500,
+  "best_acc": 98.84,
+  "last_acc": 98.54,
+  "errors": {
+    "is_set_corruption": 0,
+    "segfault": 0,
+    "abort": 0,
+    "connection_closed": 0,
+    "gloo_timeout": 0,
+    "traceback": 0,
+    "child_failed": 0
+  }
+}

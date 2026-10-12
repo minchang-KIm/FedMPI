@@ -1,0 +1,10 @@
+대기: 현재 완료 실행 1개, orchestrator=3088519 (17:31:26)
+실행기 일시정지 20:16:29
+total_iterations=541189 mismatches=0 distinct_reference_hashes=1 crashed_workers=[]
+reported_workers=32/32 (exitcode -11 = SIGSEGV)
+RESULT: PASS (모든 계산 결과 동일)
+host=wise-175 procs=30 seconds=300.0 total_threads=108
+reported=30 abnormal_reports=0 died=[]
+total_recv=94198 total_train=5153
+RESULT: PASS
+실행기 재개 20:26:32

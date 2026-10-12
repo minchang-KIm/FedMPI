@@ -1,0 +1,24 @@
+# Table 2 비교 — MNIST, K=30 (논문 vs 재현)
+
+재현 구성: single 노드, CPU 카테고리 1,2,3,4,8, 1회 실행 (논문은 10회 평균). 목표 정확도 95%. 굵게 = 각 쌍에서 더 좋은 값.
+
+| | 논문 BSA | 논문 SASAFL | 재현 BSA | 재현 SASAFL |
+|---|---:|---:|---:|---:|
+| **C = 0.1** | | | | |
+| Accuracy | 93.78 | **98.23** | **96.90** | 95.18 |
+| Round-to-accuracy | - | **116** | **261** | 447 |
+| Time-to-accuracy | - | **53.86** | **18.14** | 149.16 |
+| **C = 0.3** | | | | |
+| Accuracy | 97.14 | **98.07** | 98.28 | **98.53** |
+| Round-to-accuracy | 211 | **132** | 86 | **81** |
+| Time-to-accuracy | 101.44 | **66.71** | **30.15** | 73.48 |
+| **C = 0.5** | | | | |
+| Accuracy | **98.27** | 98.24 | **98.86** | 97.63 |
+| Round-to-accuracy | **96** | 131 | **48** | 56 |
+| Time-to-accuracy | **60.98** | 88.77 | **28.42** | 67.93 |
+
+- Accuracy: 최고 test 정확도(%), Round-to-accuracy: 95% 첫 도달 라운드, Time-to-accuracy: 서버 setup 시작부터 95% 도달까지(분). `-` = 도달 못 함 또는 미실행.
+
+**주의**
+- C=0.5 SASAFL: 134/500라운드 (stalled) — 부분 결과
+[+] /home/wise-175/Mando/FedMPI/k30_reproduction/table2_comparison.png
