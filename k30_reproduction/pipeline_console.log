@@ -33,3 +33,50 @@
 - 2026-10-12 13:32 E2 실행 시작: FMNIST_BSA_C0.5 (시도 1/2)
 
 ===== FMNIST_BSA_C0.5 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.5 30 single 1,2,3,4,8
+===== FMNIST_BSA_C0.5 -> {"name": "FMNIST_BSA_C0.5", "outcome": "completed", "returncode": 0, "wall_min": 304.19, "rounds_done": 500, "rounds_requested": 500, "best_acc": 79.57, "last_acc": 63.09, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-12 18:37 E2 실행 종료: FMNIST_BSA_C0.5 → completed, 500/500라운드, 최고 79.57%, 304.19분
+- 2026-10-12 18:37 E2 실행 시작: FMNIST_SASAFL_C0.1 (시도 1/2)
+
+===== FMNIST_SASAFL_C0.1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3,4,8
+===== FMNIST_SASAFL_C0.1 -> {"name": "FMNIST_SASAFL_C0.1", "outcome": "completed", "returncode": 0, "wall_min": 148.69, "rounds_done": 500, "rounds_requested": 500, "best_acc": 59.72, "last_acc": 43.17, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-12 21:06 E2 실행 종료: FMNIST_SASAFL_C0.1 → completed, 500/500라운드, 최고 59.72%, 148.69분
+- 2026-10-12 21:06 E2 실행 시작: FMNIST_SASAFL_C0.3 (시도 1/2)
+
+===== FMNIST_SASAFL_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8
+===== FMNIST_SASAFL_C0.3 -> {"name": "FMNIST_SASAFL_C0.3", "outcome": "completed", "returncode": 0, "wall_min": 353.47, "rounds_done": 500, "rounds_requested": 500, "best_acc": 69.93, "last_acc": 67.54, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-13 02:59 E2 실행 종료: FMNIST_SASAFL_C0.3 → completed, 500/500라운드, 최고 69.93%, 353.47분
+- 2026-10-13 03:00 E2 실행 시작: FMNIST_SASAFL_C0.5 (시도 1/2)
+
+===== FMNIST_SASAFL_C0.5 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 30 single 1,2,3,4,8
+===== FMNIST_SASAFL_C0.5 -> {"name": "FMNIST_SASAFL_C0.5", "outcome": "completed", "returncode": 0, "wall_min": 737.81, "rounds_done": 500, "rounds_requested": 500, "best_acc": 81.36, "last_acc": 61.67, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-13 15:17 E2 실행 종료: FMNIST_SASAFL_C0.5 → completed, 500/500라운드, 최고 81.36%, 737.81분
+- 2026-10-13 15:18 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-13 15:18 === E4 시작: CIFAR-10 — Table 2(CIFAR-10 열), Fig. 8(a), Fig. 9, Table 4(CIFAR-10)
+- 2026-10-13 15:18 E4 실행 시작: CIFAR10_BSA_C0.1 (시도 1/2)
+
+===== CIFAR10_BSA_C0.1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 30 single 1,2,3,4,8
+===== CIFAR10_BSA_C0.1 -> {"name": "CIFAR10_BSA_C0.1", "outcome": "completed", "returncode": 0, "wall_min": 35.8, "rounds_done": 500, "rounds_requested": 500, "best_acc": 36.5, "last_acc": 23.97, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-13 15:54 E4 실행 종료: CIFAR10_BSA_C0.1 → completed, 500/500라운드, 최고 36.5%, 35.8분
+- 2026-10-13 15:54 E4 실행 시작: CIFAR10_BSA_C0.3 (시도 1/2)
+
+===== CIFAR10_BSA_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.3 30 single 1,2,3,4,8
+===== CIFAR10_BSA_C0.3 -> {"name": "CIFAR10_BSA_C0.3", "outcome": "completed", "returncode": 0, "wall_min": 186.23, "rounds_done": 500, "rounds_requested": 500, "best_acc": 47.92, "last_acc": 27.44, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-13 19:00 E4 실행 종료: CIFAR10_BSA_C0.3 → completed, 500/500라운드, 최고 47.92%, 186.23분
+- 2026-10-13 19:00 E4 실행 시작: CIFAR10_BSA_C0.5 (시도 1/2)
+
+===== CIFAR10_BSA_C0.5 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.5 30 single 1,2,3,4,8
+===== CIFAR10_BSA_C0.5 -> {"name": "CIFAR10_BSA_C0.5", "outcome": "completed", "returncode": 0, "wall_min": 308.03, "rounds_done": 500, "rounds_requested": 500, "best_acc": 52.8, "last_acc": 42.07, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-14 00:08 E4 실행 종료: CIFAR10_BSA_C0.5 → completed, 500/500라운드, 최고 52.8%, 308.03분
+- 2026-10-14 00:09 E4 실행 시작: CIFAR10_SASAFL_C0.1 (시도 1/2)
+
+===== CIFAR10_SASAFL_C0.1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3,4,8
+===== CIFAR10_SASAFL_C0.1 -> {"name": "CIFAR10_SASAFL_C0.1", "outcome": "completed", "returncode": 0, "wall_min": 158.03, "rounds_done": 500, "rounds_requested": 500, "best_acc": 38.28, "last_acc": 26.75, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-14 02:47 E4 실행 종료: CIFAR10_SASAFL_C0.1 → completed, 500/500라운드, 최고 38.28%, 158.03분
+- 2026-10-14 02:47 E4 실행 시작: CIFAR10_SASAFL_C0.3 (시도 1/2)
+
+===== CIFAR10_SASAFL_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8
+===== CIFAR10_SASAFL_C0.3 -> {"name": "CIFAR10_SASAFL_C0.3", "outcome": "completed", "returncode": 0, "wall_min": 287.17, "rounds_done": 500, "rounds_requested": 500, "best_acc": 44.35, "last_acc": 38.14, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-14 07:34 E4 실행 종료: CIFAR10_SASAFL_C0.3 → completed, 500/500라운드, 최고 44.35%, 287.17분
+- 2026-10-14 07:34 E4 실행 시작: CIFAR10_SASAFL_C0.5 (시도 1/2)
+
+===== CIFAR10_SASAFL_C0.5 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 30 single 1,2,3,4,8
