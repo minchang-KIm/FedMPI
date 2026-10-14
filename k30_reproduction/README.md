@@ -106,11 +106,11 @@ tail k30_reproduction/pipeline_console.log   # PIPELINE_DONE이 찍히면 전체
 ls   k30_reproduction/experiments/*/SUMMARY.md
 ```
 
-다시 시작(중단 후):
+다시 시작(중단 후) — tmux 사용, 자세한 접속법은 `HOW_TO_ACCESS.md`:
 
 ```bash
-cd /home/wise-175/Mando/FedMPI
-setsid nohup bash k30_reproduction/start_pipeline_after_table2.sh > k30_reproduction/pipeline_console.log 2>&1 < /dev/null &
+cd ~/Mando/FedMPI && bash k30_reproduction/start_in_tmux.sh
+tmux attach -t k30      # 빠져나오기: Ctrl+b 누른 뒤 d
 ```
 
 ## 실행

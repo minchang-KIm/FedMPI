@@ -1,0 +1,56 @@
+# 실험 접속·확인·재시작 방법 (tmux)
+
+## tmux 위치
+
+- 설치: conda 환경 `tools`의 tmux 3.7c (`/home/wise-175/anaconda3/envs/tools/bin/tmux`). 2026-10-12 설치, sudo 없이 설치하기 위해 이 경로를 썼다.
+- 바로가기: `~/bin/tmux`. `~/bin`은 로그인 셸에서 `~/.profile`이 PATH에 넣는다.
+- `tmux: command not found`가 나오면 다음 중 하나를 쓴다.
+  - `export PATH=$HOME/bin:$PATH`
+  - 전체 경로 `/home/wise-175/anaconda3/envs/tools/bin/tmux`
+
+## 접속 (어느 터미널에서든: SSH, VS Code 터미널)
+
+```bash
+tmux ls                 # 세션 목록. 'k30'이 보여야 한다
+tmux attach -t k30      # 접속
+```
+
+| 창 | 이름 | 내용 |
+|---|---|---|
+| 0 | pipeline | 실험 본체 (tmux로 시작한 경우 여기서 출력이 흐른다) |
+| 1 | status | 30초마다 `status.sh` 상태 화면 |
+| 2 | log | 지금 실행의 라운드별 정확도 |
+
+| 키 | 동작 |
+|---|---|
+| `Ctrl+b` 누른 뒤 `0` / `1` / `2` | 창 이동 |
+| `Ctrl+b` 누른 뒤 `d` | **빠져나오기 (실험은 계속 돈다)** |
+| `Ctrl+b` 누른 뒤 `[` | 스크롤 모드 (방향키로 이동, `q`로 종료) |
+
+주의: 창 안에서 `Ctrl+c`를 누르거나 `exit`하지 않는다. 0번 창에서 누르면 실험이 멈춘다. 나올 때는 항상 `Ctrl+b d`를 쓴다.
+
+## tmux 없이 한 번만 확인
+
+```bash
+bash ~/Mando/FedMPI/k30_reproduction/status.sh
+cat  ~/Mando/FedMPI/k30_reproduction/PROGRESS.md
+```
+
+## 새로 시작 / 중단 후 다시 시작 (다음부터는 이 방법)
+
+```bash
+cd ~/Mando/FedMPI && bash k30_reproduction/start_in_tmux.sh
+tmux attach -t k30
+```
+
+- 실험이 이미 돌고 있으면 새로 시작하지 않고 관찰 창만 만든다. 중복 실행을 막기 위해서다.
+- 완료된 실행은 건너뛰고 남은 실행부터 이어 간다.
+- 서버(175)가 재부팅되면 tmux 세션도 사라진다. 이때 위 두 줄로 다시 시작한다.
+
+## 현재(2026-10-12) 상태 메모
+
+- 지금 돌고 있는 파이프라인은 tmux 이전에 `setsid nohup`으로 띄운 것이다. tmux 0번 창에는 출력이 나오지 않는다.
+  - 출력 로그: `k30_reproduction/pipeline_console.log`
+  - 진행 기록: `k30_reproduction/PROGRESS.md`
+  - 화면 확인: 1번(status), 2번(log) 창
+- 이 파이프라인도 세션과 분리돼 있어 로그아웃해도 계속 돈다. 이후 재시작은 `start_in_tmux.sh`로 한다.

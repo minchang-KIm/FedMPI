@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # K=30 재현 실험 상태 한눈에 보기
-#   bash k30_reproduction/status.sh            # 한 번 출력
+#   bash k30_reproduction/status.sh            # 한 번 출력 (tmux 접속: tmux attach -t k30, HOW_TO_ACCESS.md)
 #   watch -n 30 bash k30_reproduction/status.sh  # 30초마다 갱신 (Ctrl+C로 종료)
 K30=/home/wise-175/Mando/FedMPI/k30_reproduction
 now=$(date +%s)
