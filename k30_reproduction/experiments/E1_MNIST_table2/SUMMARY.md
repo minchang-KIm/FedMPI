@@ -1,8 +1,16 @@
 # E1. MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
 
-마지막 갱신: 2026-10-12 10:21
+마지막 갱신: 2026-10-16 13:25
 
 **재현 설정**: K=30, wise-175 단일 노드, CPU 카테고리 1·2·3·4·8코어 × 6명(논문 K=30 구성), batch 32, local epoch 5, τ=9, ζ=0.9, non-IID(gaussian), 1회 실행
+
+## 비교 그림 (왼쪽: 논문 원본, 오른쪽: 재현)
+
+![compare_fig7.png](compare_fig7.png)
+
+![compare_table2.png](compare_table2.png)
+
+![compare_table4.png](compare_table4.png)
 
 ## 실행 상태
 
@@ -32,8 +40,6 @@
 | Round-to-accuracy | **96** | 131 | **48** | 71 |
 | Time-to-accuracy | **60.98** | 88.77 | **28.42** | 84.67 |
 
-![Table 2 비교](table2_comparison.png)
-
 - Accuracy = 최고 test 정확도, Round-to-accuracy = 목표 첫 도달 라운드, Time-to-accuracy = 서버 setup 시작부터 목표 도달까지(분). `-` = 도달 못 함/미실행
 - Time-to-accuracy는 단일 노드 과다 할당(thread 109개 / 논리 CPU 32개) 환경이라 논문과 절대값 비교가 어렵다.
 
@@ -46,12 +52,6 @@
 - C=0.5: 정확도 차이(SASAFL−BSA) 논문 -0.03%p, 재현 -0.02%p → 논문과 같은 방향
   - round-to-accuracy BSA/SASAFL = 0.68배 (논문 0.73배) → 1보다 크면 SASAFL이 더 빨리 도달
 
-## Fig. 7(a) — MNIST, K=30 (5라운드 간격)
-
-![Fig7a](fig7a_mnist_k30.png)
-
-![Fig. 7 비교 (재현은 (a) MNIST K=30 패널에 해당)](compare_fig7.png)
-
 ## Table 4 (K=30 행)
 
 SASAFL로 300라운드를 마치는 데 걸린 시간(분).
@@ -61,5 +61,5 @@ SASAFL로 300라운드를 마치는 데 걸린 시간(분).
 | 논문 K=30 (300R) | 139 | 151 | 204 |
 | 재현 K=30 (300R) | 103 | 259 | 366 |
 
-![Table 4](table4_k30.png)
+<!-- /table4 -->
 

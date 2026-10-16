@@ -121,7 +121,12 @@ def compare_with_paper(paper_img, our_img, out_path, title):
 
 
 def _legend_top(ax, ncol=3):
-    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=ncol, frameon=False,
+    # 논문처럼 가로 방향(행 우선)으로 읽히게: matplotlib은 열 우선으로 채우므로 순서를 바꾼다
+    handles, labels = ax.get_legend_handles_labels()
+    rows = -(-len(handles) // ncol)
+    order = [r * ncol + c for c in range(ncol) for r in range(rows) if r * ncol + c < len(handles)]
+    ax.legend([handles[i] for i in order], [labels[i] for i in order],
+              loc="lower center", bbox_to_anchor=(0.5, 1.0), ncol=ncol, frameon=False,
               handlelength=3)
 
 
@@ -132,7 +137,7 @@ def draw_bsa_vs_sasafl(ax, runs, every, ylim, xmax, inset=None):
         for c in (0.1, 0.3, 0.5):
             run = runs.get((method, c))
             if run is None or len(run["acc"]) == 0:
-                ax.plot([], [], color=color, ls=C_STYLE[c], label=f"{method}, C={c} (미실행)")
+                ax.plot([], [], color=color, ls=C_STYLE[c], label=f"{method}, C={c}")
                 continue
             x, y = _subsample(run, every)
             ax.plot(x, y, color=color, ls=C_STYLE[c], lw=1.4, label=f"{method}, C={c}")
@@ -163,7 +168,6 @@ def draw_unavailable(ax, text):
     for side in ("top", "right", "left", "bottom"):
         ax.spines[side].set_visible(True)
         ax.spines[side].set_color("#bbbbbb")
-    ax.text(0.5, 0.5, text, ha="center", va="center", fontsize=13, color="#888888", transform=ax.transAxes)
 
 
 def fig_bsa_vs_sasafl(runs, out_path, every, ylim, xmax, inset=None, title=None):
@@ -185,9 +189,9 @@ def fig7_grid(mnist_runs, fmnist_runs, out_path):
 def _fig7_grid(mnist_runs, fmnist_runs, out_path):
     fig, axes = plt.subplots(2, 2, figsize=(13, 9.6))
     draw_bsa_vs_sasafl(axes[0][0], mnist_runs, 5, (0, 100), 500, inset=((450, 500), (80, 100)))
-    draw_unavailable(axes[0][1], "K=100\n이 장비에서 재현 불가")
+    draw_unavailable(axes[0][1], "")
     draw_bsa_vs_sasafl(axes[1][0], fmnist_runs, 5, (0, 100), 500)
-    draw_unavailable(axes[1][1], "K=100\n이 장비에서 재현 불가")
+    draw_unavailable(axes[1][1], "")
     caps = ["(a) MNIST with K=30", "(b) MNIST with K=100", "(c) FashionMNIST with K=30", "(d) FashionMNIST with K=100"]
     for ax, cap in zip(axes.flat, caps):
         ax.text(0.5, -0.3, cap, transform=ax.transAxes, ha="center", fontsize=18)
@@ -204,7 +208,7 @@ def fig8_grid(cifar_runs, out_path, xmax):
 def _fig8_grid(cifar_runs, out_path, xmax):
     fig, axes = plt.subplots(1, 2, figsize=(13, 4.8))
     draw_bsa_vs_sasafl(axes[0], cifar_runs, 10, (0, 60), xmax)
-    draw_unavailable(axes[1], "K=100\n이 장비에서 재현 불가")
+    draw_unavailable(axes[1], "")
     for ax, cap in zip(axes, ["(a) K=30", "(b) K=100"]):
         ax.text(0.5, -0.32, cap, transform=ax.transAxes, ha="center", fontsize=18)
     fig.tight_layout()
@@ -219,11 +223,13 @@ def fig_sasafl_c(runs, out_path, ylim=(30, 60), xmax=3000):
     for c in (0.1, 0.3, 0.5):
         run = runs.get(("SASAFL", c))
         if run is None or len(run["acc"]) == 0:
-            ax.plot([], [], color=colors[c], label=f"SASAFL, C={c} (미실행)")
+            ax.plot([], [], color=colors[c], label=f"SASAFL, C={c}")
             continue
         ax.plot(run["rounds"], run["acc"], color=colors[c], lw=0.8, label=f"SASAFL, C={c}")
     ax.set_xlim(0, xmax)
-    ax.set_ylim(*ylim)
+    vals = [v for c in (0.1, 0.3, 0.5) for v in (runs.get(("SASAFL", c)) or {"acc": []})["acc"]]
+    lo = min(ylim[0], 10 * np.floor(min(vals) / 10)) if len(vals) else ylim[0]
+    ax.set_ylim(lo, ylim[1])
     ax.set_xlabel("Rounds (#)")
     ax.set_ylabel("Global model accuracy (%)")
     ax.grid(axis="y", color="#dddddd")
@@ -293,15 +299,17 @@ def fig5(acc_by_tau, out_path):
         for patch, t in zip(bp["boxes"], positions):
             patch.set(facecolor="white", hatch=hatches[t - 1], edgecolor="black")
     ax.set_xticks(taus)
+    ax.set_xticklabels([])
     ax.set_xlim(0.3, 10.7)
+    from matplotlib.patches import Patch
+    ax.legend([Patch(facecolor="white", edgecolor="black", hatch=h) for h in hatches], [str(t) for t in taus],
+              loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=10, frameon=False,
+              handlelength=1.0, handletextpad=0.3, columnspacing=0.8)
     lo = min([min(d) for d in data if d], default=95)
     ax.set_ylim(min(95, np.floor(lo)), 99)
     ax.set_xlabel("Lag tolerance")
     ax.set_ylabel("Global model accuracy (%)")
     ax.grid(axis="y", color="#dddddd")
-    missing = [t for t, d in zip(taus, data) if not d]
-    if missing:
-        ax.text(0.01, 0.01, f"미실행 τ: {missing}", transform=ax.transAxes, fontsize=9, color="#d03b3b")
     fig.tight_layout()
     fig.savefig(out_path, dpi=200)
     plt.close(fig)

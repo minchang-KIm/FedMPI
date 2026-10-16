@@ -81,3 +81,58 @@
 - 2026-10-14 02:47 E4 실행 시작: CIFAR10_SASAFL_C0.3 (시도 1/2)
 - 2026-10-14 07:34 E4 실행 종료: CIFAR10_SASAFL_C0.3 → completed, 500/500라운드, 최고 44.35%, 287.17분
 - 2026-10-14 07:34 E4 실행 시작: CIFAR10_SASAFL_C0.5 (시도 1/2)
+- 2026-10-14 10:25 파이프라인 시작 (E6, report_only=True)
+- 2026-10-14 10:25 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-14 10:25 파이프라인 종료
+- 2026-10-14 15:46 E4 실행 종료: CIFAR10_SASAFL_C0.5 → completed, 500/500라운드, 최고 51.14%, 491.32분
+- 2026-10-16 13:13 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=True)
+- 2026-10-16 13:13 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-16 13:13 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-16 13:13 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-16 13:13 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-16 13:13 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-16 13:13 파이프라인 종료
+- 2026-10-16 13:14 [중단 기록] 2026-10-14 15:46 E4 마지막 run 완료 직후 정리 그림 생성 중 175 전체가 멈춤(syslog가 15:46:06에서 끊김), 10-16 10:59 강제 재부팅. 손상: E4 table2_comparison.png(0바이트) → 재생성. 실험 데이터 18개 run 모두 정상. E5부터 재개.
+- 2026-10-16 13:13 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=False)
+- 2026-10-16 13:13 === E1 시작: MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
+- 2026-10-16 13:13 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-16 13:13 === E2 시작: FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
+- 2026-10-16 13:13 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-16 13:13 === E4 시작: CIFAR-10 — Table 2(CIFAR-10 열), Fig. 8(a), Fig. 9, Table 4(CIFAR-10)
+- 2026-10-16 13:13 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-16 13:13 === E5 시작: Lag tolerance τ=1–10 — Fig. 5 (MNIST, SASAFL, C=0.3, 1회)
+- 2026-10-16 13:13 E5 실행 시작: LT_tau1_rep1 (시도 1/2)
+- 2026-10-16 13:18 그림 형식 변경(한국어 제거, 왼쪽 논문 원본·오른쪽 재현)을 위해 파이프라인 중지. LT_tau1_rep1(4분 진행)은 처음부터 다시 실행
+- 2026-10-16 13:20 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=True)
+- 2026-10-16 13:20 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-16 13:20 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-16 13:20 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-16 13:20 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-16 13:20 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-16 13:20 파이프라인 종료
+- 2026-10-16 13:21 파이프라인 시작 (E6, report_only=True)
+- 2026-10-16 13:21 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-16 13:21 파이프라인 종료
+- 2026-10-16 13:23 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=True)
+- 2026-10-16 13:23 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-16 13:23 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-16 13:23 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-16 13:23 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-16 13:23 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-16 13:23 파이프라인 종료
+- 2026-10-16 13:24 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=True)
+- 2026-10-16 13:24 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-16 13:24 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-16 13:24 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-16 13:24 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-16 13:24 === E6 정리 완료 → experiments/E6_final_summary/SUMMARY.md
+- 2026-10-16 13:24 파이프라인 종료
+- 2026-10-16 13:24 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=False)
+- 2026-10-16 13:24 === E1 시작: MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
+- 2026-10-16 13:25 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-16 13:25 === E2 시작: FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
+- 2026-10-16 13:25 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-16 13:25 === E4 시작: CIFAR-10 — Table 2(CIFAR-10 열), Fig. 8(a), Fig. 9, Table 4(CIFAR-10)
+- 2026-10-16 13:25 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-16 13:25 === E5 시작: Lag tolerance τ=1–10 — Fig. 5 (MNIST, SASAFL, C=0.3, 1회)
+- 2026-10-16 13:25 E5 실행 시작: LT_tau1_rep1 (시도 1/2)
