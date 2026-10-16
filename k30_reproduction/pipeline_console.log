@@ -80,3 +80,31 @@
 - 2026-10-14 07:34 E4 실행 시작: CIFAR10_SASAFL_C0.5 (시도 1/2)
 
 ===== CIFAR10_SASAFL_C0.5 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 30 single 1,2,3,4,8
+===== CIFAR10_SASAFL_C0.5 -> {"name": "CIFAR10_SASAFL_C0.5", "outcome": "completed", "returncode": 0, "wall_min": 491.32, "rounds_done": 500, "rounds_requested": 500, "best_acc": 51.14, "last_acc": 50.76, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-14 15:46 E4 실행 종료: CIFAR10_SASAFL_C0.5 → completed, 500/500라운드, 최고 51.14%, 491.32분
+[2026-10-16 13:13:20] Table 2 작업 종료 대기
+[2026-10-16 13:13:20] 파이프라인 시작
+- 2026-10-16 13:13 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=False)
+- 2026-10-16 13:13 === E1 시작: MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
+- 2026-10-16 13:13 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-16 13:13 === E2 시작: FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
+- 2026-10-16 13:13 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-16 13:13 === E4 시작: CIFAR-10 — Table 2(CIFAR-10 열), Fig. 8(a), Fig. 9, Table 4(CIFAR-10)
+- 2026-10-16 13:13 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-16 13:13 === E5 시작: Lag tolerance τ=1–10 — Fig. 5 (MNIST, SASAFL, C=0.3, 1회)
+- 2026-10-16 13:13 E5 실행 시작: LT_tau1_rep1 (시도 1/2)
+
+===== LT_tau1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8
+[2026-10-16 13:24:57] Table 2 작업 종료 대기
+[2026-10-16 13:24:57] 파이프라인 시작
+- 2026-10-16 13:24 파이프라인 시작 (E1, E2, E4, E5, E6, report_only=False)
+- 2026-10-16 13:24 === E1 시작: MNIST — Table 2(MNIST 열), Fig. 7(a), Table 4(MNIST)
+- 2026-10-16 13:25 === E1 정리 완료 → experiments/E1_MNIST_table2/SUMMARY.md
+- 2026-10-16 13:25 === E2 시작: FashionMNIST — Table 2(FashionMNIST 열), Fig. 7(c), Fig. 11(K=30), Table 4(FashionMNIST)
+- 2026-10-16 13:25 === E2 정리 완료 → experiments/E2_FashionMNIST_table2/SUMMARY.md
+- 2026-10-16 13:25 === E4 시작: CIFAR-10 — Table 2(CIFAR-10 열), Fig. 8(a), Fig. 9, Table 4(CIFAR-10)
+- 2026-10-16 13:25 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
+- 2026-10-16 13:25 === E5 시작: Lag tolerance τ=1–10 — Fig. 5 (MNIST, SASAFL, C=0.3, 1회)
+- 2026-10-16 13:25 E5 실행 시작: LT_tau1_rep1 (시도 1/2)
+
+===== LT_tau1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8

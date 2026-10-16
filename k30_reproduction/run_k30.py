@@ -147,6 +147,8 @@ class Run:
             "MASTER_PORT": str(self.port), "RUN_ID": run_id,
             "K30_PID_DIR": str(self.out / "pids"),
         })
+        if cfg.get("sasafl_src"):
+            env["K30_SASAFL_SRC"] = str(cfg["sasafl_src"])
         cmd = ["bash", str(HERE / "launch.sh"), cfg["method"], str(cfg["C"]), str(settings["K"]), cfg["mode"], cfg["cats"]]
         meta = {**cfg, **settings, "rounds": int(env["ROUNDS"]), "cmd": " ".join(cmd), "run_id": run_id,
                 "start": datetime.now().isoformat(timespec="seconds")}
