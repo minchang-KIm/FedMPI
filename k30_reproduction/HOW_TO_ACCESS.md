@@ -68,3 +68,9 @@ tmux attach -t k30
 - 176 진행: `ssh wise-176@210.107.197.176 tail -f /home/wise-176/Mando/FedMPI/k30_reproduction/e7_console.log`
 - **176은 터보가 켜져 있으면 실행하지 않는다** (P코어 계산 오류). 176에서 `echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo` 후 위 시작 스크립트를 다시 실행.
 - crontab 항목 제거: `crontab -e`에서 `# k30 E7 자동 재개` 줄 삭제 (두 노드 모두).
+
+## E8 (K=10) 추가 — 2026-10-19
+- 시작/재개 스크립트가 `start_two_nodes.sh`로 바뀜 (E7 → E8 순서로 두 노드가 claim 방식으로 나눠 실행). 재부팅 시 crontab이 자동 실행.
+- E8 = K=10에서 BSA · SASAFL(현재 코드) · SASAFL(원저자 코드) × MNIST/FashionMNIST/CIFAR-10 × C 0.1/0.3/0.5 = 27개, 각 500라운드.
+- 논문의 K=100 칸 자리에 K=10이 들어간다: compare_fig7 (b)(d), compare_fig8 (b), compare_fig11, compare_table4, compare_fig7_err (b)(d).
+- tmux k30 창 6 `e8`(175), 176은 `e8_console.log`. 동기화 창 4는 `sync_from_176.sh` (E7·E8 모두).
