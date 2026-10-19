@@ -46,22 +46,23 @@ def row(paths, out_path, height=1000, gap=40):
 
 
 # ------------------------------------------------------------------ 재현 그림 (논문 형식)
-def fig11_reproduced(wall, out_path):
-    """논문 Fig.11 형식: FashionMNIST 500라운드 wall clock, K=30 묶음 (K=100 자리는 비움)."""
+def fig11_reproduced(wall, out_path, wall_k10=None):
+    """논문 Fig.11 형식: FashionMNIST 500라운드 wall clock. 논문의 K=100 자리에는 K=10을 그린다."""
     hatches = {0.1: "", 0.3: "\\\\\\\\", 0.5: "++"}
     with plt.rc_context(SERIF):
         fig, ax = plt.subplots(figsize=(8, 5))
         width = 0.12
-        k = 0
-        for method, color in (("BSA", A.GREEN), ("SASAFL", A.RED)):
-            for c in (0.1, 0.3, 0.5):
-                v = wall.get((method, c))
-                x = (k - 2.5) * width
-                ax.bar(x, v if v is not None else 0, width * 0.9, color="white" if hatches[c] else color,
-                       edgecolor=color, hatch=hatches[c], linewidth=1.5, label=f"{method}, C={c}")
-                k += 1
+        for g, vals in enumerate((wall, wall_k10 or {})):
+            k = 0
+            for method, color in (("BSA", A.GREEN), ("SASAFL", A.RED)):
+                for c in (0.1, 0.3, 0.5):
+                    v = vals.get((method, c))
+                    x = g + (k - 2.5) * width
+                    ax.bar(x, v if v is not None else 0, width * 0.9, color="white" if hatches[c] else color,
+                           edgecolor=color, hatch=hatches[c], linewidth=1.5, label=f"{method}, C={c}" if g == 0 else None)
+                    k += 1
         ax.set_xticks([0, 1])
-        ax.set_xticklabels(["K=30", "K=100"])
+        ax.set_xticklabels(["K=30", "K=10"])
         ax.set_xlim(-0.6, 1.6)
         ax.set_ylabel("Wall clock time (m)")
         ax.grid(axis="y", color="#dddddd")
@@ -76,11 +77,11 @@ def table2_reproduced(values, out_path):
         A.table2_full_png(values, "Table 2", out_path, note=None)
 
 
-def table4_reproduced(row, rounds, out_path):
-    """논문 Table 4 형식 (Dataset × C). row: {dataset: {C: 분}}, K=30 행만."""
+def table4_reproduced(row, rounds, out_path, row_k10=None):
+    """논문 Table 4 형식 (Dataset × C). row/row_k10: {dataset: {C: 분}} → K=30, K=10 행."""
     datasets = [("MNIST", "MNIST"), ("FashionMNIST", "FashionMNIST"), ("CIFAR10", "CIFAR-10")]
     with plt.rc_context(SERIF):
-        fig, ax = plt.subplots(figsize=(13, 2.6))
+        fig, ax = plt.subplots(figsize=(13, 3.0))
         ax.axis("off")
         ax.set_xlim(0, 13)
         ax.set_ylim(0, 4.2)
@@ -100,12 +101,13 @@ def table4_reproduced(row, rounds, out_path):
                 ax.text(3.2 + 3.2 * k + 0.95 * j, y, f"{c}", fontsize=13)
         y -= 0.3
         ax.hlines(y, 0.1, 12.9, color="black", lw=0.8)
-        y -= 0.55
-        ax.text(0.2, y, "K=30", fontsize=13)
-        for k, (key, _) in enumerate(datasets):
-            for j, c in enumerate((0.1, 0.3, 0.5)):
-                v = row.get(key, {}).get(c)
-                ax.text(3.2 + 3.2 * k + 0.95 * j, y, "-" if v is None else f"{v:,.0f}", fontsize=13)
+        for label, vals in (("K=10", row_k10 or {}), ("K=30", row)):
+            y -= 0.55
+            ax.text(0.2, y, label, fontsize=13)
+            for k, (key, _) in enumerate(datasets):
+                for j, c in enumerate((0.1, 0.3, 0.5)):
+                    v = vals.get(key, {}).get(c)
+                    ax.text(3.2 + 3.2 * k + 0.95 * j, y, "-" if v is None else f"{v:,.0f}", fontsize=13)
         y -= 0.3
         ax.hlines(y, 0.1, 12.9, color="black", lw=1.4)
         ax.set_ylim(y - 0.2, 4.2)
@@ -114,9 +116,11 @@ def table4_reproduced(row, rounds, out_path):
 
 
 # ------------------------------------------------------------------ 전체 생성
-def build_all(mcs, e5_acc_by_tau, exp_dirs, max_rounds):
-    """mcs: {'MNIST': mc, 'FashionMNIST': mc, 'CIFAR10': mc} (mc = {(method, C): run})
-    exp_dirs: {'E1': Path, 'E2': Path, 'E4': Path, 'E5': Path, 'E6': Path}"""
+def build_all(mcs, e5_acc_by_tau, exp_dirs, max_rounds, mcs_k10=None):
+    """mcs: {'MNIST': mc, 'FashionMNIST': mc, 'CIFAR10': mc} (mc = {(method, C): run}) — K=30
+    mcs_k10: 같은 형식, K=10 (현재 코드 SASAFL). 논문의 K=100 칸 자리에 그린다.
+    exp_dirs: {'E1'..'E8': Path}"""
+    mcs_k10 = mcs_k10 or {ds: {} for ds in ("MNIST", "FashionMNIST", "CIFAR10")}
     for d in exp_dirs.values():
         d.mkdir(parents=True, exist_ok=True)
         (d / "reproduced").mkdir(exist_ok=True)
@@ -124,26 +128,30 @@ def build_all(mcs, e5_acc_by_tau, exp_dirs, max_rounds):
             (d / name).unlink(missing_ok=True)
 
     rep = exp_dirs["E6"] / "reproduced"
-    # Fig.7 (2×2, K=100 패널은 빈 축)
+    # Fig.7 (2×2) / Fig.8: 논문의 K=100 칸에는 K=10
     with plt.rc_context(SERIF):
-        A.fig7_grid(mcs["MNIST"], mcs["FashionMNIST"], rep / "fig7.png")
-        A.fig8_grid(mcs["CIFAR10"], rep / "fig8.png", xmax=max_rounds)
+        A.fig7_grid(mcs["MNIST"], mcs["FashionMNIST"], rep / "fig7.png", mcs_k10["MNIST"], mcs_k10["FashionMNIST"])
+        A.fig8_grid(mcs["CIFAR10"], rep / "fig8.png", xmax=max_rounds, cifar_k10=mcs_k10["CIFAR10"])
         A.fig_sasafl_c(mcs["CIFAR10"], rep / "fig9.png", xmax=max_rounds)
         A.fig5(e5_acc_by_tau, rep / "fig5.png")
     wall = {k: A.wall_at_round(v, 500) for k, v in mcs["FashionMNIST"].items()}
-    fig11_reproduced(wall, rep / "fig11.png")
+    wall_k10 = {k: A.wall_at_round(v, 500) for k, v in mcs_k10["FashionMNIST"].items()}
+    fig11_reproduced(wall, rep / "fig11.png", wall_k10)
     ours = {ds: {c: {m: A.metrics(mcs[ds].get((m, c)), ds) for m in ("BSA", "SASAFL")} for c in (0.1, 0.3, 0.5)}
             for ds in ("MNIST", "FashionMNIST", "CIFAR10")}
     table2_reproduced(ours, rep / "table2.png")
     t4 = {ds: {c: A.wall_at_round(mcs[ds].get(("SASAFL", c)), min(P.TABLE4_K30[ds]["rounds"], max_rounds))
                for c in (0.1, 0.3, 0.5)} for ds in ("MNIST", "FashionMNIST", "CIFAR10")}
-    table4_reproduced(t4, None, rep / "table4.png")
+    t4_k10 = {ds: {c: A.wall_at_round(mcs_k10[ds].get(("SASAFL", c)), min(P.TABLE4_K30[ds]["rounds"], max_rounds))
+                   for c in (0.1, 0.3, 0.5)} for ds in ("MNIST", "FashionMNIST", "CIFAR10")}
+    table4_reproduced(t4, None, rep / "table4.png", t4_k10)
 
     pairs = {"fig5": "paper_fig5.jpg", "fig7": "paper_fig7.jpg", "fig8": "paper_fig8.jpg", "fig9": "paper_fig9.jpg",
              "fig11": "paper_fig11.jpg", "table2": "paper_table2.png", "table4": "paper_table4.png"}
     where = {"E1": ["fig7", "table2", "table4"], "E2": ["fig7", "fig11", "table2", "table4"],
              "E4": ["fig8", "fig9", "table2", "table4"], "E5": ["fig5"],
-             "E6": ["fig5", "fig7", "fig8", "fig9", "fig11", "table2", "table4"]}
+             "E6": ["fig5", "fig7", "fig8", "fig9", "fig11", "table2", "table4"],
+             "E8": ["fig7", "fig8", "fig11", "table4"]}
     made = {}
     for eid, names in where.items():
         d = exp_dirs[eid]
@@ -156,7 +164,7 @@ def build_all(mcs, e5_acc_by_tau, exp_dirs, max_rounds):
     return made
 
 
-def build_err(mcs, err_sasafl, exp_dirs, max_rounds):
+def build_err(mcs, err_sasafl, exp_dirs, max_rounds, mcs_k10_err=None):
     """적응형 quota가 꺼진 원저자 코드(c0b819b)로 돌린 SASAFL을 기존 비교 그림 오른쪽에 붙인다.
     왼쪽부터: 논문 원본 / 재현(현재 코드, quota 적응 동작) / 재현(원저자 코드, quota 고정).
     err_sasafl: {'MNIST': {C: run}, 'FashionMNIST': {...}, 'CIFAR10': {...}}. BSA는 기존 실행을 그대로 쓴다."""
@@ -165,11 +173,12 @@ def build_err(mcs, err_sasafl, exp_dirs, max_rounds):
     err = {ds: {**{k: v for k, v in mcs[ds].items() if k[0] == "BSA"},
                 **{("SASAFL", c): err_sasafl.get(ds, {}).get(c) for c in (0.1, 0.3, 0.5)}}
            for ds in ("MNIST", "FashionMNIST", "CIFAR10")}
+    k10 = mcs_k10_err or {ds: {} for ds in ("MNIST", "FashionMNIST", "CIFAR10")}
     with plt.rc_context(SERIF):
-        A.fig7_grid(err["MNIST"], err["FashionMNIST"], rep / "fig7_err.png")
+        A.fig7_grid(err["MNIST"], err["FashionMNIST"], rep / "fig7_err.png", k10["MNIST"], k10["FashionMNIST"])
         A.fig_sasafl_c(err["CIFAR10"], rep / "fig9_err.png", xmax=max_rounds)
     made = {}
-    for eid in ("E7", "E6"):
+    for eid in ("E7", "E6", "E8"):
         d = exp_dirs[eid]
         (d / "reproduced").mkdir(parents=True, exist_ok=True)
         for name, paper in (("fig7", "paper_fig7.jpg"), ("fig9", "paper_fig9.jpg")):

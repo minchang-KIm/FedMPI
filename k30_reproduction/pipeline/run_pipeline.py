@@ -80,6 +80,15 @@ EXPERIMENTS = [
                "rounds": MAX_ROUNDS, "max_wall_min": RUN_MAX_WALL_MIN, "sasafl_src": str(ERR_SASAFL_SRC)}
               for tag, ds, lr in (("MNIST", "MNIST", 0.01), ("FMNIST", "FashionMNIST", 0.001), ("CIFAR10", "CIFAR10", 0.001))
               for c in (0.1, 0.3, 0.5)]},
+    {"id": "E8", "dir": "E8_K10",
+     "title": "K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). "
+              "BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)",
+     "runs": [{**BASE, "K": 10, "name": f"K10_{tag}_{variant}_C{c}", "method": method, "C": c, "dataset": ds,
+               "lr": lr, "rounds": MAX_ROUNDS, "max_wall_min": RUN_MAX_WALL_MIN, "variant": variant,
+               **({"sasafl_src": str(ERR_SASAFL_SRC)} if variant == "SASAFLorig" else {})}
+              for tag, ds, lr in (("MNIST", "MNIST", 0.01), ("FMNIST", "FashionMNIST", 0.001), ("CIFAR10", "CIFAR10", 0.001))
+              for c in (0.1, 0.3, 0.5)
+              for variant, method in (("BSA", "SemiAsync"), ("SASAFL", "SASAFL"), ("SASAFLorig", "SASAFL"))]},
     {"id": "E6", "dir": "E6_final_summary", "title": "최종 종합 — Table 2(3개 데이터셋), Table 4(K=30), 결론 수치 점검",
      "runs": []},
 ]
@@ -122,7 +131,7 @@ def status_table(exp, loaded):
         r = loaded[spec["name"]]
         wall = f"{r['wall'][-1]:.1f}" if r is not None and len(r["wall"]) else "-"
         tau = f" (τ={spec['tau']})" if exp["id"] == "E5" else ""
-        lines.append(f"| `{spec['name']}` | {METHOD_TAG[spec['method']]}{tau} | {spec['C']} | {A.status_line(r)} | {wall} |")
+        lines.append(f"| `{spec['name']}` | {spec.get('variant', METHOD_TAG[spec['method']])}{tau} | {spec['C']} | {A.status_line(r)} | {wall} |")
     return "\n".join(lines)
 
 
@@ -135,7 +144,7 @@ def write_summary(exp, sections):
     d = EXP_ROOT / exp["dir"]
     body = [f"# {exp['id']}. {exp['title']}", "",
             f"마지막 갱신: {datetime.now().strftime('%Y-%m-%d %H:%M')}", "",
-            f"**재현 설정**: {SETUP_TEXT}", ""] + sections
+            f"**재현 설정**: {SETUP_TEXT if exp['id'] != 'E8' else SETUP_TEXT.replace('K=30', 'K=10').replace('× 6명', '× 2명')}", ""] + sections
     (d / "SUMMARY.md").write_text("\n".join(body) + "\n")
 
 
@@ -325,14 +334,44 @@ def build_figures(loaded_all):
         run = loaded_all.get("E5", {}).get(spec["name"])
         if run is not None and run["complete"]:
             acc_by_tau.setdefault(spec["tau"], []).append(A.metrics(run, "MNIST")[0])
-    dirs = {eid: EXP_ROOT / exps[eid]["dir"] for eid in ("E1", "E2", "E4", "E5", "E6", "E7")}
-    made = PF.build_all(mcs, acc_by_tau, dirs, MAX_ROUNDS)
-    for eid, names in PF.build_err(mcs, err_sasafl(loaded_all), dirs, MAX_ROUNDS).items():
+    dirs = {eid: EXP_ROOT / exps[eid]["dir"] for eid in ("E1", "E2", "E4", "E5", "E6", "E7", "E8")}
+    made = PF.build_all(mcs, acc_by_tau, dirs, MAX_ROUNDS, k10_mc(loaded_all, "SASAFL"))
+    for eid, names in PF.build_err(mcs, err_sasafl(loaded_all), dirs, MAX_ROUNDS,
+                                   k10_mc(loaded_all, "SASAFLorig")).items():
         made.setdefault(eid, []).extend(names)
     return made
 
 
 ERR_DATASETS = (("MNIST", "MNIST", "E1"), ("FMNIST", "FashionMNIST", "E2"), ("CIFAR10", "CIFAR10", "E4"))
+
+
+def k10_mc(loaded_all, variant):
+    """E8 실행 → {dataset: {(BSA|SASAFL, C): run}}. variant: 'SASAFL'(현재 코드) | 'SASAFLorig'(원저자 코드)"""
+    loaded = loaded_all.get("E8", {})
+    return {ds: {**{("BSA", c): loaded.get(f"K10_{tag}_BSA_C{c}") for c in (0.1, 0.3, 0.5)},
+                 **{("SASAFL", c): loaded.get(f"K10_{tag}_{variant}_C{c}") for c in (0.1, 0.3, 0.5)}}
+            for tag, ds, _ in ERR_DATASETS}
+
+
+def report_E8(exp, loaded):
+    k10_now, k10_old = k10_mc({"E8": loaded}, "SASAFL"), k10_mc({"E8": loaded}, "SASAFLorig")
+    sec = ["## 무엇을 돌렸나", "",
+           "- 논문은 K=30과 K=100을 비교했지만 이 장비에서 K=100은 돌릴 수 없어 K=10으로 대신한다. "
+           "그림·표에서 논문의 K=100 칸 자리에 K=10을 넣었다(왼쪽 논문 원본은 K=100 그대로).",
+           "- K=10 클라이언트는 K=30과 같은 CPU 카테고리(1·2·3·4·8코어)를 2명씩 쓴다. 나머지 설정은 K=30과 같다.",
+           "- SASAFL은 현재 코드(quota 적응 동작)와 원저자 코드(c0b819b, quota 고정) 둘 다 돌렸다.", "",
+           "## 실행 상태", "", status_table(exp, loaded), "",
+           "## 최고 정확도 (500라운드)", "",
+           "| 데이터셋 | C | BSA | SASAFL 현재 코드 | SASAFL 원저자 코드 | 원저자 코드 quota: 범위 / 서로 다른 값 수 / int(C·K) 비율 |",
+           "|---|---:|---:|---:|---:|---|"]
+    for _, ds, _ in ERR_DATASETS:
+        for c in (0.1, 0.3, 0.5):
+            fmt = lambda r: "-" if A.metrics(r, ds)[0] is None else f"{A.metrics(r, ds)[0]:.2f}"
+            old = k10_old[ds][("SASAFL", c)]
+            q = quota_summary(old, c, k=10)
+            sec.append(f"| {ds} | {c} | {fmt(k10_now[ds][('BSA', c)])} | {fmt(k10_now[ds][('SASAFL', c)])} | "
+                       f"{fmt(old)} | {' / '.join(q)} |")
+    return sec + [""]
 
 
 def err_sasafl(loaded_all):
@@ -341,14 +380,14 @@ def err_sasafl(loaded_all):
     return {ds: {c: loaded.get(f"ERR_{tag}_SASAFL_C{c}") for c in (0.1, 0.3, 0.5)} for tag, ds, _ in ERR_DATASETS}
 
 
-def quota_summary(run, c):
+def quota_summary(run, c, k=30):
     """라운드별 quota(다음 라운드에 쓸 로컬 모델 수) 요약 문자열."""
     if run is None or len(run["quota"]) == 0:
         return "-", "-", "-"
     q = run["quota"][~np.isnan(run["quota"])].astype(int)
     if len(q) == 0:
         return "-", "-", "-"
-    fixed = int(30 * c)
+    fixed = int(k * c)
     return f"{q.min()}–{q.max()}", str(len(set(q.tolist()))), f"{100 * (q == fixed).mean():.0f}%"
 
 
@@ -399,7 +438,7 @@ def report_E7(exp, loaded):
     return hist + sec + acc + [""]
 
 
-REPORTS = {"E1": report_E1, "E2": report_E2, "E4": report_E4, "E5": report_E5, "E7": report_E7}
+REPORTS = {"E1": report_E1, "E2": report_E2, "E4": report_E4, "E5": report_E5, "E7": report_E7, "E8": report_E8}
 
 
 def build_report(exp, loaded_all):

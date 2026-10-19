@@ -73,6 +73,8 @@ def metrics(run, dataset):
         return (None, None, None)
     mask = run["rounds"] >= 1
     r, a, w = run["rounds"][mask], run["acc"][mask], run["wall"][mask]
+    if len(a) == 0:   # 첫 집계 전에 끝난 실행 (0라운드 평가만 있음)
+        return (None, None, None)
     target = TARGET_ACC[dataset]
     hit = np.nonzero(a >= target)[0]
     if len(hit) == 0:
@@ -180,19 +182,19 @@ def fig_bsa_vs_sasafl(runs, out_path, every, ylim, xmax, inset=None, title=None)
     plt.close(fig)
 
 
-def fig7_grid(mnist_runs, fmnist_runs, out_path):
-    """논문 Fig.7과 같은 2×2 배치. K=100 패널은 재현 불가 표시."""
+def fig7_grid(mnist_runs, fmnist_runs, out_path, mnist_k10=None, fmnist_k10=None):
+    """논문 Fig.7과 같은 2×2 배치. 논문의 K=100 자리(b)(d)에는 K=10 재현을 그린다."""
     with plt.rc_context({"font.size": 15, "legend.fontsize": 12}):
-        _fig7_grid(mnist_runs, fmnist_runs, out_path)
+        _fig7_grid(mnist_runs, fmnist_runs, out_path, mnist_k10 or {}, fmnist_k10 or {})
 
 
-def _fig7_grid(mnist_runs, fmnist_runs, out_path):
+def _fig7_grid(mnist_runs, fmnist_runs, out_path, mnist_k10, fmnist_k10):
     fig, axes = plt.subplots(2, 2, figsize=(13, 9.6))
     draw_bsa_vs_sasafl(axes[0][0], mnist_runs, 5, (0, 100), 500, inset=((450, 500), (80, 100)))
-    draw_unavailable(axes[0][1], "")
+    draw_bsa_vs_sasafl(axes[0][1], mnist_k10, 5, (0, 100), 500, inset=((450, 500), (80, 100)))
     draw_bsa_vs_sasafl(axes[1][0], fmnist_runs, 5, (0, 100), 500)
-    draw_unavailable(axes[1][1], "")
-    caps = ["(a) MNIST with K=30", "(b) MNIST with K=100", "(c) FashionMNIST with K=30", "(d) FashionMNIST with K=100"]
+    draw_bsa_vs_sasafl(axes[1][1], fmnist_k10, 5, (0, 100), 500)
+    caps = ["(a) MNIST with K=30", "(b) MNIST with K=10", "(c) FashionMNIST with K=30", "(d) FashionMNIST with K=10"]
     for ax, cap in zip(axes.flat, caps):
         ax.text(0.5, -0.3, cap, transform=ax.transAxes, ha="center", fontsize=18)
     fig.tight_layout(h_pad=4)
@@ -200,16 +202,17 @@ def _fig7_grid(mnist_runs, fmnist_runs, out_path):
     plt.close(fig)
 
 
-def fig8_grid(cifar_runs, out_path, xmax):
+def fig8_grid(cifar_runs, out_path, xmax, cifar_k10=None):
     with plt.rc_context({"font.size": 15, "legend.fontsize": 12}):
-        _fig8_grid(cifar_runs, out_path, xmax)
+        _fig8_grid(cifar_runs, out_path, xmax, cifar_k10 or {})
 
 
-def _fig8_grid(cifar_runs, out_path, xmax):
+def _fig8_grid(cifar_runs, out_path, xmax, cifar_k10):
+    """논문 Fig.8 배치. 논문의 K=100 자리(b)에는 K=10 재현을 그린다."""
     fig, axes = plt.subplots(1, 2, figsize=(13, 4.8))
     draw_bsa_vs_sasafl(axes[0], cifar_runs, 10, (0, 60), xmax)
-    draw_unavailable(axes[1], "")
-    for ax, cap in zip(axes, ["(a) K=30", "(b) K=100"]):
+    draw_bsa_vs_sasafl(axes[1], cifar_k10, 10, (0, 60), xmax)
+    for ax, cap in zip(axes, ["(a) K=30", "(b) K=10"]):
         ax.text(0.5, -0.32, cap, transform=ax.transAxes, ha="center", fontsize=18)
     fig.tight_layout()
     fig.savefig(out_path, dpi=200)

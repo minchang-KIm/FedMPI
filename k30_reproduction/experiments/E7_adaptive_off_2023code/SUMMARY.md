@@ -1,6 +1,6 @@
 # E7. 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
 
-마지막 갱신: 2026-10-19 10:35
+마지막 갱신: 2026-10-19 11:54
 
 **재현 설정**: K=30, wise-175 단일 노드, CPU 카테고리 1·2·3·4·8코어 × 6명(논문 K=30 구성), batch 32, local epoch 5, τ=9, ζ=0.9, non-IID(gaussian), 1회 실행
 
@@ -15,7 +15,7 @@
 | 실행 | 방법 | C | 상태 | 소요(분) |
 |---|---|---:|---|---:|
 | `ERR_MNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
-| `ERR_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
+| `ERR_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 부분 결과 (crashed): 0/500라운드 | 0.1 |
 | `ERR_MNIST_SASAFL_C0.5` | SASAFL | 0.5 | 미실행 | - |
 | `ERR_FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
 | `ERR_FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
@@ -50,7 +50,7 @@
 | 실행 | 방법 | C | 상태 | 소요(분) |
 |---|---|---:|---|---:|
 | `ERR_MNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
-| `ERR_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
+| `ERR_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 부분 결과 (crashed): 0/500라운드 | 0.1 |
 | `ERR_MNIST_SASAFL_C0.5` | SASAFL | 0.5 | 미실행 | - |
 | `ERR_FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
 | `ERR_FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
@@ -64,7 +64,7 @@
 | 데이터셋 | C | int(C·K) | 현재 코드: 범위 / 서로 다른 값 수 / 고정값 비율 | 원저자 코드: 범위 / 서로 다른 값 수 / 고정값 비율 | 원저자 코드 실행 노드 |
 |---|---:|---:|---|---|---|
 | MNIST | 0.1 | 3 | 3–30 / 20 / 63% | - / - / - | - |
-| MNIST | 0.3 | 9 | 9–30 / 22 / 39% | - / - / - | - |
+| MNIST | 0.3 | 9 | 9–30 / 22 / 39% | - / - / - | wise-175 |
 | MNIST | 0.5 | 15 | 15–30 / 16 / 42% | - / - / - | - |
 | FashionMNIST | 0.1 | 3 | 3–28 / 13 / 63% | - / - / - | - |
 | FashionMNIST | 0.3 | 9 | 9–30 / 19 / 36% | - / - / - | - |
