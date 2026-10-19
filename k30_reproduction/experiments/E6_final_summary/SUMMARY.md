@@ -1,6 +1,6 @@
 # E6. 최종 종합 — Table 2(3개 데이터셋), Table 4(K=30), 결론 수치 점검
 
-마지막 갱신: 2026-10-16 13:24
+마지막 갱신: 2026-10-19 11:17
 
 **재현 설정**: K=30, wise-175 단일 노드, CPU 카테고리 1·2·3·4·8코어 × 6명(논문 K=30 구성), batch 32, local epoch 5, τ=9, ζ=0.9, non-IID(gaussian), 1회 실행
 
@@ -19,6 +19,10 @@
 ![compare_table2.png](compare_table2.png)
 
 ![compare_table4.png](compare_table4.png)
+
+![compare_fig7_err.png](compare_fig7_err.png)
+
+![compare_fig9_err.png](compare_fig9_err.png)
 
 ## Table 2 전체 (K=30)
 

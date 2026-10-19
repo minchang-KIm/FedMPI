@@ -136,3 +136,15 @@
 - 2026-10-16 13:25 === E4 정리 완료 → experiments/E4_CIFAR10_table2/SUMMARY.md
 - 2026-10-16 13:25 === E5 시작: Lag tolerance τ=1–10 — Fig. 5 (MNIST, SASAFL, C=0.3, 1회)
 - 2026-10-16 13:25 E5 실행 시작: LT_tau1_rep1 (시도 1/2)
+- 2026-10-16 14:38 파이프라인 시작 (E7, report_only=True)
+- 2026-10-16 14:39 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-16 14:39 파이프라인 종료
+- 2026-10-16 18:34 E5 실행 종료: LT_tau1_rep1 → completed, 500/500라운드, 최고 81.64%, 309.53분
+- 2026-10-19 10:35 파이프라인 시작 (E7, report_only=False)
+- 2026-10-19 10:35 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-19 10:35 E7 실행 시작: ERR_MNIST_SASAFL_C0.3 (시도 1/2)
+- 2026-10-19 10:35 E7 실행 종료: ERR_MNIST_SASAFL_C0.3 → crashed, 0/500라운드, 최고 None%, 0.1분
+- 2026-10-19 10:36 E7 실행 시작: ERR_MNIST_SASAFL_C0.3 (시도 2/2)
+- 2026-10-19 10:36 E7 실행 종료: ERR_MNIST_SASAFL_C0.3 → crashed, 0/500라운드, 최고 8.93%, 0.1분
+- 2026-10-19 10:36 E7 정리 중 오류 → /home/wise-175/Mando/FedMPI/k30_reproduction/experiments/E7_adaptive_off_2023code/report_error.log
+- 2026-10-19 10:36 E7 실행 시작: ERR_FMNIST_SASAFL_C0.5 (시도 1/2)

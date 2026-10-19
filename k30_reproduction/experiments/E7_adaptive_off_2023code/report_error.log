@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "k30_reproduction/pipeline/run_pipeline.py", line 416, in build_report
+    sections = figs + ["## 실행 상태", "", status_table(exp, loaded), ""] + REPORTS[exp["id"]](exp, loaded)
+  File "k30_reproduction/pipeline/run_pipeline.py", line 383, in report_E7
+    acc.append(f"| {ds} | {c} | {fmt(mc.get(('BSA', c)))} | {fmt(now)} | {fmt(old)} | {p['BSA'][0]} | {p['SASAFL'][0]} |")
+  File "k30_reproduction/pipeline/run_pipeline.py", line 381, in <lambda>
+    fmt = lambda r: "-" if A.metrics(r, ds)[0] is None else f"{A.metrics(r, ds)[0]:.2f}"
+  File "/home/wise-175/Mando/FedMPI/k30_reproduction/pipeline/analysis.py", line 79, in metrics
+    return (float(a.max()), None, None)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/numpy/core/_methods.py", line 41, in _amax
+    return umr_maximum(a, axis, None, out, keepdims, initial, where)
+ValueError: zero-size array to reduction operation maximum which has no identity

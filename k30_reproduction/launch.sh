@@ -10,6 +10,7 @@
 #                K는 카테고리 수로 나누어떨어져야 한다. two 모드에서는 카테고리별 인원도 짝수여야 한다.
 # 환경변수: ROUNDS DATASET IID SPLIT LEARNING_RATE BATCH_SIZE LOCAL_EPOCHS TARGET_ACCURACY LAG_TOLERANCE
 #          MASTER_PORT RUN_ID K30_PID_DIR SYNC_SOURCE
+#          CPU_LIST (single 모드: 이 CPU들에만 고정, 예: 176에서 결함 코어 24(CPU 12,13) 제외 → 0-11,14-31)
 set -euo pipefail
 
 METHOD=${1:?usage}
@@ -69,7 +70,9 @@ cd "$MASTER_REPO"
 if [[ "$MODE" == "single" ]]; then
     THREADS="1$(make_digits "$PER_CAT")"
     echo "[k30] mode=single method=$METHOD C=$C K=$K categories=$CATEGORIES threads=$THREADS"
-    exec "$MASTER_PY" -m torch.distributed.run --nnodes=1 --nproc_per_node=$((K + 1)) \
+    PIN=()
+    if [[ -n "${CPU_LIST:-}" ]]; then PIN=(taskset -c "$CPU_LIST"); echo "[k30] cpu_list=$CPU_LIST"; fi
+    exec "${PIN[@]}" "$MASTER_PY" -m torch.distributed.run --nnodes=1 --nproc_per_node=$((K + 1)) \
         --rdzv_id="$RUN_ID" --master_addr="$MASTER_ADDR" --master_port="$MASTER_PORT" \
         --rdzv_endpoint="$MASTER_ADDR:$MASTER_PORT" --node_rank=0 \
         "$ENTRY" "${COMMON_ARGS[@]}" "--num_threads=$THREADS"

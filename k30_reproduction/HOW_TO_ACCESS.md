@@ -54,3 +54,17 @@ tmux attach -t k30
   - 진행 기록: `k30_reproduction/PROGRESS.md`
   - 화면 확인: 1번(status), 2번(log) 창
 - 이 파이프라인도 세션과 분리돼 있어 로그아웃해도 계속 돈다. 이후 재시작은 `start_in_tmux.sh`로 한다.
+
+## E7 (적응형 quota 꺼진 원저자 코드) — 2026-10-16 추가
+- tmux 세션 `k30`의 **3번 창 `err`**: `start_err_after_current.sh`가 E5 `LT_tau1_rep1`이 끝나길 기다렸다가 기존 파이프라인을 멈추고 E7 9개 실행을 시작한다.
+- 콘솔 기록: `k30_reproduction/err_console.log` (끝나면 `ERR_DONE`)
+- 결과: `experiments/E7_adaptive_off_2023code/` — `compare_fig7_err.png`, `compare_fig9_err.png`, `SUMMARY.md` (E6에도 같은 그림)
+- E5 나머지(τ=2–10)는 보류 상태. 이어 돌리려면 E7 종료 후 `bash k30_reproduction/start_in_tmux.sh`.
+
+## E7 두 노드 실행 (2026-10-19 변경)
+- 시작/재개: `bash k30_reproduction/start_e7_two_nodes.sh` (wise-175에서). 재부팅 시 두 노드 crontab `@reboot`이 자동으로 다시 띄운다.
+- 9개 실행을 두 노드가 `experiments/E7_adaptive_off_2023code/claims/`에 먼저 이름을 차지하는 방식으로 나눈다 (중복 실행 없음, 한쪽이 멈추면 다른 쪽이 남은 것을 가져감).
+- tmux `k30`: 3 e7(175, 오전에 띄운 고정 4개) · 5 queue(3이 끝나면 이어서 queue) · 4 sync(176 결과 10분마다 가져오기)
+- 176 진행: `ssh wise-176@210.107.197.176 tail -f /home/wise-176/Mando/FedMPI/k30_reproduction/e7_console.log`
+- **176은 터보가 켜져 있으면 실행하지 않는다** (P코어 계산 오류). 176에서 `echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo` 후 위 시작 스크립트를 다시 실행.
+- crontab 항목 제거: `crontab -e`에서 `# k30 E7 자동 재개` 줄 삭제 (두 노드 모두).

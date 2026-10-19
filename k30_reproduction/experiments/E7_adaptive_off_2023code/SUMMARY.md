@@ -1,0 +1,92 @@
+# E7. 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+
+마지막 갱신: 2026-10-19 10:35
+
+**재현 설정**: K=30, wise-175 단일 노드, CPU 카테고리 1·2·3·4·8코어 × 6명(논문 K=30 구성), batch 32, local epoch 5, τ=9, ζ=0.9, non-IID(gaussian), 1회 실행
+
+## 비교 그림 (왼쪽: 논문 원본, 오른쪽: 재현)
+
+![compare_fig7_err.png](compare_fig7_err.png)
+
+![compare_fig9_err.png](compare_fig9_err.png)
+
+## 실행 상태
+
+| 실행 | 방법 | C | 상태 | 소요(분) |
+|---|---|---:|---|---:|
+| `ERR_MNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
+| `ERR_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
+| `ERR_MNIST_SASAFL_C0.5` | SASAFL | 0.5 | 미실행 | - |
+| `ERR_FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
+| `ERR_FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
+| `ERR_FMNIST_SASAFL_C0.5` | SASAFL | 0.5 | 미실행 | - |
+| `ERR_CIFAR10_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
+| `ERR_CIFAR10_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
+| `ERR_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 미실행 | - |
+
+## 논문 실험 당시 코드가 이 버전이었는지 (git 기록)
+
+| 커밋 | 날짜 | 작성자 | quota 적응 |
+|---|---|---|---|
+| `e7304af`~`6546e9d` | 2023-11-24~26 | miri | 동작 (last_global_loss 초기값 1.0, 서버 안에서만 갱신) |
+| `a45de5d` "PM1" | 2023-11-27 | miri | **꺼짐** — 루프 안 덮어쓰기 줄 추가, 초기값 None |
+| `d36ab53`·`a5cf02b`·`96dc297` | 2023-11-28 | miri | 꺼짐 (마지막 SASAFL 수정) |
+| `c0b819b` | 2023-12-14 | miri | 꺼짐 (원저자 마지막 커밋, SAFA 수정) |
+| 논문 최초 투고 | 2023-12-19 | — | (논문 첫 페이지 "Received 19 December 2023") |
+| `73f5e0b` | 2026-10-08 | CheongJaeyoon | 동작 (덮어쓰기 줄을 루프 밖으로 이동) |
+
+- lag tolerance 인자(Fig.5)는 11-26~27 커밋에서 처음 생겼다. Fig.5를 포함한 투고 실험은 11-27 이후 코드, 즉 quota가 고정된 버전으로 돌렸을 가능성이 높다.
+- 한계: 2024-05 수정본(revised) 때 다시 돌린 실험이 있다면 그 코드는 이 저장소에 없다. 그래서 "투고본 실험은 고정 버전일 가능성이 높다"까지가 git 기록으로 말할 수 있는 범위다.
+
+## 무엇을 돌렸나
+
+- SASAFL.py만 원저자 마지막 커밋 `c0b819b`(2023-12-14)의 파일로 바꿔 실행했다: `original_code/SASAFL_c0b819b.py` (sha256 `7c4ca5fde677ccb0…`). 나머지 코드는 현재 저장소와 동일하다.
+- 이 파일은 집계 직후 `Server.last_global_loss = global_loss`로 직전 loss를 덮어쓴 뒤 `get_next_round_minimum_local_model(global_loss, ...)`를 부른다. 그래서 gl_r / gl_(r-1)이 항상 1이 되어 quota가 처음 값 int(C·K)에 고정된다.
+- 현재 저장소 코드(E1·E2·E4)는 `73f5e0b`(2026-10-08)에서 이 줄을 루프 밖으로 옮겨 quota가 실제로 변한다.
+- BSA는 quota 적응을 쓰지 않으므로 E1·E2·E4의 BSA 실행을 그대로 쓴다.
+
+## 실행 상태
+
+| 실행 | 방법 | C | 상태 | 소요(분) |
+|---|---|---:|---|---:|
+| `ERR_MNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
+| `ERR_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
+| `ERR_MNIST_SASAFL_C0.5` | SASAFL | 0.5 | 미실행 | - |
+| `ERR_FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
+| `ERR_FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
+| `ERR_FMNIST_SASAFL_C0.5` | SASAFL | 0.5 | 미실행 | - |
+| `ERR_CIFAR10_SASAFL_C0.1` | SASAFL | 0.1 | 미실행 | - |
+| `ERR_CIFAR10_SASAFL_C0.3` | SASAFL | 0.3 | 미실행 | - |
+| `ERR_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 미실행 | - |
+
+## quota가 실제로 고정됐는지 (rounds.csv의 라운드별 quota)
+
+| 데이터셋 | C | int(C·K) | 현재 코드: 범위 / 서로 다른 값 수 / 고정값 비율 | 원저자 코드: 범위 / 서로 다른 값 수 / 고정값 비율 | 원저자 코드 실행 노드 |
+|---|---:|---:|---|---|---|
+| MNIST | 0.1 | 3 | 3–30 / 20 / 63% | - / - / - | - |
+| MNIST | 0.3 | 9 | 9–30 / 22 / 39% | - / - / - | - |
+| MNIST | 0.5 | 15 | 15–30 / 16 / 42% | - / - / - | - |
+| FashionMNIST | 0.1 | 3 | 3–28 / 13 / 63% | - / - / - | - |
+| FashionMNIST | 0.3 | 9 | 9–30 / 19 / 36% | - / - / - | - |
+| FashionMNIST | 0.5 | 15 | 15–30 / 16 / 45% | - / - / - | - |
+| CIFAR10 | 0.1 | 3 | 3–9 / 7 / 76% | - / - / - | - |
+| CIFAR10 | 0.3 | 9 | 9–18 / 10 / 62% | - / - / - | - |
+| CIFAR10 | 0.5 | 15 | 15–30 / 16 / 44% | - / - / - | - |
+
+원저자 코드 열의 고정값 비율이 100%면 quota 적응이 한 번도 일어나지 않았다는 뜻이다.
+E7은 wise-175와 wise-176에 나눠 돌렸다. wise-176은 결함 코어 24(CPU 12,13)를 빼고 30개 논리 CPU만 쓴다 (175는 32개). 그래서 실행 시간은 노드끼리 직접 비교하지 않는다.
+
+## 최고 정확도 비교 (500라운드)
+
+| 데이터셋 | C | BSA | SASAFL 현재 코드 | SASAFL 원저자 코드 | 논문 BSA | 논문 SASAFL |
+|---|---:|---:|---:|---:|---:|---:|
+| MNIST | 0.1 | 96.90 | 95.18 | - | 93.78 | 98.23 |
+| MNIST | 0.3 | 98.28 | 98.53 | - | 97.14 | 98.07 |
+| MNIST | 0.5 | 98.86 | 98.84 | - | 98.27 | 98.24 |
+| FashionMNIST | 0.1 | 63.64 | 59.72 | - | 54.72 | 74.09 |
+| FashionMNIST | 0.3 | 74.50 | 69.93 | - | 66.0 | 71.59 |
+| FashionMNIST | 0.5 | 79.57 | 81.36 | - | 73.834 | 73.94 |
+| CIFAR10 | 0.1 | 36.50 | 38.28 | - | 42.5 | 58.59 |
+| CIFAR10 | 0.3 | 47.92 | 44.35 | - | 51.08 | 58.25 |
+| CIFAR10 | 0.5 | 52.80 | 51.14 | - | 56.82 | 56.77 |
+

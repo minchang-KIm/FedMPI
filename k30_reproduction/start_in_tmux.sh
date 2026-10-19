@@ -11,7 +11,8 @@ SESSION=k30
 
 running() {
     pgrep -f "^/home/wise-175/anaconda3/envs/FL/bin/python k30_reproduction/pipeline/run_pipeline.py" > /dev/null \
-        || pgrep -f "^bash k30_reproduction/start_pipeline_after_table2.sh" > /dev/null
+        || pgrep -f "^bash k30_reproduction/start_pipeline_after_table2.sh" > /dev/null \
+        || pgrep -f "^bash k30_reproduction/start_err_after_current.sh" > /dev/null
 }
 
 LOG_CMD='while true; do f=$(ls -t k30_reproduction/runs/*/run.log k30_reproduction/experiments/*/runs/*/run.log 2>/dev/null | head -1); echo "=== $f"; timeout 600 tail -n 400 -f "$f" | grep --line-buffered "번째 글로벌 모델"; done'
