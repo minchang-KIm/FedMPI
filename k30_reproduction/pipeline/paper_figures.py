@@ -30,13 +30,18 @@ OLD_FILES = ["table2_comparison.png", "table4_k30.png", "fig7a_mnist_k30.png", "
 
 def side_by_side(left_path, right_path, out_path, height=1000, gap=40):
     """왼쪽 논문 원본, 오른쪽 재현. 텍스트 없이 높이만 맞춘다."""
-    left = Image.open(left_path).convert("RGB")
-    right = Image.open(right_path).convert("RGB")
-    left = left.resize((int(left.width * height / left.height), height), Image.LANCZOS)
-    right = right.resize((int(right.width * height / right.height), height), Image.LANCZOS)
-    canvas = Image.new("RGB", (left.width + right.width + gap * 3, height + gap * 2), "white")
-    canvas.paste(left, (gap, gap))
-    canvas.paste(right, (left.width + gap * 2, gap))
+    row([left_path, right_path], out_path, height, gap)
+
+
+def row(paths, out_path, height=1000, gap=40):
+    """그림들을 왼쪽부터 차례로 가로로 붙인다 (높이만 맞춤, 텍스트 없음)."""
+    imgs = [Image.open(p).convert("RGB") for p in paths]
+    imgs = [im.resize((int(im.width * height / im.height), height), Image.LANCZOS) for im in imgs]
+    canvas = Image.new("RGB", (sum(im.width for im in imgs) + gap * (len(imgs) + 1), height + gap * 2), "white")
+    x = gap
+    for im in imgs:
+        canvas.paste(im, (x, gap))
+        x += im.width + gap
     canvas.save(out_path)
 
 
@@ -148,4 +153,28 @@ def build_all(mcs, e5_acc_by_tau, exp_dirs, max_rounds):
                 (d / "reproduced" / f"{name}.png").write_bytes(src.read_bytes())
             side_by_side(PAPER / pairs[name], src, d / f"compare_{name}.png")
             made.setdefault(eid, []).append(f"compare_{name}.png")
+    return made
+
+
+def build_err(mcs, err_sasafl, exp_dirs, max_rounds):
+    """적응형 quota가 꺼진 원저자 코드(c0b819b)로 돌린 SASAFL을 기존 비교 그림 오른쪽에 붙인다.
+    왼쪽부터: 논문 원본 / 재현(현재 코드, quota 적응 동작) / 재현(원저자 코드, quota 고정).
+    err_sasafl: {'MNIST': {C: run}, 'FashionMNIST': {...}, 'CIFAR10': {...}}. BSA는 기존 실행을 그대로 쓴다."""
+    rep = exp_dirs["E6"] / "reproduced"
+    rep.mkdir(parents=True, exist_ok=True)
+    err = {ds: {**{k: v for k, v in mcs[ds].items() if k[0] == "BSA"},
+                **{("SASAFL", c): err_sasafl.get(ds, {}).get(c) for c in (0.1, 0.3, 0.5)}}
+           for ds in ("MNIST", "FashionMNIST", "CIFAR10")}
+    with plt.rc_context(SERIF):
+        A.fig7_grid(err["MNIST"], err["FashionMNIST"], rep / "fig7_err.png")
+        A.fig_sasafl_c(err["CIFAR10"], rep / "fig9_err.png", xmax=max_rounds)
+    made = {}
+    for eid in ("E7", "E6"):
+        d = exp_dirs[eid]
+        (d / "reproduced").mkdir(parents=True, exist_ok=True)
+        for name, paper in (("fig7", "paper_fig7.jpg"), ("fig9", "paper_fig9.jpg")):
+            if eid != "E6":
+                (d / "reproduced" / f"{name}_err.png").write_bytes((rep / f"{name}_err.png").read_bytes())
+            row([PAPER / paper, rep / f"{name}.png", rep / f"{name}_err.png"], d / f"compare_{name}_err.png")
+            made.setdefault(eid, []).append(f"compare_{name}_err.png")
     return made

@@ -26,7 +26,8 @@ echo
 echo "[2] 지금 돌고 있는 실행"
 # config.json이 있는 실제 실행 폴더 중 가장 최근 것 (smoke/fallback/재테스트/진단 S·F·R·H 제외)
 latest=$(ls -t $K30/runs/*/config.json $K30/experiments/*/runs/*/config.json 2>/dev/null \
-         | grep -v "_old_" | grep -vE "/runs/([SFR][0-9]_|H176_)" | head -1 | xargs -r dirname)
+         | grep -v "_old_" | grep -vE "/runs/([SFR][0-9]_|H176_)" | xargs -r -n1 dirname 2>/dev/null \
+         | while read -r d; do [ -f "$d/result.json" ] || [ "$(jq -r '.host // "wise-175"' "$d/config.json" 2>/dev/null)" != "$(hostname)" ] || { echo "$d"; break; }; done)
 if [ -n "$latest" ] && [ ! -f "$latest/result.json" ]; then
     name=$(basename "$latest")
     last=$(grep -E "SERVER >> [0-9]+번째 글로벌 모델" "$latest/run.log" | tail -1)

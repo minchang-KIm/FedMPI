@@ -13,12 +13,18 @@
 """
 
 import argparse
+import hashlib
 import json
+import os
+import socket
+import subprocess
 import sys
 import time
 import traceback
 from datetime import datetime
 from pathlib import Path
+
+import numpy as np
 
 HERE = Path(__file__).resolve().parent
 K30 = HERE.parent
@@ -80,9 +86,14 @@ EXPERIMENTS = [
 
 
 # ------------------------------------------------------------------ 공통
+QUIET = False   # --quiet: PROGRESS.md에 쓰지 않는다 (주기적으로 정리만 다시 할 때)
+
+
 def log_progress(msg):
     line = f"- {datetime.now().strftime('%Y-%m-%d %H:%M')} {msg}"
     print(line, flush=True)
+    if QUIET:
+        return
     if not PROGRESS.exists():
         PROGRESS.write_text("# K=30 재현 파이프라인 진행 기록\n\n")
     with PROGRESS.open("a") as f:
@@ -301,7 +312,6 @@ def report_E6(exp, loaded_all):
     return sec
 
 
-REPORTS = {"E1": report_E1, "E2": report_E2, "E4": report_E4, "E5": report_E5}
 
 
 def build_figures(loaded_all):
@@ -315,8 +325,81 @@ def build_figures(loaded_all):
         run = loaded_all.get("E5", {}).get(spec["name"])
         if run is not None and run["complete"]:
             acc_by_tau.setdefault(spec["tau"], []).append(A.metrics(run, "MNIST")[0])
-    dirs = {eid: EXP_ROOT / exps[eid]["dir"] for eid in ("E1", "E2", "E4", "E5", "E6")}
-    return PF.build_all(mcs, acc_by_tau, dirs, MAX_ROUNDS)
+    dirs = {eid: EXP_ROOT / exps[eid]["dir"] for eid in ("E1", "E2", "E4", "E5", "E6", "E7")}
+    made = PF.build_all(mcs, acc_by_tau, dirs, MAX_ROUNDS)
+    for eid, names in PF.build_err(mcs, err_sasafl(loaded_all), dirs, MAX_ROUNDS).items():
+        made.setdefault(eid, []).extend(names)
+    return made
+
+
+ERR_DATASETS = (("MNIST", "MNIST", "E1"), ("FMNIST", "FashionMNIST", "E2"), ("CIFAR10", "CIFAR10", "E4"))
+
+
+def err_sasafl(loaded_all):
+    """E7 실행 → {dataset: {C: run}}"""
+    loaded = loaded_all.get("E7", {})
+    return {ds: {c: loaded.get(f"ERR_{tag}_SASAFL_C{c}") for c in (0.1, 0.3, 0.5)} for tag, ds, _ in ERR_DATASETS}
+
+
+def quota_summary(run, c):
+    """라운드별 quota(다음 라운드에 쓸 로컬 모델 수) 요약 문자열."""
+    if run is None or len(run["quota"]) == 0:
+        return "-", "-", "-"
+    q = run["quota"][~np.isnan(run["quota"])].astype(int)
+    if len(q) == 0:
+        return "-", "-", "-"
+    fixed = int(30 * c)
+    return f"{q.min()}–{q.max()}", str(len(set(q.tolist()))), f"{100 * (q == fixed).mean():.0f}%"
+
+
+def report_E7(exp, loaded):
+    exps = {e["id"]: e for e in EXPERIMENTS}
+    sha = hashlib.sha256(ERR_SASAFL_SRC.read_bytes()).hexdigest()
+    sec = ["## 무엇을 돌렸나", "",
+           f"- SASAFL.py만 원저자 마지막 커밋 `c0b819b`(2023-12-14)의 파일로 바꿔 실행했다: "
+           f"`original_code/SASAFL_c0b819b.py` (sha256 `{sha[:16]}…`). 나머지 코드는 현재 저장소와 동일하다.",
+           "- 이 파일은 집계 직후 `Server.last_global_loss = global_loss`로 직전 loss를 덮어쓴 뒤 "
+           "`get_next_round_minimum_local_model(global_loss, ...)`를 부른다. 그래서 gl_r / gl_(r-1)이 항상 1이 되어 "
+           "quota가 처음 값 int(C·K)에 고정된다.",
+           "- 현재 저장소 코드(E1·E2·E4)는 `73f5e0b`(2026-10-08)에서 이 줄을 루프 밖으로 옮겨 quota가 실제로 변한다.",
+           "- BSA는 quota 적응을 쓰지 않으므로 E1·E2·E4의 BSA 실행을 그대로 쓴다.", "",
+           "## 실행 상태", "", status_table(exp, loaded), "",
+           "## quota가 실제로 고정됐는지 (rounds.csv의 라운드별 quota)", "",
+           "| 데이터셋 | C | int(C·K) | 현재 코드: 범위 / 서로 다른 값 수 / 고정값 비율 | 원저자 코드: 범위 / 서로 다른 값 수 / 고정값 비율 | 원저자 코드 실행 노드 |",
+           "|---|---:|---:|---|---|---|"]
+    acc = ["## 최고 정확도 비교 (500라운드)", "",
+           "| 데이터셋 | C | BSA | SASAFL 현재 코드 | SASAFL 원저자 코드 | 논문 BSA | 논문 SASAFL |",
+           "|---|---:|---:|---:|---:|---:|---:|"]
+    err = err_sasafl({"E7": loaded})
+    for tag, ds, eid in ERR_DATASETS:
+        mc = by_method_c(exps[eid], load_exp_runs(exps[eid]))
+        for c in (0.1, 0.3, 0.5):
+            now, old = mc.get(("SASAFL", c)), err[ds][c]
+            sec.append(f"| {ds} | {c} | {int(30 * c)} | " + " / ".join(quota_summary(now, c)) + " | "
+                       + " / ".join(quota_summary(old, c)) + " | "
+                       + ("-" if old is None else f"{old['cfg'].get('host', 'wise-175')} {old['cfg'].get('cpu_list', '')}".strip()) + " |")
+            fmt = lambda r: "-" if A.metrics(r, ds)[0] is None else f"{A.metrics(r, ds)[0]:.2f}"
+            p = P.TABLE2[ds][c]
+            acc.append(f"| {ds} | {c} | {fmt(mc.get(('BSA', c)))} | {fmt(now)} | {fmt(old)} | {p['BSA'][0]} | {p['SASAFL'][0]} |")
+    sec += ["", "원저자 코드 열의 고정값 비율이 100%면 quota 적응이 한 번도 일어나지 않았다는 뜻이다.",
+            "E7은 wise-175와 wise-176에 나눠 돌렸다. wise-176은 결함 코어 24(CPU 12,13)를 빼고 30개 논리 CPU만 쓴다 "
+            "(175는 32개). 그래서 실행 시간은 노드끼리 직접 비교하지 않는다.", ""]
+    hist = ["## 논문 실험 당시 코드가 이 버전이었는지 (git 기록)", "",
+            "| 커밋 | 날짜 | 작성자 | quota 적응 |", "|---|---|---|---|",
+            "| `e7304af`~`6546e9d` | 2023-11-24~26 | miri | 동작 (last_global_loss 초기값 1.0, 서버 안에서만 갱신) |",
+            "| `a45de5d` \"PM1\" | 2023-11-27 | miri | **꺼짐** — 루프 안 덮어쓰기 줄 추가, 초기값 None |",
+            "| `d36ab53`·`a5cf02b`·`96dc297` | 2023-11-28 | miri | 꺼짐 (마지막 SASAFL 수정) |",
+            "| `c0b819b` | 2023-12-14 | miri | 꺼짐 (원저자 마지막 커밋, SAFA 수정) |",
+            "| 논문 최초 투고 | 2023-12-19 | — | (논문 첫 페이지 \"Received 19 December 2023\") |",
+            "| `73f5e0b` | 2026-10-08 | CheongJaeyoon | 동작 (덮어쓰기 줄을 루프 밖으로 이동) |", "",
+            "- lag tolerance 인자(Fig.5)는 11-26~27 커밋에서 처음 생겼다. Fig.5를 포함한 투고 실험은 11-27 이후 코드, "
+            "즉 quota가 고정된 버전으로 돌렸을 가능성이 높다.",
+            "- 한계: 2024-05 수정본(revised) 때 다시 돌린 실험이 있다면 그 코드는 이 저장소에 없다. "
+            "그래서 \"투고본 실험은 고정 버전일 가능성이 높다\"까지가 git 기록으로 말할 수 있는 범위다.", ""]
+    return hist + sec + acc + [""]
+
+
+REPORTS = {"E1": report_E1, "E2": report_E2, "E4": report_E4, "E5": report_E5, "E7": report_E7}
 
 
 def build_report(exp, loaded_all):
@@ -338,7 +421,26 @@ def build_report(exp, loaded_all):
 
 
 # ------------------------------------------------------------------ 실행
-def run_experiment(exp, port_counter, stall_min, attempts):
+def claim(name):
+    """두 노드가 같은 실행 목록을 나눠 가질 때: 실행 이름을 먼저 차지한 노드만 돌린다.
+    K30_CLAIM_DIR(wise-175의 폴더)에 mkdir로 원자적으로 차지한다. K30_CLAIM_SSH가 있으면 그 호스트에서 한다.
+    반환: 차지한 노드 이름 (설정이 없으면 이 노드, 연결 실패면 None)"""
+    claim_dir = os.environ.get("K30_CLAIM_DIR")
+    me = socket.gethostname()
+    if not claim_dir:
+        return me
+    d = f"{claim_dir}/{name}"
+    cmd = f"mkdir -p {claim_dir} && {{ mkdir {d} 2>/dev/null && echo {me} > {d}/host; cat {d}/host; }}"
+    ssh = os.environ.get("K30_CLAIM_SSH")
+    argv = ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=15", ssh, cmd] if ssh else ["bash", "-c", cmd]
+    try:
+        out = subprocess.run(argv, capture_output=True, text=True, timeout=60).stdout.strip()
+    except subprocess.TimeoutExpired:
+        return None
+    return out or None
+
+
+def run_experiment(exp, port_counter, stall_min, attempts, names=None):
     root = runs_root(exp)
     root.mkdir(parents=True, exist_ok=True)
     if exp["id"] == "E1":
@@ -347,8 +449,14 @@ def run_experiment(exp, port_counter, stall_min, attempts):
         if not link.exists():
             link.symlink_to(Path("../../runs"))
     for spec in exp["runs"]:
+        if names and spec["name"] not in names:
+            continue
         existing = A.load_run(root / spec["name"])
         if existing is not None and existing["complete"]:
+            continue
+        owner = claim(spec["name"])
+        if owner != socket.gethostname():
+            log_progress(f"{exp['id']} 건너뜀: {spec['name']} (차지한 노드: {owner or '확인 실패'})")
             continue
         for attempt in range(1, attempts + 1):
             log_progress(f"{exp['id']} 실행 시작: {spec['name']} (시도 {attempt}/{attempts})")
@@ -371,7 +479,11 @@ def main():
     parser.add_argument("--report-only", action="store_true")
     parser.add_argument("--stall-min", type=float, default=20)
     parser.add_argument("--attempts", type=int, default=2)
+    parser.add_argument("--names", nargs="*", help="이 실행 이름들만 돌린다 (두 노드에 나눠 돌릴 때)")
+    parser.add_argument("--quiet", action="store_true", help="PROGRESS.md에 기록하지 않음")
     args = parser.parse_args()
+    global QUIET
+    QUIET = args.quiet
     exps = [e for e in EXPERIMENTS if not args.only or e["id"] in args.only]
     EXP_ROOT.mkdir(exist_ok=True)
     port_counter = [int(time.time()) % 100]
@@ -383,7 +495,7 @@ def main():
     for exp in exps:
         if not args.report_only and exp["runs"]:
             log_progress(f"=== {exp['id']} 시작: {exp['title']}")
-            for _ in run_experiment(exp, port_counter, args.stall_min, args.attempts):
+            for _ in run_experiment(exp, port_counter, args.stall_min, args.attempts, args.names):
                 loaded_all[exp["id"]] = load_exp_runs(exp)
                 build_report(exp, loaded_all)
         if exp["runs"]:

@@ -16,6 +16,7 @@ import json
 import os
 import re
 import signal
+import socket
 import subprocess
 import sys
 import threading
@@ -151,7 +152,8 @@ class Run:
             env["K30_SASAFL_SRC"] = str(cfg["sasafl_src"])
         cmd = ["bash", str(HERE / "launch.sh"), cfg["method"], str(cfg["C"]), str(settings["K"]), cfg["mode"], cfg["cats"]]
         meta = {**cfg, **settings, "rounds": int(env["ROUNDS"]), "cmd": " ".join(cmd), "run_id": run_id,
-                "start": datetime.now().isoformat(timespec="seconds")}
+                "start": datetime.now().isoformat(timespec="seconds"),
+                "host": socket.gethostname(), "cpu_list": os.environ.get("CPU_LIST", "")}
         (self.out / "config.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False))
         print(f"\n===== {cfg['name']} : {meta['cmd']}", flush=True)
 
