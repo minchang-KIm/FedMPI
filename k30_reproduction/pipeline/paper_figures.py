@@ -33,26 +33,42 @@ def side_by_side(left_path, right_path, out_path, height=1000, gap=40):
     row([left_path, right_path], out_path, height, gap)
 
 
-def row(paths, out_path, height=1000, gap=40):
-    """그림들을 왼쪽부터 차례로 가로로 붙인다 (높이만 맞춤, 텍스트 없음)."""
+def row(paths, out_path, height=1000, gap=40, labels=None):
+    """그림들을 왼쪽부터 차례로 가로로 붙인다 (높이만 맞춤).
+    labels가 있으면 각 그림 위에 한 줄짜리 머리표(영어)를 단다 — err 비교 그림에서 열의 의미를 밝히는 용도."""
+    from PIL import ImageDraw, ImageFont
     imgs = [Image.open(p).convert("RGB") for p in paths]
     imgs = [im.resize((int(im.width * height / im.height), height), Image.LANCZOS) for im in imgs]
-    canvas = Image.new("RGB", (sum(im.width for im in imgs) + gap * (len(imgs) + 1), height + gap * 2), "white")
+    head = 170 if labels else 0
+    canvas = Image.new("RGB", (sum(im.width for im in imgs) + gap * (len(imgs) + 1), height + gap * 2 + head), "white")
+    draw = ImageDraw.Draw(canvas)
+    font = ImageFont.truetype(LABEL_FONT, 46) if labels else None
     x = gap
-    for im in imgs:
-        canvas.paste(im, (x, gap))
+    for i, im in enumerate(imgs):
+        canvas.paste(im, (x, gap + head))
+        if labels:
+            draw.rectangle([x, gap, x + im.width, gap + head - 20], fill=LABEL_BG[i % len(LABEL_BG)])
+            draw.multiline_text((x + im.width // 2, gap + (head - 20) // 2), labels[i], fill="black", font=font,
+                                anchor="mm", align="center", spacing=10)
         x += im.width + gap
     canvas.save(out_path)
 
 
+LABEL_FONT = "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf"
+LABEL_BG = ["#e6e6e6", "#d7ecd9", "#f6d6d6"]   # 논문(회색) · 적용(초록) · 미적용(빨강)
+ERR_LABELS = ["Paper (Yu et al., 2024)",
+              "Reproduction: adaptive selection ON\n(current code, quota adapts to global loss)",
+              "Reproduction: adaptive selection OFF\n(original code c0b819b, quota fixed at C·K)"]
+
+
 # ------------------------------------------------------------------ 재현 그림 (논문 형식)
 def fig11_reproduced(wall, out_path, wall_k10=None):
-    """논문 Fig.11 형식: FashionMNIST 500라운드 wall clock. 논문의 K=100 자리에는 K=10을 그린다."""
+    """논문 Fig.11 형식: FashionMNIST 500라운드 wall clock. 논문의 (K=30, K=100) 묶음 자리에 재현의 (K=10, K=30)."""
     hatches = {0.1: "", 0.3: "\\\\\\\\", 0.5: "++"}
     with plt.rc_context(SERIF):
         fig, ax = plt.subplots(figsize=(8, 5))
         width = 0.12
-        for g, vals in enumerate((wall, wall_k10 or {})):
+        for g, vals in enumerate((wall_k10 or {}, wall)):
             k = 0
             for method, color in (("BSA", A.GREEN), ("SASAFL", A.RED)):
                 for c in (0.1, 0.3, 0.5):
@@ -62,7 +78,7 @@ def fig11_reproduced(wall, out_path, wall_k10=None):
                            edgecolor=color, hatch=hatches[c], linewidth=1.5, label=f"{method}, C={c}" if g == 0 else None)
                     k += 1
         ax.set_xticks([0, 1])
-        ax.set_xticklabels(["K=30", "K=10"])
+        ax.set_xticklabels(["K=10", "K=30"])
         ax.set_xlim(-0.6, 1.6)
         ax.set_ylabel("Wall clock time (m)")
         ax.grid(axis="y", color="#dddddd")
@@ -118,7 +134,7 @@ def table4_reproduced(row, rounds, out_path, row_k10=None):
 # ------------------------------------------------------------------ 전체 생성
 def build_all(mcs, e5_acc_by_tau, exp_dirs, max_rounds, mcs_k10=None):
     """mcs: {'MNIST': mc, 'FashionMNIST': mc, 'CIFAR10': mc} (mc = {(method, C): run}) — K=30
-    mcs_k10: 같은 형식, K=10 (현재 코드 SASAFL). 논문의 K=100 칸 자리에 그린다.
+    mcs_k10: 같은 형식, K=10 (현재 코드 SASAFL). 논문의 K=30 칸 자리에, K=30 재현은 논문의 K=100 칸 자리에 그린다.
     exp_dirs: {'E1'..'E8': Path}"""
     mcs_k10 = mcs_k10 or {ds: {} for ds in ("MNIST", "FashionMNIST", "CIFAR10")}
     for d in exp_dirs.values():
@@ -128,7 +144,7 @@ def build_all(mcs, e5_acc_by_tau, exp_dirs, max_rounds, mcs_k10=None):
             (d / name).unlink(missing_ok=True)
 
     rep = exp_dirs["E6"] / "reproduced"
-    # Fig.7 (2×2) / Fig.8: 논문의 K=100 칸에는 K=10
+    # Fig.7 (2×2) / Fig.8: 재현 K=10 → 논문 K=30 칸, 재현 K=30 → 논문 K=100 칸
     with plt.rc_context(SERIF):
         A.fig7_grid(mcs["MNIST"], mcs["FashionMNIST"], rep / "fig7.png", mcs_k10["MNIST"], mcs_k10["FashionMNIST"])
         A.fig8_grid(mcs["CIFAR10"], rep / "fig8.png", xmax=max_rounds, cifar_k10=mcs_k10["CIFAR10"])
@@ -184,6 +200,7 @@ def build_err(mcs, err_sasafl, exp_dirs, max_rounds, mcs_k10_err=None):
         for name, paper in (("fig7", "paper_fig7.jpg"), ("fig9", "paper_fig9.jpg")):
             if eid != "E6":
                 (d / "reproduced" / f"{name}_err.png").write_bytes((rep / f"{name}_err.png").read_bytes())
-            row([PAPER / paper, rep / f"{name}.png", rep / f"{name}_err.png"], d / f"compare_{name}_err.png")
+            row([PAPER / paper, rep / f"{name}.png", rep / f"{name}_err.png"], d / f"compare_{name}_err.png",
+                labels=ERR_LABELS)
             made.setdefault(eid, []).append(f"compare_{name}_err.png")
     return made
