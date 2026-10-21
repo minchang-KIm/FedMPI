@@ -183,18 +183,18 @@ def fig_bsa_vs_sasafl(runs, out_path, every, ylim, xmax, inset=None, title=None)
 
 
 def fig7_grid(mnist_runs, fmnist_runs, out_path, mnist_k10=None, fmnist_k10=None):
-    """논문 Fig.7과 같은 2×2 배치. 논문의 K=100 자리(b)(d)에는 K=10 재현을 그린다."""
+    """논문 Fig.7과 같은 2×2 배치. 논문의 (K=30, K=100) 두 열에 재현의 (K=10, K=30)을 대응시킨다 (작은 K가 왼쪽)."""
     with plt.rc_context({"font.size": 15, "legend.fontsize": 12}):
         _fig7_grid(mnist_runs, fmnist_runs, out_path, mnist_k10 or {}, fmnist_k10 or {})
 
 
 def _fig7_grid(mnist_runs, fmnist_runs, out_path, mnist_k10, fmnist_k10):
     fig, axes = plt.subplots(2, 2, figsize=(13, 9.6))
-    draw_bsa_vs_sasafl(axes[0][0], mnist_runs, 5, (0, 100), 500, inset=((450, 500), (80, 100)))
-    draw_bsa_vs_sasafl(axes[0][1], mnist_k10, 5, (0, 100), 500, inset=((450, 500), (80, 100)))
-    draw_bsa_vs_sasafl(axes[1][0], fmnist_runs, 5, (0, 100), 500)
-    draw_bsa_vs_sasafl(axes[1][1], fmnist_k10, 5, (0, 100), 500)
-    caps = ["(a) MNIST with K=30", "(b) MNIST with K=10", "(c) FashionMNIST with K=30", "(d) FashionMNIST with K=10"]
+    draw_bsa_vs_sasafl(axes[0][0], mnist_k10, 5, (0, 100), 500, inset=((450, 500), (80, 100)))
+    draw_bsa_vs_sasafl(axes[0][1], mnist_runs, 5, (0, 100), 500, inset=((450, 500), (80, 100)))
+    draw_bsa_vs_sasafl(axes[1][0], fmnist_k10, 5, (0, 100), 500)
+    draw_bsa_vs_sasafl(axes[1][1], fmnist_runs, 5, (0, 100), 500)
+    caps = ["(a) MNIST with K=10", "(b) MNIST with K=30", "(c) FashionMNIST with K=10", "(d) FashionMNIST with K=30"]
     for ax, cap in zip(axes.flat, caps):
         ax.text(0.5, -0.3, cap, transform=ax.transAxes, ha="center", fontsize=18)
     fig.tight_layout(h_pad=4)
@@ -208,11 +208,11 @@ def fig8_grid(cifar_runs, out_path, xmax, cifar_k10=None):
 
 
 def _fig8_grid(cifar_runs, out_path, xmax, cifar_k10):
-    """논문 Fig.8 배치. 논문의 K=100 자리(b)에는 K=10 재현을 그린다."""
+    """논문 Fig.8 배치. 논문의 (a) K=30, (b) K=100 자리에 재현의 (a) K=10, (b) K=30을 대응시킨다."""
     fig, axes = plt.subplots(1, 2, figsize=(13, 4.8))
-    draw_bsa_vs_sasafl(axes[0], cifar_runs, 10, (0, 60), xmax)
-    draw_bsa_vs_sasafl(axes[1], cifar_k10, 10, (0, 60), xmax)
-    for ax, cap in zip(axes, ["(a) K=30", "(b) K=10"]):
+    draw_bsa_vs_sasafl(axes[0], cifar_k10, 10, (0, 60), xmax)
+    draw_bsa_vs_sasafl(axes[1], cifar_runs, 10, (0, 60), xmax)
+    for ax, cap in zip(axes, ["(a) K=10", "(b) K=30"]):
         ax.text(0.5, -0.32, cap, transform=ax.transAxes, ha="center", fontsize=18)
     fig.tight_layout()
     fig.savefig(out_path, dpi=200)

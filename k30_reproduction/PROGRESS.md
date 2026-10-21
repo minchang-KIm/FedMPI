@@ -337,3 +337,22 @@
 - 2026-10-21 09:34 파이프라인 시작 (E8, report_only=False)
 - 2026-10-21 09:34 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
 - 2026-10-21 09:34 E8 실행 시작: K10_CIFAR10_SASAFLorig_C0.3 (시도 1/2)
+- 2026-10-21 11:31 E8 실행 종료: K10_CIFAR10_SASAFLorig_C0.3 → completed, 500/500라운드, 최고 47.11%, 116.66분
+- 2026-10-21 11:32 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-21 11:32 파이프라인 종료
+- 2026-10-21 11:32 파이프라인 시작 (E8, report_only=False)
+- 2026-10-21 11:32 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-21 11:32 E8 건너뜀: K10_CIFAR10_BSA_C0.5 (차지한 노드: wise-176)
+- 2026-10-21 11:32 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-21 11:32 파이프라인 종료
+- 2026-10-21 11:32 파이프라인 시작 (E8, report_only=False)
+- 2026-10-21 11:32 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-21 11:32 E8 실행 시작: K10_CIFAR10_SASAFL_C0.5 (시도 1/2)
+- 2026-10-21 14:46 E8 실행 종료: K10_CIFAR10_SASAFL_C0.5 → completed, 500/500라운드, 최고 51.94%, 194.31분
+- 2026-10-21 14:47 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-21 14:47 파이프라인 종료
+- 2026-10-21 14:47 파이프라인 시작 (E8, report_only=False)
+- 2026-10-21 14:47 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-21 14:47 E8 건너뜀: K10_CIFAR10_SASAFLorig_C0.5 (차지한 노드: wise-176)
+- 2026-10-21 14:47 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-21 14:47 파이프라인 종료

@@ -13,6 +13,7 @@
 """
 
 import argparse
+import fcntl
 import hashlib
 import json
 import os
@@ -324,7 +325,14 @@ def report_E6(exp, loaded_all):
 
 
 def build_figures(loaded_all):
-    """논문 원본(왼쪽) / 재현(오른쪽) 비교 그림을 모든 실험 폴더에 다시 만든다."""
+    """논문 원본(왼쪽) / 재현(오른쪽) 비교 그림을 모든 실험 폴더에 다시 만든다.
+    두 노드 결과 동기화·실행 종료 정리가 동시에 그림을 쓰면 반쯤 쓰인 PNG를 읽게 되므로 파일 잠금으로 한 번에 하나만 그린다."""
+    with open(EXP_ROOT / ".figures.lock", "w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        return _build_figures(loaded_all)
+
+
+def _build_figures(loaded_all):
     exps = {e["id"]: e for e in EXPERIMENTS}
     mcs = {"MNIST": by_method_c(exps["E1"], loaded_all.get("E1", {})),
            "FashionMNIST": by_method_c(exps["E2"], loaded_all.get("E2", {})),
