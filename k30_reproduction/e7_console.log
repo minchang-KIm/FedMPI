@@ -15,3 +15,92 @@
 - 2026-10-19 10:36 E7 실행 시작: ERR_FMNIST_SASAFL_C0.5 (시도 1/2)
 
 ===== ERR_FMNIST_SASAFL_C0.5 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 30 single 1,2,3,4,8
+===== ERR_FMNIST_SASAFL_C0.5 -> {"name": "ERR_FMNIST_SASAFL_C0.5", "outcome": "completed", "returncode": 0, "wall_min": 446.17, "rounds_done": 500, "rounds_requested": 500, "best_acc": 77.27, "last_acc": 64.12, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-19 18:02 E7 실행 종료: ERR_FMNIST_SASAFL_C0.5 → completed, 500/500라운드, 최고 77.27%, 446.17분
+- 2026-10-19 18:03 E7 정리 중 오류 → /home/wise-175/Mando/FedMPI/k30_reproduction/experiments/E7_adaptive_off_2023code/report_error.log
+- 2026-10-19 18:03 E7 실행 시작: ERR_CIFAR10_SASAFL_C0.1 (시도 1/2)
+
+===== ERR_CIFAR10_SASAFL_C0.1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3,4,8
+===== ERR_CIFAR10_SASAFL_C0.1 -> {"name": "ERR_CIFAR10_SASAFL_C0.1", "outcome": "completed", "returncode": 0, "wall_min": 165.11, "rounds_done": 500, "rounds_requested": 500, "best_acc": 35.59, "last_acc": 27.67, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-19 20:48 E7 실행 종료: ERR_CIFAR10_SASAFL_C0.1 → completed, 500/500라운드, 최고 35.59%, 165.11분
+- 2026-10-19 20:48 E7 정리 중 오류 → /home/wise-175/Mando/FedMPI/k30_reproduction/experiments/E7_adaptive_off_2023code/report_error.log
+- 2026-10-19 20:48 E7 실행 시작: ERR_CIFAR10_SASAFL_C0.3 (시도 1/2)
+
+===== ERR_CIFAR10_SASAFL_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8
+===== ERR_CIFAR10_SASAFL_C0.3 -> {"name": "ERR_CIFAR10_SASAFL_C0.3", "outcome": "crashed", "returncode": 1, "wall_min": 0.1, "rounds_done": 0, "rounds_requested": 500, "best_acc": null, "last_acc": null, "errors": {"is_set_corruption": 0, "segfault": 1, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 1, "child_failed": 2}}
+- 2026-10-19 20:48 E7 실행 종료: ERR_CIFAR10_SASAFL_C0.3 → crashed, 0/500라운드, 최고 None%, 0.1분
+- 2026-10-19 20:48 E7 실행 시작: ERR_CIFAR10_SASAFL_C0.3 (시도 2/2)
+
+===== ERR_CIFAR10_SASAFL_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8
+===== ERR_CIFAR10_SASAFL_C0.3 -> {"name": "ERR_CIFAR10_SASAFL_C0.3", "outcome": "completed", "returncode": 0, "wall_min": 270.32, "rounds_done": 500, "rounds_requested": 500, "best_acc": 45.69, "last_acc": 37.39, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-20 01:19 E7 실행 종료: ERR_CIFAR10_SASAFL_C0.3 → completed, 500/500라운드, 최고 45.69%, 270.32분
+- 2026-10-20 01:19 E7 정리 중 오류 → /home/wise-175/Mando/FedMPI/k30_reproduction/experiments/E7_adaptive_off_2023code/report_error.log
+- 2026-10-20 01:19 E7 정리 중 오류 → /home/wise-175/Mando/FedMPI/k30_reproduction/experiments/E7_adaptive_off_2023code/report_error.log
+- 2026-10-20 01:19 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 01:19 파이프라인 종료
+k30_reproduction/run_e7_node.sh: line 26: syntax error near unexpected token `;;'
+k30_reproduction/run_e7_node.sh: line 26: `       ;;'
+[2026-10-20 01:20:03] wise-175 E7 queue 시작
+- 2026-10-20 01:20 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 01:20 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 01:20 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 01:20 파이프라인 종료
+- 2026-10-20 01:20 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 01:20 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 01:20 E7 실행 시작: ERR_MNIST_SASAFL_C0.3 (시도 1/2)
+
+===== ERR_MNIST_SASAFL_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8
+===== ERR_MNIST_SASAFL_C0.3 -> {"name": "ERR_MNIST_SASAFL_C0.3", "outcome": "crashed", "returncode": 1, "wall_min": 0.1, "rounds_done": 0, "rounds_requested": 500, "best_acc": null, "last_acc": null, "errors": {"is_set_corruption": 1, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 2, "child_failed": 2}}
+- 2026-10-20 01:20 E7 실행 종료: ERR_MNIST_SASAFL_C0.3 → crashed, 0/500라운드, 최고 None%, 0.1분
+- 2026-10-20 01:20 E7 실행 시작: ERR_MNIST_SASAFL_C0.3 (시도 2/2)
+
+===== ERR_MNIST_SASAFL_C0.3 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8
+===== ERR_MNIST_SASAFL_C0.3 -> {"name": "ERR_MNIST_SASAFL_C0.3", "outcome": "completed", "returncode": 0, "wall_min": 259.21, "rounds_done": 500, "rounds_requested": 500, "best_acc": 97.58, "last_acc": 95.88, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-20 05:39 E7 실행 종료: ERR_MNIST_SASAFL_C0.3 → completed, 500/500라운드, 최고 97.58%, 259.21분
+- 2026-10-20 05:40 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 05:40 파이프라인 종료
+- 2026-10-20 05:40 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 05:40 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 05:40 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 05:40 파이프라인 종료
+- 2026-10-20 05:40 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 05:40 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 05:40 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 05:40 파이프라인 종료
+- 2026-10-20 05:40 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 05:40 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 05:40 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 05:40 파이프라인 종료
+- 2026-10-20 05:40 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 05:40 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 05:40 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 05:40 파이프라인 종료
+- 2026-10-20 05:40 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 05:40 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 05:40 E7 건너뜀: ERR_FMNIST_SASAFL_C0.3 (차지한 노드: wise-176)
+- 2026-10-20 05:40 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 05:40 파이프라인 종료
+- 2026-10-20 05:40 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 05:40 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 05:40 E7 실행 시작: ERR_MNIST_SASAFL_C0.1 (시도 1/2)
+
+===== ERR_MNIST_SASAFL_C0.1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3,4,8
+===== ERR_MNIST_SASAFL_C0.1 -> {"name": "ERR_MNIST_SASAFL_C0.1", "outcome": "completed", "returncode": 0, "wall_min": 126.23, "rounds_done": 500, "rounds_requested": 500, "best_acc": 92.86, "last_acc": 87.04, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-20 07:47 E7 실행 종료: ERR_MNIST_SASAFL_C0.1 → completed, 500/500라운드, 최고 92.86%, 126.23분
+- 2026-10-20 07:47 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 07:47 파이프라인 종료
+- 2026-10-20 07:47 파이프라인 시작 (E7, report_only=False)
+- 2026-10-20 07:47 === E7 시작: 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
+- 2026-10-20 07:47 E7 실행 시작: ERR_FMNIST_SASAFL_C0.1 (시도 1/2)
+
+===== ERR_FMNIST_SASAFL_C0.1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3,4,8
+===== ERR_FMNIST_SASAFL_C0.1 -> {"name": "ERR_FMNIST_SASAFL_C0.1", "outcome": "crashed", "returncode": 1, "wall_min": 0.1, "rounds_done": 0, "rounds_requested": 500, "best_acc": 10.06, "last_acc": 10.06, "errors": {"is_set_corruption": 0, "segfault": 1, "abort": 0, "connection_closed": 1, "gloo_timeout": 0, "traceback": 2, "child_failed": 2}}
+- 2026-10-20 07:47 E7 실행 종료: ERR_FMNIST_SASAFL_C0.1 → crashed, 0/500라운드, 최고 10.06%, 0.1분
+- 2026-10-20 07:47 E7 실행 시작: ERR_FMNIST_SASAFL_C0.1 (시도 2/2)
+
+===== ERR_FMNIST_SASAFL_C0.1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 single 1,2,3,4,8
+===== ERR_FMNIST_SASAFL_C0.1 -> {"name": "ERR_FMNIST_SASAFL_C0.1", "outcome": "completed", "returncode": 0, "wall_min": 130.67, "rounds_done": 500, "rounds_requested": 500, "best_acc": 65.99, "last_acc": 47.62, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-20 09:58 E7 실행 종료: ERR_FMNIST_SASAFL_C0.1 → completed, 500/500라운드, 최고 65.99%, 130.67분
+- 2026-10-20 09:59 === E7 정리 완료 → experiments/E7_adaptive_off_2023code/SUMMARY.md
+- 2026-10-20 09:59 파이프라인 종료
+[2026-10-20 09:59:06] wise-175 E7_NODE_DONE

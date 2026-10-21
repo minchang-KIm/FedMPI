@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "k30_reproduction/pipeline/run_pipeline.py", line 413, in build_report
+    for tag, ds, eid in ERR_DATASETS:
+  File "k30_reproduction/pipeline/run_pipeline.py", line 380, in report_E7
+    return {ds: {c: loaded.get(f"ERR_{tag}_SASAFL_C{c}") for c in (0.1, 0.3, 0.5)} for tag, ds, _ in ERR_DATASETS}
+  File "k30_reproduction/pipeline/run_pipeline.py", line 378, in <lambda>
+    """E7 실행 → {dataset: {C: run}}"""
+  File "/home/wise-175/Mando/FedMPI/k30_reproduction/pipeline/analysis.py", line 79, in metrics
+    hit = np.nonzero(a >= target)[0]
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/numpy/core/_methods.py", line 41, in _amax
+    return umr_maximum(a, axis, None, out, keepdims, initial, where)
+ValueError: zero-size array to reduction operation maximum which has no identity

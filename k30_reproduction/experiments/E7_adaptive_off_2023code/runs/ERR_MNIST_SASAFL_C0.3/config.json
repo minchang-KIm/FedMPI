@@ -15,8 +15,8 @@
   "max_wall_min": 1500,
   "sasafl_src": "/home/wise-175/Mando/FedMPI/k30_reproduction/original_code/SASAFL_c0b819b.py",
   "cmd": "bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 single 1,2,3,4,8",
-  "run_id": "ERR_MNIST_SASAFL_C0.3_1792373767",
-  "start": "2026-10-19T10:36:07",
+  "run_id": "ERR_MNIST_SASAFL_C0.3_1792426832",
+  "start": "2026-10-20T01:20:32",
   "host": "wise-175",
   "cpu_list": ""
 }

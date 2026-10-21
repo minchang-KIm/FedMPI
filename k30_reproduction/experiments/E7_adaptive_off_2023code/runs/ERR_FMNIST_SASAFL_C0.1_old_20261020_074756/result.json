@@ -1,0 +1,19 @@
+{
+  "name": "ERR_FMNIST_SASAFL_C0.1",
+  "outcome": "crashed",
+  "returncode": 1,
+  "wall_min": 0.1,
+  "rounds_done": 0,
+  "rounds_requested": 500,
+  "best_acc": 10.06,
+  "last_acc": 10.06,
+  "errors": {
+    "is_set_corruption": 0,
+    "segfault": 1,
+    "abort": 0,
+    "connection_closed": 1,
+    "gloo_timeout": 0,
+    "traceback": 2,
+    "child_failed": 2
+  }
+}
