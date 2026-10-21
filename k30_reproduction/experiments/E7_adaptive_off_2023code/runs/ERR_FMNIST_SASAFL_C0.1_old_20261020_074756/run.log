@@ -1,0 +1,249 @@
+[k30] mode=single method=SASAFL C=0.1 K=30 categories=1,2,3,4,8 threads=1124333148124832448831812423821
+[k30] SASAFL.py 교체: /home/wise-175/Mando/FedMPI/k30_reproduction/original_code/SASAFL_c0b819b.py sha256=7c4ca5fde677ccb0228db25a95f0efc4994bf660a22a7c24b3075828ceb38c72
+Process 0 uses 1 threads
+Process 11 uses 2 threads
+Process 6 uses 3 threads
+Process 4 uses 3 threads
+Process 5 uses 3 threads
+Process 26 uses 2 threads
+Process 12 uses 4 threads
+Process 24 uses 2 threads
+Process 21 uses 1 threads
+Process 23 uses 1 threads
+Process 10 uses 1 threads
+Process 20 uses 3 threadsProcess 13 uses 8 threads
+
+Process 7 uses 1 threadsProcess 18 uses 8 threads
+
+Process 9 uses 8 threads
+Process 14 uses 3 threads
+Process 19 uses 8 threads
+Process 8 uses 4 threads
+Process 22 uses 8 threads
+Process 30 uses 1 threads
+Process 15 uses 2 threads
+Process 2 uses 2 threads
+Process 27 uses 3 threads
+Process 3 uses 4 threadsProcess 17 uses 4 threads
+
+Process 1 uses 1 threads
+Process 29 uses 2 threads
+Process 16 uses 4 threads
+Process 25 uses 4 threads
+Process 28 uses 8 threads
+[2026-10-20 07:47:37.331851] MAIN >> I am client in wise-175 rank 21
+[2026-10-20 07:47:37.331875] CLIENT 21 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.336853] MAIN >> I am server in wise-175 rank 0
+[2026-10-20 07:47:37.336874] SERVER >> global model을 초기화 합니다.
+[2026-10-20 07:47:37.357901] MAIN >> I am client in wise-175 rank 23
+[2026-10-20 07:47:37.357921] CLIENT 23 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.364838] MAIN >> I am client in wise-175 rank 1
+[2026-10-20 07:47:37.364861] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.368770] MAIN >> I am client in wise-175 rank 5
+[2026-10-20 07:47:37.368786] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.368810] MAIN >> I am client in wise-175 rank 20
+[2026-10-20 07:47:37.368824] CLIENT 20 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.369782] MAIN >> I am client in wise-175 rank 11
+[2026-10-20 07:47:37.369796] CLIENT 11 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.371888] MAIN >> I am client in wise-175 rank 10
+[2026-10-20 07:47:37.371910] CLIENT 10 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.373802] MAIN >> I am client in wise-175 rank 4
+[2026-10-20 07:47:37.373821] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.375736] MAIN >> I am client in wise-175 rank 27
+[2026-10-20 07:47:37.375751] CLIENT 27 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.376811] MAIN >> I am client in wise-175 rank 30
+[2026-10-20 07:47:37.376832] CLIENT 30 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.378749] MAIN >> I am client in wise-175 rank 6
+[2026-10-20 07:47:37.378765] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.378779] MAIN >> I am client in wise-175 rank 26
+[2026-10-20 07:47:37.378793] CLIENT 26 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.379790] MAIN >> I am client in wise-175 rank 7
+[2026-10-20 07:47:37.379809] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.381887] MAIN >> I am client in wise-175 rank 3
+[2026-10-20 07:47:37.381907] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.382784] MAIN >> I am client in wise-175 rank 29
+[2026-10-20 07:47:37.382797] CLIENT 29 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.385787] MAIN >> I am client in wise-175 rank 16
+[2026-10-20 07:47:37.385803] CLIENT 16 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.390785] MAIN >> I am client in wise-175 rank 19
+[2026-10-20 07:47:37.390807] CLIENT 19 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.391759] MAIN >> I am client in wise-175 rank 15
+[2026-10-20 07:47:37.391773] CLIENT 15 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.396878] MAIN >> I am client in wise-175 rank 8
+[2026-10-20 07:47:37.396894] CLIENT 8 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.396886] MAIN >> I am client in wise-175 rank 2
+[2026-10-20 07:47:37.396904] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.407840] MAIN >> I am client in wise-175 rank 17
+[2026-10-20 07:47:37.407863] CLIENT 17 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.407930] MAIN >> I am client in wise-175 rank 12
+[2026-10-20 07:47:37.407953] CLIENT 12 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.409009] MAIN >> I am client in wise-175 rank 14
+[2026-10-20 07:47:37.409027] CLIENT 14 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.410733] MAIN >> I am client in wise-175 rank 9
+[2026-10-20 07:47:37.410749] CLIENT 9 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.410875] MAIN >> I am client in wise-175 rank 24
+[2026-10-20 07:47:37.410897] CLIENT 24 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.412906] MAIN >> I am client in wise-175 rank 13
+[2026-10-20 07:47:37.412937] CLIENT 13 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.415822] MAIN >> I am client in wise-175 rank 28
+[2026-10-20 07:47:37.415846] CLIENT 28 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.417892] MAIN >> I am client in wise-175 rank 22
+[2026-10-20 07:47:37.417914] CLIENT 22 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.421489] MAIN >> I am client in wise-175 rank 25
+[2026-10-20 07:47:37.421513] CLIENT 25 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.421716] MAIN >> I am client in wise-175 rank 18
+[2026-10-20 07:47:37.421735] CLIENT 18 >> 빈 모델을 생성합니다.
+[2026-10-20 07:47:37.487010] SERVER >> 데이터셋을 다운받습니다.
+[2026-10-20 07:47:37.529878] SERVER >> 각 client들이 가져갈 data 개수 = [1984, 2106, 2415, 2092, 1630, 2027, 1396, 2471, 2042, 1961, 1686, 2664, 1654, 1587, 1850, 1418, 2213, 1625, 1987, 1921, 2522, 1944, 1411, 1048, 2121, 1744, 2257, 2057, 2048, 4119]
+[2026-10-20 07:47:37.574068] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-20 07:47:37.576944] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.580368] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.583474] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.586475] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.589473] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.591271] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.593074] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.596152] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.598661] CLIENT 9 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.601625] CLIENT 10 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.604338] CLIENT 11 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.607572] CLIENT 12 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.609392] CLIENT 13 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.610994] CLIENT 14 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.612951] CLIENT 15 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.614754] CLIENT 16 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.617332] CLIENT 17 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.619057] CLIENT 18 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.620981] CLIENT 19 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.623084] CLIENT 20 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.627546] CLIENT 21 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.629884] CLIENT 22 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.631513] CLIENT 23 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.632732] CLIENT 24 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.635350] CLIENT 25 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.637660] CLIENT 26 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.639945] CLIENT 27 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.642121] CLIENT 28 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.644792] CLIENT 29 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.649085] CLIENT 30 >> 로컬데이터셋을 받았습니다.
+[2026-10-20 07:47:37.649356] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-20 07:47:37.649564] CLIENT 1 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649604] CLIENT 2 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649713] CLIENT 3 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649722] CLIENT 4 >> communication delay는 0입니다.[2026-10-20 07:47:37.649727] CLIENT 6 >> communication delay는 0입니다.
+
+[2026-10-20 07:47:37.649735] CLIENT 5 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649749] CLIENT 8 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649754] CLIENT 9 >> communication delay는 0입니다.[2026-10-20 07:47:37.649758] CLIENT 11 >> communication delay는 0입니다.
+
+[2026-10-20 07:47:37.649762] CLIENT 10 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649791] CLIENT 7 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649793] CLIENT 14 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649797] CLIENT 12 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649806] CLIENT 15 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649816] CLIENT 13 >> communication delay는 0입니다.[2026-10-20 07:47:37.649822] CLIENT 16 >> communication delay는 0입니다.
+
+[2026-10-20 07:47:37.649822] CLIENT 17 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649838] CLIENT 18 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649849] CLIENT 20 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649839] CLIENT 19 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649863] CLIENT 22 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649867] CLIENT 23 >> communication delay는 0입니다.[2026-10-20 07:47:37.649865] CLIENT 21 >> communication delay는 0입니다.
+
+[2026-10-20 07:47:37.649887] CLIENT 24 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649913] CLIENT 26 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649930] CLIENT 25 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649945] CLIENT 27 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.649986] CLIENT 28 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.650019] CLIENT 30 >> communication delay는 0입니다.
+[2026-10-20 07:47:37.650042] CLIENT 29 >> communication delay는 0입니다.
+[2026-10-20 07:47:40.692615] SERVER >> 0번째 글로벌 모델 
+                                => test_accuracy: 10.06% 
+                                => test_loss: 2.3205
+Traceback (most recent call last):
+  File "k30_reproduction/harness_entry.py", line 46, in <module>
+    runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 265, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 97, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 152, in <module>
+    init_process(args)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 120, in init_process
+    init_FL(FLgroup, args)
+  File "/home/wise-175/Mando/FedMPI/Start.py", line 105, in init_FL
+    method.runServer(Server)
+  File "/home/wise-175/Mando/FedMPI/k30_reproduction/original_code/SASAFL_c0b819b.py", line 57, in runServer
+    Server.send_global_model_to_clients(clients_idx, picked_client_idx, global_loss)
+  File "/home/wise-175/Mando/FedMPI/methods/SASAFL/SASAFLServer.py", line 112, in send_global_model_to_clients
+    dist.send(tensor=torch.cat([global_model_info, torch.tensor([1])]), dst=idx) # 글로벌 모델, 현재 라운드, global loss 전송, 선택되었음 전송
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 959, in send
+    default_pg.send([tensor], dst, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [210.107.197.175]:58797
+[2026-10-20 07:47:40.802320] CLIENT 13 >> 처음 라운드이거나 정상적으로 로컬 모델을 업로드 했기 때문에 글로벌 모델을 받습니다.
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353092 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353093 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353094 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353095 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353096 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353097 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353098 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353099 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353100 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353102 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353103 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353105 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353106 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353107 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353109 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353110 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353111 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353113 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353115 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353117 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353118 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353124 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353129 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353132 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353133 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353134 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353137 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353140 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353143 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 353145 closing signal SIGTERM
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: -11) local_rank: 28 (pid: 353141) of binary: /home/wise-175/anaconda3/envs/FL/bin/python
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 765, in <module>
+    main()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 345, in wrapper
+    return f(*args, **kwargs)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 761, in main
+    run(args)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 752, in run
+    elastic_launch(
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 245, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+========================================================
+k30_reproduction/harness_entry.py FAILED
+--------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+--------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-20_07:47:40
+  host      : wise-175
+  rank      : 28 (local_rank: 28)
+  exitcode  : -11 (pid: 353141)
+  error_file: <N/A>
+  traceback : Signal 11 (SIGSEGV) received by PID 353141
+========================================================
