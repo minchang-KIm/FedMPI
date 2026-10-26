@@ -1397,7 +1397,7 @@ const PRESET_ALL = {
   vehicle_default: { crash_prob: 0.05 },
   vehicles: {
     "1": { min_data: 300, data_rate_per_s: 3 },                 // 3-2 새 데이터 없음
-    "2": { store_forward: true, energy_gate: false, battery_scale: 0.25 },   // 5-1·5-2 보관 후 일괄, 1-3·2-6 방전 (작은 배터리 택시)
+    "2": { store_forward: true, energy_gate: false, battery_scale: 0.3 },    // 5-1·5-2 보관 후 일괄, 1-3·2-6 방전 (120 J 배터리 택시: 학습 중·전송 중 방전이 번갈아)
     "3": { lr_override: 0.02 },                                 // 6-3 학습률 오류
     "4": { store_forward: true },                               // 통과 차량: 5-1 터널 보관
     "5": { wifi_only: true },                                   // 3-3 Wi-Fi에서만

@@ -550,6 +550,8 @@ class SimClient(M_CLIENT.SASAFLClient):
     def _link_fail(self, w, sent_frags, frags, v, where, forced=None):
         ex, why = (forced, where) if forced else link_reason(w)
         if v.get("store_forward") and ex and ex.startswith("2"):        # 5-1 수신 영역 밖: 보관 후 일괄 송신
+            if sent_frags > 0 or forced:                                  # 전송 도중 끊긴 것은 패턴 2로도 기록
+                self.ev(ex, f"{why}: {sent_frags}/{frags} 조각 전송 중 끊김 → 이 차량은 보관했다가 나중에 일괄 전송(5-1)")
             return self._queue("5-1", f"{why} → 보관, 수신 영역에 들어오면 일괄 송신")
         wasted = self.payload_mb() * sent_frags / frags
         self.counters["dropped"] += 1
