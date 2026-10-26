@@ -191,6 +191,28 @@ class Manager:
 MGR = Manager()
 
 
+_LAYOUT = {}
+
+
+def layout_of(name, m):
+    """맵 배치(주차장·건물·나무)는 계산이 조금 걸려 맵 파일 시각으로 캐시"""
+    key = (name, (C.MAPS / f"{name}.json").stat().st_mtime if (C.MAPS / f"{name}.json").exists() else 0)
+    if key not in _LAYOUT:
+        _LAYOUT.clear()
+        _LAYOUT[key] = C.map_layout(m)
+    return _LAYOUT[key]
+
+
+def map_list():
+    out = []
+    for n in C.list_maps():
+        m = C.load_map(n)
+        cov = C.map_coverage(m, MGR.cfg)
+        out.append({"id": n, "name": m.get("name", n), "desc": m.get("desc", ""), "size": m.get("size"),
+                    "ok": sum(c["ok"] for c in cov), "missing": [c["id"] for c in cov if not c["ok"]]})
+    return out
+
+
 def read_events(path, offset, limit=400):
     try:
         with open(path, "rb") as f:
@@ -272,7 +294,10 @@ class Handler(BaseHTTPRequestHandler):
         u = urlparse(self.path)
         q = parse_qs(u.query)
         if u.path == "/api/static":
-            return self.send(200, {"map": C.load_map(MGR.cfg["world"].get("map", "default")), "maps": C.list_maps(),
+            name = q.get("map", [MGR.cfg["world"].get("map", "default")])[0]
+            m = C.load_map(name)
+            return self.send(200, {"map": m, "map_id": name, "layout": layout_of(name, m), "maps": map_list(),
+                                   "coverage": C.map_coverage(m, MGR.cfg), "problems": C.map_problems(m),
                                    "patterns": C.PATTERNS, "usecases": C.USECASES, "methods": C.METHODS,
                                    "vtypes": C.VTYPES, "defaults": C.DEFAULT_CONFIG})
         if u.path == "/api/state":
@@ -291,7 +316,7 @@ class Handler(BaseHTTPRequestHandler):
                 "clients": {str(i): C.read_json(rd / f"client_{i}.json", {}) for i in range(1, K + 1)},
                 "events": evs, "ev": end})
         if u.path == "/api/maps":
-            return self.send(200, {"maps": C.list_maps()})
+            return self.send(200, {"maps": C.list_maps(), "info": map_list()})
         if u.path == "/api/saves":
             out = []
             for d in sorted(C.SAVES.glob("*"), reverse=True) if C.SAVES.exists() else []:
@@ -352,11 +377,12 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, {"ok": True, "config": MGR.cfg})
         if u.path == "/api/map":
             m, name = body.get("map"), safe_name(body.get("name", "custom"))
-            errs = C.validate_map(m or {})
+            errs = C.validate_map(m or {}) or C.map_problems(m)
             if errs:
                 return self.send(400, {"ok": False, "errors": errs})
+            miss = [c["id"] for c in C.map_coverage(m, MGR.cfg) if not c["ok"]]
             C.write_json(C.MAPS / f"{name}.json", m)
-            return self.send(200, {"ok": True, "name": name, "maps": C.list_maps()})
+            return self.send(200, {"ok": True, "name": name, "maps": C.list_maps(), "missing": miss})
         if u.path == "/api/control":
             act = body.get("action")
             if act == "start":

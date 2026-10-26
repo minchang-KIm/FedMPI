@@ -22,6 +22,7 @@
     </div>
   </div>
   <div class="controls">
+    <span id="clock" class="chip clock">🕒 -</span>
     <span id="methodChip" class="chip method"></span>
     <span id="runChip" class="chip">정지</span>
     <span id="runInfo" class="muted"></span>
@@ -52,7 +53,9 @@
       <div id="map3d"></div>
       <div class="map-overlay top-left"><div class="legend" id="legendState"></div></div>
       <div class="map-overlay top-right">
+        <button class="btn small" id="btnChase">🎥 선택 차량 따라가기</button>
         <label><input type="checkbox" id="optCells" checked> 셀 범위</label>
+        <label><input type="checkbox" id="optZones" checked> 구역</label>
         <label><input type="checkbox" id="optLabels" checked> 이름표</label>
         <label><input type="checkbox" id="optPlaces" checked> 장소 이름</label>
         <label><input type="checkbox" id="optBeams" checked> 업로드 선</label>
@@ -100,8 +103,10 @@
       <div class="vehgrid" id="vehGrid"></div>
     </div>
     <div class="card">
-      <div class="card-title">참여 분포 <span class="muted small">최근 라운드 집계 참여 횟수 · 칩 위 색 = 차량 종류 (패턴 7)</span></div>
+      <div class="card-title">참여 분포 <span class="muted small">최근 라운드 집계 참여 횟수 · 막대 색 = 신형/구형 (7-1)</span></div>
       <canvas id="fairChart" height="104"></canvas>
+      <div class="card-title" style="margin-top:6px">시간대별 참여 <span class="muted small">각 시간대 집계 값이 어떤 차량에서 왔나 (7-3)</span></div>
+      <canvas id="periodChart" height="112"></canvas>
     </div>
     <div class="card grow">
       <div class="card-title">라운드별 참여 차량 <span class="muted small">도착 순서대로</span></div>
@@ -141,11 +146,12 @@
         <p class="muted small">글로벌 모델(체크포인트)·라운드·차량 위치·에너지·설정을 저장합니다. 불러오면 그 시점부터 이어서 학습합니다.</p>
         <div class="row-input"><input id="saveName" placeholder="저장 이름" value="상태"><button class="btn small primary" id="btnSave">저장</button></div>
         <div id="savesList" class="list"></div>
-        <div class="fgroup">맵</div>
-        <div class="row-input"><select id="mapSelect"></select><button class="btn small" id="btnMapUse">이 맵 사용 (다음 시작)</button></div>
+        <div class="fgroup">맵 <span class="muted small">모든 맵이 34개 유스케이스 조건(장소·구역·경로)을 갖춤</span></div>
+        <div id="mapCards" class="mapcards"></div>
+        <p class="muted small" id="mapNote"></p>
         <label class="btn small filelab">맵 파일 올리기 (.json)<input type="file" id="mapFile" accept=".json"></label>
         <a class="btn small" id="mapDownload" download="map.json">현재 맵 내려받기 (편집용)</a>
-        <p class="muted small" id="mapNote"></p>
+        <div id="mapCoverage"></div>
         <div class="fgroup">로그</div>
         <p class="muted small">모든 실행은 사건·라운드·주행 기록이 자동으로 남습니다. '기록·비교' 탭에서 다시 보거나 내보냅니다.</p>
         <a class="btn small" id="btnExport">현재 실행 로그 내보내기</a>

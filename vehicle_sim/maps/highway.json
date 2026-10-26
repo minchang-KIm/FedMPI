@@ -1,0 +1,626 @@
+{
+ "name": "고속도로 회랑",
+ "desc": "두 도시를 잇는 고속도로. 산을 뚫은 1 km 터널(80 km/h ≈ 45초 단절), 톨게이트 권역 경계",
+ "size": [
+  3200,
+  1200
+ ],
+ "region_border_x": 2250,
+ "roads": [
+  {
+   "id": "hw",
+   "name": "고속도로",
+   "pts": [
+    [
+     0,
+     600
+    ],
+    [
+     3200,
+     600
+    ]
+   ],
+   "speed": 100
+  },
+  {
+   "id": "w_loop",
+   "name": "서부 도시 순환로",
+   "pts": [
+    [
+     200,
+     300
+    ],
+    [
+     800,
+     300
+    ],
+    [
+     800,
+     900
+    ],
+    [
+     200,
+     900
+    ],
+    [
+     200,
+     300
+    ]
+   ],
+   "speed": 45
+  },
+  {
+   "id": "e_loop",
+   "name": "동부 도시 순환로",
+   "pts": [
+    [
+     2400,
+     300
+    ],
+    [
+     3000,
+     300
+    ],
+    [
+     3000,
+     900
+    ],
+    [
+     2400,
+     900
+    ],
+    [
+     2400,
+     300
+    ]
+   ],
+   "speed": 45
+  }
+ ],
+ "cells": [
+  {
+   "id": "W1",
+   "name": "서부 북 W1",
+   "pos": [
+    500,
+    420
+   ],
+   "r": 400,
+   "region": "W",
+   "color": "#2563eb"
+  },
+  {
+   "id": "W2",
+   "name": "서부 남 W2",
+   "pos": [
+    500,
+    820
+   ],
+   "r": 360,
+   "region": "W",
+   "color": "#0891b2"
+  },
+  {
+   "id": "H",
+   "name": "터널 앞 H",
+   "pos": [
+    950,
+    600
+   ],
+   "r": 260,
+   "region": "W",
+   "color": "#9333ea"
+  },
+  {
+   "id": "T",
+   "name": "톨게이트 T",
+   "pos": [
+    2250,
+    600
+   ],
+   "r": 260,
+   "region": "E",
+   "color": "#db2777"
+  },
+  {
+   "id": "E1",
+   "name": "동부 북 E1",
+   "pos": [
+    2700,
+    420
+   ],
+   "r": 400,
+   "region": "E",
+   "color": "#ea580c"
+  },
+  {
+   "id": "E2",
+   "name": "동부 남 E2",
+   "pos": [
+    2700,
+    820
+   ],
+   "r": 360,
+   "region": "E",
+   "color": "#16a34a"
+  }
+ ],
+ "zones": [
+  {
+   "id": "tunnel",
+   "name": "산악 터널 1 km",
+   "kind": "tunnel",
+   "rect": [
+    1100,
+    585,
+    2100,
+    615
+   ],
+   "speed": 80
+  },
+  {
+   "id": "shadow",
+   "name": "도심 빌딩 숲(음영지역)",
+   "kind": "shadow",
+   "rect": [
+    300,
+    860,
+    700,
+    940
+   ]
+  },
+  {
+   "id": "congest",
+   "name": "동부 교차로 혼잡",
+   "kind": "congestion",
+   "rect": [
+    2360,
+    560,
+    2440,
+    640
+   ],
+   "speed": 15
+  },
+  {
+   "id": "school",
+   "name": "어린이 보호구역",
+   "kind": "school",
+   "rect": [
+    540,
+    280,
+    660,
+    320
+   ],
+   "speed": 30
+  },
+  {
+   "id": "wifi_pub",
+   "name": "공원 Wi-Fi(비과금망)",
+   "kind": "wifi",
+   "rect": [
+    2820,
+    880,
+    3000,
+    920
+   ]
+  },
+  {
+   "id": "weather",
+   "name": "산간 강우 구역",
+   "kind": "weather",
+   "circle": [
+    2700,
+    700,
+    280
+   ]
+  }
+ ],
+ "places": [
+  {
+   "id": "home",
+   "name": "서부 주거단지",
+   "kind": "home",
+   "pos": [
+    350,
+    900
+   ],
+   "wifi": true,
+   "slots": 10
+  },
+  {
+   "id": "home2",
+   "name": "동부 주거단지",
+   "kind": "home",
+   "pos": [
+    2700,
+    900
+   ],
+   "wifi": true,
+   "slots": 8
+  },
+  {
+   "id": "work",
+   "name": "동부 산업단지 오피스",
+   "kind": "work",
+   "pos": [
+    2700,
+    300
+   ],
+   "slots": 10
+  },
+  {
+   "id": "gas",
+   "name": "서부 충전소",
+   "kind": "gas",
+   "pos": [
+    800,
+    450
+   ],
+   "wifi": true,
+   "slots": 6
+  },
+  {
+   "id": "service",
+   "name": "동부 서비스센터",
+   "kind": "service",
+   "pos": [
+    2400,
+    760
+   ],
+   "wifi": true,
+   "slots": 6
+  },
+  {
+   "id": "depot",
+   "name": "서부 택시 차고지",
+   "kind": "depot",
+   "pos": [
+    200,
+    450
+   ],
+   "slots": 8
+  },
+  {
+   "id": "datacenter",
+   "name": "FL 집계 서버",
+   "kind": "server",
+   "pos": [
+    1600,
+    1050
+   ]
+  },
+  {
+   "id": "gate_in",
+   "name": "서쪽 진입",
+   "kind": "gate",
+   "pos": [
+    0,
+    600
+   ]
+  },
+  {
+   "id": "gate_out",
+   "name": "동쪽 이탈",
+   "kind": "gate",
+   "pos": [
+    3200,
+    600
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "id": "S1",
+   "name": "서부 IC 서",
+   "pos": [
+    200,
+    600
+   ],
+   "green": 20,
+   "yellow": 3,
+   "offset": 0
+  },
+  {
+   "id": "S2",
+   "name": "서부 IC 동",
+   "pos": [
+    800,
+    600
+   ],
+   "green": 20,
+   "yellow": 3,
+   "offset": 8
+  },
+  {
+   "id": "S3",
+   "name": "동부 IC 서",
+   "pos": [
+    2400,
+    600
+   ],
+   "green": 20,
+   "yellow": 3,
+   "offset": 4
+  },
+  {
+   "id": "S4",
+   "name": "동부 IC 동",
+   "pos": [
+    3000,
+    600
+   ],
+   "green": 20,
+   "yellow": 3,
+   "offset": 12
+  }
+ ],
+ "crosswalks": [
+  {
+   "id": "X1",
+   "name": "학교 앞 횡단보도",
+   "pos": [
+    600,
+    300
+   ],
+   "rate_per_min": 6,
+   "dart_prob": 0.25,
+   "school": true
+  },
+  {
+   "id": "X2",
+   "name": "서부 상가 횡단보도",
+   "pos": [
+    500,
+    900
+   ],
+   "rate_per_min": 4,
+   "dart_prob": 0.05
+  },
+  {
+   "id": "X3",
+   "name": "산업단지 횡단보도",
+   "pos": [
+    2550,
+    300
+   ],
+   "rate_per_min": 3,
+   "dart_prob": 0.05
+  },
+  {
+   "id": "X4",
+   "name": "동부 주거 횡단보도",
+   "pos": [
+    2850,
+    900
+   ],
+   "rate_per_min": 3,
+   "dart_prob": 0.08
+  }
+ ],
+ "routes": {
+  "commute": {
+   "name": "도시 간 통근",
+   "loop": true,
+   "kind": "commute",
+   "pts": [
+    [
+     350,
+     900,
+     "home"
+    ],
+    [
+     200,
+     900
+    ],
+    [
+     200,
+     600
+    ],
+    [
+     2400,
+     600
+    ],
+    [
+     2400,
+     300
+    ],
+    [
+     2700,
+     300,
+     "work"
+    ],
+    [
+     3000,
+     300
+    ],
+    [
+     3000,
+     600
+    ],
+    [
+     800,
+     600
+    ],
+    [
+     800,
+     900
+    ],
+    [
+     350,
+     900
+    ]
+   ]
+  },
+  "city": {
+   "name": "서부 택시",
+   "loop": true,
+   "kind": "city",
+   "pts": [
+    [
+     200,
+     300
+    ],
+    [
+     800,
+     300
+    ],
+    [
+     800,
+     450,
+     "gas"
+    ],
+    [
+     800,
+     900
+    ],
+    [
+     200,
+     900
+    ],
+    [
+     200,
+     450,
+     "depot"
+    ],
+    [
+     200,
+     300
+    ]
+   ]
+  },
+  "resident": {
+   "name": "동부 주민",
+   "loop": true,
+   "kind": "resident",
+   "pts": [
+    [
+     2400,
+     300
+    ],
+    [
+     3000,
+     300
+    ],
+    [
+     3000,
+     900
+    ],
+    [
+     2700,
+     900,
+     "home"
+    ],
+    [
+     2400,
+     900
+    ],
+    [
+     2400,
+     760,
+     "service"
+    ],
+    [
+     2400,
+     300
+    ]
+   ]
+  },
+  "visitor": {
+   "name": "고속도로 통과",
+   "loop": false,
+   "kind": "visitor",
+   "pts": [
+    [
+     0,
+     600
+    ],
+    [
+     3200,
+     600
+    ]
+   ]
+  }
+ },
+ "landuse": [
+  {
+   "rect": [
+    230,
+    330,
+    770,
+    570
+   ],
+   "kind": "downtown",
+   "density": 0.6
+  },
+  {
+   "rect": [
+    230,
+    630,
+    770,
+    870
+   ],
+   "kind": "residential",
+   "density": 0.6
+  },
+  {
+   "rect": [
+    2430,
+    330,
+    2970,
+    570
+   ],
+   "kind": "industrial",
+   "density": 0.6
+  },
+  {
+   "rect": [
+    2430,
+    630,
+    2970,
+    870
+   ],
+   "kind": "residential",
+   "density": 0.55
+  },
+  {
+   "rect": [
+    1000,
+    0,
+    2200,
+    1200
+   ],
+   "kind": "park",
+   "density": 0.5
+  }
+ ],
+ "hills": [
+  {
+   "rect": [
+    1060,
+    380,
+    2140,
+    820
+   ],
+   "height": 140
+  }
+ ],
+ "lane_width": 3.5,
+ "vehicle_routes": [
+  "commute",
+  "city",
+  "resident",
+  "visitor",
+  "commute",
+  "city",
+  "resident",
+  "visitor",
+  "city",
+  "commute",
+  "resident",
+  "city",
+  "commute",
+  "visitor",
+  "city",
+  "resident"
+ ]
+}

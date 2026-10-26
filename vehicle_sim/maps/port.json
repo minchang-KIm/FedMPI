@@ -1,0 +1,680 @@
+{
+ "name": "항만·산업단지",
+ "desc": "간선도로 지하차도, 컨테이너 야적장(음영), 해무(강우), 항만 게이트 혼잡",
+ "size": [
+  2400,
+  1600
+ ],
+ "region_border_x": 1500,
+ "roads": [
+  {
+   "id": "art",
+   "name": "간선도로",
+   "pts": [
+    [
+     0,
+     400
+    ],
+    [
+     2400,
+     400
+    ]
+   ],
+   "speed": 90
+  },
+  {
+   "id": "c_w",
+   "name": "서측 연결로",
+   "pts": [
+    [
+     600,
+     400
+    ],
+    [
+     600,
+     800
+    ]
+   ],
+   "speed": 50
+  },
+  {
+   "id": "c_e",
+   "name": "동측 연결로",
+   "pts": [
+    [
+     1800,
+     400
+    ],
+    [
+     1800,
+     800
+    ]
+   ],
+   "speed": 50
+  },
+  {
+   "id": "loop",
+   "name": "항만 순환로",
+   "pts": [
+    [
+     400,
+     800
+    ],
+    [
+     2000,
+     800
+    ],
+    [
+     2000,
+     1300
+    ],
+    [
+     400,
+     1300
+    ],
+    [
+     400,
+     800
+    ]
+   ],
+   "speed": 40
+  },
+  {
+   "id": "mid",
+   "name": "부두 중앙로",
+   "pts": [
+    [
+     1200,
+     800
+    ],
+    [
+     1200,
+     1300
+    ]
+   ],
+   "speed": 40
+  },
+  {
+   "id": "w_conn",
+   "name": "숙소 연결로",
+   "pts": [
+    [
+     400,
+     400
+    ],
+    [
+     400,
+     800
+    ]
+   ],
+   "speed": 50
+  }
+ ],
+ "cells": [
+  {
+   "id": "P1",
+   "name": "물류 P1",
+   "pos": [
+    600,
+    580
+   ],
+   "r": 420,
+   "region": "W",
+   "color": "#2563eb"
+  },
+  {
+   "id": "P2",
+   "name": "산단 P2",
+   "pos": [
+    1800,
+    580
+   ],
+   "r": 420,
+   "region": "E",
+   "color": "#9333ea"
+  },
+  {
+   "id": "P3",
+   "name": "서부두 P3",
+   "pos": [
+    800,
+    1100
+   ],
+   "r": 380,
+   "region": "W",
+   "color": "#0891b2"
+  },
+  {
+   "id": "P4",
+   "name": "동부두 P4",
+   "pos": [
+    1600,
+    1100
+   ],
+   "r": 380,
+   "region": "E",
+   "color": "#ea580c"
+  }
+ ],
+ "zones": [
+  {
+   "id": "tunnel",
+   "name": "지하차도",
+   "kind": "tunnel",
+   "rect": [
+    1000,
+    385,
+    1300,
+    415
+   ],
+   "speed": 70
+  },
+  {
+   "id": "shadow",
+   "name": "컨테이너 야적장(음영)",
+   "kind": "shadow",
+   "rect": [
+    1300,
+    1240,
+    1900,
+    1360
+   ]
+  },
+  {
+   "id": "congest",
+   "name": "항만 게이트 혼잡",
+   "kind": "congestion",
+   "rect": [
+    1970,
+    1050,
+    2030,
+    1150
+   ],
+   "speed": 10
+  },
+  {
+   "id": "school",
+   "name": "통학로 보호구역",
+   "kind": "school",
+   "rect": [
+    580,
+    540,
+    620,
+    660
+   ],
+   "speed": 30
+  },
+  {
+   "id": "wifi_pub",
+   "name": "물류센터 Wi-Fi(비과금망)",
+   "kind": "wifi",
+   "rect": [
+    700,
+    780,
+    900,
+    820
+   ]
+  },
+  {
+   "id": "weather",
+   "name": "해무 구역",
+   "kind": "weather",
+   "circle": [
+    1200,
+    1450,
+    420
+   ]
+  }
+ ],
+ "places": [
+  {
+   "id": "home",
+   "name": "근로자 숙소",
+   "kind": "home",
+   "pos": [
+    480,
+    400
+   ],
+   "wifi": true,
+   "slots": 10
+  },
+  {
+   "id": "home2",
+   "name": "항만 사택",
+   "kind": "home",
+   "pos": [
+    800,
+    1300
+   ],
+   "wifi": true,
+   "slots": 8
+  },
+  {
+   "id": "work",
+   "name": "물류센터 오피스",
+   "kind": "work",
+   "pos": [
+    950,
+    800
+   ],
+   "slots": 10
+  },
+  {
+   "id": "gas",
+   "name": "트럭 충전소",
+   "kind": "gas",
+   "pos": [
+    2000,
+    1000
+   ],
+   "wifi": true,
+   "slots": 6
+  },
+  {
+   "id": "service",
+   "name": "정비소",
+   "kind": "service",
+   "pos": [
+    1500,
+    800
+   ],
+   "wifi": true,
+   "slots": 6
+  },
+  {
+   "id": "depot",
+   "name": "트럭 차고지",
+   "kind": "depot",
+   "pos": [
+    500,
+    1300
+   ],
+   "slots": 8
+  },
+  {
+   "id": "datacenter",
+   "name": "FL 집계 서버",
+   "kind": "server",
+   "pos": [
+    1200,
+    200
+   ]
+  },
+  {
+   "id": "gate_in",
+   "name": "서쪽 진입",
+   "kind": "gate",
+   "pos": [
+    0,
+    400
+   ]
+  },
+  {
+   "id": "gate_out",
+   "name": "동쪽 이탈",
+   "kind": "gate",
+   "pos": [
+    2400,
+    400
+   ]
+  }
+ ],
+ "signals": [
+  {
+   "id": "S1",
+   "name": "서측 교차로",
+   "pos": [
+    600,
+    400
+   ],
+   "green": 22,
+   "yellow": 3,
+   "offset": 0
+  },
+  {
+   "id": "S2",
+   "name": "동측 교차로",
+   "pos": [
+    1800,
+    400
+   ],
+   "green": 22,
+   "yellow": 3,
+   "offset": 9
+  },
+  {
+   "id": "S3",
+   "name": "부두 북 교차로",
+   "pos": [
+    1200,
+    800
+   ],
+   "green": 16,
+   "yellow": 3,
+   "offset": 5
+  },
+  {
+   "id": "S4",
+   "name": "부두 남 교차로",
+   "pos": [
+    1200,
+    1300
+   ],
+   "green": 16,
+   "yellow": 3,
+   "offset": 11
+  },
+  {
+   "id": "S5",
+   "name": "물류센터 서측",
+   "pos": [
+    600,
+    800
+   ],
+   "green": 16,
+   "yellow": 3,
+   "offset": 2
+  },
+  {
+   "id": "S6",
+   "name": "정비단지 동측",
+   "pos": [
+    1800,
+    800
+   ],
+   "green": 16,
+   "yellow": 3,
+   "offset": 7
+  },
+  {
+   "id": "S7",
+   "name": "숙소 교차로",
+   "pos": [
+    400,
+    400
+   ],
+   "green": 22,
+   "yellow": 3,
+   "offset": 13
+  },
+  {
+   "id": "S8",
+   "name": "항만 서북 교차로",
+   "pos": [
+    400,
+    800
+   ],
+   "green": 16,
+   "yellow": 3,
+   "offset": 4
+  }
+ ],
+ "crosswalks": [
+  {
+   "id": "X1",
+   "name": "통학로 횡단보도",
+   "pos": [
+    600,
+    600
+   ],
+   "rate_per_min": 6,
+   "dart_prob": 0.25,
+   "school": true
+  },
+  {
+   "id": "X2",
+   "name": "사택 앞 횡단보도",
+   "pos": [
+    900,
+    1300
+   ],
+   "rate_per_min": 3,
+   "dart_prob": 0.08
+  },
+  {
+   "id": "X3",
+   "name": "정비소 앞 횡단보도",
+   "pos": [
+    1400,
+    800
+   ],
+   "rate_per_min": 3,
+   "dart_prob": 0.05
+  },
+  {
+   "id": "X4",
+   "name": "숙소 앞 횡단보도",
+   "pos": [
+    540,
+    400
+   ],
+   "rate_per_min": 3,
+   "dart_prob": 0.05
+  }
+ ],
+ "routes": {
+  "commute": {
+   "name": "숙소→물류센터 통근",
+   "loop": true,
+   "kind": "commute",
+   "pts": [
+    [
+     400,
+     400
+    ],
+    [
+     480,
+     400,
+     "home"
+    ],
+    [
+     600,
+     400
+    ],
+    [
+     600,
+     800
+    ],
+    [
+     950,
+     800,
+     "work"
+    ],
+    [
+     1200,
+     800
+    ],
+    [
+     1200,
+     1300
+    ],
+    [
+     400,
+     1300
+    ],
+    [
+     400,
+     800
+    ],
+    [
+     400,
+     400
+    ]
+   ]
+  },
+  "city": {
+   "name": "항만 트럭",
+   "loop": true,
+   "kind": "city",
+   "pts": [
+    [
+     400,
+     800
+    ],
+    [
+     1200,
+     800
+    ],
+    [
+     1500,
+     800,
+     "service"
+    ],
+    [
+     2000,
+     800
+    ],
+    [
+     2000,
+     1000,
+     "gas"
+    ],
+    [
+     2000,
+     1300
+    ],
+    [
+     500,
+     1300,
+     "depot"
+    ],
+    [
+     400,
+     1300
+    ],
+    [
+     400,
+     800
+    ]
+   ]
+  },
+  "resident": {
+   "name": "사택 주민",
+   "loop": true,
+   "kind": "resident",
+   "pts": [
+    [
+     1200,
+     800
+    ],
+    [
+     1200,
+     1300
+    ],
+    [
+     800,
+     1300,
+     "home"
+    ],
+    [
+     400,
+     1300
+    ],
+    [
+     400,
+     800
+    ],
+    [
+     1200,
+     800
+    ]
+   ]
+  },
+  "visitor": {
+   "name": "간선도로 통과",
+   "loop": false,
+   "kind": "visitor",
+   "pts": [
+    [
+     0,
+     400
+    ],
+    [
+     2400,
+     400
+    ]
+   ]
+  }
+ },
+ "landuse": [
+  {
+   "rect": [
+    0,
+    0,
+    2400,
+    370
+   ],
+   "kind": "industrial",
+   "density": 0.45
+  },
+  {
+   "rect": [
+    630,
+    430,
+    1770,
+    770
+   ],
+   "kind": "industrial",
+   "density": 0.6
+  },
+  {
+   "rect": [
+    430,
+    830,
+    1170,
+    1270
+   ],
+   "kind": "residential",
+   "density": 0.5
+  },
+  {
+   "rect": [
+    1230,
+    830,
+    1970,
+    1230
+   ],
+   "kind": "industrial",
+   "density": 0.6
+  },
+  {
+   "rect": [
+    0,
+    430,
+    570,
+    1600
+   ],
+   "kind": "park",
+   "density": 0.3
+  }
+ ],
+ "water": [
+  {
+   "rect": [
+    0,
+    1380,
+    2400,
+    1600
+   ]
+  }
+ ],
+ "lane_width": 3.5,
+ "vehicle_routes": [
+  "commute",
+  "city",
+  "resident",
+  "visitor",
+  "commute",
+  "city",
+  "resident",
+  "visitor",
+  "city",
+  "commute",
+  "resident",
+  "city",
+  "commute",
+  "visitor",
+  "city",
+  "resident"
+ ]
+}
