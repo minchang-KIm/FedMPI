@@ -1401,7 +1401,7 @@ const PRESET_ALL = {
     "3": { lr_override: 0.02, energy_gate: false, battery_scale: 0.25 },    // 6-3 학습률 오류 · 1-3 학습 중 방전 (집에서 충전 후 복귀)
     "4": { store_forward: true },                               // 통과 차량: 5-1 터널 보관
     "5": { wifi_only: true },                                   // 3-3 Wi-Fi에서만
-    "6": { backdoor_boost: 0.5, battery_scale: 0.5 },           // 6-1 악의적 조작 · 3-1 작은 배터리 → 충전소에서 회복 후 복귀
+    "6": { backdoor_boost: 0.5, battery_scale: 0.5, store_forward: true },   // 6-1 악의적 조작 · 3-1 작은 배터리 → 충전소에서 회복 · 5-2 셀 가장자리 보류
     "7": { emergency_rate: 3, safety_preempt_prob: 0.5 },       // 1-4·4-5 긴급제동 (어린이 보호구역을 지나는 주민 차량)
     "8": { sensor_fault_classes: "3,8", sensor_fault_level: 0.6 },   // 6-2 센서 고장 (재시작) · 터널을 지나는 통과 차량 → 2-5
   },
