@@ -263,6 +263,8 @@ class SimClient(M_CLIENT.SASAFLClient):
                 self.local_model_version = int(self.global_model_info[-3].item())
                 self.last_global_loss = self.global_model_info[-2].item()
                 self.model = copy.deepcopy(self.received_global_model)
+                # main 8f430a7과 같은 수정: 교체한 모델을 학습하도록 optimizer를 다시 만든다
+                optimizer = SGD(self.model.parameters(), lr=lr, momentum=0.9)
                 self.replace_global_model_during_local_update.clear()
                 start_weights = copy.deepcopy(self.model.state_dict())
                 continue
