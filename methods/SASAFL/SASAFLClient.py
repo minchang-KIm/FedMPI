@@ -103,6 +103,9 @@ class SASAFLClient(FedAvgClient.FedAvgClient):
                 self.local_model_version = int(self.global_model_info[-3].item())
                 self.last_global_loss = self.global_model_info[-2].item()
                 self.model = copy.deepcopy(self.received_global_model)
+                # 교체한 모델을 학습하도록 optimizer를 새 모델의 파라미터로 다시 만든다.
+                # (그대로 두면 optimizer가 버려진 이전 모델만 갱신해, 교체된 모델은 학습 없이 서버로 전송된다)
+                optimizer = SGD(self.model.parameters(), lr=self.lr, momentum=0.9)
                 printLog(f"CLIENT {self.id}", f"global model version {self.local_model_version}로 교체했습니다.")
                 
                 self.replace_global_model_during_local_update.clear()
