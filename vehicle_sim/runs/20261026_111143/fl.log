@@ -1,0 +1,46 @@
+Process 0 uses 1 threads
+Process 2 uses 1 threads
+Process 1 uses 1 threads
+Process 4 uses 1 threadsProcess 5 uses 1 threads
+
+Process 3 uses 1 threads
+[2026-10-26 11:11:45.845909] MAIN >> I am server in wise-175 rank 0
+[2026-10-26 11:11:45.845992] SERVER >> global model을 초기화 합니다.
+[2026-10-26 11:11:45.847854] MAIN >> I am client in wise-175 rank 3
+[2026-10-26 11:11:45.847908] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-26 11:11:45.851785] MAIN >> I am client in wise-175 rank 1
+[2026-10-26 11:11:45.852028] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-26 11:11:45.852188] MAIN >> I am client in wise-175 rank 4
+[2026-10-26 11:11:45.852225] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-26 11:11:45.851951] MAIN >> I am client in wise-175 rank 2
+[2026-10-26 11:11:45.860596] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-26 11:11:45.851989] MAIN >> I am client in wise-175 rank 5
+[2026-10-26 11:11:45.866612] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-26 11:11:45.919091] SERVER >> 데이터셋을 다운받습니다.
+[2026-10-26 11:11:45.999078] SERVER >> 각 client들이 가져갈 data 개수 = [11769, 11925, 11679, 11611, 13016]
+[2026-10-26 11:11:46.092766] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-26 11:11:46.122897] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 11:11:46.151787] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 11:11:46.181713] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 11:11:46.211729] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 11:11:46.239262] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 11:11:46.239768] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-26 11:11:46.239941] CLIENT 1 >> communication delay는 0입니다.[2026-10-26 11:11:46.239960] CLIENT 2 >> communication delay는 0입니다.
+
+[2026-10-26 11:11:46.240008] CLIENT 4 >> communication delay는 0입니다.
+[2026-10-26 11:11:46.240039] CLIENT 5 >> communication delay는 0입니다.
+[2026-10-26 11:11:46.240056] CLIENT 3 >> communication delay는 0입니다.
+[W init.cpp:1506] Warning: ProcessGroup::Work::source_rank API is being deprecated, please ping https://github.com/pytorch/pytorch/issues/46291 if you see this warning (function operator())
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 638, in receive_local_model_from_any_clients
+    C.emit(RUN, "arrive", vid=src, msg=f"업데이트 도착 v{ver} (staleness {self.current_round - ver})"
+TypeError: emit() got multiple values for keyword argument 'vid'
+[2026-10-26 11:12:21.416275] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 0.0
+
+[2026-10-26 11:12:21.416335] SERVER >> global aggregation을 진행합니다.

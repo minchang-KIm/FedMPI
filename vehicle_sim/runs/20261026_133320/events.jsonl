@@ -1,0 +1,47 @@
+{"t": 1792989200.165, "kind": "control", "vid": null, "example": null, "msg": "시뮬레이션 시작: 차량 30대, CIFAR10, C=0.3, τ=9"}
+{"t": 1792989200.192, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 11, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 12, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 13, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 14, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 17, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.192, "kind": "world", "vid": 18, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.193, "kind": "world", "vid": 21, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.193, "kind": "world", "vid": 24, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.193, "kind": "world", "vid": 25, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.193, "kind": "world", "vid": 26, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.193, "kind": "world", "vid": 28, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.193, "kind": "world", "vid": 29, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.193, "kind": "world", "vid": 30, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792989200.193, "kind": "world", "vid": 1, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792989200.193, "kind": "world", "vid": 2, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792989200.193, "kind": "world", "vid": 3, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.193, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792989200.193, "kind": "world", "vid": 5, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792989200.193, "kind": "world", "vid": 6, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792989200.193, "kind": "world", "vid": 7, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 10, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 11, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 12, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 13, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 16, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 17, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 18, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792989200.194, "kind": "world", "vid": 19, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 21, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 22, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 23, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 24, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 25, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 27, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 28, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 29, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792989200.195, "kind": "world", "vid": 30, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792989200.593, "kind": "world", "vid": 28, "example": null, "msg": "충전소 정차, 충전 시작", "stop": "gas", "phase": "start"}
+{"t": 1792989200.793, "kind": "world", "vid": 14, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792989202.001, "kind": "world", "vid": 9, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}

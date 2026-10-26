@@ -1,0 +1,172 @@
+Process 0 uses 1 threads
+Process 30 uses 1 threads
+Process 29 uses 1 threads
+Process 16 uses 1 threads
+Process 28 uses 1 threads
+Process 5 uses 1 threads
+Process 13 uses 1 threads
+Process 2 uses 1 threads
+Process 11 uses 1 threads
+Process 26 uses 1 threads
+Process 6 uses 1 threads
+Process 27 uses 1 threads
+Process 9 uses 1 threads
+Process 20 uses 1 threads
+Process 10 uses 1 threads
+Process 7 uses 1 threadsProcess 1 uses 1 threads
+
+Process 24 uses 1 threads
+Process 22 uses 1 threads
+Process 23 uses 1 threads
+Process 15 uses 1 threads
+Process 3 uses 1 threads
+Process 17 uses 1 threads
+Process 4 uses 1 threads
+Process 21 uses 1 threads
+Process 12 uses 1 threads
+Process 8 uses 1 threads
+Process 19 uses 1 threads
+Process 14 uses 1 threads
+Process 18 uses 1 threads
+Process 25 uses 1 threads
+[2026-10-26 13:26:01.599856] MAIN >> I am client in wise-175 rank 16
+[2026-10-26 13:26:01.599913] CLIENT 16 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.612843] MAIN >> I am client in wise-175 rank 28
+[2026-10-26 13:26:01.612891] CLIENT 28 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.614821] MAIN >> I am client in wise-175 rank 30
+[2026-10-26 13:26:01.614871] CLIENT 30 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.615866] MAIN >> I am client in wise-175 rank 24
+[2026-10-26 13:26:01.615903] CLIENT 24 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.618864] MAIN >> I am client in wise-175 rank 22[2026-10-26 13:26:01.618870] MAIN >> I am client in wise-175 rank 5
+
+[2026-10-26 13:26:01.618924] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.618924] CLIENT 22 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.621879] MAIN >> I am client in wise-175 rank 10
+[2026-10-26 13:26:01.621916] CLIENT 10 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.622781] MAIN >> I am client in wise-175 rank 15
+[2026-10-26 13:26:01.622824] CLIENT 15 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.623870] MAIN >> I am client in wise-175 rank 3
+[2026-10-26 13:26:01.623912] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.629796] MAIN >> I am client in wise-175 rank 13
+[2026-10-26 13:26:01.629837] CLIENT 13 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.630729] MAIN >> I am server in wise-175 rank 0
+[2026-10-26 13:26:01.630760] SERVER >> global model을 초기화 합니다.
+[2026-10-26 13:26:01.634913] MAIN >> I am client in wise-175 rank 6
+[2026-10-26 13:26:01.634961] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.635812] MAIN >> I am client in wise-175 rank 11
+[2026-10-26 13:26:01.635829] MAIN >> I am client in wise-175 rank 2[2026-10-26 13:26:01.635849] CLIENT 11 >> 빈 모델을 생성합니다.
+
+[2026-10-26 13:26:01.635865] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.635895] MAIN >> I am client in wise-175 rank 9
+[2026-10-26 13:26:01.635930] CLIENT 9 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.637717] MAIN >> I am client in wise-175 rank 23
+[2026-10-26 13:26:01.637753] CLIENT 23 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.638716] MAIN >> I am client in wise-175 rank 26[2026-10-26 13:26:01.639720] MAIN >> I am client in wise-175 rank 1
+[2026-10-26 13:26:01.639869] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.640801] MAIN >> I am client in wise-175 rank 19
+[2026-10-26 13:26:01.640846] CLIENT 19 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.640844] MAIN >> I am client in wise-175 rank 20
+[2026-10-26 13:26:01.640879] CLIENT 20 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.642879] MAIN >> I am client in wise-175 rank 17
+[2026-10-26 13:26:01.642919] CLIENT 17 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.644679] MAIN >> I am client in wise-175 rank 8
+[2026-10-26 13:26:01.644714] CLIENT 8 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.644763] MAIN >> I am client in wise-175 rank 12
+[2026-10-26 13:26:01.644797] CLIENT 12 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.645696] MAIN >> I am client in wise-175 rank 29
+[2026-10-26 13:26:01.645732] CLIENT 29 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.646685] MAIN >> I am client in wise-175 rank 7
+[2026-10-26 13:26:01.646723] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.646734] MAIN >> I am client in wise-175 rank 18
+[2026-10-26 13:26:01.646765] CLIENT 18 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.649807] MAIN >> I am client in wise-175 rank 14
+[2026-10-26 13:26:01.649849] CLIENT 14 >> 빈 모델을 생성합니다.
+
+[2026-10-26 13:26:01.651658] CLIENT 26 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.655744] MAIN >> I am client in wise-175 rank 21[2026-10-26 13:26:01.655780] MAIN >> I am client in wise-175 rank 27
+
+[2026-10-26 13:26:01.655821] CLIENT 21 >> 빈 모델을 생성합니다.[2026-10-26 13:26:01.655821] CLIENT 27 >> 빈 모델을 생성합니다.
+
+[2026-10-26 13:26:01.664919] MAIN >> I am client in wise-175 rank 4
+[2026-10-26 13:26:01.664983] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.675827] MAIN >> I am client in wise-175 rank 25
+[2026-10-26 13:26:01.675897] CLIENT 25 >> 빈 모델을 생성합니다.
+[2026-10-26 13:26:01.817079] SERVER >> 데이터셋을 다운받습니다.
+Files already downloaded and verified
+Files already downloaded and verified
+[2026-10-26 13:26:03.306196] SERVER >> 각 client들이 가져갈 data 개수 = [1361, 1332, 1739, 1549, 1942, 2156, 1458, 1330, 1653, 1632, 1500, 936, 931, 1298, 1511, 1915, 2150, 2135, 1754, 1136, 1140, 1177, 1852, 1721, 1523, 1943, 1659, 1996, 1705, 3866]
+[2026-10-26 13:26:03.563900] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-26 13:26:03.581824] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.602146] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.625078] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.639382] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.660416] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.691051] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.716744] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.729845] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.752207] CLIENT 9 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.769824] CLIENT 10 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.785828] CLIENT 11 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.801080] CLIENT 12 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.815236] CLIENT 13 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.826725] CLIENT 14 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.842970] CLIENT 15 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.868955] CLIENT 16 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.893885] CLIENT 17 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.912125] CLIENT 18 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.937485] CLIENT 19 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.956661] CLIENT 20 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.967730] CLIENT 21 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:03.979999] CLIENT 22 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.000024] CLIENT 23 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.015313] CLIENT 24 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.028221] CLIENT 25 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.044622] CLIENT 26 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.062263] CLIENT 27 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.080014] CLIENT 28 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.095012] CLIENT 29 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.137354] CLIENT 30 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:26:04.139577] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-26 13:26:04.139847] CLIENT 1 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.139870] CLIENT 2 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142077] CLIENT 4 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142106] CLIENT 3 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142118] CLIENT 5 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142286] CLIENT 6 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142383] CLIENT 8 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142460] CLIENT 7 >> communication delay는 0입니다.[2026-10-26 13:26:04.142469] CLIENT 10 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142462] CLIENT 9 >> communication delay는 0입니다.
+
+[2026-10-26 13:26:04.142566] CLIENT 11 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142668] CLIENT 13 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142675] CLIENT 14 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142685] CLIENT 15 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142794] CLIENT 16 >> communication delay는 0입니다.[2026-10-26 13:26:04.142800] CLIENT 17 >> communication delay는 0입니다.
+
+[2026-10-26 13:26:04.142833] CLIENT 18 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142929] CLIENT 20 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142992] CLIENT 19 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.142994] CLIENT 21 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143042] CLIENT 22 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143081] CLIENT 23 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143119] CLIENT 24 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143191] CLIENT 26 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143230] CLIENT 25 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143250] CLIENT 27 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143267] CLIENT 28 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143428] CLIENT 29 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.143450] CLIENT 30 >> communication delay는 0입니다.
+[2026-10-26 13:26:04.145182] CLIENT 12 >> communication delay는 0입니다.
+[W init.cpp:1506] Warning: ProcessGroup::Work::source_rank API is being deprecated, please ping https://github.com/pytorch/pytorch/issues/46291 if you see this warning (function operator())
+[2026-10-26 13:27:34.484026] SERVER >> picked clients info: 
+CLIENT 10의 staleness: 0.0
+CLIENT 19의 staleness: 0.0
+CLIENT 14의 staleness: 0.0
+CLIENT 23의 staleness: 0.0
+CLIENT 26의 staleness: 0.0
+CLIENT 13의 staleness: 0.0
+CLIENT 5의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 1의 staleness: 0.0
+
+[2026-10-26 13:27:34.484092] SERVER >> global aggregation을 진행합니다.

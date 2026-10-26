@@ -1,0 +1,10 @@
+{"t": 1792988736.631, "kind": "control", "vid": null, "example": null, "msg": "시뮬레이션 시작: 차량 8대, MNIST, C=0.3, τ=9"}
+{"t": 1792988736.658, "kind": "world", "vid": 2, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792988736.658, "kind": "world", "vid": 3, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988736.658, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792988736.658, "kind": "world", "vid": 5, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988736.658, "kind": "world", "vid": 6, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792988736.659, "kind": "world", "vid": 7, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988736.659, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988738.166, "kind": "world", "vid": 1, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988738.236, "kind": "control", "vid": null, "example": null, "msg": "시뮬레이션 정지"}

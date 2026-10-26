@@ -1,0 +1,417 @@
+{"t": 1792988441.558, "kind": "control", "vid": null, "example": null, "msg": "시뮬레이션 시작: 차량 8대, MNIST, C=0.3, τ=9"}
+{"t": 1792988441.584, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792988441.584, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792988441.584, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 50%)"}
+{"t": 1792988441.584, "kind": "world", "vid": 2, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792988441.584, "kind": "world", "vid": 3, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988441.585, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792988441.585, "kind": "world", "vid": 5, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988441.585, "kind": "world", "vid": 6, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792988441.585, "kind": "world", "vid": 7, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988441.585, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988443.087, "kind": "world", "vid": 1, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988443.598, "kind": "world", "vid": 2, "example": null, "msg": "기지국 A 범위 이탈"}
+{"t": 1792988444.014, "kind": "fl", "vid": 5, "example": "7-2", "msg": "라벨 2203/7345개를 틀리게 바꿈", "pattern": 7}
+{"t": 1792988447.502, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H1 범위 이탈"}
+{"t": 1792988448.239, "kind": "fl", "vid": 2, "example": "6-1", "msg": "새 모델 v0 수신 실패(기지국 범위 밖) → v0로 계속", "pattern": 6, "cause": "2-1"}
+{"t": 1792988448.253, "kind": "fl", "vid": 4, "example": "6-1", "msg": "새 모델 v0 수신 실패(기지국 범위 밖) → v0로 계속", "pattern": 6, "cause": "2-1"}
+{"t": 1792988448.273, "kind": "fl", "vid": 3, "example": "8-1", "msg": "가용 시간 아님 → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988448.273, "kind": "fl", "vid": 6, "example": "3-3", "msg": "충전 중일 때만 참여 → 이번엔 참여하지 않음 (서버에 알릴 신호가 SASAFL에 없음)", "pattern": 3}
+{"t": 1792988448.403, "kind": "world", "vid": 7, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792988448.503, "kind": "world", "vid": 7, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988448.525, "kind": "fl", "vid": 5, "example": "4-5", "msg": "주행 보조 기능이 연산을 점유해 학습 지연", "pattern": 4}
+{"t": 1792988450.005, "kind": "world", "vid": 2, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792988450.198, "kind": "fl", "vid": 8, "example": "1-1", "msg": "계산 도중 돌발 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988450.198, "kind": "fl", "vid": 8, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792988451.608, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 51%)"}
+{"t": 1792988451.608, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 51%)"}
+{"t": 1792988451.608, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 51%)"}
+{"t": 1792988451.608, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 51%)"}
+{"t": 1792988451.608, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 51%)"}
+{"t": 1792988451.608, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 51%)"}
+{"t": 1792988454.812, "kind": "world", "vid": 4, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792988458.133, "kind": "world", "vid": 2, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988458.135, "kind": "fl", "vid": 2, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792988458.374, "kind": "fl", "vid": 7, "example": "7-4", "msg": "가중치 노이즈 ×0.05", "pattern": 7}
+{"t": 1792988458.375, "kind": "fl", "vid": 7, "example": "7-5", "msg": "시계 오차로 버전 0 → 1로 보고", "pattern": 7}
+{"t": 1792988458.94, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H2 범위 이탈"}
+{"t": 1792988459.464, "kind": "upload", "vid": 7, "example": null, "msg": "v1 업로드 완료 1.0초", "version": 1, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988459.467, "kind": "arrive", "vid": 7, "example": null, "msg": "업데이트 도착 v1 (staleness -1)", "version": 1, "staleness": -1, "overwrite": false}
+{"t": 1792988460.442, "kind": "world", "vid": 8, "example": null, "msg": "이탈 게이트로 맵을 떠남"}
+{"t": 1792988460.567, "kind": "fl", "vid": 8, "example": "1-5", "msg": "주차·시동 꺼짐으로 학습 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988461.644, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 52%)"}
+{"t": 1792988461.644, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 52%)"}
+{"t": 1792988461.644, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 52%)"}
+{"t": 1792988461.644, "kind": "world", "vid": 6, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 52%)"}
+{"t": 1792988461.644, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 52%)"}
+{"t": 1792988461.795, "kind": "fl", "vid": 6, "example": "8-1", "msg": "가용 시간 아님 → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988462.146, "kind": "fl", "vid": 2, "example": "1-1", "msg": "계산 도중 돌발 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988462.147, "kind": "fl", "vid": 2, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792988464.248, "kind": "world", "vid": 4, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792988464.451, "kind": "fl", "vid": 1, "example": "1-1", "msg": "계산 도중 돌발 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988464.451, "kind": "fl", "vid": 1, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792988466.151, "kind": "world", "vid": 4, "example": null, "msg": "터널 통과", "zone": "tunnel"}
+{"t": 1792988468.113, "kind": "fl", "vid": 2, "example": "4-5", "msg": "주행 보조 기능이 연산을 점유해 학습 지연", "pattern": 4}
+{"t": 1792988469.656, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988471.677, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 55%)"}
+{"t": 1792988471.677, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 55%)"}
+{"t": 1792988471.677, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 55%)"}
+{"t": 1792988471.677, "kind": "world", "vid": 5, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 55%)"}
+{"t": 1792988471.677, "kind": "world", "vid": 6, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 55%)"}
+{"t": 1792988471.677, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 55%)"}
+{"t": 1792988471.709, "kind": "fl", "vid": 6, "example": "3-3", "msg": "충전 중일 때만 참여 → 이번엔 참여하지 않음 (서버에 알릴 신호가 SASAFL에 없음)", "pattern": 3}
+{"t": 1792988471.758, "kind": "fl", "vid": 4, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792988473.389, "kind": "world", "vid": 5, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792988473.885, "kind": "fl", "vid": 3, "example": "7-1", "msg": "학습률 0.02로 학습 (정상 0.01)", "pattern": 7}
+{"t": 1792988473.885, "kind": "fl", "vid": 3, "example": "4-1", "msg": "ECU ×1.4로 학습이 6.5초 늦어짐 (22.0초)", "pattern": 4}
+{"t": 1792988476.001, "kind": "upload", "vid": 3, "example": null, "msg": "v0 업로드 완료 2.0초", "version": 0, "delays": {"tdma": 1.0, "congestion": 0.0}}
+{"t": 1792988476.006, "kind": "arrive", "vid": 3, "example": null, "msg": "업데이트 도착 v0 (staleness 0)", "version": 0, "staleness": 0, "overwrite": false}
+{"t": 1792988480.479, "kind": "round", "vid": null, "example": null, "msg": "1라운드 집계: 차량 [7, 3] 정확도 26.57%", "round": {"round": 1, "acc": 26.57, "loss": 3.2234, "t": 1792988480.4788778, "dur": 32.35, "quota": 2, "next_quota": 2, "picked": [{"vid": 7, "staleness": -1, "version": 1, "weight": 0.471}, {"vid": 3, "staleness": 0, "version": 0, "weight": 0.529}], "dups": [], "elapsed": 32.3}}
+{"t": 1792988480.592, "kind": "fl", "vid": 5, "example": "6-1", "msg": "새 모델 v1 수신 실패(기지국 범위 밖) → v0로 계속", "pattern": 6, "cause": "2-1"}
+{"t": 1792988480.648, "kind": "fl", "vid": 7, "example": "4-5", "msg": "주행 보조 기능이 연산을 점유해 학습 지연", "pattern": 4}
+{"t": 1792988481.609, "kind": "world", "vid": 5, "example": null, "msg": "권역 경계 통과 E → W", "region_cross": ["E", "W"]}
+{"t": 1792988481.709, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 58%)"}
+{"t": 1792988481.709, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 58%)"}
+{"t": 1792988481.71, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 58%)"}
+{"t": 1792988481.71, "kind": "world", "vid": 5, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 58%)"}
+{"t": 1792988481.71, "kind": "world", "vid": 6, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 58%)"}
+{"t": 1792988481.71, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 58%)"}
+{"t": 1792988481.71, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 58%)"}
+{"t": 1792988481.926, "kind": "fl", "vid": 6, "example": "8-1", "msg": "가용 시간 아님 → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988484.133, "kind": "fl", "vid": 5, "example": "4-1", "msg": "ECU ×2.2로 학습이 16.0초 늦어짐 (35.9초)", "pattern": 4}
+{"t": 1792988485.618, "kind": "world", "vid": 1, "example": null, "msg": "핸드오버 H2 → C", "handover": ["H2", "C"]}
+{"t": 1792988487.013, "kind": "fl", "vid": 5, "example": "5-1", "msg": "TDMA 순서 대기 2.8초 (그룹 1/2)", "pattern": 5}
+{"t": 1792988487.013, "kind": "fl", "vid": 5, "example": "2-1", "msg": "기지국 범위 밖: 0/10 조각 전송 후 끊김, 0.0 MB 낭비", "pattern": 2, "wasted_mb": 0.0, "cause": "2-1"}
+{"t": 1792988487.671, "kind": "fl", "vid": 1, "example": "1-1", "msg": "계산 도중 돌발 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988487.935, "kind": "world", "vid": 5, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792988488.018, "kind": "fl", "vid": 5, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v1)"}
+{"t": 1792988490.765, "kind": "fl", "vid": 4, "example": "4-1", "msg": "ECU ×1.4로 학습이 5.6초 늦어짐 (19.0초)", "pattern": 4}
+{"t": 1792988491.475, "kind": "fl", "vid": 4, "example": "2-2", "msg": "98 km/h 도플러로 채널 추정 실패 (6/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988491.739, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 63%)"}
+{"t": 1792988491.739, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 63%)"}
+{"t": 1792988491.739, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 63%)"}
+{"t": 1792988496.546, "kind": "world", "vid": 1, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792988496.646, "kind": "world", "vid": 1, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988496.827, "kind": "fl", "vid": 2, "example": "4-1", "msg": "ECU ×1.5로 학습이 8.6초 늦어짐 (34.6초)", "pattern": 4}
+{"t": 1792988496.863, "kind": "fl", "vid": 4, "example": "2-2", "msg": "99 km/h 도플러로 채널 추정 실패 (9/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988496.947, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H2 범위 이탈"}
+{"t": 1792988496.947, "kind": "world", "vid": 7, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792988496.966, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.017, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.047, "kind": "world", "vid": 7, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988497.07, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.12, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.171, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.221, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.272, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.322, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.373, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.423, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.13로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.474, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.524, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.575, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.625, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.676, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.727, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.777, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.828, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.878, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.929, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988497.979, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.03, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.08, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.131, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.181, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.232, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.282, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.333, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.383, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.434, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.12로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.451, "kind": "world", "vid": 4, "example": null, "msg": "이탈 게이트로 맵을 떠남"}
+{"t": 1792988498.484, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.535, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.585, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.636, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.686, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.737, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.787, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.838, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.888, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.939, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988498.99, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.11로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988501.034, "kind": "fl", "vid": 7, "example": "7-4", "msg": "가중치 노이즈 ×0.05", "pattern": 7}
+{"t": 1792988501.035, "kind": "fl", "vid": 7, "example": "7-5", "msg": "시계 오차로 버전 1 → 2로 보고", "pattern": 7}
+{"t": 1792988501.758, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 67%)"}
+{"t": 1792988501.758, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 67%)"}
+{"t": 1792988501.758, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 67%)"}
+{"t": 1792988501.758, "kind": "world", "vid": 6, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 67%)"}
+{"t": 1792988501.767, "kind": "fl", "vid": 6, "example": "3-3", "msg": "충전 중일 때만 참여 → 이번엔 참여하지 않음 (서버에 알릴 신호가 SASAFL에 없음)", "pattern": 3}
+{"t": 1792988501.964, "kind": "fl", "vid": 4, "example": "2-1", "msg": "맵 밖: 8/10 조각 전송 후 끊김, 5.3 MB 낭비", "pattern": 2, "wasted_mb": 5.32, "cause": "8-3"}
+{"t": 1792988502.045, "kind": "fl", "vid": 2, "example": "5-1", "msg": "TDMA 순서 대기 3.0초 (그룹 0/2)", "pattern": 5}
+{"t": 1792988502.138, "kind": "upload", "vid": 7, "example": null, "msg": "v2 업로드 완료 1.0초", "version": 2, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988502.142, "kind": "arrive", "vid": 7, "example": null, "msg": "업데이트 도착 v2 (staleness -1)", "version": 2, "staleness": -1, "overwrite": false}
+{"t": 1792988502.246, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.07로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988502.247, "kind": "fl", "vid": 2, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v1)"}
+{"t": 1792988502.297, "kind": "fl", "vid": 2, "example": "5-2", "msg": "통신 품질 0.07로 낮아 전송 보류", "pattern": 5}
+{"t": 1792988503.563, "kind": "world", "vid": 3, "example": null, "msg": "집 도착, 시동 끔 (주차)", "stop": "home", "phase": "start"}
+{"t": 1792988503.675, "kind": "fl", "vid": 3, "example": "1-5", "msg": "주차·시동 꺼짐으로 학습 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988506.675, "kind": "world", "vid": 2, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792988506.675, "kind": "world", "vid": 2, "example": null, "msg": "권역 경계 통과 E → W", "region_cross": ["E", "W"]}
+{"t": 1792988510.983, "kind": "world", "vid": 8, "example": null, "msg": "진입 게이트로 새로 합류"}
+{"t": 1792988510.983, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792988510.983, "kind": "world", "vid": 8, "example": null, "msg": "권역 경계 통과 E → W", "region_cross": ["E", "W"]}
+{"t": 1792988511.044, "kind": "fl", "vid": 8, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v1)"}
+{"t": 1792988511.785, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 72%)"}
+{"t": 1792988511.785, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 72%)"}
+{"t": 1792988511.785, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 72%)"}
+{"t": 1792988512.786, "kind": "world", "vid": 2, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792988514.955, "kind": "fl", "vid": 5, "example": "4-1", "msg": "ECU ×2.2로 학습이 14.5초 늦어짐 (26.9초)", "pattern": 4}
+{"t": 1792988517.015, "kind": "fl", "vid": 5, "example": "5-1", "msg": "TDMA 순서 대기 2.0초 (그룹 1/2)", "pattern": 5}
+{"t": 1792988517.207, "kind": "fl", "vid": 5, "example": "2-3", "msg": "무선 패킷 오류 (2/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988520.848, "kind": "fl", "vid": 1, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v1)"}
+{"t": 1792988521.798, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 78%)"}
+{"t": 1792988521.798, "kind": "world", "vid": 6, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 78%)"}
+{"t": 1792988521.798, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 78%)"}
+{"t": 1792988521.909, "kind": "fl", "vid": 6, "example": "8-1", "msg": "가용 시간 아님 → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988523.077, "kind": "fl", "vid": 5, "example": "4-3", "msg": "재전송 대기로 5초 늦게 도착", "pattern": 4}
+{"t": 1792988523.077, "kind": "fl", "vid": 5, "example": "4-4", "msg": "업로드에 8.0초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988523.077, "kind": "upload", "vid": 5, "example": null, "msg": "v0 업로드 완료 8.0초", "version": 0, "delays": {"tdma": 1.95, "congestion": 0.0}}
+{"t": 1792988523.084, "kind": "arrive", "vid": 5, "example": null, "msg": "업데이트 도착 v0 (staleness 1)", "version": 0, "staleness": 1, "overwrite": false}
+{"t": 1792988529.911, "kind": "world", "vid": 6, "example": null, "msg": "핸드오버 A → H1", "handover": ["A", "H1"]}
+{"t": 1792988530.563, "kind": "round", "vid": null, "example": null, "msg": "2라운드 집계: 차량 [7, 5] 정확도 19.84%", "round": {"round": 2, "acc": 19.84, "loss": 3.1363, "t": 1792988530.5633457, "dur": 50.08, "quota": 2, "next_quota": 2, "picked": [{"vid": 7, "staleness": -1, "version": 2, "weight": 0.503}, {"vid": 5, "staleness": 1, "version": 0, "weight": 0.497}], "dups": [], "elapsed": 82.4}}
+{"t": 1792988530.735, "kind": "fl", "vid": 7, "example": "8-4", "msg": "강우 구역에서 수집한 데이터로 학습 (입력 분포 변화)", "pattern": 8}
+{"t": 1792988531.813, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 83%)"}
+{"t": 1792988531.813, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 83%)"}
+{"t": 1792988531.813, "kind": "world", "vid": 5, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 83%)"}
+{"t": 1792988531.813, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 83%)"}
+{"t": 1792988531.813, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 83%)"}
+{"t": 1792988535.588, "kind": "fl", "vid": 2, "example": "4-1", "msg": "ECU ×1.5로 학습이 11.5초 늦어짐 (33.3초)", "pattern": 4}
+{"t": 1792988536.123, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H1 범위 이탈"}
+{"t": 1792988538.008, "kind": "fl", "vid": 2, "example": "5-1", "msg": "TDMA 순서 대기 2.3초 (그룹 0/2)", "pattern": 5}
+{"t": 1792988538.008, "kind": "fl", "vid": 2, "example": "5-3", "msg": "음영지역 단절: 업데이트 보관 (연결 회복 후 전송)", "pattern": 5, "cause": "5-3"}
+{"t": 1792988538.059, "kind": "fl", "vid": 2, "example": null, "msg": "복귀: 마지막 모델 v1로 다시 학습 (서버는 v2)"}
+{"t": 1792988539.36, "kind": "fl", "vid": 8, "example": "4-1", "msg": "ECU ×2.0로 학습이 13.9초 늦어짐 (28.3초)", "pattern": 4}
+{"t": 1792988539.503, "kind": "fl", "vid": 8, "example": "2-1", "msg": "기지국 범위 밖: 0/10 조각 전송 후 끊김, 0.0 MB 낭비", "pattern": 2, "wasted_mb": 0.0, "cause": "2-1"}
+{"t": 1792988540.128, "kind": "world", "vid": 5, "example": null, "msg": "핸드오버 A → H1", "handover": ["A", "H1"]}
+{"t": 1792988541.83, "kind": "world", "vid": 5, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 88%)"}
+{"t": 1792988541.83, "kind": "world", "vid": 6, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 88%)"}
+{"t": 1792988541.83, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 88%)"}
+{"t": 1792988541.957, "kind": "fl", "vid": 7, "example": "7-4", "msg": "가중치 노이즈 ×0.05", "pattern": 7}
+{"t": 1792988541.96, "kind": "fl", "vid": 7, "example": "7-5", "msg": "시계 오차로 버전 2 → 3로 보고", "pattern": 7}
+{"t": 1792988542.052, "kind": "fl", "vid": 6, "example": "3-3", "msg": "충전 중일 때만 참여 → 이번엔 참여하지 않음 (서버에 알릴 신호가 SASAFL에 없음)", "pattern": 3}
+{"t": 1792988542.47, "kind": "fl", "vid": 7, "example": "2-3", "msg": "무선 패킷 오류 (4/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988543.232, "kind": "world", "vid": 6, "example": null, "msg": "핸드오버 H1 → A", "handover": ["H1", "A"]}
+{"t": 1792988543.333, "kind": "world", "vid": 8, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792988545.264, "kind": "fl", "vid": 1, "example": "4-1", "msg": "ECU ×2.0로 학습이 12.1초 늦어짐 (24.4초)", "pattern": 4}
+{"t": 1792988547.003, "kind": "fl", "vid": 1, "example": "5-1", "msg": "TDMA 순서 대기 1.6초 (그룹 1/2)", "pattern": 5}
+{"t": 1792988548.147, "kind": "fl", "vid": 7, "example": "4-3", "msg": "재전송 대기로 5초 늦게 도착", "pattern": 4}
+{"t": 1792988548.148, "kind": "fl", "vid": 7, "example": "4-4", "msg": "업로드에 6.1초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988548.148, "kind": "upload", "vid": 7, "example": null, "msg": "v3 업로드 완료 6.1초", "version": 3, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988548.149, "kind": "arrive", "vid": 7, "example": null, "msg": "업데이트 도착 v3 (staleness -1)", "version": 3, "staleness": -1, "overwrite": false}
+{"t": 1792988548.207, "kind": "fl", "vid": 1, "example": "4-2", "msg": "기지국 C 혼잡으로 1.2초 대기", "pattern": 4}
+{"t": 1792988548.686, "kind": "fl", "vid": 1, "example": "2-3", "msg": "무선 패킷 오류 (5/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988551.858, "kind": "world", "vid": 1, "example": null, "msg": "집 도착, 시동 끔 (주차)", "stop": "home", "phase": "start"}
+{"t": 1792988552.862, "kind": "world", "vid": 8, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792988553.786, "kind": "fl", "vid": 1, "example": "2-1", "msg": "시동 꺼짐: 4/10 조각 전송 후 끊김, 2.7 MB 낭비", "pattern": 2, "wasted_mb": 2.66, "cause": "1-5"}
+{"t": 1792988554.766, "kind": "world", "vid": 8, "example": null, "msg": "터널 통과", "zone": "tunnel"}
+{"t": 1792988558.271, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988558.322, "kind": "fl", "vid": 8, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v2)"}
+{"t": 1792988560.287, "kind": "fl", "vid": 5, "example": "4-1", "msg": "ECU ×2.2로 학습이 15.9초 늦어짐 (29.5초)", "pattern": 4}
+{"t": 1792988560.996, "kind": "fl", "vid": 5, "example": "2-3", "msg": "무선 패킷 오류 (6/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988561.876, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 95%)"}
+{"t": 1792988566.484, "kind": "fl", "vid": 5, "example": "4-3", "msg": "재전송 대기로 5초 늦게 도착", "pattern": 4}
+{"t": 1792988566.484, "kind": "fl", "vid": 5, "example": "4-4", "msg": "업로드에 6.1초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988566.484, "kind": "upload", "vid": 5, "example": null, "msg": "v2 업로드 완료 6.1초", "version": 2, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988566.485, "kind": "arrive", "vid": 5, "example": null, "msg": "업데이트 도착 v2 (staleness 0)", "version": 2, "staleness": 0, "overwrite": false}
+{"t": 1792988568.083, "kind": "world", "vid": 6, "example": null, "msg": "서비스센터 OTA 설치 시작 (재부팅)", "stop": "service", "phase": "start"}
+{"t": 1792988568.211, "kind": "fl", "vid": 6, "example": "1-2", "msg": "OTA 설치 중 → 이번엔 참여하지 않음", "pattern": 1}
+{"t": 1792988571.139, "kind": "round", "vid": null, "example": null, "msg": "3라운드 집계: 차량 [7, 5] 정확도 36.75%", "round": {"round": 3, "acc": 36.75, "loss": 2.2674, "t": 1792988571.1389573, "dur": 40.58, "quota": 2, "next_quota": 2, "picked": [{"vid": 7, "staleness": -1, "version": 3, "weight": 0.503}, {"vid": 5, "staleness": 0, "version": 2, "weight": 0.497}], "dups": [], "elapsed": 123.0}}
+{"t": 1792988571.26, "kind": "fl", "vid": 6, "example": "6-2", "msg": "새 모델 v3 수신 실패(OTA 설치 중) → v0로 계속", "pattern": 6, "cause": "1-2"}
+{"t": 1792988571.899, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 98%)"}
+{"t": 1792988580.528, "kind": "fl", "vid": 7, "example": "1-1", "msg": "계산 도중 돌발 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988580.528, "kind": "fl", "vid": 7, "example": null, "msg": "복귀: 마지막 모델 v3로 다시 학습 (서버는 v3)"}
+{"t": 1792988582.399, "kind": "fl", "vid": 2, "example": "4-1", "msg": "ECU ×1.5로 학습이 15.3초 늦어짐 (44.3초)", "pattern": 4}
+{"t": 1792988583.505, "kind": "upload", "vid": 2, "example": null, "msg": "v2 업로드 완료 1.0초", "version": 2, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988583.508, "kind": "arrive", "vid": 2, "example": null, "msg": "업데이트 도착 v2 (staleness 1)", "version": 2, "staleness": 1, "overwrite": false}
+{"t": 1792988584.626, "kind": "world", "vid": 5, "example": null, "msg": "기지국 H1 범위 이탈"}
+{"t": 1792988584.994, "kind": "fl", "vid": 8, "example": "4-1", "msg": "ECU ×2.0로 학습이 13.1초 늦어짐 (26.6초)", "pattern": 4}
+{"t": 1792988585.628, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H2 범위 이탈"}
+{"t": 1792988586.01, "kind": "fl", "vid": 2, "example": "5-1", "msg": "TDMA 순서 대기 2.5초 (그룹 0/2)", "pattern": 5}
+{"t": 1792988586.04, "kind": "fl", "vid": 8, "example": "2-1", "msg": "기지국 범위 밖: 0/10 조각 전송 후 끊김, 0.0 MB 낭비", "pattern": 2, "wasted_mb": 0.0, "cause": "2-1"}
+{"t": 1792988586.97, "kind": "fl", "vid": 2, "example": "4-4", "msg": "업로드에 3.4초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988586.97, "kind": "upload", "vid": 2, "example": null, "msg": "v0 업로드 완료 3.4초", "version": 0, "delays": {"tdma": 2.45, "congestion": 0.0}}
+{"t": 1792988586.974, "kind": "arrive", "vid": 2, "example": null, "msg": "업데이트 도착 v0 (staleness 3) — 같은 차량 업데이트가 버퍼에 이미 있어 덮어씀", "version": 0, "staleness": 3, "overwrite": true}
+{"t": 1792988587.13, "kind": "world", "vid": 8, "example": null, "msg": "이탈 게이트로 맵을 떠남"}
+{"t": 1792988587.431, "kind": "world", "vid": 4, "example": null, "msg": "진입 게이트로 새로 합류"}
+{"t": 1792988587.431, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792988587.431, "kind": "world", "vid": 4, "example": null, "msg": "권역 경계 통과 E → W", "region_cross": ["E", "W"]}
+{"t": 1792988587.449, "kind": "fl", "vid": 2, "example": "2-3", "msg": "무선 패킷 오류 (5/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988587.471, "kind": "fl", "vid": 4, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v3)"}
+{"t": 1792988591.024, "kind": "round", "vid": null, "example": null, "msg": "4라운드 집계: 차량 [2, 2] 정확도 20.87%", "round": {"round": 4, "acc": 20.87, "loss": 2.3026, "t": 1792988591.0240843, "dur": 19.88, "quota": 2, "next_quota": 2, "picked": [{"vid": 2, "staleness": 3, "version": 0, "weight": 0.0}, {"vid": 2, "staleness": 3, "version": 0, "weight": 0.0}], "dups": [2], "elapsed": 142.9}}
+{"t": 1792988591.024, "kind": "fl", "vid": 2, "example": null, "msg": "차량 [2]: 같은 라운드에 두 번 집계됨 — 버퍼가 차량당 1칸이라 최신 것만 남음. 원본 calculate_coefficient가 그 차량 비중을 합으로 두 번 나눠 비중 합이 0.0001 (1이어야 함)"}
+{"t": 1792988591.142, "kind": "fl", "vid": 6, "example": "6-2", "msg": "새 모델 v4 수신 실패(OTA 설치 중) → v0로 계속", "pattern": 6, "cause": "1-2"}
+{"t": 1792988591.15, "kind": "fl", "vid": 5, "example": "6-1", "msg": "새 모델 v4 수신 실패(기지국 범위 밖) → v3로 계속", "pattern": 6, "cause": "2-1"}
+{"t": 1792988591.941, "kind": "world", "vid": 5, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792988592.689, "kind": "fl", "vid": 7, "example": "7-4", "msg": "가중치 노이즈 ×0.05", "pattern": 7}
+{"t": 1792988592.691, "kind": "fl", "vid": 7, "example": "7-5", "msg": "시계 오차로 버전 3 → 4로 보고", "pattern": 7}
+{"t": 1792988593.036, "kind": "arrive", "vid": 2, "example": null, "msg": "업데이트 도착 v1 (staleness 3)", "version": 1, "staleness": 3, "overwrite": false}
+{"t": 1792988593.038, "kind": "fl", "vid": 2, "example": "4-3", "msg": "재전송 대기로 5초 늦게 도착", "pattern": 4}
+{"t": 1792988593.038, "kind": "fl", "vid": 2, "example": "4-4", "msg": "업로드에 6.1초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988593.038, "kind": "upload", "vid": 2, "example": null, "msg": "v1 업로드 완료 6.1초", "version": 1, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988593.038, "kind": "fl", "vid": 2, "example": "5-3", "msg": "보관한 업데이트 2개를 한꺼번에 전송 (버전 [0, 1])", "pattern": 5, "n": 2}
+{"t": 1792988595.024, "kind": "fl", "vid": 7, "example": "5-1", "msg": "TDMA 순서 대기 2.2초 (그룹 1/2)", "pattern": 5}
+{"t": 1792988595.987, "kind": "fl", "vid": 7, "example": "4-4", "msg": "업로드에 3.2초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988595.988, "kind": "upload", "vid": 7, "example": null, "msg": "v4 업로드 완료 3.2초", "version": 4, "delays": {"tdma": 2.21, "congestion": 0.0}}
+{"t": 1792988595.992, "kind": "arrive", "vid": 7, "example": null, "msg": "업데이트 도착 v4 (staleness 0)", "version": 4, "staleness": 0, "overwrite": false}
+{"t": 1792988599.483, "kind": "fl", "vid": 5, "example": "4-1", "msg": "ECU ×2.2로 학습이 15.2초 늦어짐 (28.2초)", "pattern": 4}
+{"t": 1792988600.555, "kind": "world", "vid": 7, "example": null, "msg": "집 도착, 시동 끔 (주차)", "stop": "home", "phase": "start"}
+{"t": 1792988601.027, "kind": "fl", "vid": 5, "example": "2-6", "msg": "터널: 0/10 조각 전송 후 끊김, 0.0 MB 낭비", "pattern": 2, "wasted_mb": 0.0, "cause": "2-6"}
+{"t": 1792988601.358, "kind": "world", "vid": 5, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792988602.638, "kind": "round", "vid": null, "example": null, "msg": "5라운드 집계: 차량 [2, 7] 정확도 19.87%", "round": {"round": 5, "acc": 19.87, "loss": 3.5428, "t": 1792988602.637716, "dur": 11.61, "quota": 2, "next_quota": 3, "picked": [{"vid": 2, "staleness": 3, "version": 1, "weight": 0.487}, {"vid": 7, "staleness": 0, "version": 4, "weight": 0.513}], "dups": [], "elapsed": 154.5}}
+{"t": 1792988602.81, "kind": "fl", "vid": 7, "example": "6-1", "msg": "새 모델 v5 수신 실패(시동 꺼짐) → v3로 계속", "pattern": 6, "cause": "1-5"}
+{"t": 1792988602.817, "kind": "fl", "vid": 6, "example": "6-2", "msg": "새 모델 v5 수신 실패(OTA 설치 중) → v0로 계속", "pattern": 6, "cause": "1-2"}
+{"t": 1792988603.266, "kind": "world", "vid": 5, "example": null, "msg": "터널 통과", "zone": "tunnel"}
+{"t": 1792988606.772, "kind": "world", "vid": 5, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988606.856, "kind": "fl", "vid": 5, "example": null, "msg": "복귀: 마지막 모델 v3로 다시 학습 (서버는 v5)"}
+{"t": 1792988607.873, "kind": "world", "vid": 3, "example": null, "msg": "시동 켬, 출발", "stop": "home", "phase": "end"}
+{"t": 1792988607.901, "kind": "fl", "vid": 3, "example": null, "msg": "복귀: 마지막 모델 v1로 다시 학습 (서버는 v5)"}
+{"t": 1792988612.48, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H1 범위 이탈"}
+{"t": 1792988619.788, "kind": "world", "vid": 4, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792988620.188, "kind": "world", "vid": 1, "example": null, "msg": "시동 켬, 출발", "stop": "home", "phase": "end"}
+{"t": 1792988620.214, "kind": "fl", "vid": 1, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v5)"}
+{"t": 1792988620.788, "kind": "fl", "vid": 4, "example": "4-1", "msg": "ECU ×1.4로 학습이 9.8초 늦어짐 (33.3초)", "pattern": 4}
+{"t": 1792988622.046, "kind": "fl", "vid": 4, "example": "5-3", "msg": "터널: 업데이트 보관 (연결 회복 후 전송)", "pattern": 5, "cause": "2-6"}
+{"t": 1792988622.098, "kind": "fl", "vid": 4, "example": null, "msg": "복귀: 마지막 모델 v3로 다시 학습 (서버는 v5)"}
+{"t": 1792988629.306, "kind": "world", "vid": 4, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792988629.739, "kind": "fl", "vid": 5, "example": "4-1", "msg": "ECU ×2.2로 학습이 12.3초 늦어짐 (22.8초)", "pattern": 4}
+{"t": 1792988630.918, "kind": "fl", "vid": 2, "example": "4-1", "msg": "ECU ×1.5로 학습이 13.1초 늦어짐 (37.9초)", "pattern": 4}
+{"t": 1792988631.209, "kind": "world", "vid": 4, "example": null, "msg": "터널 통과", "zone": "tunnel"}
+{"t": 1792988631.489, "kind": "fl", "vid": 3, "example": "7-1", "msg": "학습률 0.02로 학습 (정상 0.01)", "pattern": 7}
+{"t": 1792988631.489, "kind": "fl", "vid": 3, "example": "4-1", "msg": "ECU ×1.4로 학습이 7.0초 늦어짐 (23.5초)", "pattern": 4}
+{"t": 1792988632.002, "kind": "upload", "vid": 5, "example": null, "msg": "v3 업로드 완료 2.2초", "version": 3, "delays": {"tdma": 1.2, "congestion": 0.0}}
+{"t": 1792988632.004, "kind": "arrive", "vid": 5, "example": null, "msg": "업데이트 도착 v3 (staleness 2)", "version": 3, "staleness": 2, "overwrite": false}
+{"t": 1792988632.009, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 92%)"}
+{"t": 1792988632.582, "kind": "upload", "vid": 3, "example": null, "msg": "v1 업로드 완료 1.0초", "version": 1, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988632.584, "kind": "arrive", "vid": 3, "example": null, "msg": "업데이트 도착 v1 (staleness 4)", "version": 1, "staleness": 4, "overwrite": false}
+{"t": 1792988632.61, "kind": "world", "vid": 6, "example": null, "msg": "OTA 설치·재부팅 완료", "stop": "service", "phase": "end"}
+{"t": 1792988632.841, "kind": "fl", "vid": 6, "example": "3-3", "msg": "충전 중일 때만 참여 → 이번엔 참여하지 않음 (서버에 알릴 신호가 SASAFL에 없음)", "pattern": 3}
+{"t": 1792988634.009, "kind": "fl", "vid": 2, "example": "5-1", "msg": "TDMA 순서 대기 3.0초 (그룹 0/2)", "pattern": 5}
+{"t": 1792988634.615, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988634.971, "kind": "fl", "vid": 2, "example": "4-4", "msg": "업로드에 3.9초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988634.971, "kind": "upload", "vid": 2, "example": null, "msg": "v4 업로드 완료 3.9초", "version": 4, "delays": {"tdma": 2.96, "congestion": 0.0}}
+{"t": 1792988634.972, "kind": "arrive", "vid": 2, "example": null, "msg": "업데이트 도착 v4 (staleness 1)", "version": 4, "staleness": 1, "overwrite": false}
+{"t": 1792988635.417, "kind": "world", "vid": 3, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792988635.517, "kind": "world", "vid": 3, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988641.118, "kind": "round", "vid": null, "example": null, "msg": "6라운드 집계: 차량 [5, 3, 2] 정확도 51.19%", "round": {"round": 6, "acc": 51.19, "loss": 1.8291, "t": 1792988641.118177, "dur": 38.48, "quota": 3, "next_quota": 2, "picked": [{"vid": 5, "staleness": 2, "version": 3, "weight": 0.323}, {"vid": 3, "staleness": 4, "version": 1, "weight": 0.367}, {"vid": 2, "staleness": 1, "version": 4, "weight": 0.31}], "dups": [], "elapsed": 193.0}}
+{"t": 1792988642.028, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 87%)"}
+{"t": 1792988643.9, "kind": "fl", "vid": 4, "example": "4-1", "msg": "ECU ×1.4로 학습이 6.4초 늦어짐 (21.8초)", "pattern": 4}
+{"t": 1792988645.634, "kind": "world", "vid": 2, "example": null, "msg": "충전소 정차, 충전 시작", "stop": "gas", "phase": "start"}
+{"t": 1792988646.012, "kind": "fl", "vid": 4, "example": "5-1", "msg": "TDMA 순서 대기 2.0초 (그룹 0/2)", "pattern": 5}
+{"t": 1792988646.395, "kind": "fl", "vid": 4, "example": "2-2", "msg": "96 km/h 도플러로 채널 추정 실패 (4/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988649.24, "kind": "fl", "vid": 1, "example": "4-1", "msg": "ECU ×2.0로 학습이 14.3초 늦어짐 (29.0초)", "pattern": 4}
+{"t": 1792988649.246, "kind": "world", "vid": 5, "example": null, "msg": "핸드오버 H2 → C", "handover": ["H2", "C"]}
+{"t": 1792988650.353, "kind": "upload", "vid": 1, "example": null, "msg": "v0 업로드 완료 1.0초", "version": 0, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988650.356, "kind": "arrive", "vid": 1, "example": null, "msg": "업데이트 도착 v0 (staleness 6)", "version": 0, "staleness": 6, "overwrite": false}
+{"t": 1792988652.052, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 82%)"}
+{"t": 1792988652.073, "kind": "fl", "vid": 4, "example": "4-3", "msg": "재전송 대기로 5초 늦게 도착", "pattern": 4}
+{"t": 1792988652.073, "kind": "fl", "vid": 4, "example": "4-4", "msg": "업로드에 8.1초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988652.073, "kind": "upload", "vid": 4, "example": null, "msg": "v3 업로드 완료 8.1초", "version": 3, "delays": {"tdma": 2.0, "congestion": 0.0}}
+{"t": 1792988652.077, "kind": "arrive", "vid": 4, "example": null, "msg": "업데이트 도착 v3 (staleness 3)", "version": 3, "staleness": 3, "overwrite": false}
+{"t": 1792988652.22, "kind": "fl", "vid": 4, "example": "2-2", "msg": "96 km/h 도플러로 채널 추정 실패 (1/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988653.911, "kind": "fl", "vid": 3, "example": "4-5", "msg": "주행 보조 기능이 연산을 점유해 학습 지연", "pattern": 4}
+{"t": 1792988657.416, "kind": "fl", "vid": 4, "example": "2-2", "msg": "98 km/h 도플러로 채널 추정 실패 (2/10 조각) → 5.0초 뒤 재전송", "pattern": 2}
+{"t": 1792988659.854, "kind": "round", "vid": null, "example": null, "msg": "7라운드 집계: 차량 [1, 4] 정확도 19.82%", "round": {"round": 7, "acc": 19.82, "loss": 2.6019, "t": 1792988659.854305, "dur": 18.74, "quota": 2, "next_quota": 2, "picked": [{"vid": 1, "staleness": 6, "version": 0, "weight": 0.495}, {"vid": 4, "staleness": 3, "version": 3, "weight": 0.505}], "dups": [], "elapsed": 211.7}}
+{"t": 1792988660.067, "kind": "world", "vid": 6, "example": null, "msg": "기지국 A 범위 이탈"}
+{"t": 1792988661.172, "kind": "world", "vid": 7, "example": null, "msg": "시동 켬, 출발", "stop": "home", "phase": "end"}
+{"t": 1792988661.196, "kind": "fl", "vid": 7, "example": null, "msg": "복귀: 마지막 모델 v3로 다시 학습 (서버는 v7)"}
+{"t": 1792988661.873, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H2 범위 이탈"}
+{"t": 1792988662.518, "kind": "fl", "vid": 4, "example": "5-2", "msg": "기지국 범위 밖: 업데이트 보관 (연결 회복 후 전송)", "pattern": 5, "cause": "2-1"}
+{"t": 1792988662.518, "kind": "fl", "vid": 4, "example": "8-1", "msg": "가용 시간 아님 → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988663.369, "kind": "fl", "vid": 5, "example": "1-1", "msg": "계산 도중 돌발 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988663.37, "kind": "fl", "vid": 5, "example": null, "msg": "복귀: 마지막 모델 v6로 다시 학습 (서버는 v7)"}
+{"t": 1792988663.478, "kind": "world", "vid": 4, "example": null, "msg": "이탈 게이트로 맵을 떠남"}
+{"t": 1792988663.721, "kind": "fl", "vid": 4, "example": "8-3", "msg": "맵 밖(이탈) → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988664.562, "kind": "fl", "vid": 2, "example": "4-1", "msg": "ECU ×1.5로 학습이 8.1초 늦어짐 (23.2초)", "pattern": 4}
+{"t": 1792988665.667, "kind": "upload", "vid": 2, "example": null, "msg": "v6 업로드 완료 1.0초", "version": 6, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988665.668, "kind": "arrive", "vid": 2, "example": null, "msg": "업데이트 도착 v6 (staleness 1)", "version": 6, "staleness": 1, "overwrite": false}
+{"t": 1792988666.259, "kind": "fl", "vid": 1, "example": "4-5", "msg": "주행 보조 기능이 연산을 점유해 학습 지연", "pattern": 4}
+{"t": 1792988666.381, "kind": "world", "vid": 6, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792988669.721, "kind": "fl", "vid": 3, "example": "7-1", "msg": "학습률 0.02로 학습 (정상 0.01)", "pattern": 7}
+{"t": 1792988669.721, "kind": "fl", "vid": 3, "example": "4-1", "msg": "ECU ×1.4로 학습이 6.0초 늦어짐 (28.4초)", "pattern": 4}
+{"t": 1792988670.832, "kind": "upload", "vid": 3, "example": null, "msg": "v6 업로드 완료 1.0초", "version": 6, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988670.833, "kind": "arrive", "vid": 3, "example": null, "msg": "업데이트 도착 v6 (staleness 1)", "version": 6, "staleness": 1, "overwrite": false}
+{"t": 1792988672.095, "kind": "world", "vid": 4, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 72%)"}
+{"t": 1792988672.095, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 72%)"}
+{"t": 1792988672.295, "kind": "world", "vid": 8, "example": null, "msg": "진입 게이트로 새로 합류"}
+{"t": 1792988672.295, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792988672.295, "kind": "world", "vid": 8, "example": null, "msg": "권역 경계 통과 E → W", "region_cross": ["E", "W"]}
+{"t": 1792988672.314, "kind": "fl", "vid": 8, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v7)"}
+{"t": 1792988674.499, "kind": "world", "vid": 6, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792988675.325, "kind": "fl", "vid": 7, "example": "7-4", "msg": "가중치 노이즈 ×0.05", "pattern": 7}
+{"t": 1792988675.327, "kind": "fl", "vid": 7, "example": "7-5", "msg": "시계 오차로 버전 3 → 4로 보고", "pattern": 7}
+{"t": 1792988676.426, "kind": "upload", "vid": 7, "example": null, "msg": "v4 업로드 완료 1.0초", "version": 4, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988676.43, "kind": "arrive", "vid": 7, "example": null, "msg": "업데이트 도착 v4 (staleness 3)", "version": 4, "staleness": 3, "overwrite": false}
+{"t": 1792988678.113, "kind": "round", "vid": null, "example": null, "msg": "8라운드 집계: 차량 [2, 3] 정확도 23.73%", "round": {"round": 8, "acc": 23.73, "loss": 2.8014, "t": 1792988678.1130142, "dur": 18.26, "quota": 2, "next_quota": 2, "picked": [{"vid": 2, "staleness": 1, "version": 6, "weight": 0.458}, {"vid": 3, "staleness": 1, "version": 6, "weight": 0.542}], "dups": [], "elapsed": 230.0}}
+{"t": 1792988678.272, "kind": "fl", "vid": 4, "example": "6-1", "msg": "새 모델 v8 수신 실패(맵 밖) → v7로 계속", "pattern": 6, "cause": "8-3"}
+{"t": 1792988678.277, "kind": "fl", "vid": 5, "example": "6-1", "msg": "새 모델 v8 수신 실패(보안 게이트웨이 차단) → v6로 계속", "pattern": 6, "cause": "3-4"}
+{"t": 1792988682.108, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 67%)"}
+{"t": 1792988682.108, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 67%)"}
+{"t": 1792988682.108, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 67%)"}
+{"t": 1792988682.108, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 67%)"}
+{"t": 1792988692.131, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 62%)"}
+{"t": 1792988692.131, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 62%)"}
+{"t": 1792988692.131, "kind": "world", "vid": 5, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 62%)"}
+{"t": 1792988692.131, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 62%)"}
+{"t": 1792988694.038, "kind": "world", "vid": 4, "example": null, "msg": "진입 게이트로 새로 합류"}
+{"t": 1792988694.038, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H1 범위 진입"}
+{"t": 1792988694.038, "kind": "world", "vid": 4, "example": null, "msg": "권역 경계 통과 E → W", "region_cross": ["E", "W"]}
+{"t": 1792988694.286, "kind": "fl", "vid": 3, "example": "8-4", "msg": "강우 구역에서 수집한 데이터로 학습 (입력 분포 변화)", "pattern": 8}
+{"t": 1792988695.041, "kind": "upload", "vid": 4, "example": null, "msg": "v3 업로드 완료 1.0초", "version": 3, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988695.041, "kind": "fl", "vid": 4, "example": "5-2", "msg": "보관한 업데이트 1개를 한꺼번에 전송 (버전 [3])", "pattern": 5, "n": 1}
+{"t": 1792988695.049, "kind": "arrive", "vid": 4, "example": null, "msg": "업데이트 도착 v3 (staleness 5)", "version": 3, "staleness": 5, "overwrite": false}
+{"t": 1792988696.244, "kind": "world", "vid": 1, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792988697.447, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H1 범위 이탈"}
+{"t": 1792988697.534, "kind": "fl", "vid": 5, "example": "4-1", "msg": "ECU ×2.2로 학습이 18.4초 늦어짐 (34.1초)", "pattern": 4}
+{"t": 1792988698.19, "kind": "fl", "vid": 2, "example": "4-1", "msg": "ECU ×1.5로 학습이 6.9초 늦어짐 (19.9초)", "pattern": 4}
+{"t": 1792988698.607, "kind": "upload", "vid": 5, "example": null, "msg": "v6 업로드 완료 1.0초", "version": 6, "delays": {"tdma": 0.0, "congestion": 0.0}}
+{"t": 1792988698.608, "kind": "arrive", "vid": 5, "example": null, "msg": "업데이트 도착 v6 (staleness 2)", "version": 6, "staleness": 2, "overwrite": false}
+{"t": 1792988700.05, "kind": "fl", "vid": 2, "example": "5-1", "msg": "TDMA 순서 대기 1.8초 (그룹 0/2)", "pattern": 5}
+{"t": 1792988701.012, "kind": "upload", "vid": 2, "example": null, "msg": "v8 업로드 완료 2.7초", "version": 8, "delays": {"tdma": 1.75, "congestion": 0.0}}
+{"t": 1792988701.013, "kind": "arrive", "vid": 2, "example": null, "msg": "업데이트 도착 v8 (staleness 0)", "version": 8, "staleness": 0, "overwrite": false}
+{"t": 1792988701.563, "kind": "fl", "vid": 3, "example": "7-1", "msg": "학습률 0.02로 학습 (정상 0.01)", "pattern": 7}
+{"t": 1792988701.563, "kind": "fl", "vid": 3, "example": "4-1", "msg": "ECU ×1.4로 학습이 6.9초 늦어짐 (23.2초)", "pattern": 4}
+{"t": 1792988702.155, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 58%)"}
+{"t": 1792988702.155, "kind": "world", "vid": 2, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 58%)"}
+{"t": 1792988702.155, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 58%)"}
+{"t": 1792988702.155, "kind": "world", "vid": 7, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 58%)"}
+{"t": 1792988702.155, "kind": "world", "vid": 8, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 58%)"}
+{"t": 1792988702.551, "kind": "round", "vid": null, "example": null, "msg": "9라운드 집계: 차량 [7, 4] 정확도 37.7%", "round": {"round": 9, "acc": 37.7, "loss": 1.9922, "t": 1792988702.5508204, "dur": 24.44, "quota": 2, "next_quota": 2, "picked": [{"vid": 7, "staleness": 4, "version": 4, "weight": 0.507}, {"vid": 4, "staleness": 5, "version": 3, "weight": 0.493}], "dups": [], "elapsed": 254.4}}
+{"t": 1792988702.699, "kind": "fl", "vid": 1, "example": "6-1", "msg": "새 모델 v9 수신 실패(기지국 범위 밖) → v7로 계속", "pattern": 6, "cause": "2-1"}
+{"t": 1792988702.713, "kind": "fl", "vid": 7, "example": "8-1", "msg": "가용 시간 아님 → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988702.737, "kind": "fl", "vid": 8, "example": "6-1", "msg": "새 모델 v9 수신 실패(기지국 범위 밖) → v7로 계속", "pattern": 6, "cause": "2-1"}
+{"t": 1792988703.357, "kind": "world", "vid": 2, "example": null, "msg": "충전 끝, 출발", "stop": "gas", "phase": "end"}
+{"t": 1792988704.362, "kind": "world", "vid": 1, "example": null, "msg": "권역 경계 통과 E → W", "region_cross": ["E", "W"]}
+{"t": 1792988704.662, "kind": "world", "vid": 8, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792988704.948, "kind": "fl", "vid": 3, "example": "4-4", "msg": "업로드에 3.2초 (대역폭·혼잡·재전송 포함)", "pattern": 4}
+{"t": 1792988704.948, "kind": "upload", "vid": 3, "example": null, "msg": "v8 업로드 완료 3.2초", "version": 8, "delays": {"tdma": 1.32, "congestion": 0.0}}
+{"t": 1792988704.949, "kind": "arrive", "vid": 3, "example": null, "msg": "업데이트 도착 v8 (staleness 1)", "version": 8, "staleness": 1, "overwrite": false}
+{"t": 1792988710.322, "kind": "round", "vid": null, "example": null, "msg": "10라운드 집계: 차량 [5, 2] 정확도 29.55%", "round": {"round": 10, "acc": 29.55, "loss": 1.9067, "t": 1792988710.3218327, "dur": 7.77, "quota": 2, "next_quota": 2, "picked": [{"vid": 5, "staleness": 3, "version": 6, "weight": 0.51}, {"vid": 2, "staleness": 1, "version": 8, "weight": 0.49}], "dups": [], "elapsed": 262.2}}
+{"t": 1792988710.466, "kind": "fl", "vid": 8, "example": "6-1", "msg": "새 모델 v10 수신 실패(터널) → v7로 계속", "pattern": 6, "cause": "2-6"}
+{"t": 1792988710.476, "kind": "fl", "vid": 5, "example": "8-1", "msg": "가용 시간 아님 → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988710.478, "kind": "fl", "vid": 1, "example": "6-1", "msg": "새 모델 v10 수신 실패(기지국 범위 밖) → v7로 계속", "pattern": 6, "cause": "2-1"}
+{"t": 1792988710.669, "kind": "world", "vid": 1, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792988711.67, "kind": "world", "vid": 2, "example": null, "msg": "핸드오버 A → H1", "handover": ["A", "H1"]}
+{"t": 1792988712.171, "kind": "world", "vid": 1, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 55%)"}
+{"t": 1792988712.171, "kind": "world", "vid": 3, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 55%)"}
+{"t": 1792988712.171, "kind": "world", "vid": 5, "example": null, "msg": "가용 상태 켜짐 (목표 가용률 55%)"}
+{"t": 1792988712.171, "kind": "world", "vid": 6, "example": null, "msg": "가용 상태 꺼짐 (목표 가용률 55%)"}
+{"t": 1792988712.472, "kind": "fl", "vid": 6, "example": "8-1", "msg": "가용 시간 아님 → 이번엔 참여하지 않음", "pattern": 8}
+{"t": 1792988714.073, "kind": "world", "vid": 8, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792988715.475, "kind": "world", "vid": 5, "example": null, "msg": "집 도착, 시동 끔 (주차)", "stop": "home", "phase": "start"}
+{"t": 1792988715.619, "kind": "fl", "vid": 5, "example": "1-5", "msg": "주차·시동 꺼짐으로 학습 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792988715.975, "kind": "world", "vid": 8, "example": null, "msg": "터널 통과", "zone": "tunnel"}
+{"t": 1792988719.079, "kind": "world", "vid": 4, "example": null, "msg": "기지국 H1 범위 이탈"}
+{"t": 1792988719.479, "kind": "world", "vid": 8, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792988721.618, "kind": "fl", "vid": 1, "example": "4-1", "msg": "ECU ×2.0로 학습이 26.2초 늦어짐 (61.6초)", "pattern": 4}
+{"t": 1792988722.124, "kind": "control", "vid": null, "example": null, "msg": "시뮬레이션 정지"}
+{"t": 1792988724.171, "kind": "control", "vid": null, "example": null, "msg": "시뮬레이션 정지"}

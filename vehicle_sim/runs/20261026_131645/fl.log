@@ -1,0 +1,203 @@
+Process 0 uses 1 threads
+Process 7 uses 1 threadsProcess 8 uses 1 threads
+
+Process 5 uses 1 threads
+Process 1 uses 1 threads
+Process 2 uses 1 threads
+Process 3 uses 1 threadsProcess 6 uses 1 threads
+
+Process 4 uses 1 threads
+[2026-10-26 13:16:47.432740] MAIN >> I am client in wise-175 rank 5
+[2026-10-26 13:16:47.432771] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-26 13:16:47.435717] MAIN >> I am client in wise-175 rank 7
+[2026-10-26 13:16:47.435753] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-26 13:16:47.439831] MAIN >> I am server in wise-175 rank 0[2026-10-26 13:16:47.439842] MAIN >> I am client in wise-175 rank 8
+
+[2026-10-26 13:16:47.439869] SERVER >> global model을 초기화 합니다.[2026-10-26 13:16:47.439871] CLIENT 8 >> 빈 모델을 생성합니다.
+
+[2026-10-26 13:16:47.449785] MAIN >> I am client in wise-175 rank 4
+[2026-10-26 13:16:47.449820] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-26 13:16:47.450786] MAIN >> I am client in wise-175 rank 1
+[2026-10-26 13:16:47.450818] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-26 13:16:47.451848] MAIN >> I am client in wise-175 rank 6
+[2026-10-26 13:16:47.451882] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-26 13:16:47.452744] MAIN >> I am client in wise-175 rank 2
+[2026-10-26 13:16:47.452781] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-26 13:16:47.457147] MAIN >> I am client in wise-175 rank 3
+[2026-10-26 13:16:47.457181] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-26 13:16:47.481017] SERVER >> 데이터셋을 다운받습니다.
+[2026-10-26 13:16:47.542617] SERVER >> 각 client들이 가져갈 data 개수 = [7572, 7042, 6873, 7561, 7136, 7664, 7566, 8586]
+[2026-10-26 13:16:47.612536] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-26 13:16:47.625542] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:16:47.636619] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:16:47.648606] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:16:47.661314] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:16:47.672588] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:16:47.685353] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:16:47.697823] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:16:47.710637] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:16:47.711334] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-26 13:16:47.711667] CLIENT 1 >> communication delay는 0입니다.
+[2026-10-26 13:16:47.711785] CLIENT 3 >> communication delay는 0입니다.
+[2026-10-26 13:16:47.711809] CLIENT 5 >> communication delay는 0입니다.
+[2026-10-26 13:16:47.711854] CLIENT 2 >> communication delay는 0입니다.[2026-10-26 13:16:47.711854] CLIENT 6 >> communication delay는 0입니다.[2026-10-26 13:16:47.711861] CLIENT 4 >> communication delay는 0입니다.
+[2026-10-26 13:16:47.711864] CLIENT 7 >> communication delay는 0입니다.
+
+
+[2026-10-26 13:16:47.711994] CLIENT 8 >> communication delay는 0입니다.
+[W init.cpp:1506] Warning: ProcessGroup::Work::source_rank API is being deprecated, please ping https://github.com/pytorch/pytorch/issues/46291 if you see this warning (function operator())
+[2026-10-26 13:18:22.058358] SERVER >> picked clients info: 
+CLIENT 7의 staleness: -1.0
+CLIENT 5의 staleness: 0.0
+
+[2026-10-26 13:18:22.058426] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:18:31.158854] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 1.0
+CLIENT 2의 staleness: 1.0
+
+[2026-10-26 13:18:31.158914] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:19:25.018198] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 2.0
+CLIENT 2의 staleness: 0.0
+
+[2026-10-26 13:19:25.018267] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:19:46.013707] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 1.0
+CLIENT 3의 staleness: 3.0
+
+[2026-10-26 13:19:46.013802] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:20:06.955540] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 1.0
+CLIENT 1의 staleness: 4.0
+
+[2026-10-26 13:20:06.955591] SERVER >> global aggregation을 진행합니다.
+Exception in thread Exception in thread Thread-2:
+Thread-2Traceback (most recent call last):
+:
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread Exception in thread Thread-2:
+Thread-2Traceback (most recent call last):
+:
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 169, in receive_global_model_from_server
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 169, in receive_global_model_from_server
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    dist.recv(tensor=self.global_model_info, src=0)
+      File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    dist.recv(tensor=self.global_model_info, src=0)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+    RuntimeErrorself._target(*self._args, **self._kwargs): 
+[/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:21219
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 169, in receive_global_model_from_server
+    pg.recv([tensor], src, tag).wait()
+    RuntimeErrorself._target(*self._args, **self._kwargs): 
+[/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:21906
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 169, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    dist.recv(tensor=self.global_model_info, src=0)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:28828
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:31940
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 169, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:15785
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 169, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 169, in receive_global_model_from_server
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:3745
+    dist.recv(tensor=self.global_model_info, src=0)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.1.1]:16289
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/wise-175/Mando/FedMPI/vehicle_sim/fl/sim_sasafl.py", line 169, in receive_global_model_from_server
+    dist.recv(tensor=self.global_model_info, src=0)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/distributed_c10d.py", line 1002, in recv
+    pg.recv([tensor], src, tag).wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1659484810403/work/third_party/gloo/gloo/transport/tcp/pair.cc:598] Connection closed by peer [127.0.0.1]:27327
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 1611913 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 1611914 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 1611915 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 1611916 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 1611917 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 1611918 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 1611919 closing signal SIGTERM
+WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 1611920 closing signal SIGTERM
+ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: -9) local_rank: 0 (pid: 1611912) of binary: /home/wise-175/anaconda3/envs/FL/bin/python
+Traceback (most recent call last):
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 765, in <module>
+    main()
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 345, in wrapper
+    return f(*args, **kwargs)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 761, in main
+    run(args)
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/run.py", line 752, in run
+    elastic_launch(
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 131, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/wise-175/anaconda3/envs/FL/lib/python3.8/site-packages/torch/distributed/launcher/api.py", line 245, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+/home/wise-175/Mando/FedMPI/vehicle_sim/fl/fl_entry.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-10-26_13:20:36
+  host      : wise-175
+  rank      : 0 (local_rank: 0)
+  exitcode  : -9 (pid: 1611912)
+  error_file: <N/A>
+  traceback : Signal 9 (SIGKILL) received by PID 1611912
+============================================================

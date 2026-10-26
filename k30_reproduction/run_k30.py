@@ -48,7 +48,7 @@ STAGES = {
         {"name": "F3_single_cats123_SASAFL", "method": "SASAFL", "C": 0.1, "mode": "single", "cats": SMALL_CATS},
     ],
 }
-# git 동기화(176 → 175와 같은 커밋 31288d0) 후 S2 구성 재테스트 3회
+# git 동기화(176 → 175와 같은 커밋 f0df1a9) 후 S2 구성 재테스트 3회
 STAGES["resync"] = [
     {"name": f"R{i}_two_paperCats_SASAFL_after_gitsync", "method": "SASAFL", "C": 0.1, "mode": "two", "cats": PAPER_CATS}
     for i in (1, 2, 3)

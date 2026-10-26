@@ -539,7 +539,7 @@ def report_E7(exp, loaded):
            "- 이 파일은 집계 직후 `Server.last_global_loss = global_loss`로 직전 loss를 덮어쓴 뒤 "
            "`get_next_round_minimum_local_model(global_loss, ...)`를 부른다. 그래서 gl_r / gl_(r-1)이 항상 1이 되어 "
            "quota가 처음 값 int(C·K)에 고정된다.",
-           "- 현재 저장소 코드(E1·E2·E4)는 `73f5e0b`(2026-10-08)에서 이 줄을 루프 밖으로 옮겨 quota가 실제로 변한다.",
+           "- 현재 저장소 코드(E1·E2·E4)는 `f8fd198`(2026-10-08)에서 이 줄을 루프 밖으로 옮겨 quota가 실제로 변한다.",
            "- BSA는 quota 적응을 쓰지 않으므로 E1·E2·E4의 BSA 실행을 그대로 쓴다.", "",
            "## 실행 상태", "", status_table(exp, loaded), "",
            "## quota가 실제로 고정됐는지 (rounds.csv의 라운드별 quota)", "",
@@ -569,7 +569,7 @@ def report_E7(exp, loaded):
             "| `d36ab53`·`a5cf02b`·`96dc297` | 2023-11-28 | miri | 꺼짐 (마지막 SASAFL 수정) |",
             "| `c0b819b` | 2023-12-14 | miri | 꺼짐 (원저자 마지막 커밋, SAFA 수정) |",
             "| 논문 최초 투고 | 2023-12-19 | — | (논문 첫 페이지 \"Received 19 December 2023\") |",
-            "| `73f5e0b` | 2026-10-08 | CheongJaeyoon | 동작 (덮어쓰기 줄을 루프 밖으로 이동) |", "",
+            "| `f8fd198` | 2026-10-08 | CheongJaeyoon | 동작 (덮어쓰기 줄을 루프 밖으로 이동) |", "",
             "- lag tolerance 인자(Fig.5)는 11-26~27 커밋에서 처음 생겼다. Fig.5를 포함한 투고 실험은 11-27 이후 코드, "
             "즉 quota가 고정된 버전으로 돌렸을 가능성이 높다.",
             "- 한계: 2024-05 수정본(revised) 때 다시 돌린 실험이 있다면 그 코드는 이 저장소에 없다. "

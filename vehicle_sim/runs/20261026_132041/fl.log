@@ -1,0 +1,99 @@
+Process 0 uses 1 threads
+Process 2 uses 1 threadsProcess 8 uses 1 threads
+
+Process 1 uses 1 threads
+Process 6 uses 1 threads
+Process 7 uses 1 threads
+Process 5 uses 1 threads
+Process 3 uses 1 threads
+Process 4 uses 1 threads
+[2026-10-26 13:20:43.597912] MAIN >> I am client in wise-175 rank 8
+[2026-10-26 13:20:43.597961] CLIENT 8 >> 빈 모델을 생성합니다.
+[2026-10-26 13:20:43.626798] MAIN >> I am client in wise-175 rank 7
+[2026-10-26 13:20:43.626950] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-26 13:20:43.627734] MAIN >> I am client in wise-175 rank 1
+[2026-10-26 13:20:43.627778] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-26 13:20:43.628814] MAIN >> I am client in wise-175 rank 2
+[2026-10-26 13:20:43.628910] CLIENT 2 >> 빈 모델을 생성합니다.
+[2026-10-26 13:20:43.629730] MAIN >> I am server in wise-175 rank 0
+[2026-10-26 13:20:43.629765] SERVER >> global model을 초기화 합니다.
+[2026-10-26 13:20:43.634247] MAIN >> I am client in wise-175 rank 6
+[2026-10-26 13:20:43.634303] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-26 13:20:43.634814] MAIN >> I am client in wise-175 rank 4
+[2026-10-26 13:20:43.634859] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-26 13:20:43.635780] MAIN >> I am client in wise-175 rank 5
+[2026-10-26 13:20:43.635815] CLIENT 5 >> 빈 모델을 생성합니다.
+[2026-10-26 13:20:43.640227] MAIN >> I am client in wise-175 rank 3
+[2026-10-26 13:20:43.640282] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-26 13:20:43.682587] SERVER >> 데이터셋을 다운받습니다.
+[2026-10-26 13:20:43.772623] SERVER >> 각 client들이 가져갈 data 개수 = [7105, 7050, 8350, 7237, 7345, 7932, 7431, 7550]
+[2026-10-26 13:20:43.864544] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-26 13:20:43.881134] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:20:43.897201] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:20:43.918890] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:20:43.936650] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:20:43.955276] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:20:43.975047] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:20:43.993482] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:20:44.011750] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:20:44.012182] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-26 13:20:44.012582] CLIENT 1 >> communication delay는 0입니다.[2026-10-26 13:20:44.012599] CLIENT 2 >> communication delay는 0입니다.
+
+[2026-10-26 13:20:44.012645] CLIENT 3 >> communication delay는 0입니다.[2026-10-26 13:20:44.012652] CLIENT 4 >> communication delay는 0입니다.[2026-10-26 13:20:44.012654] CLIENT 5 >> communication delay는 0입니다.
+
+
+[2026-10-26 13:20:44.012701] CLIENT 7 >> communication delay는 0입니다.
+[2026-10-26 13:20:44.012712] CLIENT 6 >> communication delay는 0입니다.
+[2026-10-26 13:20:44.012744] CLIENT 8 >> communication delay는 0입니다.
+[W init.cpp:1506] Warning: ProcessGroup::Work::source_rank API is being deprecated, please ping https://github.com/pytorch/pytorch/issues/46291 if you see this warning (function operator())
+[2026-10-26 13:21:16.051529] SERVER >> picked clients info: 
+CLIENT 7의 staleness: -1.0
+CLIENT 3의 staleness: 0.0
+
+[2026-10-26 13:21:16.051629] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:22:03.120127] SERVER >> picked clients info: 
+CLIENT 7의 staleness: -1.0
+CLIENT 5의 staleness: 1.0
+
+[2026-10-26 13:22:03.120210] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:22:46.521709] SERVER >> picked clients info: 
+CLIENT 7의 staleness: -1.0
+CLIENT 5의 staleness: 0.0
+
+[2026-10-26 13:22:46.521777] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:23:07.012310] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 3.0
+CLIENT 2의 staleness: 3.0
+
+[2026-10-26 13:23:07.012359] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:23:16.029517] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 3.0
+CLIENT 7의 staleness: 0.0
+
+[2026-10-26 13:23:16.029596] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:23:55.025301] SERVER >> picked clients info: 
+CLIENT 5의 staleness: 2.0
+CLIENT 3의 staleness: 4.0
+CLIENT 2의 staleness: 1.0
+
+[2026-10-26 13:23:55.025377] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:24:12.106615] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 6.0
+CLIENT 4의 staleness: 3.0
+
+[2026-10-26 13:24:12.106669] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:24:30.868011] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+
+[2026-10-26 13:24:30.868099] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:24:55.096080] SERVER >> picked clients info: 
+CLIENT 7의 staleness: 4.0
+CLIENT 4의 staleness: 5.0
+
+[2026-10-26 13:24:55.096167] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:25:02.765137] SERVER >> picked clients info: 
+CLIENT 5의 staleness: 3.0
+CLIENT 2의 staleness: 1.0
+
+[2026-10-26 13:25:02.765205] SERVER >> global aggregation을 진행합니다.

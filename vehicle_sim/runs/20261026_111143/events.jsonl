@@ -1,0 +1,48 @@
+{"t": 1792980703.684, "kind": "control", "vid": null, "example": null, "msg": "시뮬레이션 시작: 차량 5대, MNIST, C=0.3, τ=9"}
+{"t": 1792980703.713, "kind": "world", "vid": 2, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792980703.713, "kind": "world", "vid": 4, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792980703.713, "kind": "world", "vid": 5, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792980705.52, "kind": "world", "vid": 1, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792980705.721, "kind": "world", "vid": 4, "example": null, "msg": "기지국 A 범위 이탈"}
+{"t": 1792980710.046, "kind": "world", "vid": 3, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792980711.217, "kind": "fl", "vid": 2, "example": "6-1", "msg": "새 모델 v0 수신 실패(보안 게이트웨이 차단) → v0로 계속", "pattern": 6, "cause": "3-4"}
+{"t": 1792980711.222, "kind": "fl", "vid": 1, "example": "6-1", "msg": "새 모델 v0 수신 실패(터널) → v0로 계속", "pattern": 6, "cause": "2-6"}
+{"t": 1792980711.228, "kind": "fl", "vid": 4, "example": "6-1", "msg": "새 모델 v0 수신 실패(기지국 범위 밖) → v0로 계속", "pattern": 6, "cause": "2-1"}
+{"t": 1792980712.049, "kind": "world", "vid": 4, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792980713.965, "kind": "fl", "vid": 2, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792980715.053, "kind": "world", "vid": 1, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792980716.855, "kind": "world", "vid": 1, "example": null, "msg": "터널 통과", "zone": "tunnel"}
+{"t": 1792980720.259, "kind": "world", "vid": 4, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792980720.297, "kind": "fl", "vid": 4, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792980720.359, "kind": "world", "vid": 1, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792980720.392, "kind": "fl", "vid": 1, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792980724.265, "kind": "world", "vid": 2, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792980724.365, "kind": "world", "vid": 2, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792980730.165, "kind": "fl", "vid": 4, "example": "1-4", "msg": "안전 기능(긴급 제동)이 연산을 가져가 FL 프로세스 종료 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792980730.165, "kind": "fl", "vid": 4, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v0)"}
+{"t": 1792980730.28, "kind": "fl", "vid": 4, "example": "4-5", "msg": "주행 보조 기능이 연산을 점유해 학습 지연", "pattern": 4}
+{"t": 1792980741.396, "kind": "upload", "vid": 1, "example": null, "msg": "v0 업로드 완료 1.0초", "version": 0, "delays": {"congestion": 0.0}}
+{"t": 1792980744.993, "kind": "world", "vid": 2, "example": null, "msg": "집 도착, 시동 끔 (주차)", "stop": "home", "phase": "start"}
+{"t": 1792980745.078, "kind": "fl", "vid": 2, "example": "1-5", "msg": "주차·시동 꺼짐으로 학습 중단 → 서버는 아무 응답도 받지 못함", "pattern": 1}
+{"t": 1792980748.053, "kind": "round", "vid": null, "example": null, "msg": "1라운드 집계: 차량 [1] 정확도 21.12%", "round": {"round": 1, "acc": 21.12, "loss": 14.1481, "t": 1792980748.0526674, "dur": 36.94, "quota": 1, "next_quota": 5, "picked": [{"vid": 1, "staleness": 0, "version": 0, "weight": 1.0}], "dups": [], "elapsed": 36.9}}
+{"t": 1792980762.26, "kind": "world", "vid": 3, "example": null, "msg": "핸드오버 A → H1", "handover": ["A", "H1"]}
+{"t": 1792980762.963, "kind": "world", "vid": 1, "example": null, "msg": "핸드오버 H2 → C", "handover": ["H2", "C"]}
+{"t": 1792980768.678, "kind": "world", "vid": 4, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792980768.678, "kind": "world", "vid": 4, "example": null, "msg": "권역 경계 통과 E → W", "region_cross": ["E", "W"]}
+{"t": 1792980773.901, "kind": "world", "vid": 1, "example": null, "msg": "기지국 C 범위 이탈"}
+{"t": 1792980774.001, "kind": "world", "vid": 1, "example": null, "msg": "기지국 C 범위 진입"}
+{"t": 1792980774.183, "kind": "fl", "vid": 4, "example": "2-1", "msg": "기지국 범위 밖: 0/10 조각 전송 후 끊김, 0.0 MB 낭비", "pattern": 2, "wasted_mb": 0.0, "cause": "2-1"}
+{"t": 1792980774.702, "kind": "world", "vid": 4, "example": null, "msg": "기지국 A 범위 진입"}
+{"t": 1792980774.787, "kind": "fl", "vid": 4, "example": null, "msg": "복귀: 마지막 모델 v0로 다시 학습 (서버는 v1)"}
+{"t": 1792980783.716, "kind": "world", "vid": 5, "example": null, "msg": "충전소 정차, 충전 시작", "stop": "gas", "phase": "start"}
+{"t": 1792980806.745, "kind": "world", "vid": 3, "example": null, "msg": "기지국 H1 범위 이탈"}
+{"t": 1792980808.221, "kind": "fl", "vid": null, "example": "9-2", "msg": "버퍼 0/5로 60초째 대기 (학습·전송 중인 차량 4대) — SASAFL에는 타임아웃이 없음", "pattern": 9}
+{"t": 1792980813.955, "kind": "world", "vid": 3, "example": null, "msg": "터널 진입", "zone": "tunnel"}
+{"t": 1792980822.27, "kind": "world", "vid": 5, "example": null, "msg": "충전 끝, 출발", "stop": "gas", "phase": "end"}
+{"t": 1792980823.472, "kind": "world", "vid": 3, "example": null, "msg": "권역 경계 통과 W → E", "region_cross": ["W", "E"]}
+{"t": 1792980825.376, "kind": "world", "vid": 3, "example": null, "msg": "터널 통과", "zone": "tunnel"}
+{"t": 1792980828.882, "kind": "world", "vid": 3, "example": null, "msg": "기지국 H2 범위 진입"}
+{"t": 1792980829.082, "kind": "world", "vid": 1, "example": null, "msg": "집 도착, 시동 끔 (주차)", "stop": "home", "phase": "start"}
+{"t": 1792980830.585, "kind": "world", "vid": 5, "example": null, "msg": "핸드오버 A → H1", "handover": ["A", "H1"]}
+{"t": 1792980844.002, "kind": "world", "vid": 5, "example": null, "msg": "핸드오버 H1 → A", "handover": ["H1", "A"]}
+{"t": 1792980853.721, "kind": "control", "vid": null, "example": null, "msg": "시뮬레이션 정지"}

@@ -1,0 +1,571 @@
+Process 0 uses 1 threads
+Process 21 uses 1 threadsProcess 13 uses 1 threads
+
+Process 14 uses 1 threads
+Process 8 uses 1 threads
+Process 17 uses 1 threads
+Process 22 uses 1 threads
+Process 29 uses 1 threads
+Process 16 uses 1 threads
+Process 5 uses 1 threads
+Process 30 uses 1 threads
+Process 6 uses 1 threads
+Process 1 uses 1 threads
+Process 7 uses 1 threads
+Process 11 uses 1 threads
+Process 3 uses 1 threads
+Process 9 uses 1 threads
+Process 4 uses 1 threads
+Process 19 uses 1 threadsProcess 24 uses 1 threads
+
+Process 26 uses 1 threads
+Process 10 uses 1 threads
+Process 20 uses 1 threads
+Process 28 uses 1 threads
+Process 27 uses 1 threads
+Process 2 uses 1 threads
+Process 15 uses 1 threads
+Process 12 uses 1 threads
+Process 18 uses 1 threads
+Process 23 uses 1 threads
+Process 25 uses 1 threads
+[2026-10-26 13:33:26.473815] MAIN >> I am client in wise-175 rank 8
+[2026-10-26 13:33:26.473861] CLIENT 8 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.494878] MAIN >> I am client in wise-175 rank 13
+[2026-10-26 13:33:26.494927] CLIENT 13 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.504070] MAIN >> I am client in wise-175 rank 6
+[2026-10-26 13:33:26.504125] CLIENT 6 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.504273] MAIN >> I am client in wise-175 rank 1
+[2026-10-26 13:33:26.504308] CLIENT 1 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.506681] MAIN >> I am client in wise-175 rank 21
+[2026-10-26 13:33:26.506718] CLIENT 21 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.506835] MAIN >> I am client in wise-175 rank 29
+[2026-10-26 13:33:26.506870] CLIENT 29 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.508812] MAIN >> I am client in wise-175 rank 16
+[2026-10-26 13:33:26.508852] CLIENT 16 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.509727] MAIN >> I am server in wise-175 rank 0
+[2026-10-26 13:33:26.509764] SERVER >> global model을 초기화 합니다.
+[2026-10-26 13:33:26.510842] MAIN >> I am client in wise-175 rank 7
+[2026-10-26 13:33:26.510879] CLIENT 7 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.510885] MAIN >> I am client in wise-175 rank 30
+[2026-10-26 13:33:26.510920] CLIENT 30 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.513807] MAIN >> I am client in wise-175 rank 17
+[2026-10-26 13:33:26.513846] CLIENT 17 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.518916] MAIN >> I am client in wise-175 rank 14
+[2026-10-26 13:33:26.518965] CLIENT 14 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.520761] MAIN >> I am client in wise-175 rank 12
+[2026-10-26 13:33:26.520801] CLIENT 12 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.520847] MAIN >> I am client in wise-175 rank 22
+[2026-10-26 13:33:26.520885] CLIENT 22 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.520901] MAIN >> I am client in wise-175 rank 4
+[2026-10-26 13:33:26.520935] CLIENT 4 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.525872] MAIN >> I am client in wise-175 rank 11
+[2026-10-26 13:33:26.525924] CLIENT 11 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.527853] MAIN >> I am client in wise-175 rank 23
+[2026-10-26 13:33:26.527903] CLIENT 23 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.527916] MAIN >> I am client in wise-175 rank 2
+[2026-10-26 13:33:26.527935] MAIN >> I am client in wise-175 rank 10[2026-10-26 13:33:26.527949] CLIENT 2 >> 빈 모델을 생성합니다.
+
+[2026-10-26 13:33:26.527965] CLIENT 10 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.529796] MAIN >> I am client in wise-175 rank 28
+[2026-10-26 13:33:26.529839] CLIENT 28 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.529943] MAIN >> I am client in wise-175 rank 15
+[2026-10-26 13:33:26.529979] CLIENT 15 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.530655] MAIN >> I am client in wise-175 rank 19
+[2026-10-26 13:33:26.530747] CLIENT 19 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.530820] MAIN >> I am client in wise-175 rank 27
+[2026-10-26 13:33:26.530855] CLIENT 27 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.531841] MAIN >> I am client in wise-175 rank 9
+[2026-10-26 13:33:26.531885] CLIENT 9 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.531876] MAIN >> I am client in wise-175 rank 18[2026-10-26 13:33:26.531887] MAIN >> I am client in wise-175 rank 26
+
+[2026-10-26 13:33:26.531916] CLIENT 26 >> 빈 모델을 생성합니다.[2026-10-26 13:33:26.531916] CLIENT 18 >> 빈 모델을 생성합니다.
+
+[2026-10-26 13:33:26.531928] MAIN >> I am client in wise-175 rank 3
+[2026-10-26 13:33:26.531955] CLIENT 3 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.534827] MAIN >> I am client in wise-175 rank 24[2026-10-26 13:33:26.534847] MAIN >> I am client in wise-175 rank 5
+
+[2026-10-26 13:33:26.534879] CLIENT 24 >> 빈 모델을 생성합니다.[2026-10-26 13:33:26.534880] CLIENT 5 >> 빈 모델을 생성합니다.
+
+[2026-10-26 13:33:26.540851] MAIN >> I am client in wise-175 rank 20
+[2026-10-26 13:33:26.540905] CLIENT 20 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.549830] MAIN >> I am client in wise-175 rank 25
+[2026-10-26 13:33:26.549891] CLIENT 25 >> 빈 모델을 생성합니다.
+[2026-10-26 13:33:26.727892] SERVER >> 데이터셋을 다운받습니다.
+Files already downloaded and verified
+Files already downloaded and verified
+[2026-10-26 13:33:28.356867] SERVER >> 각 client들이 가져갈 data 개수 = [1387, 1633, 2342, 1857, 1656, 1706, 1127, 1659, 1780, 1691, 1119, 1762, 1709, 1677, 2177, 1335, 1516, 1061, 2001, 1390, 1148, 1746, 1731, 1637, 1612, 1561, 1684, 2020, 1330, 2946]
+[2026-10-26 13:33:28.665559] SERVER >> 클라이언트들에게 로컬 데이터셋을 분할합니다
+[2026-10-26 13:33:28.683943] CLIENT 1 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.704040] CLIENT 2 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.727885] CLIENT 3 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.753839] CLIENT 4 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.764259] CLIENT 5 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.783947] CLIENT 6 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.794806] CLIENT 7 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.814766] CLIENT 8 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.834985] CLIENT 9 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.852579] CLIENT 10 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.863488] CLIENT 11 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.879841] CLIENT 12 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.897345] CLIENT 13 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.913235] CLIENT 14 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.937804] CLIENT 15 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.952231] CLIENT 16 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.973030] CLIENT 17 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:28.991031] CLIENT 18 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.012474] CLIENT 19 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.029544] CLIENT 20 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.042293] CLIENT 21 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.070879] CLIENT 22 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.092867] CLIENT 23 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.113891] CLIENT 24 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.136867] CLIENT 25 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.156764] CLIENT 26 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.175889] CLIENT 27 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.200973] CLIENT 28 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.214041] CLIENT 29 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.248759] CLIENT 30 >> 로컬데이터셋을 받았습니다.
+[2026-10-26 13:33:29.252743] SERVER >> 클라이언트들에게 communication delay를 할당합니다.
+[2026-10-26 13:33:29.253043] CLIENT 2 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253066] CLIENT 3 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253154] CLIENT 5 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253251] CLIENT 7 >> communication delay는 0입니다.[2026-10-26 13:33:29.253259] CLIENT 6 >> communication delay는 0입니다.
+
+[2026-10-26 13:33:29.253269] CLIENT 8 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253308] CLIENT 9 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253413] CLIENT 12 >> communication delay는 0입니다.[2026-10-26 13:33:29.253421] CLIENT 11 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253427] CLIENT 10 >> communication delay는 0입니다.
+
+[2026-10-26 13:33:29.253551] CLIENT 15 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253563] CLIENT 13 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253591] CLIENT 16 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253618] CLIENT 17 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253562] CLIENT 14 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253692] CLIENT 19 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253753] CLIENT 18 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253788] CLIENT 21 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253835] CLIENT 23 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253883] CLIENT 24 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253935] CLIENT 4 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253957] CLIENT 25 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.253992] CLIENT 22 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.254012] CLIENT 27 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.254036] CLIENT 28 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.254079] CLIENT 29 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.254119] CLIENT 30 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.254144] CLIENT 26 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.257658] CLIENT 1 >> communication delay는 0입니다.
+[2026-10-26 13:33:29.257728] CLIENT 20 >> communication delay는 0입니다.
+[W init.cpp:1506] Warning: ProcessGroup::Work::source_rank API is being deprecated, please ping https://github.com/pytorch/pytorch/issues/46291 if you see this warning (function operator())
+[2026-10-26 13:34:11.548406] SERVER >> picked clients info: 
+CLIENT 22의 staleness: 0.0
+CLIENT 5의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 23의 staleness: 0.0
+CLIENT 13의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 18의 staleness: 0.0
+CLIENT 26의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+
+[2026-10-26 13:34:11.548462] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:34:49.003251] SERVER >> picked clients info: 
+CLIENT 25의 staleness: 1.0
+CLIENT 12의 staleness: 1.0
+CLIENT 22의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 19의 staleness: 1.0
+CLIENT 9의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+CLIENT 15의 staleness: 0.0
+CLIENT 23의 staleness: 0.0
+
+[2026-10-26 13:34:49.003369] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:35:28.089545] SERVER >> picked clients info: 
+CLIENT 25의 staleness: 0.0
+CLIENT 5의 staleness: 1.0
+CLIENT 21의 staleness: 2.0
+CLIENT 22의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 19의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 9의 staleness: 2.0
+CLIENT 17의 staleness: 2.0
+
+[2026-10-26 13:35:28.089605] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:36:06.603883] SERVER >> picked clients info: 
+CLIENT 18의 staleness: 2.0
+CLIENT 9의 staleness: 0.0
+CLIENT 21의 staleness: 0.0
+CLIENT 8의 staleness: 3.0
+CLIENT 15의 staleness: 0.0
+CLIENT 13의 staleness: 2.0
+CLIENT 28의 staleness: 0.0
+CLIENT 19의 staleness: 1.0
+CLIENT 16의 staleness: 3.0
+
+[2026-10-26 13:36:06.603931] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:36:46.474481] SERVER >> picked clients info: 
+CLIENT 7의 staleness: 3.0
+CLIENT 3의 staleness: 4.0
+CLIENT 13의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 16의 staleness: 0.0
+CLIENT 29의 staleness: 4.0
+CLIENT 25의 staleness: 2.0
+CLIENT 27의 staleness: 0.0
+
+[2026-10-26 13:36:46.474633] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:37:19.299118] SERVER >> picked clients info: 
+CLIENT 21의 staleness: 2.0
+CLIENT 28의 staleness: 1.0
+CLIENT 9의 staleness: 0.0
+CLIENT 11의 staleness: 5.0
+CLIENT 10의 staleness: 0.0
+CLIENT 18의 staleness: 0.0
+CLIENT 1의 staleness: 0.0
+CLIENT 8의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+
+[2026-10-26 13:37:19.299259] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:38:23.414199] SERVER >> picked clients info: 
+CLIENT 13의 staleness: 1.0
+CLIENT 22의 staleness: 4.0
+CLIENT 5의 staleness: 1.0
+CLIENT 28의 staleness: 0.0
+CLIENT 3의 staleness: 1.0
+CLIENT 25의 staleness: 0.0
+CLIENT 15의 staleness: 1.0
+CLIENT 29의 staleness: 0.0
+CLIENT 7의 staleness: 0.0
+
+[2026-10-26 13:38:23.414265] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:39:20.808725] SERVER >> picked clients info: 
+CLIENT 16의 staleness: 2.0
+CLIENT 4의 staleness: 7.0
+CLIENT 4의 staleness: 7.0
+CLIENT 2의 staleness: 7.0
+CLIENT 2의 staleness: 7.0
+CLIENT 25의 staleness: 0.0
+CLIENT 5의 staleness: 0.0
+CLIENT 9의 staleness: 2.0
+CLIENT 17의 staleness: 4.0
+
+[2026-10-26 13:39:20.808782] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:39:42.548832] SERVER >> picked clients info: 
+CLIENT 4의 staleness: 8.0
+CLIENT 4의 staleness: 8.0
+CLIENT 19의 staleness: 4.0
+CLIENT 13의 staleness: 1.0
+CLIENT 22의 staleness: 1.0
+CLIENT 28의 staleness: 1.0
+CLIENT 26의 staleness: 1.0
+CLIENT 10의 staleness: 2.0
+CLIENT 25의 staleness: 0.0
+
+[2026-10-26 13:39:42.548881] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:40:22.453101] SERVER >> picked clients info: 
+CLIENT 15의 staleness: 2.0
+CLIENT 16의 staleness: 1.0
+CLIENT 19의 staleness: 0.0
+CLIENT 13의 staleness: 0.0
+CLIENT 18의 staleness: 3.0
+CLIENT 22의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+CLIENT 28의 staleness: 2.0
+CLIENT 9의 staleness: 1.0
+
+[2026-10-26 13:40:22.453156] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:40:45.568153] SERVER >> picked clients info: 
+CLIENT 20의 staleness: 10.0
+CLIENT 21의 staleness: 4.0
+CLIENT 25의 staleness: 0.0
+CLIENT 5의 staleness: 1.0
+CLIENT 22의 staleness: 0.0
+CLIENT 13의 staleness: 0.0
+CLIENT 18의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 1의 staleness: 1.0
+
+[2026-10-26 13:40:45.568214] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:41:15.407363] SERVER >> picked clients info: 
+CLIENT 15의 staleness: 1.0
+CLIENT 16의 staleness: 1.0
+CLIENT 11의 staleness: 1.0
+CLIENT 19의 staleness: 1.0
+CLIENT 21의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 27의 staleness: 0.0
+CLIENT 12의 staleness: 9.0
+
+[2026-10-26 13:41:15.407413] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:41:48.588626] SERVER >> picked clients info: 
+CLIENT 1의 staleness: 1.0
+CLIENT 10의 staleness: 3.0
+CLIENT 3의 staleness: 5.0
+CLIENT 8의 staleness: 1.0
+CLIENT 8의 staleness: 1.0
+CLIENT 29의 staleness: 5.0
+CLIENT 22의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 16의 staleness: 0.0
+
+[2026-10-26 13:41:48.588701] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:42:46.463424] SERVER >> picked clients info: 
+CLIENT 6의 staleness: 1.0
+CLIENT 14의 staleness: 1.0
+CLIENT 18의 staleness: 2.0
+CLIENT 22의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 3의 staleness: 0.0
+CLIENT 16의 staleness: 0.0
+CLIENT 23의 staleness: 0.0
+CLIENT 29의 staleness: 0.0
+
+[2026-10-26 13:42:46.463490] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:43:34.483125] SERVER >> picked clients info: 
+CLIENT 27의 staleness: 2.0
+CLIENT 9의 staleness: 4.0
+CLIENT 4의 staleness: 14.0
+CLIENT 25의 staleness: 2.0
+CLIENT 21의 staleness: 2.0
+CLIENT 19의 staleness: 4.0
+CLIENT 15의 staleness: 0.0
+CLIENT 23의 staleness: 0.0
+CLIENT 28의 staleness: 4.0
+CLIENT 7의 staleness: 6.0
+
+[2026-10-26 13:43:34.483197] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:44:10.974438] SERVER >> picked clients info: 
+CLIENT 18의 staleness: 1.0
+CLIENT 3의 staleness: 1.0
+CLIENT 25의 staleness: 0.0
+CLIENT 4의 staleness: 7.0
+CLIENT 4의 staleness: 7.0
+CLIENT 9의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 12의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+
+[2026-10-26 13:44:10.974502] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:44:31.007340] SERVER >> picked clients info: 
+CLIENT 26의 staleness: 7.0
+CLIENT 21의 staleness: 1.0
+CLIENT 19의 staleness: 1.0
+CLIENT 2의 staleness: 6.0
+CLIENT 2의 staleness: 6.0
+CLIENT 22의 staleness: 3.0
+CLIENT 2의 staleness: 6.0
+CLIENT 25의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+
+[2026-10-26 13:44:31.007408] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:45:18.281466] SERVER >> picked clients info: 
+CLIENT 15의 staleness: 1.0
+CLIENT 20의 staleness: 2.0
+CLIENT 18의 staleness: 1.0
+CLIENT 12의 staleness: 2.0
+CLIENT 25의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+CLIENT 23의 staleness: 2.0
+CLIENT 11의 staleness: 0.0
+CLIENT 29의 staleness: 3.0
+
+[2026-10-26 13:45:18.281525] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:45:48.312482] SERVER >> picked clients info: 
+CLIENT 16의 staleness: 1.0
+CLIENT 25의 staleness: 0.0
+CLIENT 3의 staleness: 1.0
+CLIENT 12의 staleness: 0.0
+CLIENT 26의 staleness: 1.0
+CLIENT 22의 staleness: 1.0
+CLIENT 28의 staleness: 2.0
+CLIENT 15의 staleness: 0.0
+CLIENT 7의 staleness: -1.0
+
+[2026-10-26 13:45:48.312613] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:46:25.700642] SERVER >> picked clients info: 
+CLIENT 17의 staleness: 1.0
+CLIENT 9의 staleness: 3.0
+CLIENT 27의 staleness: 1.0
+CLIENT 18의 staleness: 1.0
+CLIENT 4의 staleness: 11.0
+CLIENT 25의 staleness: 0.0
+CLIENT 10의 staleness: 1.0
+CLIENT 3의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+
+[2026-10-26 13:46:25.700764] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:47:07.459541] SERVER >> picked clients info: 
+CLIENT 15의 staleness: 1.0
+CLIENT 22의 staleness: 1.0
+CLIENT 29의 staleness: 2.0
+CLIENT 18의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+CLIENT 10의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 3의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+
+[2026-10-26 13:47:07.459596] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:47:41.144282] SERVER >> picked clients info: 
+CLIENT 11의 staleness: 3.0
+CLIENT 9의 staleness: 1.0
+CLIENT 2의 staleness: 3.0
+CLIENT 29의 staleness: 0.0
+CLIENT 7의 staleness: 1.0
+CLIENT 25의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+
+[2026-10-26 13:47:41.144331] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:48:29.693340] SERVER >> picked clients info: 
+CLIENT 12의 staleness: 3.0
+CLIENT 4의 staleness: 7.0
+CLIENT 23의 staleness: 2.0
+CLIENT 25의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+CLIENT 28의 staleness: 1.0
+CLIENT 15의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+
+[2026-10-26 13:48:29.693401] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:50:34.443345] SERVER >> picked clients info: 
+CLIENT 29의 staleness: 1.0
+CLIENT 28의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 7의 staleness: -1.0
+CLIENT 17의 staleness: 0.0
+CLIENT 25의 staleness: 1.0
+CLIENT 22의 staleness: 1.0
+CLIENT 11의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+
+[2026-10-26 13:50:34.443403] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:52:31.975377] SERVER >> picked clients info: 
+CLIENT 27의 staleness: 1.0
+CLIENT 28의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+CLIENT 4의 staleness: 1.0
+CLIENT 18의 staleness: 3.0
+CLIENT 26의 staleness: 0.0
+
+[2026-10-26 13:52:31.975460] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:56:13.849434] SERVER >> picked clients info: 
+CLIENT 22의 staleness: 0.0
+CLIENT 18의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+CLIENT 28의 staleness: 1.0
+CLIENT 15의 staleness: 1.0
+CLIENT 26의 staleness: 0.0
+CLIENT 12의 staleness: 0.0
+CLIENT 2의 staleness: 2.0
+
+[2026-10-26 13:56:13.849502] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 13:59:45.110946] SERVER >> picked clients info: 
+CLIENT 2의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 28의 staleness: 2.0
+CLIENT 18의 staleness: 0.0
+CLIENT 12의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+
+[2026-10-26 13:59:45.111022] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 14:04:37.439386] SERVER >> picked clients info: 
+CLIENT 22의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+CLIENT 25의 staleness: 1.0
+CLIENT 18의 staleness: 1.0
+CLIENT 12의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+
+[2026-10-26 14:04:37.439466] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 14:06:07.518691] SERVER >> picked clients info: 
+CLIENT 22의 staleness: 0.0
+CLIENT 18의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+CLIENT 9의 staleness: 1.0
+CLIENT 15의 staleness: 1.0
+CLIENT 2의 staleness: 0.0
+CLIENT 12의 staleness: 1.0
+
+[2026-10-26 14:06:07.518759] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 14:21:13.478891] SERVER >> picked clients info: 
+CLIENT 9의 staleness: 0.0
+CLIENT 25의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 18의 staleness: 1.0
+CLIENT 2의 staleness: 0.0
+CLIENT 6의 staleness: 1.0
+CLIENT 12의 staleness: 0.0
+
+[2026-10-26 14:21:13.478957] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 14:29:25.473463] SERVER >> picked clients info: 
+CLIENT 9의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 18의 staleness: 0.0
+CLIENT 15의 staleness: 1.0
+CLIENT 22의 staleness: 1.0
+CLIENT 25의 staleness: 1.0
+CLIENT 2의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+CLIENT 12의 staleness: 0.0
+
+[2026-10-26 14:29:25.473540] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 14:32:43.514809] SERVER >> picked clients info: 
+CLIENT 25의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 18의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 12의 staleness: 0.0
+CLIENT 2의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+
+[2026-10-26 14:32:43.514928] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 14:38:12.537808] SERVER >> picked clients info: 
+CLIENT 22의 staleness: 0.0
+CLIENT 28의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 6의 staleness: 0.0
+CLIENT 25의 staleness: 1.0
+CLIENT 9의 staleness: 0.0
+CLIENT 18의 staleness: 0.0
+CLIENT 12의 staleness: 1.0
+CLIENT 2의 staleness: 0.0
+
+[2026-10-26 14:38:12.537849] SERVER >> global aggregation을 진행합니다.
+[2026-10-26 15:06:43.454242] SERVER >> picked clients info: 
+CLIENT 28의 staleness: 0.0
+CLIENT 9의 staleness: 0.0
+CLIENT 15의 staleness: 0.0
+CLIENT 18의 staleness: 1.0
+CLIENT 25의 staleness: 2.0
+CLIENT 2의 staleness: 0.0
+CLIENT 22의 staleness: 0.0
+CLIENT 12의 staleness: 2.0
+CLIENT 6의 staleness: 0.0
+
+[2026-10-26 15:06:43.454325] SERVER >> global aggregation을 진행합니다.
