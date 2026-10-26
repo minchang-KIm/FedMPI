@@ -1397,13 +1397,13 @@ const PRESET_ALL = {
   vehicle_default: { crash_prob: 0.05 },
   vehicles: {
     "1": { min_data: 300, data_rate_per_s: 3 },                 // 3-2 새 데이터 없음
-    "2": { store_forward: true, energy_gate: false, battery_scale: 0.3 },    // 5-1·5-2 보관 후 일괄, 1-3·2-6 방전 (120 J 배터리 택시: 학습 중·전송 중 방전이 번갈아)
-    "3": { lr_override: 0.02 },                                 // 6-3 학습률 오류
+    "2": { store_forward: true, energy_gate: false, battery_scale: 0.1 },    // 5-1·5-2 보관 후 일괄, 2-6 전송 중 방전 (배터리가 거의 바닥인 택시: 학습 한 번 뒤 전송하다 꺼짐)
+    "3": { lr_override: 0.02, energy_gate: false, battery_scale: 0.25 },    // 6-3 학습률 오류 · 1-3 학습 중 방전 (집에서 충전 후 복귀)
     "4": { store_forward: true },                               // 통과 차량: 5-1 터널 보관
     "5": { wifi_only: true },                                   // 3-3 Wi-Fi에서만
     "6": { backdoor_boost: 0.5, battery_scale: 0.5 },           // 6-1 악의적 조작 · 3-1 작은 배터리 → 충전소에서 회복 후 복귀
-    "7": { sensor_fault_classes: "3,8", sensor_fault_level: 0.6 },   // 6-2 센서 고장 (재시작)
-    "8": { emergency_rate: 3, safety_preempt_prob: 0.5 },       // 1-4·4-5 긴급제동
+    "7": { emergency_rate: 3, safety_preempt_prob: 0.5 },       // 1-4·4-5 긴급제동 (어린이 보호구역을 지나는 주민 차량)
+    "8": { sensor_fault_classes: "3,8", sensor_fault_level: 0.6 },   // 6-2 센서 고장 (재시작) · 터널을 지나는 통과 차량 → 2-5
   },
 };
 const PRESET_CLEAN = {
