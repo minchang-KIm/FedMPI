@@ -1,0 +1,60 @@
+{
+  "name": "기본 도시 (2.0 × 1.4 km)",
+  "size": [2000, 1400],
+  "lane_width": 7,
+  "region_border_x": 1100,
+  "roads": [
+    {"id": "highway", "name": "고속도로", "pts": [[0, 300], [2000, 300]], "speed": 100},
+    {"id": "conn_w", "name": "서측 진입로", "pts": [[300, 300], [300, 600]], "speed": 50},
+    {"id": "conn_e", "name": "동측 진입로", "pts": [[1700, 300], [1700, 700]], "speed": 50},
+    {"id": "ring", "name": "도심 순환로", "pts": [[300, 600], [1100, 600], [1100, 1200], [300, 1200], [300, 600]], "speed": 45},
+    {"id": "suburb", "name": "교외 순환로", "pts": [[1100, 700], [1800, 700], [1800, 1200], [1100, 1200]], "speed": 55}
+  ],
+  "cells": [
+    {"id": "A", "name": "도심 기지국 A", "pos": [650, 900], "r": 480, "region": "W", "color": "#3b82f6"},
+    {"id": "H1", "name": "고속도로 서측 H1", "pos": [300, 330], "r": 360, "region": "W", "color": "#06b6d4"},
+    {"id": "H2", "name": "고속도로 동측 H2", "pos": [1600, 330], "r": 360, "region": "E", "color": "#a855f7"},
+    {"id": "C", "name": "교외 기지국 C", "pos": [1450, 950], "r": 430, "region": "E", "color": "#f97316"}
+  ],
+  "zones": [
+    {"id": "tunnel", "name": "터널", "kind": "tunnel", "rect": [850, 270, 1150, 330]},
+    {"id": "shadow", "name": "빌딩 숲(음영지역)", "kind": "shadow", "rect": [450, 1050, 800, 1260]},
+    {"id": "congest", "name": "혼잡 교차로", "kind": "congestion", "rect": [250, 850, 350, 1050], "speed": 15},
+    {"id": "school", "name": "어린이 보호구역", "kind": "school", "rect": [1060, 820, 1140, 980], "speed": 30},
+    {"id": "wifi_pub", "name": "공영 Wi-Fi 구역(비과금망)", "kind": "wifi", "rect": [1740, 850, 1900, 1050]},
+    {"id": "weather", "name": "강우 구역", "kind": "weather", "circle": [1450, 850, 250]}
+  ],
+  "places": [
+    {"id": "home", "name": "집·주차장", "kind": "home", "pos": [1500, 1200], "wifi": true},
+    {"id": "gas", "name": "충전소", "kind": "gas", "pos": [300, 750], "wifi": true},
+    {"id": "service", "name": "서비스센터(OTA·정비 대기)", "kind": "service", "pos": [700, 600], "wifi": true},
+    {"id": "datacenter", "name": "FL 집계 서버", "kind": "server", "pos": [1000, 1330]},
+    {"id": "gate_in", "name": "진입 게이트", "kind": "gate", "pos": [0, 300]},
+    {"id": "gate_out", "name": "이탈 게이트", "kind": "gate", "pos": [2000, 300]}
+  ],
+  "signals": [
+    {"id": "S1", "name": "서측 교차로", "pos": [300, 600], "green": 18, "yellow": 3, "offset": 0},
+    {"id": "S2", "name": "도심·교외 교차로", "pos": [1100, 700], "green": 16, "yellow": 3, "offset": 7},
+    {"id": "S3", "name": "남측 교차로", "pos": [1100, 1200], "green": 18, "yellow": 3, "offset": 12},
+    {"id": "S4", "name": "동측 교차로", "pos": [1700, 700], "green": 20, "yellow": 3, "offset": 4}
+  ],
+  "crosswalks": [
+    {"id": "X1", "name": "어린이 보호구역 횡단보도", "pos": [1100, 900], "rate_per_min": 6, "dart_prob": 0.25},
+    {"id": "X2", "name": "도심 횡단보도", "pos": [650, 1200], "rate_per_min": 4, "dart_prob": 0.05},
+    {"id": "X3", "name": "서비스센터 앞 횡단보도", "pos": [850, 600], "rate_per_min": 3, "dart_prob": 0.05},
+    {"id": "X4", "name": "주택가 횡단보도", "pos": [1350, 1200], "rate_per_min": 3, "dart_prob": 0.08}
+  ],
+  "routes": {
+    "commute": {"name": "고속도로 통근", "loop": true,
+      "pts": [[300, 600], [300, 300], [1700, 300], [1700, 700], [1800, 700], [1800, 1200],
+              [1500, 1200, "home"], [1100, 1200], [1100, 600], [300, 600]]},
+    "city": {"name": "도심 순환", "loop": true,
+      "pts": [[300, 600], [700, 600, "service"], [1100, 600], [1100, 1200], [300, 1200],
+              [300, 750, "gas"], [300, 600]]},
+    "suburb": {"name": "교외 순환", "loop": true,
+      "pts": [[1100, 700], [1800, 700], [1800, 1200], [1500, 1200, "home"], [1100, 1200], [1100, 700]]},
+    "visitor": {"name": "통과 차량(합류·이탈)", "loop": false, "pts": [[0, 300], [2000, 300]]}
+  },
+  "vehicle_routes": ["commute", "city", "suburb", "visitor", "commute", "city", "suburb", "visitor",
+                     "city", "commute", "suburb", "city", "commute", "visitor", "city", "suburb"]
+}

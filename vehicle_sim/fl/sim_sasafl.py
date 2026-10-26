@@ -1,14 +1,17 @@
-"""SASAFL 원본 파일을 고치지 않고, 서브클래스로 '차량 환경'을 끼워 넣는다.
+"""SASAFL 원본 파일을 고치지 않고, 서브클래스로 '차량 환경'과 '학습 방식 전환'을 끼워 넣는다.
 
 원본 메서드의 동작은 그대로 옮겨 두고(장애가 없으면 원본과 같은 순서·같은 통신), 사이사이에 다음을 넣었다.
-  - 주행 환경(world.json)과 설정(config.json)을 읽어 학습 중단·건너뛰기·지연·전송 끊김을 결정
-  - 차량 상태(client_<id>.json), 서버 상태(server.json), 사건(events.jsonl)을 화면용으로 기록
-원본과 다른 점 (화면을 위해 바꾼 것)
-  - 원본 runClient/wait_until_can_update_global_model은 쉬지 않고 도는 busy-wait이라 CPU를 다 쓴다 → 짧게 sleep
-  - 'rejoin'(설정 fl.rejoin): 원본 SASAFL은 한 번 빠진 차량이 다시 선택되지 못한다(선택 = 직전 집계 참여).
-    켜면 차량이 연결 회복 후 마지막 모델로 스스로 다시 학습해 보낸다. 끄면 원본 그대로 영구 제외.
-  - 업로드: 원본은 dist.send 한 번. 여기서는 전송 시간(모델 크기/대역폭)을 조각 단위로 흘려보내며 연결을 확인하고,
-    끊기면 실제 dist.send를 하지 않는다(서버는 아무것도 받지 못함 = SASAFL이 실제로 보는 모습).
+  - 주행 환경(world.json)과 설정(config.json)을 읽어 학습 중단·불참·지연·전송 끊김·보관 후 일괄 전송을 결정
+  - 차량 상태(client_<id>.json), 서버 상태(server.json), 사건(events.jsonl), 체크포인트(checkpoint.pt)를 기록
+  - 학습 방식(설정 fl.method): SASAFL / SASAFL 원저자 코드 / BSA / FedAsync / 동기식. 같은 하네스에서
+    적응형 quota·staleness 감쇄·학습 중 교체·epoch 축소·quota 크기만 바꾸므로 나머지 조건은 그대로다 (ablation).
+원본과 다른 점
+  - 원본 runClient/wait_until_can_update_global_model의 busy-wait → 짧게 sleep (동작 동일)
+  - 'rejoin'(fl.rejoin): 원본은 한 번 빠진 차량이 다시 선택되지 못한다. 켜면 복귀한 차량이 스스로 다시 학습한다.
+    해당 라운드 미참여(패턴 3)는 복귀할 때 마지막으로 받은 최신 글로벌 모델로 시작한다.
+  - 학습 중 글로벌 모델 교체 뒤 optimizer를 다시 만든다 (main 8f430a7 버그 수정과 같음)
+  - 업로드: 실제 dist.send는 원본처럼 한 번. 전송 시간(모델 크기/대역폭)을 n등분해 기다리며 연결을 확인하고,
+    끊기면 보내지 않는다 (서버는 아무것도 받지 못함 — SASAFL에는 조각 개념이 없어 패턴 2가 패턴 1처럼 보인다).
 """
 
 import copy
@@ -17,7 +20,7 @@ import os
 import random
 import threading
 import time
-from collections import OrderedDict
+from collections import Counter, deque
 from pathlib import Path
 
 import torch
@@ -34,15 +37,18 @@ from utils.model_utils import TensorBuffer
 from utils.utils import printLog
 
 RUN = Path(os.environ["SIM_RUN_DIR"])
+RESUME = Path(os.environ["SIM_RESUME_DIR"]) if os.environ.get("SIM_RESUME_DIR") else None
 ABORT = "ABORT"
+MAX_ARRIVALS, MAX_HISTORY = 200, 1500           # 메모리가 실행 시간에 비례해 늘지 않게
 
 
 class Env:
-    """world.json / config.json 읽기 캐시 (프로세스마다 하나)"""
+    """world.json / config.json / server_ctl.json 읽기 캐시 (프로세스마다 하나)"""
 
     def __init__(self):
         self._w_t, self._w = 0.0, {}
         self._c_t, self._c, self._c_m = 0.0, None, -1
+        self._s_t, self._s = 0.0, {}
 
     def world(self, vid):
         if time.time() - self._w_t > 0.1:
@@ -66,6 +72,13 @@ class Env:
             self._c_t = time.time()
         return self._c
 
+    def server_down(self):
+        """8-1 집계 서버 장애(일시 중단) 여부: serve.py가 server_ctl.json에 down_until을 쓴다"""
+        if time.time() - self._s_t > 0.3:
+            self._s = C.read_json(RUN / "server_ctl.json", {}) or {}
+            self._s_t = time.time()
+        return time.time() < float(self._s.get("down_until", 0))
+
 
 ENV = Env()
 
@@ -73,26 +86,21 @@ ENV = Env()
 def link_reason(w):
     """연결이 없는 이유 → 유스케이스 id"""
     if not w.get("present", True):
-        return "8-3", "맵 밖"
+        return None, "맵 밖"
     if w.get("zones", {}).get("tunnel"):
-        return "2-6", "터널"
+        return "2-5", "터널"
     if w.get("engine_off"):
         return "1-5", "시동 꺼짐"
     if w.get("ota"):
         return "1-2", "OTA 설치 중"
     if not w.get("gilbert_good", True):
-        return "5-3", "음영지역 단절"
-    if not w.get("cell"):
-        return "2-1", "기지국 범위 밖"
-    if w.get("zones", {}).get("security"):
-        return "3-4", "보안 게이트웨이 차단"
-    return "2-1", "연결 없음"
+        return "2-1", "음영지역 단절"
+    return "2-1", "기지국 범위 밖"
 
 
 # ================================================================== 차량 (클라이언트)
 class SimClient(M_CLIENT.SASAFLClient):
 
-    # ---------------------------------------------------------------- 공통
     def ev(self, example, msg, **kw):
         C.emit(RUN, "fl", vid=self.id, example=example, msg=msg, **kw)
 
@@ -104,27 +112,40 @@ class SimClient(M_CLIENT.SASAFLClient):
 
     def setup(self, cluster_type):
         super().setup(cluster_type)
-        cfg = ENV.cfg()
-        v = self.vcfg()
+        cfg, v = ENV.cfg(), self.vcfg()
+        _, self.method = C.method_of(cfg)
         self.energy = float(cfg["energy"]["budget_j"])
         self.new_data = float(v.get("min_data", 32)) * 2
-        self.ecu = float(v["ecu_factor"]) if v.get("ecu_factor") else random.uniform(1.0, 2.2)   # 4-1 (VEFL 범위)
+        if RESUME:                                            # 불러오기: 에너지·데이터 이어받기
+            old = C.read_json(RESUME / f"client_{self.id}.json", {}) or {}
+            self.energy = float(old.get("energy", self.energy))
+            self.new_data = float(old.get("new_data", self.new_data))
+        self.vtype = v["vtype"]
+        self.ecu = float(v["ecu_factor"])
         self.status, self.detail = "idle", ""
-        self.queue = []                    # 보관 후 전송(5-x)용 [텐서, 버전, 만든 시각]
+        self.queue = []                                       # 보관 후 전송(5-x): [텐서, 버전, 만든 시각]
+        self.queue_cause = None
         self.need_rejoin = False
         self.server_version = 0
+        self.latest_info = None                               # 마지막으로 받은 글로벌 모델 (패턴 3 복귀용)
+        self.keep_streak = 0                                  # 새 글로벌 모델을 연속으로 거부한 횟수 (8-3)
+        self.emerg_seen = 0
         self.counters = {k: 0 for k in ("trained", "sent", "dropped", "aborted", "skipped", "queued", "burst")}
         self.wasted_mb = 0.0
         self.skip_active = None
-        self.queued_while_off = False
-        labels = self.dataset.tensors[1]
-        if v.get("label_noise", 0) > 0:      # 7-2 라벨 오류: 시작할 때 일부 라벨을 무작위로 바꾼다
-            n = len(labels)
-            idx = torch.randperm(n)[: int(n * float(v["label_noise"]))]
-            labels = labels.clone()
+        labels = self.dataset.tensors[1].clone()
+        # 6-2 센서 고장: 지정한 라벨의 데이터 일부가 계속 오염 (라벨이 무작위로 바뀜)
+        fault = [int(c) for c in str(v.get("sensor_fault_classes", "")).replace(" ", "").split(",") if c != ""]
+        lvl = float(v.get("sensor_fault_level", 0.0))
+        self.sensor_fault = (fault, lvl) if fault and lvl > 0 else None
+        if self.sensor_fault:
+            mask = torch.zeros(len(labels), dtype=torch.bool)
+            for c in fault:
+                mask |= labels == c
+            idx = torch.nonzero(mask).flatten()
+            idx = idx[torch.rand(len(idx)) < lvl]
             labels[idx] = torch.randint(0, 10, (len(idx),))
             self.dataset.tensors = (self.dataset.tensors[0], labels)
-            self.ev("7-2", f"라벨 {len(idx)}/{n}개를 틀리게 바꿈")
         hist = torch.bincount(labels.long(), minlength=10).tolist()
         self.label_hist = hist
         self.label_skew = max(hist) / max(1, sum(hist))
@@ -141,30 +162,30 @@ class SimClient(M_CLIENT.SASAFLClient):
                 if w.get("charging"):
                     self.energy = min(float(cfg["energy"]["budget_j"]),
                                       self.energy + float(cfg["energy"]["charge_rate_jps"]) * dt)
-                if w.get("moving"):
+                if w.get("moving"):                            # 새 데이터는 주행 중에만 쌓인다 (3-2)
                     self.new_data += float(v.get("data_rate_per_s", 5)) * dt
                 C.write_json(RUN / f"client_{self.id}.json", {
-                    "vid": self.id, "t": now, "status": self.status, "detail": self.detail,
+                    "vid": self.id, "t": now, "status": self.status, "detail": self.detail, "vtype": self.vtype,
                     "version": self.local_model_version, "server_version": self.server_version,
                     "energy": round(self.energy, 1), "new_data": int(self.new_data), "ecu": round(self.ecu, 2),
                     "queue": len(self.queue), "need_rejoin": self.need_rejoin, "counters": self.counters,
                     "wasted_mb": round(self.wasted_mb, 2), "label_hist": self.label_hist,
                     "label_skew": round(self.label_skew, 2), "n_data": len(self.dataset),
-                    "model_mb": round(self.model_mb, 2), "lr": v.get("lr_override") or self.lr})
-            except Exception as e:  # 상태 기록 실패가 학습을 멈추지 않게
+                    "model_mb": round(self.model_mb, 2), "lr": v.get("lr_override") or self.lr,
+                    "keep_streak": self.keep_streak})
+            except Exception as e:
                 printLog(f"CLIENT {self.id}", f"status error {e}")
             time.sleep(0.3)
 
     def set_status(self, status, detail=""):
         self.status, self.detail = status, detail
 
-    # ---------------------------------------------------------------- 글로벌 모델 수신 (원본 + 6-x 수신 실패)
+    # ---------------------------------------------------------------- 글로벌 모델 수신 (원본 + 수신 실패·강제 갱신 기록)
     def receive_global_model_from_server(self, is_ongoing_local_update_flag, terminate_FL_flag, lag_tolerance):
         self.received_global_model = self.model_controller.Model()
         model_state_dict = self.model.state_dict()
         flatten_model = TensorBuffer(list(model_state_dict.values()))
         self.global_model_info = torch.zeros(len(flatten_model.buffer) + 3)
-
         while True:
             dist.recv(tensor=self.global_model_info, src=0)
             global_model_version = int(self.global_model_info[-3].item())
@@ -174,30 +195,37 @@ class SimClient(M_CLIENT.SASAFLClient):
             am_i_picked = self.global_model_info[-1].item()
             global_loss = self.global_model_info[-2].item()
             self.server_version = global_model_version
-
             w = self.w()
             if not (w.get("link_up") and w.get("server_ok")):
                 # 서버는 모든 차량에 보내지만 이 차량은 받지 못함 (프로세스는 메시지를 비워 서버가 멈추지 않게 한다)
-                if am_i_picked == 1 or is_ongoing_local_update_flag.is_set():
-                    ex, why = link_reason(w)
-                    ex6 = "6-2" if w.get("ota") else "6-1"
-                    self.ev(ex6, f"새 모델 v{global_model_version} 수신 실패({why}) → v{self.local_model_version}로 계속",
-                            cause=ex)
-                    if am_i_picked == 1 and not is_ongoing_local_update_flag.is_set():
-                        self.need_rejoin = True      # 원본이라면 이 차량은 다시는 학습을 시작하지 못한다
+                if am_i_picked == 1 and not is_ongoing_local_update_flag.is_set() and w.get("present", True) \
+                        and not w.get("engine_off") and not w.get("ota"):
+                    _, why = link_reason(w)
+                    self.ev("4-8", f"새 모델 v{global_model_version} 수신 실패({why}) → 이전 v{self.local_model_version}로 "
+                                   f"학습해 늦은 값을 보냄")
+                    is_ongoing_local_update_flag.set()           # 받은 줄 모르고 가진 모델로 학습 시작
+                elif am_i_picked == 1:
+                    self.need_rejoin = True
                 continue
-
+            self.latest_info = self.global_model_info.clone()     # 최신 글로벌 모델 보관 (덮어쓰기라 메모리 일정)
             flatten_model.buffer = self.global_model_info[:-3]
             flatten_model.unpack(model_state_dict.values())
-
             if is_ongoing_local_update_flag.is_set() and global_model_version >= 1:
-                if global_model_version - self.local_model_version >= lag_tolerance:
+                if not self.method["mid_swap"]:                  # BSA·FedAsync·동기식: 학습 중에는 교체하지 않음
+                    continue
+                lag = global_model_version - self.local_model_version
+                if lag >= lag_tolerance:
+                    self.ev("8-3", f"새 글로벌 모델을 {self.keep_streak}번 연속 거부(성능이 더 나쁨)하다 lag {lag} ≥ τ={lag_tolerance}"
+                                   f" → 강제 갱신" if self.keep_streak else f"lag {lag} ≥ τ={lag_tolerance} → 강제 갱신")
+                    self.keep_streak = 0
                     self.received_global_model.load_state_dict(model_state_dict)
                     self.replace_global_model_during_local_update.set()
                 elif global_loss < self.last_global_loss:
+                    self.keep_streak = 0
                     self.received_global_model.load_state_dict(model_state_dict)
                     self.replace_global_model_during_local_update.set()
                 else:
+                    self.keep_streak += 1
                     continue
             elif am_i_picked == 1:
                 self.model.load_state_dict(model_state_dict)
@@ -206,29 +234,42 @@ class SimClient(M_CLIENT.SASAFLClient):
                 self.need_rejoin = False
                 is_ongoing_local_update_flag.set()
 
-    # ---------------------------------------------------------------- 참여 조건 (3-x, 8-x): 미달이면 학습을 시작하지 않는다
+    def load_latest_global(self, why):
+        """패턴 3 서버 대응: 복귀할 때 마지막으로 받은 최신 글로벌 모델로 시작"""
+        info = self.latest_info
+        if info is None or int(info[-3].item()) <= self.local_model_version:
+            return False
+        sd = self.model.state_dict()
+        fm = TensorBuffer(list(sd.values()))
+        fm.buffer = info[:-3]
+        fm.unpack(sd.values())
+        self.model.load_state_dict(sd)
+        old = self.local_model_version
+        self.local_model_version = int(info[-3].item())
+        self.last_global_loss = info[-2].item()
+        self.ev(None, f"복귀({why}): 최신 글로벌 모델 v{self.local_model_version}을 받아 다시 참여 (이전 v{old})")
+        return True
+
+    # ---------------------------------------------------------------- 참여 조건: 미달이면 학습을 시작하지 않는다
     def gate(self):
         cfg, w, v = ENV.cfg(), self.w(), self.vcfg()
-        if not w.get("present", True):
-            return "8-3", "맵 밖(이탈)"
-        if v.get("leave"):
-            return ("8-2" if self.label_skew > 0.5 else "8-3"), f"차량 이탈 (라벨 쏠림 {self.label_skew:.0%})"
+        if not w.get("present", True) or v.get("leave"):
+            return None, "맵 밖"
         if not w.get("available", True):
-            return "8-1", "가용 시간 아님"
+            return None, "운행 시간대 아님"
         if w.get("engine_off"):
             return "1-5", "시동 꺼짐"
         if w.get("ota"):
             return "1-2", "OTA 설치 중"
         if self.energy <= 0:
-            return "1-3", "배터리 방전 (충전소에서 충전 필요)"
-        if v.get("energy_gate", True) and self.energy < float(cfg["energy"]["min_energy_j"]):   # FedQoS식 에너지 확인
-            return "3-1", f"잔여 에너지 {self.energy:.0f} J < 기준 {cfg['energy']['min_energy_j']} J"
+            return "1-3", "배터리 방전 (충전 필요)"
+        if v.get("energy_gate", True) and self.energy < float(cfg["energy"]["min_energy_j"]):
+            return "3-1", f"잔여 배터리 {self.energy:.0f} J < 안전 기준 {cfg['energy']['min_energy_j']} J"
         if self.new_data < float(v.get("min_data", 32)):
-            return "3-2", f"새 데이터 {self.new_data:.0f}개 < {v.get('min_data')}"
-        if v.get("charging_only") and not w.get("charging"):
-            return "3-3", "충전 중일 때만 참여"
-        if w.get("zones", {}).get("security"):
-            return "3-4", "보안 게이트웨이가 외부 서버 연결 차단"
+            why = "충전 중" if w.get("charging") else ("시동 켠 채 정차" if w.get("idle_parked") else "주행 데이터 부족")
+            return "3-2", f"새 데이터 {self.new_data:.0f}개 < {v.get('min_data')} ({why})"
+        if v.get("wifi_only") and not w.get("wifi"):
+            return "3-3", "비과금망(Wi-Fi)이 아님"
         return None
 
     # ---------------------------------------------------------------- 로컬 학습 (원본 + 중단·지연·오염)
@@ -242,14 +283,12 @@ class SimClient(M_CLIENT.SASAFLClient):
         loss_function = CrossEntropyLoss()
         dataloader = DataLoader(self.dataset, self.batch_size, shuffle=True)
         start_weights = copy.deepcopy(self.model.state_dict())
-        crash_at = random.random() < float(v.get("crash_prob", 0.0))            # 1-1
-        crash_batch = random.randint(0, max(0, len(dataloader) * self.current_local_epoch - 1)) if crash_at else -1
-        preempt_rolled = False
-        drift_logged = adas_logged = False
-        self.slow_s = 0.0
+        crash_batch = random.randint(0, max(0, len(dataloader) * self.current_local_epoch - 1)) \
+            if random.random() < float(v.get("crash_prob", 0.0)) else -1                 # 1-1
         e_cfg = cfg["energy"]
         per_batch_j = random.uniform(float(e_cfg["round_j_min"]), float(e_cfg["round_j_max"])) / \
             max(1, len(dataloader) * self.current_local_epoch)
+        slow_ecu = slow_adas = 0.0
         batch_no = 0
         epoch_train_loss = 0.0
         e = 0
@@ -257,21 +296,20 @@ class SimClient(M_CLIENT.SASAFLClient):
             if self.replace_global_model_during_local_update.is_set():
                 e = 0
                 epoch_train_loss = 0.0
-                self.current_local_epoch -= 1
-                if self.current_local_epoch < 2:
-                    self.current_local_epoch = 2
+                if self.method["epoch_reduce"]:
+                    self.current_local_epoch -= 1
+                    if self.current_local_epoch < 2:
+                        self.current_local_epoch = 2
                 self.local_model_version = int(self.global_model_info[-3].item())
                 self.last_global_loss = self.global_model_info[-2].item()
                 self.model = copy.deepcopy(self.received_global_model)
-                # main 8f430a7과 같은 수정: 교체한 모델을 학습하도록 optimizer를 다시 만든다
-                optimizer = SGD(self.model.parameters(), lr=lr, momentum=0.9)
+                optimizer = SGD(self.model.parameters(), lr=lr, momentum=0.9)     # main 8f430a7 수정과 같음
                 self.replace_global_model_during_local_update.clear()
                 start_weights = copy.deepcopy(self.model.state_dict())
                 continue
             for data, labels in dataloader:
                 t_b = time.time()
                 w = self.w()
-                # 학습 중단 (패턴 1): 서버에는 아무것도 가지 않는다
                 if w.get("engine_off") or not w.get("present", True):
                     return self._abort("1-5", "주차·시동 꺼짐으로 학습 중단")
                 if w.get("ota"):
@@ -280,15 +318,13 @@ class SimClient(M_CLIENT.SASAFLClient):
                     return self._abort("1-1", "계산 도중 돌발 중단")
                 if self.energy <= 0:
                     return self._abort("1-3", "학습 중 배터리 방전")
-                if w.get("zones", {}).get("school") and not preempt_rolled:
-                    preempt_rolled = True
+                adas = float(w.get("emergency", 0)) > 0
+                if adas and int(w.get("emergency_id", 0)) > self.emerg_seen:   # 새 긴급제동
+                    self.emerg_seen = int(w["emergency_id"])
+                    cause = w.get("emergency_cause", "")
                     if random.random() < float(v.get("safety_preempt_prob", 0.0)):
-                        return self._abort("1-4", "안전 기능(긴급 제동)이 연산을 가져가 FL 프로세스 종료")
-                if w.get("zones", {}).get("weather") and float(v.get("drift_noise", 0)) > 0:   # 8-4 입력 분포 변화
-                    data = data + float(v["drift_noise"]) * torch.randn_like(data)
-                    if not drift_logged:
-                        drift_logged = True
-                        self.ev("8-4", "강우 구역에서 수집한 데이터로 학습 (입력 분포 변화)")
+                        return self._abort("1-4", f"긴급제동({cause})이 연산을 선점해 FL 프로세스 종료")
+                    self.ev("4-5", f"긴급제동({cause}) — ADAS가 {w['emergency']:.0f}초간 연산 점유, 학습 지연")
                 optimizer.zero_grad()
                 outputs = self.model.forward(data)
                 loss = loss_function(outputs, labels)
@@ -298,17 +334,13 @@ class SimClient(M_CLIENT.SASAFLClient):
                 optimizer.step()
                 batch_no += 1
                 self.energy -= per_batch_j
-                # 지연 (패턴 4): ECU 속도 배수, 보호구역 주행 보조 연산 점유
                 spent = time.time() - t_b
-                slow = self.ecu - 1.0
-                if w.get("zones", {}).get("school"):
-                    slow += float(v.get("adas_slowdown", 0.0))
-                    if not adas_logged:
-                        adas_logged = True
-                        self.ev("4-5", "주행 보조 기능이 연산을 점유해 학습 지연")
-                if slow > 0:
-                    time.sleep(spent * slow)
-                    self.slow_s += spent * (self.ecu - 1.0)
+                if self.ecu > 1.0:                                              # 4-1 구형 EV
+                    time.sleep(spent * (self.ecu - 1.0))
+                    slow_ecu += spent * (self.ecu - 1.0)
+                if adas:                                                         # 4-5 ADAS 연산 점유
+                    time.sleep(spent * float(v.get("adas_slowdown", 1.5)))
+                    slow_adas += spent * float(v.get("adas_slowdown", 1.5))
             e += 1
             self.set_status("training", f"v{self.local_model_version} · {e}/{self.current_local_epoch} epoch")
             if terminate_flag.is_set():
@@ -316,10 +348,14 @@ class SimClient(M_CLIENT.SASAFLClient):
         self.total_train_time += time.time() - start
         self.counters["trained"] += 1
         self.new_data = max(0.0, self.new_data - float(v.get("min_data", 32)))
-        self._corrupt(start_weights, v)
-        self.train_time = time.time() - start
-        if self.ecu >= 1.4 and self.slow_s > 1.0:
-            self.ev("4-1", f"ECU ×{self.ecu:.1f}로 학습이 {self.slow_s:.1f}초 늦어짐 ({self.train_time:.1f}초)")
+        self._corrupt(start_weights, v, lr)
+        took = time.time() - start
+        if slow_ecu > 1.0:
+            self.ev("4-1", f"{C.VTYPES[self.vtype]['name']} (연산 ×{self.ecu:.1f}) — 학습 {took:.1f}초, "
+                           f"{slow_ecu:.1f}초 늦어짐")
+        avg = 60000 / max(1, int(cfg["fl"]["K"]))
+        if len(self.dataset) > 1.3 * avg and took > 3:
+            self.ev("4-6", f"데이터 {len(self.dataset)}개(평균의 {len(self.dataset) / avg:.1f}배)로 학습 {took:.1f}초")
         return epoch_train_loss / len(dataloader)
 
     def _abort(self, example, msg):
@@ -329,36 +365,27 @@ class SimClient(M_CLIENT.SASAFLClient):
         self.ev(example, msg + " → 서버는 아무 응답도 받지 못함")
         return ABORT
 
-    def _corrupt(self, start_weights, v):
-        """패턴 7: 제시간·정상 형식이지만 내용이 틀린 업데이트"""
-        sd = self.model.state_dict()
-        changed = []
-        if float(v.get("weight_noise", 0)) > 0:                        # 7-4 센서 고장·불량 노드
-            for k in sd:
-                sd[k] = sd[k] + float(v["weight_noise"]) * torch.randn_like(sd[k]) * sd[k].std()
-            changed.append(("7-4", f"가중치 노이즈 ×{v['weight_noise']}"))
-        if float(v.get("backdoor_boost", 0)) > 0:                      # 7-3 백도어(업데이트 증폭)
+    def _corrupt(self, start_weights, v, lr):
+        """패턴 6: 제시간·정상 형식이지만 오류가 있는 값을 계속 보냄"""
+        if float(v.get("backdoor_boost", 0)) > 0:                       # 6-1 악의적 조작
+            sd = self.model.state_dict()
             for k in sd:
                 sd[k] = start_weights[k] + (1 + float(v["backdoor_boost"])) * (sd[k] - start_weights[k])
-            changed.append(("7-3", f"업데이트 {1 + float(v['backdoor_boost']):.0f}배 증폭(백도어)"))
-        if changed:
             self.model.load_state_dict(sd)
-            for ex, msg in changed:
-                self.ev(ex, msg)
-        if v.get("lr_override"):
-            self.ev("7-1", f"학습률 {v['lr_override']}로 학습 (정상 {self.lr})")
+            self.ev("6-1", f"조작한 값 전송 (업데이트 {1 + float(v['backdoor_boost']):.1f}배 증폭)")
+        if self.sensor_fault:                                            # 6-2 센서 고장
+            cls, lvl = self.sensor_fault
+            self.ev("6-2", f"센서 고장: 라벨 {cls} 데이터의 {lvl:.0%}가 오염된 채 학습한 값 전송")
+        if v.get("lr_override"):                                         # 6-3 학습 설정 오류
+            self.ev("6-3", f"학습률 {lr} (정상 {self.lr})로 학습한 값 전송")
 
-    # ---------------------------------------------------------------- 업로드 (원본 dist.send 한 번 → 시간·끊김 반영)
+    # ---------------------------------------------------------------- 업로드
     def build_update(self, utility):
-        v = self.vcfg()
-        version = self.local_model_version + int(v.get("clock_skew", 0) or 0)       # 7-5 시계 오차 → 버전 오차
-        if v.get("clock_skew"):
-            self.ev("7-5", f"시계 오차로 버전 {self.local_model_version} → {version}로 보고")
         flatten_model = TensorBuffer(list(self.model.state_dict().values()))
         info = flatten_model.buffer.tolist()
         info.append(utility)
-        info.append(version)
-        return torch.tensor(info), version
+        info.append(self.local_model_version)
+        return torch.tensor(info), self.local_model_version
 
     def send_local_model_to_server(self, utility):
         self.current_local_epoch = self.local_epoch
@@ -366,6 +393,7 @@ class SimClient(M_CLIENT.SASAFLClient):
         result = self.upload(tensor, version)
         if result == "queued":
             self.queue.append((tensor, version, time.time()))
+            del self.queue[:-3]                       # 보관은 최대 3개 (메모리 상한)
             self.counters["queued"] += 1
         return result
 
@@ -382,27 +410,24 @@ class SimClient(M_CLIENT.SASAFLClient):
 
     def upload(self, tensor, version):
         cfg, v = ENV.cfg(), self.vcfg()
-        n = ENV.cfg()["net"]
+        n = cfg["net"]
         frags = max(1, int(n["fragments"]))
         t0 = time.time()
-        delays = {}
-        # 5-1 TDMA: 그룹 G개면 자기 순서가 올 때까지 기다린다
-        G = int(n.get("tdma_groups", 1))
+        if ENV.server_down():                                             # 8-1 서버 장애 중: 보관 (5-3)
+            return self._queue("5-3", "집계 서버 장애 — 복구될 때까지 보관")
+        G = int(n.get("tdma_groups", 1))                                  # 4-7 TDMA 순서 대기
         if G > 1:
-            slot = float(n["tdma_slot_s"])
-            grp = self.id % G
+            slot, grp = float(n["tdma_slot_s"]), self.id % G
             self.set_status("waiting", f"TDMA 그룹 {grp}/{G} 순서 대기")
             while int(time.time() / slot) % G != grp:
                 time.sleep(0.05)
-            delays["tdma"] = time.time() - t0
-            if delays["tdma"] > slot * 0.5:
-                self.ev("5-1", f"TDMA 순서 대기 {delays['tdma']:.1f}초 (그룹 {grp}/{G})")
-        # 연결 확인 + 셀 슬롯 (4-2)
+            waited = time.time() - t0
+            if waited > slot * 0.5:
+                self.ev("4-7", f"TDMA 송신 순서 대기 {waited:.1f}초 (그룹 {grp}/{G})")
         w = self.w()
         if not (w.get("link_up") and w.get("server_ok")):
             return self._link_fail(w, 0, frags, v, "전송 시작 전")
-        t_slot = time.time()
-        lock = None
+        t_slot, lock = time.time(), None
         while lock is None:
             w = self.w()
             if not (w.get("link_up") and w.get("server_ok")):
@@ -411,33 +436,31 @@ class SimClient(M_CLIENT.SASAFLClient):
             if lock is None:
                 self.set_status("waiting", f"기지국 {w['cell']} 혼잡 — 빈 슬롯 대기")
                 time.sleep(0.2)
-        delays["congestion"] = time.time() - t_slot
-        if delays["congestion"] > 1.0:
-            self.ev("4-2", f"기지국 {w['cell']} 혼잡으로 {delays['congestion']:.1f}초 대기")
+        if time.time() - t_slot > 1.0:
+            self.ev("4-2", f"기지국 {w['cell']} 혼잡으로 {time.time() - t_slot:.1f}초 대기")
         try:
             cell0, region0 = w["cell"], w["region"]
-            # 5-2 셀 가장자리(품질 낮음)면 보관 후 전송 차량은 보류
             if v.get("store_forward") and w.get("quality", 1) < float(n.get("edge_quality", 0.15)):
-                self.ev("5-2", f"통신 품질 {w['quality']:.2f}로 낮아 전송 보류")
-                return "queued"
-            retx_spent = 0.0
+                return self._queue("5-2", f"통신 품질 {w['quality']:.2f}로 낮아 전송 보류")
+            retx = 0.0
             i = 0
             while i < frags:
                 w = self.w()
                 bw = float(n["bandwidth_mbps"]) * (float(n["weather_bw_mult"]) if w.get("zones", {}).get("weather") else 1.0)
-                frag_s = self.model_mb * 8 / frags / max(0.1, bw)
                 self.set_status("uploading", f"{i}/{frags} 조각 · {bw:.0f} Mbps")
-                time.sleep(frag_s)
+                time.sleep(self.model_mb * 8 / frags / max(0.1, bw))
                 w = self.w()
                 fail = None
+                if ENV.server_down():
+                    return self._queue("5-3", "전송 중 집계 서버 장애 — 복구될 때까지 보관")
                 if not (w.get("link_up") and w.get("server_ok")):
                     fail = link_reason(w)
                 elif w.get("cell") != cell0 and n.get("handover_drops", True):
-                    fail = ("2-4", f"핸드오버 {cell0}→{w.get('cell')}")
+                    fail = ("2-1", f"기지국 {cell0}→{w.get('cell')} 핸드오버로 범위 이탈")
                 elif w.get("region") != region0 and random.random() < float(n["region_instability"]):
-                    fail = ("2-5", f"권역 경계 {region0}→{w.get('region')} 망 불안정")
+                    fail = ("2-4", f"권역 경계 {region0}→{w.get('region')} 망 불안정")
                 elif self.energy <= 0:
-                    fail = ("2-7", "전송 중 배터리 방전")
+                    fail = ("2-6", "전송 중 배터리 방전")
                 elif w.get("speed_kmh", 0) > float(n["doppler_kmh"]) and random.random() < float(n["doppler_fail"]):
                     fail = ("2-2", f"{w['speed_kmh']:.0f} km/h 도플러로 채널 추정 실패")
                 elif random.random() < float(n["frag_fail"]):
@@ -446,30 +469,22 @@ class SimClient(M_CLIENT.SASAFLClient):
                     self.energy -= float(cfg["energy"]["upload_j"]) / frags
                     i += 1
                     continue
-                # 재전송 가능한 오류(패킷·도플러)는 제한 시간 안에서 같은 조각을 다시 보낸다 (4-3)
                 if fail[0] in ("2-2", "2-3") and v.get("retransmit", True) and \
-                        retx_spent + float(n["retx_timeout_s"]) <= float(n["retx_total_s"]):
+                        retx + float(n["retx_timeout_s"]) <= float(n["retx_total_s"]):
                     self.set_status("waiting", f"재전송 대기 {n['retx_timeout_s']}초 ({fail[1]})")
-                    self.ev(fail[0], f"{fail[1]} ({i + 1}/{frags} 조각) → {n['retx_timeout_s']}초 뒤 재전송")
                     time.sleep(float(n["retx_timeout_s"]))
-                    retx_spent += float(n["retx_timeout_s"])
+                    retx += float(n["retx_timeout_s"])
                     continue
                 return self._link_fail(w, i, frags, v, fail[1], forced=fail[0])
-            # 전송 완료: 실제로 서버에 보낸다 (원본과 같은 dist.send)
-            dist.send(tensor=tensor, dst=0)
+            dist.send(tensor=tensor, dst=0)                       # 원본과 같은 한 번의 dist.send
             total = time.time() - t0
             self.counters["sent"] += 1
             self.need_rejoin = False
-            if retx_spent > 0:
-                self.ev("4-3", f"재전송 대기로 {retx_spent:.0f}초 늦게 도착")
-            up_s = self.model_mb * 8 / float(n["bandwidth_mbps"])
-            if total > up_s * 3 and total > 2:
-                self.ev("4-4", f"업로드에 {total:.1f}초 (대역폭·혼잡·재전송 포함)")
-            C.emit(RUN, "upload", vid=self.id, msg=f"v{version} 업로드 완료 {total:.1f}초", version=version,
-                   delays={k: round(x, 2) for k, x in delays.items()})
-            if random.random() < float(v.get("dup_prob", 0)):              # 9-3 수신 확인만 끊겨 재전송
-                dist.send(tensor=tensor, dst=0)
-                self.ev("9-3", "수신 확인 손실로 같은 업데이트를 한 번 더 전송")
+            if retx > 0:
+                self.ev("4-3", f"패킷 오류·도플러로 재전송 대기 {retx:.0f}초 후 도착")
+            if total > self.model_mb * 8 / float(n["bandwidth_mbps"]) * 3 and total > 2:
+                self.ev("4-4", f"업로드 {total:.1f}초 (대역폭 {n['bandwidth_mbps']} Mbps·강우·혼잡 포함)")
+            C.emit(RUN, "upload", vid=self.id, msg=f"v{version} 업로드 완료 {total:.1f}초", version=version)
             self.set_status("idle", "업로드 완료, 다음 선택 대기")
             return "sent"
         finally:
@@ -477,49 +492,45 @@ class SimClient(M_CLIENT.SASAFLClient):
                 fcntl.flock(lock, fcntl.LOCK_UN)
                 lock.close()
 
+    def _queue(self, example, why):
+        self.queue_cause = self.queue_cause or example
+        self.set_status("queued", why)
+        self.ev(None, f"{why} (보관 {len(self.queue) + 1}개)")
+        return "queued"
+
     def _link_fail(self, w, sent_frags, frags, v, where, forced=None):
         ex, why = (forced, where) if forced else link_reason(w)
+        if v.get("store_forward") and ex and ex.startswith("2"):        # 5-1 수신 영역 밖: 보관 후 일괄 송신
+            return self._queue("5-1", f"{why} → 보관, 수신 영역에 들어오면 일괄 송신")
         wasted = self.model_mb * sent_frags / frags
-        if v.get("store_forward") and ex in ("2-1", "2-6", "5-3", "1-5", "2-4", "3-4", "2-5", "2-2", "2-3"):
-            self.set_status("queued", f"{why} → 보관 후 연결 회복 시 전송")
-            if w.get("engine_off"):
-                self.queued_while_off = True
-            self.ev("5-2" if ex not in ("2-6", "5-3") else "5-3", f"{why}: 업데이트 보관 (연결 회복 후 전송)",
-                    cause=ex)
-            return "queued"
         self.counters["dropped"] += 1
         self.wasted_mb += wasted
         self.need_rejoin = True
         self.set_status("dead", f"{why} → 업데이트 폐기")
-        pat = int(ex.split("-")[0])
-        if pat == 2 or sent_frags > 0:
-            self.ev(ex if pat == 2 else "2-1", f"{why}: {sent_frags}/{frags} 조각 전송 후 끊김, {wasted:.1f} MB 낭비",
-                    wasted_mb=round(wasted, 2), cause=ex)
+        if ex and ex.startswith("2"):
+            self.ev(ex, f"{why}: {sent_frags}/{frags} 조각 전송 중 끊김, {wasted:.1f} MB 낭비 "
+                        f"(SASAFL 서버에는 조각이 없어 '아무것도 안 옴'으로 보임)", wasted_mb=round(wasted, 2))
         else:
-            self.ev(ex, f"{why}: 업로드 시작 못 함 → 서버는 아무것도 받지 못함")
+            self.ev(ex, f"{why}: 업로드 못 함 → 서버는 아무것도 받지 못함")
         return "dropped"
 
     def flush_queue(self):
-        """보관한 업데이트를 연결이 돌아오면 한꺼번에 보낸다 (5-x). 원본 서버는 차량당 버퍼 1칸이라 덮어씀"""
+        """보관한 업데이트를 연결·서버가 돌아오면 한꺼번에 보낸다 (패턴 5). 원본 서버는 차량당 버퍼 1칸이라 덮어씀"""
         w = self.w()
-        if not self.queue or not (w.get("link_up") and w.get("server_ok")):
+        if not self.queue or ENV.server_down() or not (w.get("link_up") and w.get("server_ok")):
             return
         items, self.queue = self.queue, []
-        ex = "5-4" if self.queued_while_off else ("5-3" if len(items) > 1 else "5-2")
-        self.queued_while_off = False
+        cause, self.queue_cause = self.queue_cause or "5-1", None
         sent = 0
         for tensor, version, made in items:
-            r = self.upload(tensor, version)
-            if r != "sent":
-                self.queue.append((tensor, version, made))
-                continue
-            sent += 1
+            if self.upload(tensor, version) == "sent":
+                sent += 1
         if sent:
             self.counters["burst"] += 1
-            self.ev(ex, f"보관한 업데이트 {sent}개를 한꺼번에 전송 (버전 {[it[1] for it in items]})", n=sent)
+            self.ev(cause, f"보관한 값 {sent}개를 한꺼번에 전송 (버전 {[it[1] for it in items]})", n=sent)
 
 
-# ================================================================== 실행 루프 (원본 SASAFL.runClient/runServer + 기록)
+# ================================================================== 실행 루프
 class SimSASAFL(M_SASAFL.SASAFL):
 
     def runClient(self, Client):
@@ -537,15 +548,17 @@ class SimSASAFL(M_SASAFL.SASAFL):
             if is_ongoing.is_set():
                 g = Client.gate()
                 if g:
-                    if Client.skip_active != g[0]:
-                        Client.skip_active = g[0]
+                    if Client.skip_active != g:
+                        Client.skip_active = g
                         Client.counters["skipped"] += 1
-                        Client.ev(g[0], f"{g[1]} → 이번엔 참여하지 않음" + (" (서버에 알릴 신호가 SASAFL에 없음)"
-                                                                       if g[0].startswith("3") else ""))
-                    Client.set_status("skipped", g[1])
+                        Client.ev(g[0], f"{g[1]} → 이번 라운드 미참여")
+                    Client.set_status("skipped" if g[0] else "absent", g[1])
                     time.sleep(0.3)
                     continue
-                Client.skip_active = None
+                if Client.skip_active:                          # 패턴 3 복귀: 최신 글로벌 모델로 시작
+                    if Client.skip_active[0] and Client.skip_active[0].startswith("3"):
+                        Client.load_latest_global(Client.skip_active[1])
+                    Client.skip_active = None
                 utility = Client.train(terminate)
                 if terminate.is_set() or utility == -1:
                     break
@@ -554,71 +567,101 @@ class SimSASAFL(M_SASAFL.SASAFL):
                     continue
                 r = Client.send_local_model_to_server(utility)
                 is_ongoing.clear()
-                # 보관 후 전송 차량은 끊긴 동안 자기 모델로 계속 학습해 업데이트를 쌓는다 (최대 3개)
                 if r == "queued" and len(Client.queue) < 3:
-                    Client.need_rejoin = True
+                    Client.need_rejoin = True                   # 끊긴 동안 같은 버전 모델로 계속 학습해 쌓는다
             elif Client.need_rejoin and cfg["fl"].get("rejoin", True):
                 w = Client.w()
+                g = Client.gate()
                 can_store = Client.vcfg().get("store_forward") and Client.queue and len(Client.queue) < 3
-                if (w.get("link_up") and w.get("server_ok") and not Client.gate()) or (can_store and not Client.gate()):
-                    Client.ev(None, f"복귀: 마지막 모델 v{Client.local_model_version}로 다시 학습 "
-                                    f"(서버는 v{Client.server_version})")
+                if not g and ((w.get("link_up") and w.get("server_ok") and not ENV.server_down()) or can_store):
+                    if not can_store:
+                        Client.load_latest_global("연결 회복")
                     Client.need_rejoin = False
                     is_ongoing.set()
                 else:
-                    g = Client.gate()
                     why = g[1] if g else link_reason(w)[1]
                     Client.set_status("dead" if not Client.queue else "queued", f"복귀 대기: {why}")
             elif Client.need_rejoin:
-                Client.set_status("excluded", "원본 SASAFL: 다시 선택되지 않음 (rejoin 꺼짐)")
+                Client.set_status("excluded", "원본 SASAFL: 다시 선택되지 않음 (복귀 허용 꺼짐)")
             time.sleep(0.05)
         printLog(f"CLIENT {Client.id}", "FL 프로세스를 종료합니다.")
         dist.barrier()
 
     def runServer(self, Server):
-        clients_idx = [idx for idx in range(1, Server.num_clients + 1)]
+        cfg = ENV.cfg()
+        mname, method = C.method_of(cfg)
+        K = Server.num_clients
+        clients_idx = list(range(1, K + 1))
         picked_client_idx = clients_idx
-        minimum_num_picked_client = int(Server.num_clients * Server.selection_ratio)
-        current_num_picked_client = minimum_num_picked_client
+        if method["quota"] == "one":
+            minimum = 1
+        elif method["quota"] == "all":
+            minimum = K
+        else:
+            minimum = max(1, int(K * Server.selection_ratio))
+        current = minimum
+        Server.method = method
         listen_local_update = threading.Thread(target=Server.receive_local_model_from_any_clients, daemon=True)
         global_acc, global_loss = Server.evaluate()
         Server.last_global_loss = global_loss
         Server.history = [{"round": 0, "acc": round(global_acc * 100, 2), "loss": round(global_loss, 4),
-                           "t": time.time(), "quota": current_num_picked_client, "picked": []}]
-        Server.publish(current_num_picked_client, "start")
-        current_FL_start = time.time()
+                           "t": time.time(), "quota": current, "picked": []}]
+        Server.part_total = Counter()
+        Server.window = deque(maxlen=int(cfg["server"].get("p7_window", 20)))
+        Server.p7_last = {}
+        if RESUME and (RESUME / "checkpoint.pt").exists():
+            ck = torch.load(RESUME / "checkpoint.pt")
+            Server.model.load_state_dict(ck["model"])
+            Server.current_round = ck["round"]
+            Server.last_global_loss = global_loss = ck["last_loss"]
+            current = ck.get("quota", current)
+            Server.history = ck.get("history", Server.history)
+            Server.part_total = Counter({int(k): v for k, v in ck.get("part_total", {}).items()})
+            C.emit(RUN, "control", msg=f"저장된 글로벌 모델 {Server.current_round}라운드에서 이어서 학습")
+        C.emit(RUN, "control", msg=f"학습 방식: {method['name']} (quota 최소 {minimum}, 적응형 "
+                                   f"{'켬' if method['adaptive_quota'] else '끔'}, 감쇄 {'켬' if method['decay'] else '끔'}, "
+                                   f"학습 중 교체 {'켬' if method['mid_swap'] else '끔'})")
+        Server.publish(current, "start")
+        start = time.time()
         listen_local_update.start()
         while True:
-            current_round_start = time.time()
+            Server.wait_while_down(current)
+            round_start = time.time()
             Server.send_global_model_to_clients(clients_idx, picked_client_idx, global_loss)
-            picked_client_idx = Server.wait_until_can_update_global_model(current_num_picked_client)
+            picked_client_idx = Server.wait_until_can_update_global_model(current)
             stal = {i: Server.current_round - int(Server.local_model_version[i]) for i in picked_client_idx}
             Server.refine_received_local_model(picked_client_idx)
             coefficient = Server.calculate_coefficient(picked_client_idx)
             Server.average_aggregation(picked_client_idx, coefficient)
             global_acc, global_loss = Server.evaluate()
             Server.current_round += 1
-            used = current_num_picked_client
+            used = current
             if Server.current_round == Server.target_rounds or global_acc >= Server.target_accuracy:
                 break
-            current_num_picked_client = Server.get_next_round_minimum_local_model(
-                global_loss, current_num_picked_client, minimum_num_picked_client)
+            if method["adaptive_quota"]:
+                current = Server.get_next_round_minimum_local_model(global_loss, current, minimum)
+            else:
+                Server.last_global_loss = global_loss
             dups = sorted({i for i in picked_client_idx if picked_client_idx.count(i) > 1})
             rec = {"round": Server.current_round, "acc": round(global_acc * 100, 2), "loss": round(global_loss, 4),
-                   "t": time.time(), "dur": round(time.time() - current_round_start, 2), "quota": used,
-                   "next_quota": current_num_picked_client,
+                   "t": time.time(), "dur": round(time.time() - round_start, 2), "quota": used, "next_quota": current,
                    "picked": [{"vid": i, "staleness": stal[i], "version": int(Server.local_model_version[i]),
                                "weight": round(float(coefficient[i]), 3)} for i in picked_client_idx],
-                   "dups": dups, "elapsed": round(time.time() - current_FL_start, 1)}
+                   "dups": dups, "elapsed": round(time.time() - start, 1), "method": mname}
             Server.history.append(rec)
-            C.emit(RUN, "round", msg=f"{Server.current_round}라운드 집계: 차량 {picked_client_idx} "
-                                     f"정확도 {rec['acc']}%", round=rec)
+            del Server.history[:-MAX_HISTORY]
+            C.emit(RUN, "round", msg=f"{Server.current_round}라운드 집계: 차량 {picked_client_idx} 정확도 {rec['acc']}%",
+                   round=rec)
             if dups:
                 wsum = sum(float(coefficient[i]) for i in picked_client_idx)
-                C.emit(RUN, "fl", vid=dups[0], example=None,
-                       msg=f"차량 {dups}: 같은 라운드에 두 번 집계됨 — 버퍼가 차량당 1칸이라 최신 것만 남음. "
-                           f"원본 calculate_coefficient가 그 차량 비중을 합으로 두 번 나눠 비중 합이 {wsum:.4f} (1이어야 함)")
-            Server.publish(current_num_picked_client, "aggregated")
+                C.emit(RUN, "fl", vid=dups[0], msg=f"차량 {dups}: 같은 라운드에 두 번 집계 — 버퍼가 차량당 1칸이라 최신 것만 "
+                                                   f"남고, 원본 calculate_coefficient가 비중을 두 번 나눠 비중 합 {wsum:.4f}")
+            Server.track_participation(picked_client_idx)
+            Server.publish(current, "aggregated")
+            torch.save({"model": Server.model.state_dict(), "round": Server.current_round, "last_loss": global_loss,
+                        "quota": current, "history": Server.history, "part_total": dict(Server.part_total)},
+                       RUN / "checkpoint.pt.tmp")
+            os.replace(RUN / "checkpoint.pt.tmp", RUN / "checkpoint.pt")
         Server.terminate(clients_idx)
         dist.barrier()
 
@@ -627,15 +670,45 @@ class SimSASAFL(M_SASAFL.SASAFL):
 class SimServer(M_SERVER.SASAFLServer):
 
     def publish(self, quota, phase, waiting_s=0.0):
+        K = self.num_clients
+        win = Counter(i for r in getattr(self, "window", []) for i in r)
         C.write_json(RUN / "server.json", {
             "t": time.time(), "phase": phase, "round": self.current_round, "quota": quota,
             "cached": self.num_cached_local_model, "cached_ids": list(self.cached_client_idx),
-            "waiting_s": round(waiting_s, 1), "history": self.history[-200:],
-            "last_arrivals": getattr(self, "arrivals", [])[-30:]})
+            "waiting_s": round(waiting_s, 1), "history": self.history[-300:],
+            "last_arrivals": getattr(self, "arrivals", [])[-30:],
+            "participation": {"total": {str(i): self.part_total.get(i, 0) for i in range(1, K + 1)},
+                              "window": {str(i): win.get(i, 0) for i in range(1, K + 1)},
+                              "window_rounds": len(getattr(self, "window", []))}})
+
+    def refine_received_local_model(self, picked_client_idx):
+        if getattr(self, "method", {}).get("decay", True):
+            super().refine_received_local_model(picked_client_idx)
+
+    def check_down(self):
+        """8-1 장애 시작·복구를 한 번씩 기록. 반환: 지금 장애 중인지"""
+        down = ENV.server_down()
+        if down and not getattr(self, "_down_since", None):
+            self._down_since = time.time()
+            C.emit(RUN, "fl", example="8-1", msg="집계 서버 장애 — 배포·수신·집계 중단 (차량은 값을 보관)")
+        elif not down and getattr(self, "_down_since", None):
+            C.emit(RUN, "fl", example="8-1", msg=f"집계 서버 복구 ({time.time() - self._down_since:.0f}초 중단) — "
+                                                 f"학습 재개, 보관된 값이 한꺼번에 도착")
+            self._down_since = None
+        return down
+
+    def wait_while_down(self, quota):
+        """8-1: 장애 중에는 배포·집계를 멈춘다. 복구되면 이어서 학습"""
+        t0 = time.time()
+        while self.check_down():
+            self.publish(quota, "down", time.time() - t0)
+            time.sleep(0.3)
 
     def receive_local_model_from_any_clients(self):
         self.arrivals = []
         while not self.terminate_FL.is_set() or len(self.idle_clients) + self.num_cached_local_model < self.num_clients:
+            while ENV.server_down():                       # 장애 중에는 수신하지 않는다
+                time.sleep(0.2)
             temp_local_model = TensorBuffer(list(self.model.state_dict().values()))
             local_model_info = torch.zeros(len(temp_local_model.buffer) + 2)
             req = dist.irecv(tensor=local_model_info)
@@ -650,11 +723,13 @@ class SimServer(M_SERVER.SASAFLServer):
                 self.local_utility[src] = local_model_info[-2]
                 self.local_model_version[src] = local_model_info[-1]
             ver = int(local_model_info[-1].item())
+            q = ENV.world(src).get("quality", 0)
             arr = {"t": time.time(), "vid": src, "version": ver, "staleness": self.current_round - ver,
-                   "overwrite": dup}
+                   "overwrite": dup, "quality": q}
             self.arrivals.append(arr)
-            C.emit(RUN, "arrive", vid=src, msg=f"업데이트 도착 v{ver} (staleness {self.current_round - ver})"
-                   + (" — 같은 차량 업데이트가 버퍼에 이미 있어 덮어씀" if dup else ""),
+            del self.arrivals[:-MAX_ARRIVALS]
+            C.emit(RUN, "arrive", vid=src, msg=f"값 도착 v{ver} (staleness {self.current_round - ver})"
+                   + (" — 같은 차량 값이 버퍼에 이미 있어 덮어씀" if dup else ""),
                    version=ver, staleness=arr["staleness"], overwrite=dup)
 
     def wait_until_can_update_global_model(self, num_local_model_limit):
@@ -662,24 +737,66 @@ class SimServer(M_SERVER.SASAFLServer):
         warned = False
         last_pub = 0
         while True:
+            down = self.check_down()
+            if down:
+                t0 = time.time()                      # 장애 시간은 무한 대기(8-2) 판단에서 뺀다
             with self.cached_client_idx_lock and self.num_cached_local_model_lock:
-                if self.num_cached_local_model >= num_local_model_limit:
+                if self.num_cached_local_model >= num_local_model_limit and not down:
                     picked = [self.cached_client_idx.pop(0) for _ in range(self.num_cached_local_model)]
                     self.num_cached_local_model = 0
                     return picked
             waited = time.time() - t0
             if time.time() - last_pub > 0.5:
-                self.publish(num_local_model_limit, "waiting", waited)
+                self.publish(num_local_model_limit, "down" if down else "waiting", waited)
                 last_pub = time.time()
-            if waited > 60 and not warned:          # 9-2: 보낼 수 있는 차량이 quota보다 적으면 끝없이 기다린다
+            if waited > 60 and not warned and not down:
                 warned = True
                 alive = sum(1 for i in range(1, self.num_clients + 1)
                             if (C.read_json(RUN / f"client_{i}.json", {}) or {}).get("status") in
                             ("training", "uploading", "waiting", "queued"))
-                C.emit(RUN, "fl", example="9-2",
+                C.emit(RUN, "fl", example="8-2",
                        msg=f"버퍼 {self.num_cached_local_model}/{num_local_model_limit}로 {waited:.0f}초째 대기 "
-                           f"(학습·전송 중인 차량 {alive}대) — SASAFL에는 타임아웃이 없음")
+                           f"(학습·전송 중인 차량 {alive}대) — SASAFL에는 라운드 시간 제한이 없음")
             time.sleep(0.01)
+
+    def track_participation(self, picked):
+        """패턴 7: 여러 라운드를 봐야 보이는 편중을 감시 (신형 EV / 통신 품질 / 운행 시간대)"""
+        cfg = ENV.cfg()
+        self.part_total.update(picked)
+        self.window.append(list(picked))
+        W = self.window.maxlen
+        if len(self.window) < W:
+            return
+        ratio = float(cfg["server"].get("p7_ratio", 1.4))
+        allw = [i for r in self.window for i in r]
+        K = self.num_clients
+        vtype = {i: C.merged_vehicle(cfg, i)["vtype"] for i in range(1, K + 1)}
+        rnd = self.current_round
+
+        def fire(key, ex, msg):
+            if rnd - self.p7_last.get(key, -10 ** 9) >= W:
+                self.p7_last[key] = rnd
+                C.emit(RUN, "fl", example=ex, msg=msg)
+        n_new = sum(1 for i in vtype if vtype[i] == "new")
+        exp = n_new / K
+        got = sum(1 for i in allw if vtype[i] == "new") / max(1, len(allw))
+        if n_new and exp < 1 and got > exp * ratio:
+            fire("7-1", "7-1", f"최근 {W}라운드 집계의 {got:.0%}가 신형 EV (차량 비율 {exp:.0%}) — 연산이 빠른 차량 편중")
+        arr = [a for a in self.arrivals if a["t"] > time.time() - 600]
+        if len(arr) >= W:
+            fleet_q = [s.get("quality", 0) for s in ENV.world_all().values() if s.get("present")]
+            aq = sum(a["quality"] for a in arr) / len(arr)
+            fq = sum(fleet_q) / max(1, len(fleet_q))
+            if aq > fq + 0.15:
+                fire("7-2", "7-2", f"도착한 값의 평균 통신 품질 {aq:.2f} vs 전체 차량 {fq:.2f} — 전파 좋은 차량 편중")
+        if cfg["world"].get("availability_mode") == "cycle":
+            routes = {str(k): s.get("route") for k, s in ENV.world_all().items()}
+            com = [i for i in range(1, K + 1) if routes.get(str(i)) == "commute"]
+            if com:
+                e2 = len(com) / K
+                g2 = sum(1 for i in allw if i in com) / max(1, len(allw))
+                if g2 > e2 * ratio or g2 < e2 / ratio:
+                    fire("7-3", "7-3", f"최근 {W}라운드 통근 차량 비중 {g2:.0%} (차량 비율 {e2:.0%}) — 운행 시간대 편중")
 
 
 def install():
