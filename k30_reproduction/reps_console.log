@@ -236,3 +236,48 @@
 - 2026-10-26 16:31 E8 실행 시작: K10_MNIST_SASAFL_C0.3_rep2 (시도 1/2)
 
 ===== K10_MNIST_SASAFL_C0.3_rep2 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 10 single 1,2,3,4,8
+===== K10_MNIST_SASAFL_C0.3_rep2 -> {"name": "K10_MNIST_SASAFL_C0.3_rep2", "outcome": "completed", "returncode": 0, "wall_min": 237.12, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.83, "last_acc": 97.9, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-26 20:28 E8 실행 종료: K10_MNIST_SASAFL_C0.3_rep2 → completed, 500/500라운드, 최고 98.83%, 237.12분
+- 2026-10-26 20:29 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-26 20:29 파이프라인 종료
+- 2026-10-26 20:29 파이프라인 시작 (E8, report_only=False)
+- 2026-10-26 20:29 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-26 20:29 E8 실행 시작: K10_MNIST_SASAFL_C0.5_rep2 (시도 1/2)
+
+===== K10_MNIST_SASAFL_C0.5_rep2 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 10 single 1,2,3,4,8
+===== K10_MNIST_SASAFL_C0.5_rep2 -> {"name": "K10_MNIST_SASAFL_C0.5_rep2", "outcome": "completed", "returncode": 0, "wall_min": 308.54, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.98, "last_acc": 98.24, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-27 01:37 E8 실행 종료: K10_MNIST_SASAFL_C0.5_rep2 → completed, 500/500라운드, 최고 98.98%, 308.54분
+- 2026-10-27 01:38 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-27 01:38 파이프라인 종료
+- 2026-10-27 01:38 파이프라인 시작 (E8, report_only=False)
+- 2026-10-27 01:38 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-27 01:38 E8 실행 시작: K10_FMNIST_BSA_C0.1_rep2 (시도 1/2)
+
+===== K10_FMNIST_BSA_C0.1_rep2 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 10 single 1,2,3,4,8
+===== K10_FMNIST_BSA_C0.1_rep2 -> {"name": "K10_FMNIST_BSA_C0.1_rep2", "outcome": "completed", "returncode": 0, "wall_min": 40.57, "rounds_done": 500, "rounds_requested": 500, "best_acc": 61.22, "last_acc": 32.27, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-27 02:19 E8 실행 종료: K10_FMNIST_BSA_C0.1_rep2 → completed, 500/500라운드, 최고 61.22%, 40.57분
+- 2026-10-27 02:20 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-27 02:20 파이프라인 종료
+- 2026-10-27 02:20 파이프라인 시작 (E8, report_only=False)
+- 2026-10-27 02:20 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-27 02:20 E8 실행 시작: K10_FMNIST_SASAFLorig_C0.1_rep2 (시도 1/2)
+
+===== K10_FMNIST_SASAFLorig_C0.1_rep2 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 10 single 1,2,3,4,8
+===== K10_FMNIST_SASAFLorig_C0.1_rep2 -> {"name": "K10_FMNIST_SASAFLorig_C0.1_rep2", "outcome": "completed", "returncode": 0, "wall_min": 78.3, "rounds_done": 500, "rounds_requested": 500, "best_acc": 77.82, "last_acc": 50.93, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-27 03:38 E8 실행 종료: K10_FMNIST_SASAFLorig_C0.1_rep2 → completed, 500/500라운드, 최고 77.82%, 78.3분
+- 2026-10-27 03:39 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-27 03:39 파이프라인 종료
+- 2026-10-27 03:39 파이프라인 시작 (E8, report_only=False)
+- 2026-10-27 03:39 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-27 03:39 E8 실행 시작: K10_FMNIST_SASAFL_C0.3_rep2 (시도 1/2)
+
+===== K10_FMNIST_SASAFL_C0.3_rep2 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 10 single 1,2,3,4,8
+===== K10_FMNIST_SASAFL_C0.3_rep2 -> {"name": "K10_FMNIST_SASAFL_C0.3_rep2", "outcome": "completed", "returncode": 0, "wall_min": 234.95, "rounds_done": 500, "rounds_requested": 500, "best_acc": 83.01, "last_acc": 68.93, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-27 07:34 E8 실행 종료: K10_FMNIST_SASAFL_C0.3_rep2 → completed, 500/500라운드, 최고 83.01%, 234.95분
+- 2026-10-27 07:35 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-27 07:35 파이프라인 종료
+- 2026-10-27 07:35 파이프라인 시작 (E8, report_only=False)
+- 2026-10-27 07:35 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-27 07:35 E8 실행 시작: K10_FMNIST_SASAFL_C0.5_rep2 (시도 1/2)
+
+===== K10_FMNIST_SASAFL_C0.5_rep2 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.5 10 single 1,2,3,4,8

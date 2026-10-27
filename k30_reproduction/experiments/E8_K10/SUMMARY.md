@@ -1,6 +1,6 @@
 # E8. K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
 
-마지막 갱신: 2026-10-26 16:48
+마지막 갱신: 2026-10-27 11:18
 
 **재현 설정**: K=10, wise-175 단일 노드, CPU 카테고리 1·2·3·4·8코어 × 2명(논문 K=10 구성), batch 32, local epoch 5, τ=9, ζ=0.9, non-IID(gaussian), 설정당 반복 10회 목표(논문: average of ten repetitions)
 
@@ -26,18 +26,18 @@
 | `K10_MNIST_SASAFL_C0.1` | SASAFL | 0.1 | 2/10 | 98.69 ± 0.09 | 163 |
 | `K10_MNIST_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 2/10 | 92.50 ± 1.91 | 76 |
 | `K10_MNIST_BSA_C0.3` | BSA | 0.3 | 2/10 | 97.90 ± 0.01 | 100 |
-| `K10_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 1/10 | 98.88 ± 0.00 | 197 |
-| `K10_MNIST_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 1/10 | 96.66 ± 0.00 | 117 |
-| `K10_MNIST_BSA_C0.5` | BSA | 0.5 | 1/10 | 98.71 ± 0.00 | 150 |
-| `K10_MNIST_SASAFL_C0.5` | SASAFL | 0.5 | 1/10 | 98.85 ± 0.00 | 221 |
-| `K10_MNIST_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 1/10 | 98.40 ± 0.00 | 181 |
-| `K10_FMNIST_BSA_C0.1` | BSA | 0.1 | 1/10 | 55.48 ± 0.00 | 29 |
-| `K10_FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 1/10 | 69.59 ± 0.00 | 73 |
-| `K10_FMNIST_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 1/10 | 55.59 ± 0.00 | 75 |
-| `K10_FMNIST_BSA_C0.3` | BSA | 0.3 | 1/10 | 74.91 ± 0.00 | 76 |
-| `K10_FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 1/10 | 79.10 ± 0.00 | 162 |
-| `K10_FMNIST_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 1/10 | 70.12 ± 0.00 | 106 |
-| `K10_FMNIST_BSA_C0.5` | BSA | 0.5 | 1/10 | 78.88 ± 0.00 | 128 |
+| `K10_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 2/10 | 98.85 ± 0.02 | 217 |
+| `K10_MNIST_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 2/10 | 96.41 ± 0.25 | 117 |
+| `K10_MNIST_BSA_C0.5` | BSA | 0.5 | 2/10 | 98.81 ± 0.11 | 151 |
+| `K10_MNIST_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 98.91 ± 0.07 | 265 |
+| `K10_MNIST_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 2/10 | 98.18 ± 0.23 | 183 |
+| `K10_FMNIST_BSA_C0.1` | BSA | 0.1 | 2/10 | 58.35 ± 2.87 | 35 |
+| `K10_FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 2/10 | 65.63 ± 3.96 | 79 |
+| `K10_FMNIST_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 2/10 | 66.70 ± 11.11 | 76 |
+| `K10_FMNIST_BSA_C0.3` | BSA | 0.3 | 2/10 | 74.72 ± 0.20 | 81 |
+| `K10_FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 2/10 | 81.06 ± 1.96 | 199 |
+| `K10_FMNIST_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 2/10 | 69.49 ± 0.63 | 112 |
+| `K10_FMNIST_BSA_C0.5` | BSA | 0.5 | 2/10 | 79.36 ± 0.48 | 140 |
 | `K10_FMNIST_SASAFL_C0.5` | SASAFL | 0.5 | 1/10 | 84.87 ± 0.00 | 293 |
 | `K10_FMNIST_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 1/10 | 80.34 ± 0.00 | 156 |
 | `K10_CIFAR10_BSA_C0.1` | BSA | 0.1 | 1/10 | 43.59 ± 0.00 | 35 |
@@ -66,18 +66,18 @@
 | `K10_MNIST_SASAFL_C0.1` | SASAFL | 0.1 | 2/10 | 98.69 ± 0.09 | 163 |
 | `K10_MNIST_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 2/10 | 92.50 ± 1.91 | 76 |
 | `K10_MNIST_BSA_C0.3` | BSA | 0.3 | 2/10 | 97.90 ± 0.01 | 100 |
-| `K10_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 1/10 | 98.88 ± 0.00 | 197 |
-| `K10_MNIST_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 1/10 | 96.66 ± 0.00 | 117 |
-| `K10_MNIST_BSA_C0.5` | BSA | 0.5 | 1/10 | 98.71 ± 0.00 | 150 |
-| `K10_MNIST_SASAFL_C0.5` | SASAFL | 0.5 | 1/10 | 98.85 ± 0.00 | 221 |
-| `K10_MNIST_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 1/10 | 98.40 ± 0.00 | 181 |
-| `K10_FMNIST_BSA_C0.1` | BSA | 0.1 | 1/10 | 55.48 ± 0.00 | 29 |
-| `K10_FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 1/10 | 69.59 ± 0.00 | 73 |
-| `K10_FMNIST_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 1/10 | 55.59 ± 0.00 | 75 |
-| `K10_FMNIST_BSA_C0.3` | BSA | 0.3 | 1/10 | 74.91 ± 0.00 | 76 |
-| `K10_FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 1/10 | 79.10 ± 0.00 | 162 |
-| `K10_FMNIST_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 1/10 | 70.12 ± 0.00 | 106 |
-| `K10_FMNIST_BSA_C0.5` | BSA | 0.5 | 1/10 | 78.88 ± 0.00 | 128 |
+| `K10_MNIST_SASAFL_C0.3` | SASAFL | 0.3 | 2/10 | 98.85 ± 0.02 | 217 |
+| `K10_MNIST_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 2/10 | 96.41 ± 0.25 | 117 |
+| `K10_MNIST_BSA_C0.5` | BSA | 0.5 | 2/10 | 98.81 ± 0.11 | 151 |
+| `K10_MNIST_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 98.91 ± 0.07 | 265 |
+| `K10_MNIST_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 2/10 | 98.18 ± 0.23 | 183 |
+| `K10_FMNIST_BSA_C0.1` | BSA | 0.1 | 2/10 | 58.35 ± 2.87 | 35 |
+| `K10_FMNIST_SASAFL_C0.1` | SASAFL | 0.1 | 2/10 | 65.63 ± 3.96 | 79 |
+| `K10_FMNIST_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 2/10 | 66.70 ± 11.11 | 76 |
+| `K10_FMNIST_BSA_C0.3` | BSA | 0.3 | 2/10 | 74.72 ± 0.20 | 81 |
+| `K10_FMNIST_SASAFL_C0.3` | SASAFL | 0.3 | 2/10 | 81.06 ± 1.96 | 199 |
+| `K10_FMNIST_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 2/10 | 69.49 ± 0.63 | 112 |
+| `K10_FMNIST_BSA_C0.5` | BSA | 0.5 | 2/10 | 79.36 ± 0.48 | 140 |
 | `K10_FMNIST_SASAFL_C0.5` | SASAFL | 0.5 | 1/10 | 84.87 ± 0.00 | 293 |
 | `K10_FMNIST_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 1/10 | 80.34 ± 0.00 | 156 |
 | `K10_CIFAR10_BSA_C0.1` | BSA | 0.1 | 1/10 | 43.59 ± 0.00 | 35 |
@@ -95,11 +95,11 @@
 | 데이터셋 | C | BSA | SASAFL 현재 코드 | SASAFL 원저자 코드 | 원저자 코드 quota: 범위 / 서로 다른 값 수 / int(C·K) 비율 |
 |---|---:|---:|---:|---:|---|
 | MNIST | 0.1 | 94.64 | 98.69 | 92.50 | 1–1 / 1 / 100% |
-| MNIST | 0.3 | 97.90 | 98.88 | 96.66 | 3–3 / 1 / 100% |
-| MNIST | 0.5 | 98.71 | 98.85 | 98.40 | 5–5 / 1 / 100% |
-| FashionMNIST | 0.1 | 55.48 | 69.59 | 55.59 | 1–1 / 1 / 100% |
-| FashionMNIST | 0.3 | 74.91 | 79.10 | 70.12 | 3–3 / 1 / 100% |
-| FashionMNIST | 0.5 | 78.88 | 84.87 | 80.34 | 5–5 / 1 / 100% |
+| MNIST | 0.3 | 97.90 | 98.85 | 96.41 | 3–3 / 1 / 100% |
+| MNIST | 0.5 | 98.81 | 98.91 | 98.18 | 5–5 / 1 / 100% |
+| FashionMNIST | 0.1 | 58.35 | 65.63 | 66.70 | 1–1 / 1 / 100% |
+| FashionMNIST | 0.3 | 74.72 | 81.06 | 69.49 | 3–3 / 1 / 100% |
+| FashionMNIST | 0.5 | 79.36 | 84.87 | 80.34 | 5–5 / 1 / 100% |
 | CIFAR10 | 0.1 | 43.59 | 35.92 | 47.04 | 1–1 / 1 / 100% |
 | CIFAR10 | 0.3 | 45.36 | 48.76 | 47.11 | 3–3 / 1 / 100% |
 | CIFAR10 | 0.5 | 51.99 | 51.94 | 48.46 | 5–5 / 1 / 100% |

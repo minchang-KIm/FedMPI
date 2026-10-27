@@ -1,6 +1,6 @@
 # E7. 적응형 quota가 꺼진 원저자 코드(c0b819b) — Fig. 7(a)(c), Fig. 9 재실행 (SASAFL만, BSA는 E1·E2·E4 재사용)
 
-마지막 갱신: 2026-10-26 16:48
+마지막 갱신: 2026-10-27 11:18
 
 **재현 설정**: K=30, wise-175 단일 노드, CPU 카테고리 1·2·3·4·8코어 × 6명(논문 K=30 구성), batch 32, local epoch 5, τ=9, ζ=0.9, non-IID(gaussian), 설정당 반복 10회 목표(논문: average of ten repetitions)
 
@@ -22,7 +22,7 @@
 | `ERR_FMNIST_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 76.75 ± 0.52 | 484 |
 | `ERR_CIFAR10_SASAFL_C0.1` | SASAFL | 0.1 | 2/10 | 37.81 ± 2.22 | 157 |
 | `ERR_CIFAR10_SASAFL_C0.3` | SASAFL | 0.3 | 2/10 | 45.99 ± 0.30 | 274 |
-| `ERR_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 1/10 | 50.26 ± 0.00 | 519 |
+| `ERR_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 51.84 ± 1.58 | 518 |
 
 반복 값 파일: `repeats/runs_index.csv`(실행별), `repeats/summary_by_setting.csv`(설정별 평균·표준편차), `repeats/curves/<설정>.csv`(라운드별 회차 값과 평균)
 
@@ -59,7 +59,7 @@
 | `ERR_FMNIST_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 76.75 ± 0.52 | 484 |
 | `ERR_CIFAR10_SASAFL_C0.1` | SASAFL | 0.1 | 2/10 | 37.81 ± 2.22 | 157 |
 | `ERR_CIFAR10_SASAFL_C0.3` | SASAFL | 0.3 | 2/10 | 45.99 ± 0.30 | 274 |
-| `ERR_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 1/10 | 50.26 ± 0.00 | 519 |
+| `ERR_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 51.84 ± 1.58 | 518 |
 
 ## quota가 실제로 고정됐는지 (rounds.csv의 라운드별 quota)
 
@@ -90,5 +90,5 @@ E7은 wise-175와 wise-176에 나눠 돌렸다. wise-176은 결함 코어 24(CPU
 | FashionMNIST | 0.5 | 78.43 | 81.60 | 76.75 | 73.834 | 73.94 |
 | CIFAR10 | 0.1 | 38.95 | 41.30 | 37.81 | 42.5 | 58.59 |
 | CIFAR10 | 0.3 | 47.37 | 45.82 | 45.99 | 51.08 | 58.25 |
-| CIFAR10 | 0.5 | 51.59 | 52.55 | 50.26 | 56.82 | 56.77 |
+| CIFAR10 | 0.5 | 51.59 | 52.55 | 51.84 | 56.82 | 56.77 |
 
