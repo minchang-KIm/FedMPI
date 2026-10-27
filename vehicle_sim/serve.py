@@ -8,6 +8,11 @@ API
   GET  /api/static              맵·패턴·유스케이스·학습 방식·차량 종류·설정 기본값·맵 목록
   GET  /api/state?ev=<오프셋>    world / server / clients / 새 사건 / 실행 상태
   POST /api/config              설정 일부 변경 (깊은 병합)
+  POST /api/drive               {vid, on, throttle, brake, steer, reverse, park} 선택 차량 수동 운전 입력
+                                (차량마다 한 사람: 다른 사람이 운전 중인 차는 409)
+여러 사람이 함께 쓰기
+  --host 0.0.0.0 으로 띄우면 같은 네트워크의 다른 컴퓨터가 접속한다. --code 를 주면 처음 접속할 때 그 코드를 물어본다.
+  브라우저마다 X-Client-Id / X-Client-Name 헤더 → 접속자 목록·운전자 이름·설정을 바꾼 사람이 사건 기록에 남는다.
   POST /api/control             {"action": "start"|"stop"|"server_down"|"ablation"|"save"|"load"|"reset_config", ...}
   GET  /api/maps · POST /api/map {name, map}           맵 목록 · 맵 올리기(검사 후 저장)
   GET  /api/saves                                     저장한 상태 목록
@@ -28,15 +33,26 @@ import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, unquote, urlparse
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE / "simcore"))
 import common as C  # noqa: E402
+import mapgeo as G  # noqa: E402
 
 PY = os.environ.get("SIM_PY", "/home/wise-175/anaconda3/envs/FL/bin/python")
 WEB = HERE / "web"
 SAVED_CFG = HERE / "config_last.json"
+ACCESS_CODE = ""                       # --code: 비어 있으면 묻지 않음
+PEERS = {}                             # 접속자 id → {name, seen, sel}
+DRIVES = {}                            # 차량 id(str) → {client, name, 입력…, t}
+DRIVE_LOCK = threading.Lock()
+LOGIN_HTML = """<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>차량 FL 시뮬레이터</title><body style="font-family:system-ui;background:#090e1b;color:#f1f5ff;display:grid;place-items:center;height:100vh;margin:0">
+<form style="background:#101a2f;padding:28px 32px;border-radius:14px;border:1px solid #2a3b60;display:flex;flex-direction:column;gap:10px">
+<b style="font-size:18px">차량 연합학습 장애 시뮬레이터</b><span style="color:#a3b3d1">접속 코드를 입력하세요</span>
+<input name=code autofocus style="font-size:18px;padding:8px;border-radius:8px;border:1px solid #2a3b60;background:#0b1328;color:#fff">
+<button style="padding:8px;border-radius:8px;background:#5b9cff;color:#fff;border:0;font-weight:700">입장</button></form></body>"""
 SAVE_FILES = ["config.json", "world_state.json", "checkpoint.pt", "server.json", "events.jsonl", "world_hist.jsonl"]
 
 
@@ -58,6 +74,18 @@ def fill_defaults(cfg):
             for kk, vv in v.items():
                 cfg[k].setdefault(kk, vv)
     return cfg
+
+
+def describe_patch(patch, prefix=""):
+    """{"fl": {"lr": 0.02}, "vehicles": {"3": {"aeb": false}}} → "fl.lr=0.02, V3.aeb=false" """
+    out = []
+    for k, v in patch.items():
+        key = f"V{k}" if prefix == "vehicles." else prefix + k
+        if isinstance(v, dict):
+            out.append(describe_patch(v, "vehicles." if k == "vehicles" and not prefix else key + "."))
+        else:
+            out.append(f"{key}={json.dumps(v, ensure_ascii=False)}")
+    return ", ".join(x for x in out if x)
 
 
 def safe_name(s):
@@ -199,15 +227,15 @@ def layout_of(name, m):
     key = (name, (C.MAPS / f"{name}.json").stat().st_mtime if (C.MAPS / f"{name}.json").exists() else 0)
     if key not in _LAYOUT:
         _LAYOUT.clear()
-        _LAYOUT[key] = C.map_layout(m)
+        _LAYOUT[key] = G.map_layout(m)
     return _LAYOUT[key]
 
 
 def map_list():
     out = []
-    for n in C.list_maps():
-        m = C.load_map(n)
-        cov = C.map_coverage(m, MGR.cfg)
+    for n in G.list_maps():
+        m = G.load_map(n)
+        cov = G.map_coverage(m, MGR.cfg)
         out.append({"id": n, "name": m.get("name", n), "desc": m.get("desc", ""), "size": m.get("size"),
                     "ok": sum(c["ok"] for c in cov), "missing": [c["id"] for c in cov if not c["ok"]]})
     return out
@@ -283,6 +311,36 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def authed(self, q):
+        if not ACCESS_CODE:
+            return True
+        if q.get("code", [""])[0] == ACCESS_CODE:
+            return True
+        cookie = self.headers.get("Cookie", "")
+        return any(c.strip() == f"vfl_code={ACCESS_CODE}" for c in cookie.split(";"))
+
+    def gate(self, u, q):
+        """접속 코드 확인. 통과하면 None, 아니면 응답을 보내고 True"""
+        if self.authed(q):
+            if ACCESS_CODE and q.get("code"):          # 코드를 쿠키로 바꾸고 주소에서 지운다
+                self.send(302, b"", "text/plain", {"Location": u.path or "/",
+                          "Set-Cookie": f"vfl_code={ACCESS_CODE}; Path=/; Max-Age=2592000; SameSite=Lax"})
+                return True
+            return None
+        if u.path.startswith("/api/"):
+            self.send(401, {"ok": False, "error": "접속 코드 필요"})
+        else:
+            self.send(200, LOGIN_HTML, "text/html; charset=utf-8")
+        return True
+
+    def who(self):
+        """요청한 접속자 (id, 이름) — 접속자 목록도 갱신"""
+        cid = self.headers.get("X-Client-Id", "")[:40]
+        name = unquote(self.headers.get("X-Client-Name", ""))[:20] or "익명"
+        if cid:
+            PEERS[cid] = {**PEERS.get(cid, {}), "name": name, "seen": time.time(), "ip": self.client_address[0]}
+        return cid, name
+
     def run_path(self, q):
         name = q.get("run", [""])[0]
         d = (C.RUNS / name).resolve()
@@ -293,18 +351,30 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         u = urlparse(self.path)
         q = parse_qs(u.query)
+        if self.gate(u, q):
+            return
+        cid, _ = self.who()
         if u.path == "/api/static":
             name = q.get("map", [MGR.cfg["world"].get("map", "default")])[0]
-            m = C.load_map(name)
+            m = G.load_map(name)
             return self.send(200, {"map": m, "map_id": name, "layout": layout_of(name, m), "maps": map_list(),
-                                   "coverage": C.map_coverage(m, MGR.cfg), "problems": C.map_problems(m),
+                                   "coverage": G.map_coverage(m, MGR.cfg), "problems": G.map_problems(m),
                                    "patterns": C.PATTERNS, "usecases": C.USECASES, "methods": C.METHODS,
                                    "vtypes": C.VTYPES, "defaults": C.DEFAULT_CONFIG})
         if u.path == "/api/state":
             off = int(q.get("ev", ["0"])[0])
+            if cid and q.get("sel"):
+                PEERS[cid]["sel"] = q["sel"][0]
+            now = time.time()
+            with DRIVE_LOCK:
+                drivers = {k: d["name"] for k, d in DRIVES.items() if d.get("on") and now - d["t"] < 2}
+            peers = [{"id": k[:6], "me": k == cid, "name": p["name"], "sel": p.get("sel"),
+                      "driving": next((v for v, d in DRIVES.items() if d.get("client") == k and d.get("on")), None)}
+                     for k, p in sorted(PEERS.items(), key=lambda kv: kv[1]["name"]) if now - p["seen"] < 6]
             rd = MGR.run_dir
             if not rd:
-                return self.send(200, {"run": None, "config": MGR.cfg, "procs": {}, "events": [], "ev": 0})
+                return self.send(200, {"run": None, "config": MGR.cfg, "procs": {}, "events": [], "ev": 0,
+                                       "peers": peers, "drivers": drivers})
             K = int((C.read_json(rd / "config.json", MGR.cfg) or MGR.cfg)["fl"]["K"])
             evs, end = read_events(rd / "events.jsonl", off)
             ctl = C.read_json(rd / "server_ctl.json", {}) or {}
@@ -314,9 +384,9 @@ class Handler(BaseHTTPRequestHandler):
                 "server": C.read_json(rd / "server.json", {}),
                 "server_down_left": max(0.0, float(ctl.get("down_until", 0)) - time.time()),
                 "clients": {str(i): C.read_json(rd / f"client_{i}.json", {}) for i in range(1, K + 1)},
-                "events": evs, "ev": end})
+                "events": evs, "ev": end, "peers": peers, "drivers": drivers})
         if u.path == "/api/maps":
-            return self.send(200, {"maps": C.list_maps(), "info": map_list()})
+            return self.send(200, {"maps": G.list_maps(), "info": map_list()})
         if u.path == "/api/saves":
             out = []
             for d in sorted(C.SAVES.glob("*"), reverse=True) if C.SAVES.exists() else []:
@@ -358,6 +428,9 @@ class Handler(BaseHTTPRequestHandler):
         n = int(self.headers.get("Content-Length", 0))
         raw = self.rfile.read(n) if n else b""
         u = urlparse(self.path)
+        if self.gate(u, parse_qs(u.query)):
+            return
+        cid, name = self.who()
         if u.path == "/api/import":
             d = C.RUNS / f"imported_{time.strftime('%Y%m%d_%H%M%S')}"
             d.mkdir(parents=True)
@@ -374,17 +447,45 @@ class Handler(BaseHTTPRequestHandler):
         if u.path == "/api/config":
             deep_merge(MGR.cfg, body)
             MGR.save_cfg()
+            if MGR.run_dir and name != "익명":
+                C.emit(MGR.run_dir, "control", by=name, msg=f"{name}: 설정 변경 {describe_patch(body)}")
             return self.send(200, {"ok": True, "config": MGR.cfg})
+        if u.path == "/api/drive":               # 수동 운전 입력 (world.py가 매 틱 읽음)
+            if not MGR.run_dir or MGR.procs.get("world") is None or MGR.procs["world"].poll() is not None:
+                return self.send(409, {"ok": False, "error": "시뮬레이션이 실행 중이 아님"})
+            cid = cid or str(body.get("client", ""))[:40]
+            vid, now = str(body.get("vid")), time.time()
+            with DRIVE_LOCK:
+                cur = DRIVES.get(vid)
+                if body.get("on") and cur and cur.get("on") and cur["client"] != cid and now - cur["t"] < 2:
+                    return self.send(409, {"ok": False, "busy": True, "error": f"V{vid}은 {cur['name']} 님이 운전 중"})
+                for k in [k for k, d in DRIVES.items() if (d["client"] == cid and k != vid) or now - d["t"] > 10]:
+                    DRIVES.pop(k)                         # 한 사람은 한 대만 · 오래된 입력 정리
+                if body.get("on"):
+                    DRIVES[vid] = {k: body[k] for k in ("throttle", "brake", "steer", "reverse", "park") if k in body}
+                    DRIVES[vid].update(on=True, client=cid, name=name, t=now)
+                elif cur and cur["client"] == cid:
+                    DRIVES.pop(vid)
+                C.write_json(MGR.run_dir / "drive.json", {"cars": {k: {kk: vv for kk, vv in d.items() if kk != "client"}
+                                                                  for k, d in DRIVES.items()}})
+            w = C.read_json(MGR.run_dir / "world.json", {}) or {}
+            near = None
+            me = (w.get("vehicles") or {}).get(vid)
+            if me:                                        # 운전 중인 차 주변 사람도 바로 그린다
+                near = [x for x in w.get("walkers", []) if abs(x[1] - me["pos"][0]) + abs(x[2] - me["pos"][1]) < 120]
+            return self.send(200, {"ok": True, "v": me, "walkers": near})
         if u.path == "/api/map":
             m, name = body.get("map"), safe_name(body.get("name", "custom"))
-            errs = C.validate_map(m or {}) or C.map_problems(m)
+            errs = G.validate_map(m or {}) or G.map_problems(m)
             if errs:
                 return self.send(400, {"ok": False, "errors": errs})
-            miss = [c["id"] for c in C.map_coverage(m, MGR.cfg) if not c["ok"]]
+            miss = [c["id"] for c in G.map_coverage(m, MGR.cfg) if not c["ok"]]
             C.write_json(C.MAPS / f"{name}.json", m)
-            return self.send(200, {"ok": True, "name": name, "maps": C.list_maps(), "missing": miss})
+            return self.send(200, {"ok": True, "name": name, "maps": G.list_maps(), "missing": miss})
         if u.path == "/api/control":
             act = body.get("action")
+            label = {"start": "시작", "stop": "정지", "server_down": "서버 장애 주입", "ablation": "방식만 바꿔 다시 실행",
+                     "save": "상태 저장", "load": "저장 상태 불러오기", "reset_config": "설정 초기화"}.get(act, act)
             if act == "start":
                 MGR.start()
             elif act == "stop":
@@ -407,6 +508,8 @@ class Handler(BaseHTTPRequestHandler):
             elif act == "reset_config":
                 MGR.cfg = json.loads(json.dumps(C.DEFAULT_CONFIG))
                 MGR.save_cfg()
+            if MGR.run_dir and name != "익명":
+                C.emit(MGR.run_dir, "control", by=name, msg=f"{name}: {label}")
             return self.send(200, {"ok": True, "procs": MGR.status(), "config": MGR.cfg})
         self.send(404, {"error": "not found"})
 
@@ -414,10 +517,13 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", type=int, default=8765)
-    ap.add_argument("--host", default="127.0.0.1")
+    ap.add_argument("--host", default="127.0.0.1", help="0.0.0.0 = 같은 네트워크의 다른 컴퓨터도 접속")
+    ap.add_argument("--code", default=os.environ.get("SIM_CODE", ""), help="접속 코드 (비우면 묻지 않음)")
     a = ap.parse_args()
+    global ACCESS_CODE
+    ACCESS_CODE = a.code
     srv = ThreadingHTTPServer((a.host, a.port), Handler)
-    print(f"차량 FL 시뮬레이터: http://{a.host}:{a.port}", flush=True)
+    print(f"차량 FL 시뮬레이터: http://{a.host}:{a.port}" + (f"  (접속 코드 {a.code})" if a.code else ""), flush=True)
     try:
         srv.serve_forever()
     finally:

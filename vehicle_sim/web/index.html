@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>차량 FL 장애 시뮬레이터</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 <link rel="stylesheet" href="style.css">
 <script type="importmap">
 { "imports": {
@@ -15,26 +16,32 @@
 <body>
 <header>
   <div class="brand">
-    <span class="logo">◆</span>
+    <div class="logo"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 15l2-5.5A2 2 0 0 1 7.9 8h8.2a2 2 0 0 1 1.9 1.5L20 15v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z" fill="currentColor"/><circle cx="7.5" cy="14" r="1.3" fill="#0b1220"/><circle cx="16.5" cy="14" r="1.3" fill="#0b1220"/><path d="M8 4.5a6 6 0 0 1 8 0M10 6.5a3 3 0 0 1 4 0" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg></div>
     <div>
       <h1>차량 연합학습 장애 시뮬레이터</h1>
       <p>실제 FL 학습 + 주행 환경 · 서버가 받은 모습 기준 8개 패턴 / 34개 유스케이스</p>
     </div>
   </div>
-  <div class="controls">
+  <div class="status-row">
     <span id="clock" class="chip clock">🕒 -</span>
+    <span id="mapChip" class="chip"></span>
     <span id="methodChip" class="chip method"></span>
-    <span id="runChip" class="chip">정지</span>
-    <span id="runInfo" class="muted"></span>
+    <span id="runChip" class="chip status"><i></i>정지</span>
+    <span id="runInfo" class="muted small"></span>
+  </div>
+  <div class="controls">
+    <span id="peersChip" class="chip peers" title="지금 접속한 사람">👥 -</span>
+    <button id="meChip" class="chip me" title="내 이름 바꾸기 (운전자·설정 변경 기록에 표시)">👤 <span id="meName">-</span></button>
+    <span class="vsep"></span>
     <button id="btnStart" class="btn primary">▶ 시작</button>
     <button id="btnStop" class="btn">■ 정지</button>
-    <button id="btnDown" class="btn danger" title="8-1 집계 서버 장애: 정해진 시간 동안 중단했다가 복구">서버 장애</button>
+    <button id="btnDown" class="btn danger" title="8-1 집계 서버 장애: 정해진 시간 동안 중단했다가 복구">⚡ 서버 장애</button>
   </div>
 </header>
 
 <div id="replayBar" class="replay-bar hidden">
-  <b>다시 보기</b> <span id="replayName"></span>
-  <button class="btn small" id="rpPlay">▶</button>
+  <b>⏪ 다시 보기</b> <span id="replayName"></span>
+  <button class="btn small" id="rpPlay">❚❚</button>
   <select id="rpSpeed"><option value="1">1배</option><option value="5" selected>5배</option><option value="20">20배</option><option value="60">60배</option></select>
   <input type="range" id="rpSlider" min="0" max="0" value="0">
   <span id="rpTime" class="mono"></span>
@@ -42,27 +49,62 @@
 </div>
 
 <main>
-  <section class="col col-map">
+  <section class="col col-map panel">
     <nav class="tabs" data-group="left">
-      <button class="tab active" data-tab="map">시뮬레이션 맵</button>
-      <button class="tab" data-tab="cases">유스케이스 34</button>
+      <button class="tab active" data-tab="map">🗺 시뮬레이션 맵</button>
+      <button class="tab" data-tab="cases">유스케이스 <span class="count" id="caseCount">0/34</span></button>
       <button class="tab" data-tab="log">사건 기록</button>
       <button class="tab" data-tab="runs">기록·비교</button>
     </nav>
     <div class="tabpane active" id="pane-map">
       <div id="map3d"></div>
-      <div class="map-overlay top-left"><div class="legend" id="legendState"></div></div>
-      <div class="map-overlay top-right">
-        <button class="btn small" id="btnChase">🎥 선택 차량 따라가기</button>
-        <label><input type="checkbox" id="optCells" checked> 셀 범위</label>
-        <label><input type="checkbox" id="optZones" checked> 구역</label>
-        <label><input type="checkbox" id="optLabels" checked> 이름표</label>
-        <label><input type="checkbox" id="optPlaces" checked> 장소 이름</label>
-        <label><input type="checkbox" id="optBeams" checked> 업로드 선</label>
-        <button class="btn small" id="btnView">전체 보기</button>
+      <div class="map-overlay top-right viewbar">
+        <div class="seg" title="시점">
+          <button class="btn small on" id="camOrbit" title="자유 시점: 드래그 회전 · 우클릭 드래그 이동 · 휠 확대">🗺 자유</button>
+          <button class="btn small" id="btnChase" title="선택 차량 뒤에서 따라가기">🎥 따라가기</button>
+          <button class="btn small" id="camFpv" title="선택 차량 운전석 시점 (드래그로 둘러보기)">👁 1인칭</button>
+        </div>
+        <button class="btn small" id="btnDrive" title="선택 차량을 직접 운전 (1인칭으로 전환). 끄면 자동 운전으로 돌아감">🕹 운전</button>
+        <button class="btn small" id="btnTour" title="차량을 바꿔 가며 따라가기·1인칭·하늘 시점을 자동으로 (켜 두고 보기)">🎬 자동 구경</button>
+        <span class="sep"></span>
+        <div class="seg">
+          <button class="btn small icon" id="zoomIn" title="확대">＋</button>
+          <button class="btn small icon" id="zoomOut" title="축소">－</button>
+          <button class="btn small" id="zoomBox" title="드래그한 영역으로 확대 (Shift+드래그도 됨)">⬚ 영역</button>
+          <button class="btn small" id="btnView" title="맵 전체 보기">⤢ 전체</button>
+        </div>
+        <div class="dd">
+          <button class="btn small" id="optToggle">표시 ▾</button>
+          <div class="dd-menu hidden" id="optMenu">
+            <label><input type="checkbox" id="optCells" checked> 셀 범위</label>
+            <label><input type="checkbox" id="optZones" checked> 구역</label>
+            <label><input type="checkbox" id="optLabels" checked> 차량 이름표</label>
+            <label><input type="checkbox" id="optPlaces" checked> 장소 이름</label>
+            <label><input type="checkbox" id="optBeams" checked> 업로드 선</label>
+            <label><input type="checkbox" id="optLegend" checked> 범례</label>
+          </div>
+        </div>
       </div>
+      <div class="map-overlay top-left legend" id="legendState"></div>
       <div class="map-overlay bottom-left" id="toastBox"></div>
       <div class="map-overlay bottom-right legend" id="legendPatterns"></div>
+      <div id="zoomRect" class="zoom-rect hidden"></div>
+      <div class="map-overlay view-hint">휠: 커서 위치로 확대 · 더블클릭: 그곳으로 · Shift+드래그: 영역 확대 · 우클릭 드래그: 이동</div>
+      <div class="map-overlay hud hidden" id="hud">
+        <div class="hud-notes" id="hudNotes"></div>
+        <div class="hud-main">
+          <div class="hud-speed"><b id="hudSpeed">0</b><span>km/h</span></div>
+          <div class="hud-gear" id="hudGear">D</div>
+          <div class="hud-info">
+            <div class="hud-title" id="hudTitle">V1</div>
+            <div id="hudFl" class="hud-fl"></div>
+            <div id="hudNet" class="hud-net"></div>
+          </div>
+          <div class="hud-steer" id="hudSteer"><div></div></div>
+        </div>
+        <div class="hud-alert hidden" id="hudAlert"></div>
+        <div class="hud-keys" id="hudKeys"></div>
+      </div>
     </div>
     <div class="tabpane" id="pane-cases"><div id="caseTable"></div></div>
     <div class="tabpane" id="pane-log">
@@ -71,7 +113,7 @@
     </div>
     <div class="tabpane" id="pane-runs">
       <div class="runs-wrap">
-        <div class="card-title">학습 방식 비교 (같은 시드·설정에서 방식만 바꾼 실행 = ablation)</div>
+        <div class="card-title">학습 방식 비교 <span class="muted small">같은 시드·설정에서 방식만 바꾼 실행 = ablation</span></div>
         <canvas id="cmpChart" height="260"></canvas>
         <div class="runs-actions">
           <label>방식만 바꿔 다시 실행:</label>
@@ -89,78 +131,86 @@
     </div>
   </section>
 
-  <section class="col col-fl">
-    <div class="card">
-      <div class="card-title">연합학습 상태 <span id="flPhase" class="chip small"></span></div>
-      <div class="kpis">
-        <div class="kpi"><span>라운드</span><b id="kRound">-</b></div>
-        <div class="kpi"><span>정확도</span><b id="kAcc">-</b></div>
-        <div class="kpi"><span>quota</span><b id="kQuota">-</b></div>
-        <div class="kpi"><span>버퍼</span><b id="kBuf">-</b></div>
+  <section class="col col-fl side" id="sideFl" data-key="fl">
+    <div class="side-rail" title="연합학습 상태 보이기/숨기기"><span class="fold">▶</span><span class="rail-title">연합학습 상태</span></div>
+    <div class="side-body">
+      <div class="card">
+        <div class="card-title">연합학습 상태 <span id="flPhase" class="chip small phase"></span></div>
+        <div class="kpis">
+          <div class="kpi"><span>라운드</span><b id="kRound">-</b></div>
+          <div class="kpi"><span>정확도</span><b id="kAcc">-</b></div>
+          <div class="kpi"><span>quota</span><b id="kQuota">-</b></div>
+          <div class="kpi"><span>버퍼</span><b id="kBuf">-</b></div>
+        </div>
+        <div class="waitbar"><div id="waitFill"></div><span id="waitText">대기 0초</span></div>
+        <canvas id="accChart" height="120"></canvas>
+        <div class="vehgrid" id="vehGrid"></div>
       </div>
-      <div class="waitbar"><div id="waitFill"></div><span id="waitText">대기 0초</span></div>
-      <canvas id="accChart" height="120"></canvas>
-      <div class="vehgrid" id="vehGrid"></div>
-    </div>
-    <div class="card">
-      <div class="card-title">참여 분포 <span class="muted small">최근 라운드 집계 참여 횟수 · 막대 색 = 신형/구형 (7-1)</span></div>
-      <canvas id="fairChart" height="104"></canvas>
-      <div class="card-title" style="margin-top:6px">시간대별 참여 <span class="muted small">각 시간대 집계 값이 어떤 차량에서 왔나 (7-3)</span></div>
-      <canvas id="periodChart" height="112"></canvas>
-    </div>
-    <div class="card grow">
-      <div class="card-title">라운드별 참여 차량 <span class="muted small">도착 순서대로</span></div>
-      <div id="roundFeed" class="round-feed"></div>
-    </div>
-    <div class="card grow">
-      <div class="card-title">실시간 사건 <span class="muted small">P번호 = 서버가 받은 모습</span></div>
-      <div id="eventFeed" class="event-feed"></div>
+      <div class="card">
+        <div class="card-title">참여 분포 <span class="muted small">최근 라운드 집계 참여 횟수 (7-1)</span></div>
+        <canvas id="fairChart" height="104"></canvas>
+        <div class="card-title mt">시간대별 참여 <span class="muted small">각 시간대 집계 값이 어떤 차량에서 왔나 (7-3)</span></div>
+        <canvas id="periodChart" height="112"></canvas>
+      </div>
+      <div class="card grow">
+        <div class="card-title">라운드별 참여 차량 <span class="muted small">도착 순서대로</span></div>
+        <div id="roundFeed" class="round-feed"></div>
+      </div>
+      <div class="card grow">
+        <div class="card-title">실시간 사건 <span class="muted small">P번호 = 서버가 받은 모습</span></div>
+        <div id="eventFeed" class="event-feed"></div>
+      </div>
     </div>
   </section>
 
-  <section class="col col-cfg">
-    <nav class="tabs" data-group="right">
-      <button class="tab active" data-tab="veh">차량</button>
-      <button class="tab" data-tab="global">전체 설정</button>
-      <button class="tab" data-tab="save">저장·맵</button>
-    </nav>
-    <div class="tabpane active" id="pane-veh">
-      <div id="vehPicker" class="veh-picker"></div>
-      <div id="vehInfo" class="veh-info"></div>
-      <div id="vehForm" class="form"></div>
-      <p class="muted small pad">값은 바로 반영됩니다. <span class="restart">재시작</span> 표시는 다음 시작부터 적용.</p>
-    </div>
-    <div class="tabpane" id="pane-global">
-      <div class="presets">
-        <div class="fgroup">시나리오 프리셋</div>
-        <button class="btn small" id="presetAll" title="차량마다 다른 장애를 걸어 34개 유스케이스가 한 맵에서 일어나게 한다">34개 전부 보이기</button>
-        <button class="btn small" id="presetClean">장애 설정 끄기</button>
-        <button class="btn small" id="btnReset">기본값으로</button>
-        <p class="muted small" id="presetNote"></p>
+  <section class="col col-cfg side panel" id="sideCfg" data-key="cfg">
+    <div class="side-rail" title="설정 보이기/숨기기"><span class="fold">▶</span><span class="rail-title">설정</span></div>
+    <div class="side-body">
+      <nav class="tabs" data-group="right">
+        <button class="tab active" data-tab="veh">차량</button>
+        <button class="tab" data-tab="global">전체 설정</button>
+        <button class="tab" data-tab="save">저장·맵</button>
+      </nav>
+      <div class="tabpane active" id="pane-veh">
+        <div id="vehPicker" class="veh-picker"></div>
+        <div id="vehInfo" class="veh-info"></div>
+        <div id="vehForm" class="form"></div>
+        <p class="muted small pad">값은 바로 반영됩니다. <span class="restart">재시작</span> 표시는 다음 시작부터 적용.</p>
       </div>
-      <div id="globalForm" class="form"></div>
-    </div>
-    <div class="tabpane" id="pane-save">
-      <div class="form">
-        <div class="fgroup">현재 상태 저장·불러오기</div>
-        <p class="muted small">글로벌 모델(체크포인트)·라운드·차량 위치·에너지·설정을 저장합니다. 불러오면 그 시점부터 이어서 학습합니다.</p>
-        <div class="row-input"><input id="saveName" placeholder="저장 이름" value="상태"><button class="btn small primary" id="btnSave">저장</button></div>
-        <div id="savesList" class="list"></div>
-        <div class="fgroup">맵 <span class="muted small">모든 맵이 34개 유스케이스 조건(장소·구역·경로)을 갖춤</span></div>
-        <div id="mapCards" class="mapcards"></div>
-        <p class="muted small" id="mapNote"></p>
-        <label class="btn small filelab">맵 파일 올리기 (.json)<input type="file" id="mapFile" accept=".json"></label>
-        <a class="btn small" id="mapDownload" download="map.json">현재 맵 내려받기 (편집용)</a>
-        <div id="mapCoverage"></div>
-        <div class="fgroup">로그</div>
-        <p class="muted small">모든 실행은 사건·라운드·주행 기록이 자동으로 남습니다. '기록·비교' 탭에서 다시 보거나 내보냅니다.</p>
-        <a class="btn small" id="btnExport">현재 실행 로그 내보내기</a>
+      <div class="tabpane" id="pane-global">
+        <div class="presets">
+          <div class="fgroup">시나리오 프리셋</div>
+          <button class="btn small" id="presetAll" title="차량마다 다른 장애를 걸어 34개 유스케이스가 한 맵에서 일어나게 한다">34개 전부 보이기</button>
+          <button class="btn small" id="presetClean">장애 설정 끄기</button>
+          <button class="btn small" id="btnReset">기본값으로</button>
+          <p class="muted small" id="presetNote"></p>
+        </div>
+        <div id="globalForm" class="form"></div>
+      </div>
+      <div class="tabpane" id="pane-save">
+        <div class="form">
+          <div class="fgroup">맵 <span class="muted small">모든 맵이 34개 유스케이스 조건(장소·구역·경로)을 갖춤</span></div>
+          <div id="mapCards" class="mapcards"></div>
+          <p class="muted small" id="mapNote"></p>
+          <div class="row-btns">
+            <label class="btn small filelab">맵 파일 올리기 (.json)<input type="file" id="mapFile" accept=".json"></label>
+            <a class="btn small" id="mapDownload" download="map.json">현재 맵 내려받기</a>
+          </div>
+          <div class="fgroup">현재 상태 저장·불러오기</div>
+          <p class="muted small">글로벌 모델(체크포인트)·라운드·차량 위치·에너지·설정을 저장합니다. 불러오면 그 시점부터 이어서 학습합니다.</p>
+          <div class="row-input"><input id="saveName" placeholder="저장 이름" value="상태"><button class="btn small primary" id="btnSave">저장</button></div>
+          <div id="savesList" class="list"></div>
+          <div class="fgroup">로그</div>
+          <p class="muted small">모든 실행은 사건·라운드·주행 기록이 자동으로 남습니다. '기록·비교' 탭에서 다시 보거나 내보냅니다.</p>
+          <a class="btn small" id="btnExport">현재 실행 로그 내보내기</a>
+          <div id="mapCoverage"></div>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
 <div id="tooltip" class="tooltip"></div>
-<script type="module" src="app.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

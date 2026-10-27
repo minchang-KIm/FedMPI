@@ -18,12 +18,12 @@
     = adas_base_s + adas_per_10kmh_s × (속도/10) → 학습 지연(4-5) 또는 FL 종료(1-4).
 통신
   cell(서빙 기지국), quality, region, zone 플래그(터널·음영·보호구역·Wi-Fi·강우·혼잡), link_up, server_ok, wifi
+수동 운전 → manual.py · 횡단보도 보행자·걷는 사람 → walkers.py · 차로 경로·겹침 검사 → lanes.py
 저장
   world.json(현재), world_state.json(2초마다, 불러오기용), world_hist.jsonl(1초마다, 다시 보기용)
 사용법: python world.py RUN_DIR      (환경 변수 SIM_RESUME_DIR이 있으면 그 상태에서 이어서 시작)
 """
 
-import bisect
 import json
 import math
 import os
@@ -33,182 +33,21 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import (CAR_L, CAR_W, DEFAULT_CONFIG, SIDEWALK, emit, fmt_hour, load_map, map_layout,  # noqa: E402
-                    merged_vehicle, period_of, read_json, seg_dist, write_json)
-
-DT = 0.1
-ACC, DEC, DEC_COMF, DEC_EMERG = 2.2, 4.0, 2.0, 9.0      # m/s²
-A_LAT = 2.5                                             # 곡선 구간 횡가속도 한계 (m/s²)
-GAP_MIN = 2.5                                           # 정지 시 앞차와 간격 (m)
-FILLET_R = 9.0                                          # 모서리 곡선 반경 (m)
-HL, HW = CAR_L / 2 + 0.15, CAR_W / 2 + 0.15             # 겹침 검사용 반길이·반폭 (여유 15 cm)
-
-
-def in_rect(p, r):
-    return r[0] <= p[0] <= r[2] and r[1] <= p[1] <= r[3]
-
-
-def unit(dx, dz):
-    L = math.hypot(dx, dz) or 1.0
-    return dx / L, dz / L
-
-
-def right(h):
-    return -h[1], h[0]
-
-
-def obb_overlap(a, b):
-    """a, b = (x, z, hx, hz): 같은 크기 차량 직사각형의 분리축 검사"""
-    dx, dz = b[0] - a[0], b[1] - a[1]
-    if dx * dx + dz * dz > (2 * (HL + HW)) ** 2:
-        return False
-    for ux, uz in ((a[2], a[3]), (-a[3], a[2]), (b[2], b[3]), (-b[3], b[2])):
-        ra = HL * abs(a[2] * ux + a[3] * uz) + HW * abs(-a[3] * ux + a[2] * uz)
-        rb = HL * abs(b[2] * ux + b[3] * uz) + HW * abs(-b[3] * ux + b[2] * uz)
-        if abs(dx * ux + dz * uz) > ra + rb:
-            return False
-    return True
-
-
-class LanePath:
-    """경로(도로 중심선 꼭짓점) → 진행 방향 오른쪽 차로 중심선. 모서리는 곡선(2차 베지어), U턴은 반원"""
-
-    def __init__(self, route, off, world):
-        pts = [tuple(p[:2]) for p in route["pts"]]
-        kinds = [p[2] if len(p) > 2 else None for p in route["pts"]]
-        self.loop = bool(route.get("loop"))
-        if self.loop and pts[0] == pts[-1]:
-            if kinds[-1] and not kinds[0]:
-                kinds[0] = kinds[-1]
-            pts, kinds = pts[:-1], kinds[:-1]
-        n = len(pts)
-        xs, zs, vmax, cid, stop_idx = [], [], [], [], []      # cid: 곡선(모서리) 번호, 직선 점은 None
-
-        def add(x, z, vm, c=None):
-            if xs and math.hypot(x - xs[-1], z - zs[-1]) < 0.05:
-                vmax[-1] = min(vmax[-1], vm)
-                cid[-1] = cid[-1] if cid[-1] is not None else c
-                return
-            xs.append(x)
-            zs.append(z)
-            vmax.append(vm)
-            cid.append(c)
-        for i in range(n):
-            p = pts[i]
-            start = len(xs)
-            if not self.loop and i in (0, n - 1):
-                d = unit(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]) if i == 0 else \
-                    unit(pts[-1][0] - pts[-2][0], pts[-1][1] - pts[-2][1])
-                r = right(d)
-                add(p[0] + r[0] * off, p[1] + r[1] * off, 99.0)
-            else:
-                a, b = pts[i - 1], pts[(i + 1) % n]
-                d1, d2 = unit(p[0] - a[0], p[1] - a[1]), unit(b[0] - p[0], b[1] - p[1])
-                r1, r2 = right(d1), right(d2)
-                dot = d1[0] * d2[0] + d1[1] * d2[1]
-                if dot > 0.999:
-                    add(p[0] + r1[0] * off, p[1] + r1[1] * off, 99.0)
-                elif dot < -0.98:                                     # U턴: 반원
-                    for k in range(9):
-                        ang = math.pi * k / 8
-                        vx = r1[0] * math.cos(ang) + d1[0] * math.sin(ang)
-                        vz = r1[1] * math.cos(ang) + d1[1] * math.sin(ang)
-                        add(p[0] + vx * off * 1.4, p[1] + vz * off * 1.4, math.sqrt(A_LAT * off), i)
-                else:                                                 # 모서리: 두 차로선의 교점을 곡선으로 깎음
-                    q1 = (p[0] + r1[0] * off, p[1] + r1[1] * off)
-                    q2 = (p[0] + r2[0] * off, p[1] + r2[1] * off)
-                    den = d1[0] * d2[1] - d1[1] * d2[0]
-                    t = ((q2[0] - q1[0]) * d2[1] - (q2[1] - q1[1]) * d2[0]) / den
-                    c = (q1[0] + d1[0] * t, q1[1] + d1[1] * t)
-                    th = math.acos(max(-1.0, min(1.0, dot)))
-                    cut = min(FILLET_R * math.tan(th / 2), 0.45 * math.dist(a, p), 0.45 * math.dist(p, b))
-                    R = cut / math.tan(th / 2)
-                    A = (c[0] - d1[0] * cut, c[1] - d1[1] * cut)
-                    B = (c[0] + d2[0] * cut, c[1] + d2[1] * cut)
-                    for k in range(9):
-                        t = k / 8
-                        add((1 - t) ** 2 * A[0] + 2 * (1 - t) * t * c[0] + t * t * B[0],
-                            (1 - t) ** 2 * A[1] + 2 * (1 - t) * t * c[1] + t * t * B[1], math.sqrt(A_LAT * R), i)
-            if kinds[i]:
-                stop_idx.append(((start + len(xs) - 1) // 2, kinds[i], p))
-        if self.loop:
-            xs.append(xs[0])
-            zs.append(zs[0])
-            vmax.append(vmax[0])
-            cid.append(cid[0])
-        self.x, self.z, self.vmax = xs, zs, vmax
-        S = [0.0]
-        for i in range(1, len(xs)):
-            S.append(S[-1] + math.hypot(xs[i] - xs[i - 1], zs[i] - zs[i - 1]))
-        self.S, self.L = S, S[-1]
-        self.stops = [(S[i], kind, p) for i, kind, p in stop_idx]
-        self.lim = []                                   # 구간 i (점 i→i+1) 제한 속도 m/s: 도로·구역·곡선
-        for i in range(len(xs) - 1):
-            mid = ((xs[i] + xs[i + 1]) / 2, (zs[i] + zs[i + 1]) / 2)
-            curve = cid[i] is not None and cid[i] == cid[i + 1]
-            self.lim.append(min(world.speed_at(mid) / 3.6, vmax[i] if curve else 99.0))
-        # 신호 교차로 진입점·횡단보도 통과점 (1 m 간격으로 미리 계산)
-        B = world.lane_w + 3.0
-        self.signals, self.cross = [], []
-        for sig in world.map.get("signals", []):
-            inside, entry = None, None
-            s = 0.0
-            while s < self.L + 1:
-                x, z, hx, hz = self.at(s)
-                ins = abs(x - sig["pos"][0]) <= B and abs(z - sig["pos"][1]) <= B
-                if ins and inside is False:
-                    dirkey = ("E" if hx > 0 else "W") if abs(hx) > abs(hz) else ("S" if hz > 0 else "N")
-                    entry = (s, sig, "x" if abs(hx) > abs(hz) else "z", dirkey)
-                elif not ins and inside and entry:
-                    self.signals.append(entry + (s,))              # (진입 s, 신호, 축, 진입 방향, 빠져나가는 s)
-                    entry = None
-                inside = ins
-                s += 1.0
-        for cw in world.map.get("crosswalks", []):
-            best, bs = None, 0.0
-            s = 0.0
-            while s <= self.L:
-                x, z, _, _ = self.at(s)
-                d = math.hypot(x - cw["pos"][0], z - cw["pos"][1])
-                if d < world.lane_w + 1:
-                    if best is None or d < best:
-                        best, bs = d, s
-                elif best is not None:
-                    self.cross.append(self._cross(bs, cw, world))
-                    best = None
-                s += 1.0
-            if best is not None:
-                self.cross.append(self._cross(bs, cw, world))
-
-    def _cross(self, s, cw, world):
-        """(통과 지점 s, 횡단보도, 보행자 이동축에서 내 차로 중심의 위치)"""
-        x, z, _, _ = self.at(s)
-        return s, cw, (z - cw["pos"][1]) if world.cw_axis[cw["id"]] == "x" else (x - cw["pos"][0])
-
-    def norm(self, s):
-        return s % self.L if self.loop else min(max(s, 0.0), self.L)
-
-    def index(self, s):
-        i = bisect.bisect_right(self.S, self.norm(s)) - 1
-        return min(max(i, 0), len(self.S) - 2)
-
-    def at(self, s):
-        s = self.norm(s)
-        i = self.index(s)
-        seg = self.S[i + 1] - self.S[i]
-        t = (s - self.S[i]) / seg if seg > 1e-9 else 0.0
-        hx, hz = unit(self.x[i + 1] - self.x[i], self.z[i + 1] - self.z[i])
-        return self.x[i] + (self.x[i + 1] - self.x[i]) * t, self.z[i] + (self.z[i + 1] - self.z[i]) * t, hx, hz
-
-    def ahead(self, target, s):
-        """현재 s에서 target까지 앞쪽 거리"""
-        return (target - self.norm(s)) % self.L if self.loop else target - s
+from common import DEFAULT_CONFIG, emit, fmt_hour, merged_vehicle, period_of, read_json, write_json  # noqa: E402
+from lanes import ACC, DEC, DEC_COMF, DEC_EMERG, DT, GAP_MIN, LanePath, in_rect, obb_overlap  # noqa: E402
+from manual import ManualDriveMixin  # noqa: E402
+from mapgeo import CAR_L, CAR_W, SIDEWALK, load_map, map_layout, seg_dist  # noqa: E402
+from walkers import PedestriansMixin  # noqa: E402
 
 
 class Vehicle:
-    def __init__(self, vid, route_id, route, path):
-        self.vid, self.route_id, self.route, self.path = vid, route_id, route, path
+    """FL 차량(vid 1..K) 또는 배경 차량(npc, vid 1000+: 학습에는 참여하지 않고 길만 채운다)"""
+
+    def __init__(self, vid, route_id, route, path, npc=False):
+        self.vid, self.route_id, self.route, self.path, self.npc = vid, route_id, route, path, npc
         self.kind = route.get("kind", route_id)
+        self.accel = float(route.get("accel", ACC))       # 경로별 성능 (레이싱 차는 크게)
+        self.brake = float(route.get("brake", DEC_COMF))
         self.mode = "drive"                       # drive · park(주차장 칸) · out(맵 밖)
         self.s = self.odo = self.v = 0.0
         self.x = self.z = 0.0
@@ -221,6 +60,8 @@ class Vehicle:
         self.block_t, self.block_by = 0.0, None
         self.cw_at = None
         self.sched = {}
+        self.manual, self.aeb, self.hard_brk, self.offroad, self.in_box, self.park_key = False, False, False, False, set(), False
+        self.inp, self.driver = {}, ""
 
     @property
     def present(self):
@@ -239,7 +80,7 @@ class Vehicle:
                 "cell": self.cell, "region": self.region, "in_tunnel": self.in_tunnel, "emerg_id": self.emerg_id}
 
 
-class World:
+class World(PedestriansMixin, ManualDriveMixin):
     def __init__(self, run_dir):
         self.run_dir = Path(run_dir)
         self.cfg = read_json(self.run_dir / "config.json", DEFAULT_CONFIG)
@@ -250,33 +91,25 @@ class World:
         self.lots = {pid: [None] * len(l["slots"]) for pid, l in self.layout["lots"].items()}
         self.clock = 0.0                          # 시뮬레이션 경과 시간 (실제 초)
         self.cfg_mtime = 0
-        self.peds = {x["id"]: [] for x in self.map.get("crosswalks", [])}   # 보행자: [시작 시각, 방향, 돌발]
-        self.cw_wait = {}                         # 횡단보도 앞에서 차가 기다리기 시작한 시각 (오래 기다리면 보행자 멈춤)
         self.box_occ = {s["id"]: {} for s in self.map.get("signals", [])}   # 교차로 안(예약 포함) 차량: {vid: 진입 방향}
-        self.cw_axis = {x["id"]: self.road_axis(x["pos"]) for x in self.map.get("crosswalks", [])}
-        paths = {rid: LanePath(r, self.lane_w / 2, self) for rid, r in self.map["routes"].items()}
-        K = int(self.cfg["fl"]["K"])
+        self.solid = [tuple(b[:4]) for b in self.layout["buildings"]] + [
+            (b["x"] - b["w"] / 2, b["z"] - b["d"] / 2, b["x"] + b["w"] / 2, b["z"] + b["d"] / 2)
+            for b in self.layout["place_buildings"] if b["kind"] != "canopy"]
+        self.init_manual()
+        self.init_pedestrians()
+        self.paths = {rid: LanePath(r, self.lane_w / 2, self) for rid, r in self.map["routes"].items()}
         vr = self.map["vehicle_routes"]
-        self.vehicles = []
-        n_city = 0
-        for i in range(1, K + 1):
-            rid = vr[(i - 1) % len(vr)]
-            v = Vehicle(i, rid, self.map["routes"][rid], paths[rid])
-            r = self.rng
-            if v.kind == "commute":
-                v.sched = {"am": 7.0 + r.uniform(0, 1.5), "pm": 17.0 + r.uniform(0, 1.5)}
-            elif v.kind == "city":
-                n_city += 1
-                v.sched = {"on": 5.5 + r.uniform(0, 1), "off": (23.5 + r.uniform(0, 1)) % 24, "shift": "주간"} \
-                    if n_city % 2 == 1 else {"on": 17.5 + r.uniform(0, 1), "off": 9 + r.uniform(0, 1), "shift": "야간"}
-            elif v.kind == "resident":
-                v.sched = {"wake": 8 + r.uniform(0, 1), "sleep": 20.5 + r.uniform(0, 1)}
-            self.vehicles.append(v)
+        self.n_city = 0
+        self.fl = [self.make_vehicle(i, vr[(i - 1) % len(vr)]) for i in range(1, int(self.cfg["fl"]["K"]) + 1)]
+        nr = self.map.get("npc_routes") or list(self.map["routes"])
+        self.npcs = [self.make_vehicle(1000 + i, nr[i % len(nr)], npc=True)
+                     for i in range(int(self.cfg["world"].get("npc_cars", 16)))]
+        self.vehicles = self.fl + self.npcs
         resume = os.environ.get("SIM_RESUME_DIR")
         if resume and (Path(resume) / "world_state.json").exists():
             st = read_json(Path(resume) / "world_state.json", {})
             self.clock = st.get("clock", 0.0)
-            for v in self.vehicles:
+            for v in self.fl:
                 d = st.get("vehicles", {}).get(str(v.vid))
                 if d:
                     for k in ("mode", "s", "odo", "v", "park", "sched", "x", "z", "hx", "hz", "gilbert_good",
@@ -289,6 +122,24 @@ class World:
         else:
             self.initial_placement()
         self.hist = open(self.run_dir / "world_hist.jsonl", "a")
+
+    def make_vehicle(self, vid, rid, npc=False):
+        """차량 하나 + 하루 일정 (경로 종류: 통근·택시(상시 운행 경로 포함)·주민·통과)"""
+        v = Vehicle(vid, rid, self.map["routes"][rid], self.paths[rid], npc)
+        r = self.rng
+        if npc:
+            return v
+        if v.kind == "commute":
+            v.sched = {"am": 7.0 + r.uniform(0, 1.5), "pm": 17.0 + r.uniform(0, 1.5)}
+        elif v.kind == "city" and v.route.get("always"):
+            v.sched = {"on": 0.0, "off": 24.0, "shift": "상시"}
+        elif v.kind == "city":
+            self.n_city += 1
+            v.sched = {"on": 5.5 + r.uniform(0, 1), "off": (23.5 + r.uniform(0, 1)) % 24, "shift": "주간"} \
+                if self.n_city % 2 == 1 else {"on": 17.5 + r.uniform(0, 1), "off": 9 + r.uniform(0, 1), "shift": "야간"}
+        elif v.kind == "resident":
+            v.sched = {"wake": 8 + r.uniform(0, 1), "sleep": 20.5 + r.uniform(0, 1)}
+        return v
 
     # ---------------------------------------------------------------- 하루 시계
     def sec_per_hour(self):
@@ -314,8 +165,12 @@ class World:
 
     def sched_text(self, v):
         s = v.sched
+        if v.npc:
+            return "배경 차량 (학습 참여 안 함)"
         if v.kind == "commute":
             return f"출근 {fmt_hour(s['am'])} · 퇴근 {fmt_hour(s['pm'])}"
+        if v.kind == "city" and s["shift"] == "상시":
+            return f"{v.route.get('label', '택시')} 상시 운행"
         if v.kind == "city":
             return f"택시 {s['shift']}조 {fmt_hour(s['on'])}–{fmt_hour(s['off'])}"
         if v.kind == "resident":
@@ -403,6 +258,8 @@ class World:
             self.cfg_mtime = m
 
     def ev(self, v, msg, **kw):
+        if v is not None and v.npc:                       # 배경 차량은 사건 기록에 남기지 않는다
+            return
         emit(self.run_dir, "world", vid=v.vid if v else None, msg=msg, **kw)
 
     def emergency(self, v, cause):
@@ -465,6 +322,9 @@ class World:
         t = self.tod()
         for v in self.vehicles:
             want = None
+            if v.npc:
+                v.mode = "drive"
+                continue
             if v.kind == "commute":
                 if self.between(t, v.sched["am"] + 0.5, v.sched["pm"]):
                     want = ("work", v.sched["pm"], "근무 중 주차")
@@ -495,39 +355,6 @@ class World:
                     break
                 s += 9.0
             v.odo = s
-
-    # ---------------------------------------------------------------- 보행자
-    def step_peds(self):
-        scale = float(self.cfg["world"].get("pedestrian_scale", 1.0))
-        width = 2 * self.lane_w + 2 * SIDEWALK
-        for x in self.map.get("crosswalks", []):
-            lst = self.peds[x["id"]]
-            lst[:] = [p for p in lst if (self.clock - p[0]) * 1.3 < width]          # 다 건넌 보행자 제거
-            rate = x.get("rate_per_min", 3) * scale * self.hour_mult("school" if x.get("school") else "ped")
-            held = self.clock - self.cw_wait.get(x["id"], self.clock) > 8      # 차가 8초 넘게 기다리면 새 보행자는 대기
-            if not held and self.rng.random() < rate / 600:
-                darting = self.rng.random() < x.get("dart_prob", 0.05)
-                lst.append([self.clock, self.rng.choice([-1, 1]), darting])
-                if darting:                                                  # 돌발: 다가오던 차 긴급제동
-                    for v in self.vehicles:
-                        if v.mode != "drive" or v.v < 4:
-                            continue
-                        rate_v = float(merged_vehicle(self.cfg, v.vid).get("emergency_rate", 1.0))
-                        for s_cw, cw, _ in v.path.cross:
-                            a = v.path.ahead(s_cw, v.s)
-                            if cw["id"] == x["id"] and 3 < a < v.v ** 2 / (2 * DEC) + 19 and self.rng.random() < min(1.0, rate_v):
-                                self.emergency(v, f"{x['name']} 보행자 돌발")
-
-    def ped_positions(self):
-        width = 2 * self.lane_w + 2 * SIDEWALK
-        out = []
-        for x in self.map.get("crosswalks", []):
-            ax = self.cw_axis[x["id"]]
-            for t0, d, dart in self.peds[x["id"]]:
-                off = ((self.clock - t0) * 1.3 - width / 2) * d
-                pos = [x["pos"][0], x["pos"][1] + off] if ax == "x" else [x["pos"][0] + off, x["pos"][1]]
-                out.append([round(pos[0], 1), round(pos[1], 1), 1 if dart else 0])
-        return out
 
     # ---------------------------------------------------------------- 정차 계획 (하루 시계)
     def decide_stop(self, v, kind, node):
@@ -638,25 +465,29 @@ class World:
         P = v.path
         scale = float(wcfg.get("speed_scale", 1.0))
         look = max(45.0, v.v * v.v / (2 * DEC) + 35)
+        look_c = max(look, v.v * v.v / (2 * v.brake) + 20)   # 앞 곡선을 미리 보고 감속할 거리
         i = P.index(v.s)
         target = P.lim[i] * scale
         j, dist = i + 1, P.S[i + 1] - P.norm(v.s)            # 앞 구간 제한 속도·곡선: 편안한 감속으로 맞출 수 있는 속도
-        while dist < look:
+        while dist < look_c:
             if j >= len(P.lim):
                 if not P.loop:
                     break
                 j = 0
-            target = min(target, math.sqrt((P.lim[j] * scale) ** 2 + 2 * DEC_COMF * max(0.0, dist)))
+            target = min(target, math.sqrt((P.lim[j] * scale) ** 2 + 2 * v.brake * max(0.0, dist)))
             dist += P.S[j + 1] - P.S[j]
             j += 1
         stops = []                                           # (앞 범퍼에서 멈출 지점까지 거리, 이유)
         gap, other = self.path_hit(v, look)
         if gap is not None:
             stops.append((gap - GAP_MIN, "car"))
+        pg = self.walker_hit(v, look)
+        if pg is not None:
+            stops.append((pg - 1.5, "보행자 차로"))
         for s_e, sig, axis, dk, s_x in P.signals:
             occ = self.box_occ[sig["id"]]
             key = (v.vid, round(s_e))
-            a = P.ahead(s_e, v.s) - CAR_L / 2 - 0.8
+            a = P.ahead_signed(s_e, v.s) - CAR_L / 2 - 0.8
             if key in occ:                                   # 교차로에 들어간(예약한) 차: 뒤 범퍼가 출구를 지나면 해제
                 past = ((v.s - s_x - CAR_L / 2 - 1) % P.L < P.L / 2) if P.loop else v.s > s_x + CAR_L / 2 + 1
                 if past or a > 40:
@@ -687,7 +518,7 @@ class World:
                     break
             if busy:
                 stops.append((a, "보행자 " + cw["id"]))
-        for s_stop, kind, node in P.stops:                   # 정차 계획: 정차 지점 80 m 앞에서 한 번 정한다
+        for s_stop, kind, node in ([] if v.npc else P.stops):   # 정차 계획: 정차 지점 80 m 앞에서 한 번 정한다
             a = P.ahead(s_stop, v.s)
             key = round(v.odo + a)
             if 0 < a < 80 and key not in v.decided:
@@ -714,9 +545,11 @@ class World:
                     self.emergency(v, "신호 급정거")
                 elif why_stop == "car" and v.v * 3.6 > 20:
                     self.emergency(v, "교차로·앞차 충돌 회피")
+                elif why_stop == "보행자 차로":
+                    self.emergency(v, "차로에 들어온 보행자")
             v.v = max(target, v.v - dec * DT)
         else:
-            v.v = min(target, v.v + ACC * DT)
+            v.v = min(target, v.v + v.accel * DT)
             v.braking = False
         if v.v * 3.6 > 40 and self.rng.random() < 0.0008 * float(vcfg.get("emergency_rate", 1.0)):
             self.emergency(v, "끼어들기")
@@ -804,14 +637,14 @@ class World:
             p.get("wifi") and math.hypot(v.x - p["pos"][0], v.z - p["pos"][1]) < 60 for p in self.map["places"])
         return {
             "pos": [round(v.x, 2), round(v.z, 2)], "heading": round(math.atan2(v.hz, v.hx), 3),
-            "speed_kmh": round(v.v * 3.6, 1), "route": v.route_id, "kind": v.kind, "present": v.present,
+            "speed_kmh": round(abs(v.v) * 3.6, 1), "manual": v.manual, "driver": v.driver if v.manual else "", "reverse": v.v < -0.05, "offroad": v.offroad, "route": v.route_id, "kind": v.kind, "present": v.present,
             "mode": v.mode, "parked": v.park["place"] if v.park else None, "park_why": v.park["why"] if v.park else "",
             "cell": cid, "quality": round(q, 3), "region": region, "zones": z, "gilbert_good": v.gilbert_good,
             "link_up": link_up, "server_ok": link_up, "wifi": bool(link_up and (z.get("wifi") or at_wifi)),
             "engine_off": sk == "home" or not v.present, "charging": sk == "gas", "ota": sk == "ota",
             "idle_parked": sk in ("gas", "service"), "home_charging": bool(v.park and v.park["kind"] == "home"),
             "stop_left": round(max(0.0, v.park["until"] - self.clock), 1) if v.park else 0.0, "available": True,
-            "moving": v.v > 1, "emergency": round(v.emerg_left, 1), "emergency_id": v.emerg_id,
+            "moving": abs(v.v) > 1, "emergency": round(v.emerg_left, 1), "emergency_id": v.emerg_id,
             "emergency_cause": v.emerg_cause, "braking": v.braking or (v.mode == "drive" and v.v < 0.5),
             "sched": self.sched_text(v),
         }
@@ -831,18 +664,29 @@ class World:
                     self.ev(None, f"{fmt_hour(tod)} — {pname} 시간대 시작", period=pkey)
                 last_period = pkey
             self.step_peds()
-            for v in self.vehicles:
-                self.step_vehicle(v)
-            state = {str(v.vid): self.link(v) for v in self.vehicles}
-            sigs = {s["id"]: [self.signal_state(s, "x"), self.signal_state(s, "z")] for s in self.map.get("signals", [])}
+            self.reload_drive()
+            self.update_manual()
             peds = self.ped_positions()
+            self.step_walkers()
+            for v in self.vehicles:
+                if v.manual:
+                    self.step_manual(v, peds)
+                else:
+                    self.step_vehicle(v)
+            self.collide_walkers()
+            walkers = self.walker_states()
+            state = {str(v.vid): self.link(v) for v in self.fl}
+            npc = [[v.vid, round(v.x, 2), round(v.z, 2), round(math.atan2(v.hz, v.hx), 3), round(v.v * 3.6),
+                    int(v.braking or v.v < 0.5), v.route_id] for v in self.npcs if v.present]
+            sigs = {s["id"]: [self.signal_state(s, "x"), self.signal_state(s, "z")] for s in self.map.get("signals", [])}
             write_json(self.run_dir / "world.json", {"t": now, "elapsed": self.clock, "tod": round(tod, 4),
                                                      "day": int(self.hours() // 24) + 1, "period": pkey,
                                                      "period_name": pname, "sec_per_hour": self.sec_per_hour(),
-                                                     "vehicles": state, "signals": sigs, "peds": peds})
+                                                     "vehicles": state, "signals": sigs, "peds": peds,
+                                                     "npc": npc, "walkers": walkers, "ped_hits": self.ped_hits})
             if self.clock - last_state >= 2:            # 불러오기용 전체 상태
                 write_json(self.run_dir / "world_state.json",
-                           {"clock": self.clock, "vehicles": {str(v.vid): v.state() for v in self.vehicles}})
+                           {"clock": self.clock, "vehicles": {str(v.vid): v.state() for v in self.fl}})
                 last_state = self.clock
             if self.clock - last_hist >= 1:             # 다시 보기용 기록 (1초 간격, 짧게)
                 rec = {"t": round(now, 2), "c": round(self.clock, 1), "h": round(tod, 3),
@@ -851,7 +695,8 @@ class World:
                                  | int(s["ota"]) << 3 | int(s["emergency"] > 0) << 4 | int(s["link_up"]) << 5
                                  | int(s["braking"]) << 6]
                              for k, s in state.items()},
-                       "s": {k: v[0][0] + v[1][0] for k, v in sigs.items()}, "p": peds}
+                       "s": {k: v[0][0] + v[1][0] for k, v in sigs.items()}, "p": peds, "w": [x[:7] for x in walkers],
+                       "n": [x[:4] for x in npc]}
                 self.hist.write(json.dumps(rec, separators=(",", ":")) + "\n")
                 self.hist.flush()
                 last_hist = self.clock
