@@ -546,3 +546,33 @@
 - 2026-10-27 12:34 파이프라인 시작 (E8, report_only=False)
 - 2026-10-27 12:34 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
 - 2026-10-27 12:34 E8 실행 시작: K10_CIFAR10_SASAFL_C0.1_rep2 (시도 1/2)
+- 2026-10-27 14:38 E8 실행 종료: K10_CIFAR10_SASAFL_C0.1_rep2 → completed, 500/500라운드, 최고 52.08%, 124.18분
+- 2026-10-27 14:38 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-27 14:38 파이프라인 종료
+- 2026-10-27 14:38 파이프라인 시작 (E8, report_only=False)
+- 2026-10-27 14:38 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-27 14:38 E8 실행 시작: K10_CIFAR10_BSA_C0.3_rep2 (시도 1/2)
+- 2026-10-27 17:05 E8 실행 종료: K10_CIFAR10_BSA_C0.3_rep2 → completed, 500/500라운드, 최고 48.5%, 146.12분
+- 2026-10-27 17:05 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-27 17:05 파이프라인 종료
+- 2026-10-27 17:05 파이프라인 시작 (E8, report_only=False)
+- 2026-10-27 17:05 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-27 17:05 E8 실행 시작: K10_CIFAR10_SASAFLorig_C0.3_rep2 (시도 1/2)
+- 2026-10-27 20:26 E8 실행 종료: K10_CIFAR10_SASAFLorig_C0.3_rep2 → completed, 500/500라운드, 최고 56.23%, 200.74분
+- 2026-10-27 20:27 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-27 20:27 파이프라인 종료
+- 2026-10-27 20:27 파이프라인 시작 (E8, report_only=False)
+- 2026-10-27 20:27 === E8 시작: K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
+- 2026-10-27 20:27 E8 실행 시작: K10_CIFAR10_SASAFLorig_C0.5_rep2 (시도 1/2)
+- 2026-10-28 00:02 E8 실행 종료: K10_CIFAR10_SASAFLorig_C0.5_rep2 → completed, 500/500라운드, 최고 53.57%, 214.99분
+- 2026-10-28 00:03 === E8 정리 완료 → experiments/E8_K10/SUMMARY.md
+- 2026-10-28 00:03 파이프라인 종료
+- 2026-10-28 00:03 파이프라인 시작 (E5, report_only=False)
+- 2026-10-28 00:03 === E5 시작: Lag tolerance τ=1–10 — Fig. 5 (MNIST, SASAFL, C=0.3, 설정당 10회)
+- 2026-10-28 00:03 E5 실행 시작: LT_tau1_rep2 (시도 1/2)
+- 2026-10-28 08:04 E5 실행 종료: LT_tau1_rep2 → completed, 500/500라운드, 최고 98.87%, 481.55분
+- 2026-10-28 08:05 === E5 정리 완료 → experiments/E5_Fig5_lag_tolerance/SUMMARY.md
+- 2026-10-28 08:05 파이프라인 종료
+- 2026-10-28 08:05 파이프라인 시작 (E5, report_only=False)
+- 2026-10-28 08:05 === E5 시작: Lag tolerance τ=1–10 — Fig. 5 (MNIST, SASAFL, C=0.3, 설정당 10회)
+- 2026-10-28 08:05 E5 실행 시작: LT_tau3_rep2 (시도 1/2)

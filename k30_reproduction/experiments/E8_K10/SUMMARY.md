@@ -1,6 +1,6 @@
 # E8. K=10 — 논문의 K=100 칸 대신 (Fig. 7(b)(d), Fig. 8(b), Fig. 11, Table 4 K=10 행). BSA · SASAFL(현재 코드) · SASAFL(원저자 코드, quota 고정)
 
-마지막 갱신: 2026-10-27 13:34
+마지막 갱신: 2026-10-28 09:43
 
 **재현 설정**: K=10, wise-175 단일 노드, CPU 카테고리 1·2·3·4·8코어 × 2명(논문 K=10 구성), batch 32, local epoch 5, τ=9, ζ=0.9, non-IID(gaussian), 설정당 반복 10회 목표(논문: average of ten repetitions)
 
@@ -41,14 +41,14 @@
 | `K10_FMNIST_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 82.66 ± 2.21 | 295 |
 | `K10_FMNIST_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 2/10 | 79.66 ± 0.68 | 168 |
 | `K10_CIFAR10_BSA_C0.1` | BSA | 0.1 | 2/10 | 41.31 ± 2.28 | 44 |
-| `K10_CIFAR10_SASAFL_C0.1` | SASAFL | 0.1 | 1/10 | 35.92 ± 0.00 | 83 |
-| `K10_CIFAR10_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 1/10 | 47.04 ± 0.00 | 74 |
-| `K10_CIFAR10_BSA_C0.3` | BSA | 0.3 | 1/10 | 45.36 ± 0.00 | 87 |
-| `K10_CIFAR10_SASAFL_C0.3` | SASAFL | 0.3 | 1/10 | 48.76 ± 0.00 | 159 |
-| `K10_CIFAR10_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 1/10 | 47.11 ± 0.00 | 117 |
-| `K10_CIFAR10_BSA_C0.5` | BSA | 0.5 | 1/10 | 51.99 ± 0.00 | 178 |
-| `K10_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 1/10 | 51.94 ± 0.00 | 194 |
-| `K10_CIFAR10_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 1/10 | 48.46 ± 0.00 | 216 |
+| `K10_CIFAR10_SASAFL_C0.1` | SASAFL | 0.1 | 2/10 | 44.00 ± 8.08 | 103 |
+| `K10_CIFAR10_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 2/10 | 46.06 ± 0.98 | 84 |
+| `K10_CIFAR10_BSA_C0.3` | BSA | 0.3 | 2/10 | 46.93 ± 1.57 | 117 |
+| `K10_CIFAR10_SASAFL_C0.3` | SASAFL | 0.3 | 2/10 | 48.83 ± 0.07 | 160 |
+| `K10_CIFAR10_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 2/10 | 51.67 ± 4.56 | 159 |
+| `K10_CIFAR10_BSA_C0.5` | BSA | 0.5 | 2/10 | 48.92 ± 3.07 | 179 |
+| `K10_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 51.51 ± 0.43 | 217 |
+| `K10_CIFAR10_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 2/10 | 51.02 ± 2.55 | 216 |
 
 반복 값 파일: `repeats/runs_index.csv`(실행별), `repeats/summary_by_setting.csv`(설정별 평균·표준편차), `repeats/curves/<설정>.csv`(라운드별 회차 값과 평균)
 
@@ -81,14 +81,14 @@
 | `K10_FMNIST_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 82.66 ± 2.21 | 295 |
 | `K10_FMNIST_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 2/10 | 79.66 ± 0.68 | 168 |
 | `K10_CIFAR10_BSA_C0.1` | BSA | 0.1 | 2/10 | 41.31 ± 2.28 | 44 |
-| `K10_CIFAR10_SASAFL_C0.1` | SASAFL | 0.1 | 1/10 | 35.92 ± 0.00 | 83 |
-| `K10_CIFAR10_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 1/10 | 47.04 ± 0.00 | 74 |
-| `K10_CIFAR10_BSA_C0.3` | BSA | 0.3 | 1/10 | 45.36 ± 0.00 | 87 |
-| `K10_CIFAR10_SASAFL_C0.3` | SASAFL | 0.3 | 1/10 | 48.76 ± 0.00 | 159 |
-| `K10_CIFAR10_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 1/10 | 47.11 ± 0.00 | 117 |
-| `K10_CIFAR10_BSA_C0.5` | BSA | 0.5 | 1/10 | 51.99 ± 0.00 | 178 |
-| `K10_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 1/10 | 51.94 ± 0.00 | 194 |
-| `K10_CIFAR10_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 1/10 | 48.46 ± 0.00 | 216 |
+| `K10_CIFAR10_SASAFL_C0.1` | SASAFL | 0.1 | 2/10 | 44.00 ± 8.08 | 103 |
+| `K10_CIFAR10_SASAFLorig_C0.1` | SASAFLorig | 0.1 | 2/10 | 46.06 ± 0.98 | 84 |
+| `K10_CIFAR10_BSA_C0.3` | BSA | 0.3 | 2/10 | 46.93 ± 1.57 | 117 |
+| `K10_CIFAR10_SASAFL_C0.3` | SASAFL | 0.3 | 2/10 | 48.83 ± 0.07 | 160 |
+| `K10_CIFAR10_SASAFLorig_C0.3` | SASAFLorig | 0.3 | 2/10 | 51.67 ± 4.56 | 159 |
+| `K10_CIFAR10_BSA_C0.5` | BSA | 0.5 | 2/10 | 48.92 ± 3.07 | 179 |
+| `K10_CIFAR10_SASAFL_C0.5` | SASAFL | 0.5 | 2/10 | 51.51 ± 0.43 | 217 |
+| `K10_CIFAR10_SASAFLorig_C0.5` | SASAFLorig | 0.5 | 2/10 | 51.02 ± 2.55 | 216 |
 
 ## 최고 정확도 (500라운드)
 
@@ -100,7 +100,7 @@
 | FashionMNIST | 0.1 | 58.35 | 65.63 | 66.70 | 1–1 / 1 / 100% |
 | FashionMNIST | 0.3 | 74.72 | 81.06 | 69.49 | 3–3 / 1 / 100% |
 | FashionMNIST | 0.5 | 79.36 | 82.66 | 79.66 | 5–5 / 1 / 100% |
-| CIFAR10 | 0.1 | 41.31 | 35.92 | 47.04 | 1–1 / 1 / 100% |
-| CIFAR10 | 0.3 | 45.36 | 48.76 | 47.11 | 3–3 / 1 / 100% |
-| CIFAR10 | 0.5 | 51.99 | 51.94 | 48.46 | 5–5 / 1 / 100% |
+| CIFAR10 | 0.1 | 41.31 | 44.00 | 46.06 | 1–1 / 1 / 100% |
+| CIFAR10 | 0.3 | 46.93 | 48.83 | 51.67 | 3–3 / 1 / 100% |
+| CIFAR10 | 0.5 | 48.92 | 51.51 | 51.02 | 5–5 / 1 / 100% |
 

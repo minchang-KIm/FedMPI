@@ -9,8 +9,8 @@ LT_tau7_rep1,1,LT_tau7_rep1,SASAFL,,MNIST,30,0.3,7,wise-176,completed,500,98.31,
 LT_tau8_rep1,1,LT_tau8_rep1,SASAFL,,MNIST,30,0.3,8,wise-175,completed,500,88.11,,,264.05,runs/LT_tau8_rep1
 LT_tau9_rep1,1,LT_tau9_rep1,SASAFL,,MNIST,30,0.3,9,wise-175,completed,500,98.53,81,73.48,413.2,runs/LT_tau9_rep1
 LT_tau10_rep1,1,LT_tau10_rep1,SASAFL,,MNIST,30,0.3,10,wise-175,completed,500,96.76,337,213.18,325.05,runs/LT_tau10_rep1
-LT_tau1_rep1,2,LT_tau1_rep2,SASAFL,,MNIST,30,0.3,1,,not_run,,,,,,
-LT_tau2_rep1,2,LT_tau2_rep2,SASAFL,,MNIST,30,0.3,2,,not_run,,,,,,
+LT_tau1_rep1,2,LT_tau1_rep2,SASAFL,,MNIST,30,0.3,1,wise-175,completed,500,98.87,54,56.23,481.55,runs/LT_tau1_rep2
+LT_tau2_rep1,2,LT_tau2_rep2,SASAFL,,MNIST,30,0.3,2,wise-176,completed,500,98.73,61,52.32,475.22,runs/LT_tau2_rep2
 LT_tau3_rep1,2,LT_tau3_rep2,SASAFL,,MNIST,30,0.3,3,,not_run,,,,,,
 LT_tau4_rep1,2,LT_tau4_rep2,SASAFL,,MNIST,30,0.3,4,,not_run,,,,,,
 LT_tau5_rep1,2,LT_tau5_rep2,SASAFL,,MNIST,30,0.3,5,,not_run,,,,,,
