@@ -172,8 +172,8 @@ def build_commands_md():
         "실험 전체 시작/재개 (wise-175에서만 실행. 176 쪽 프로세스는 launch.sh가 ssh로 띄운다):", "",
         "```bash", "# wise-175", "bash /home/wise-175/Mando/FedMPI/k30_reproduction/fig7/start_fig7.sh   # tmux 세션 fig7",
         "#   내부: python -u k30_reproduction/fig7/run_fig7.py  → 실행마다 아래 launch.sh 호출", "```", "",
-        "## 실행별 명령", "",
     ]
+    lines += (spec.HERE / "commands_top.md").read_text().splitlines() + ["", "## 실행별 명령", ""]
     for s in spec.queue():
         d = spec.RUNS / s["name"]
         cmd = d / "cmd.txt"
@@ -208,6 +208,7 @@ def build_commands_md():
                       "```bash", cmds[0], "```", "",
                       "wise-176 (node_rank 1: 클라이언트 15개, cwd /home/wise-176/Mando/FedMPI, launch.sh가 ssh로 실행):", "",
                       "```bash", cmds[1], "```", ""]
+    lines += [""] + (spec.HERE / "commands_bottom.md").read_text().splitlines()
     out = spec.OUT / "COMMANDS.md"
     tmp = out.with_suffix(".tmp")
     tmp.write_text("\n".join(lines) + "\n")
