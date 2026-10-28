@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """논문 Fig. 7 (K=30)과 같은 형식의 그림에 SAFA를 더해 그린다.
 
-그림 4장 (SASAFL 제안 기법 ON/OFF × SAFA 저장소 구현/수정판) + 같은 4장을 논문 원본(왼쪽)과 나란히 붙인 compare_*.png:
-  fig7_SASAFL-ON_SAFA-repo.png, fig7_SASAFL-ON_SAFA-fixed.png, fig7_SASAFL-OFF_SAFA-repo.png, fig7_SASAFL-OFF_SAFA-fixed.png
-각 그림: (a) MNIST with K=30, (c) FashionMNIST with K=30. BSA 초록, SASAFL 빨강, SAFA 파랑, C=0.1/0.3/0.5 = 실선/점선/파선.
+그림 2장 (SASAFL 제안 기법 ON / OFF) + 논문 원본(왼쪽)과 나란히 붙인 compare_*.png. 각 그림에 SAFA 저장소 구현(파랑)과 수정판(보라)을 함께 그린다:
+  fig7_SASAFL-ON.png, fig7_SASAFL-OFF.png
+각 그림: (a) MNIST with K=30, (c) FashionMNIST with K=30. BSA 초록, SASAFL 빨강, SAFA(저장소 구현) 파랑, SAFA(수정판) 보라, C=0.1/0.3/0.5 = 실선/점선/파선.
 곡선은 완료·진행 중 회차의 라운드별 평균이고, 논문처럼 5라운드마다 표시한다.
 
 --watch: 결과(rounds.csv)가 바뀔 때마다(=라운드가 끝날 때마다) 다시 그린다. 그림은 임시 파일에 그린 뒤 교체한다.
@@ -33,12 +33,11 @@ plt.rcParams.update({
 GREEN, RED, BLUE = "#00a650", "#ff0000", "#0070c0"
 C_STYLE = {0.1: "-", 0.3: ":", 0.5: "--"}
 EVERY = 5
-FIGS = (
-    ("fig7_SASAFL-ON_SAFA-repo.png", "SASAFL_ON", "SAFA"),
-    ("fig7_SASAFL-ON_SAFA-fixed.png", "SASAFL_ON", "SAFAfix"),
-    ("fig7_SASAFL-OFF_SAFA-repo.png", "SASAFL_OFF", "SAFA"),
-    ("fig7_SASAFL-OFF_SAFA-fixed.png", "SASAFL_OFF", "SAFAfix"),
+FIGS = (   # 그림마다 BSA, SASAFL(ON 또는 OFF), SAFA(저장소 구현), SAFA(수정판)를 함께 그린다
+    ("fig7_SASAFL-ON.png", "SASAFL_ON"),
+    ("fig7_SASAFL-OFF.png", "SASAFL_OFF"),
 )
+PURPLE = "#7030a0"
 
 
 def read_curve(run_dir):
@@ -70,8 +69,12 @@ def mean_curves():
     return out
 
 
-def draw(ax, curves, ds, sasafl, safa, inset):
-    for label, variant, color in (("BSA", "BSA", GREEN), ("SASAFL", sasafl, RED), ("SAFA", safa, BLUE)):
+def lines_for(sasafl):
+    return (("BSA", "BSA", GREEN), ("SASAFL", sasafl, RED), ("SAFA", "SAFA", BLUE), ("SAFA (fixed)", "SAFAfix", PURPLE))
+
+
+def draw(ax, curves, ds, sasafl, inset):
+    for label, variant, color in lines_for(sasafl):
         for c in spec.CS:
             item = curves.get((variant, ds, c))
             if item is None:
@@ -88,12 +91,13 @@ def draw(ax, curves, ds, sasafl, safa, inset):
     ax.set_ylabel("Global model accuracy (%)")
     ax.grid(color="#dddddd")
     handles, labels = ax.get_legend_handles_labels()
-    order = [r * 3 + c for c in range(3) for r in range(3)]   # 행 우선(논문처럼 방법별 한 줄)
+    rows = len(handles) // 3
+    order = [r * 3 + c for c in range(3) for r in range(rows)]   # 행 우선(논문처럼 방법별 한 줄)
     ax.legend([handles[i] for i in order], [labels[i] for i in order], loc="lower center", bbox_to_anchor=(0.5, 1.0),
               ncol=3, frameon=False, handlelength=2.5, columnspacing=1.0, handletextpad=0.5)
     if inset:
         ins = ax.inset_axes([0.55, 0.12, 0.4, 0.38])
-        for variant, color in (("BSA", GREEN), (sasafl, RED), (safa, BLUE)):
+        for _, variant, color in lines_for(sasafl):
             for c in spec.CS:
                 item = curves.get((variant, ds, c))
                 if item is None:
@@ -110,12 +114,12 @@ def draw(ax, curves, ds, sasafl, safa, inset):
 
 
 def render(curves):
-    for fname, sasafl, safa in FIGS:
+    for fname, sasafl in FIGS:
         fig, axes = plt.subplots(1, 2, figsize=(15, 5.6))
-        draw(axes[0], curves, "MNIST", sasafl, safa, inset=True)
-        draw(axes[1], curves, "FashionMNIST", sasafl, safa, inset=False)
+        draw(axes[0], curves, "MNIST", sasafl, inset=True)
+        draw(axes[1], curves, "FashionMNIST", sasafl, inset=False)
         for ax, cap in zip(axes, ("(a) MNIST with K=30", "(c) FashionMNIST with K=30")):
-            ax.text(0.5, -0.24, cap, transform=ax.transAxes, ha="center", fontsize=18)
+            ax.text(0.5, -0.27, cap, transform=ax.transAxes, ha="center", fontsize=18)
         fig.tight_layout()
         out = spec.OUT / fname
         tmp = out.with_name(out.stem + ".tmp.png")
@@ -137,12 +141,12 @@ def render_compare(curves):
     from PIL import Image
     paper = Image.open(PAPER_FIG7).convert("RGB")
     paper = paper.crop((0, 0, paper.width // 2 + 3, paper.height))   # 왼쪽 열 = K=30
-    for fname, sasafl, safa in FIGS:
-        fig, axes = plt.subplots(2, 1, figsize=(7.6, 10.4))
-        draw(axes[0], curves, "MNIST", sasafl, safa, inset=True)
-        draw(axes[1], curves, "FashionMNIST", sasafl, safa, inset=False)
+    for fname, sasafl in FIGS:
+        fig, axes = plt.subplots(2, 1, figsize=(7.6, 11.4))
+        draw(axes[0], curves, "MNIST", sasafl, inset=True)
+        draw(axes[1], curves, "FashionMNIST", sasafl, inset=False)
         for ax, cap in zip(axes, ("(a) MNIST with K=30", "(c) FashionMNIST with K=30")):
-            ax.text(0.5, -0.26, cap, transform=ax.transAxes, ha="center", fontsize=18)
+            ax.text(0.5, -0.32, cap, transform=ax.transAxes, ha="center", fontsize=18)
         fig.tight_layout(h_pad=3)
         tmp = spec.OUT / ("_ours_" + fname)
         fig.savefig(tmp, dpi=200)
