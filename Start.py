@@ -7,7 +7,6 @@ from methods.FedAsync import FedAsync, FedAsyncClient, FedAsyncServer
 from methods.SemiAsyncPM3 import SemiAsyncPM3, SemiAsyncPM3Client, SemiAsyncPM3Server
 from methods.SASAFL import SASAFL, SASAFLClient, SASAFLServer
 from methods.SAFA import SAFA, SAFAClient, SAFAServer
-from methods.SAFAfix import SAFAfix, SAFAfixClient, SAFAfixServer
 
 from utils.utils import printLog
 
@@ -91,11 +90,6 @@ def init_FL(FLgroup, args):
             method = SAFA.SAFA(args.lag_tolerance)
             Server = SAFAServer.SAFAServer(WORLD_SIZE-1, args.selection_ratio, args.batch_size, args.round, args.target_acc, args.wandb_on, FLgroup)
             Client = SAFAClient.SAFAClient(WORLD_SIZE-1, args.selection_ratio, args.batch_size, args.local_epochs, args.lr, args.dataset, FLgroup)
-
-        elif args.method=="SAFAfix":
-            method = SAFAfix.SAFAfix(args.lag_tolerance)
-            Server = SAFAfixServer.SAFAfixServer(WORLD_SIZE-1, args.selection_ratio, args.batch_size, args.round, args.target_acc, args.wandb_on, FLgroup)
-            Client = SAFAfixClient.SAFAfixClient(WORLD_SIZE-1, args.selection_ratio, args.batch_size, args.local_epochs, args.lr, args.dataset, FLgroup)
         
         if WORLD_RANK == 0:
             if args.wandb_on == "True":
@@ -152,7 +146,7 @@ if __name__ == "__main__":
     parser.add_argument("--split", choices=['uniform', 'gaussian'], default='gaussian', type=str)
     parser.add_argument("--comm_hetero", choices=['True', 'False'], default='False')
 
-    parser.add_argument("--method", choices=['FedAvg', 'CHAFL','pow_d','cpow_d', 'SemiAsync', 'SemiAsyncPM1', 'FedAsync', 'SemiAsyncPM3', 'SASAFL', 'SAFA', 'SAFAfix'], default='FedAvg', type=str)
+    parser.add_argument("--method", choices=['FedAvg', 'CHAFL','pow_d','cpow_d', 'SemiAsync', 'SemiAsyncPM1', 'FedAsync', 'SemiAsyncPM3', 'SASAFL', 'SAFA'], default='FedAvg', type=str)
     parser.add_argument("--d", type=int)
     parser.add_argument("--lag_tolerance", type=int, default=2)
     

@@ -48,13 +48,14 @@
 
 ### 3) SAFA 파라미터
 
-| 파라미터 | 논문 (SASAFL 논문 §5.2, Fig.6 조건) | SAFA (저장소 구현) | SAFAfix (수정판) |
-|---|---|---|---|
-| lag tolerance | 5 | 5 | 5 |
-| 학습률 / 배치 | Fig.6(SAFA 비교)에서는 lr 0.001, batch 40. Fig.7에는 SAFA가 없음 | 0.001 / 40 (클라이언트에 고정, 원저자 코드) | Fig.7 조건 그대로 (MNIST 0.01, FMNIST 0.001 / 32) |
-| quota | C·K | `int(K·C)` | `int(K·C)` |
-| 충돌 확률 | 논문 미기재 | 클라이언트별 매 라운드 0.1 (원저자 `generate_crash_trace`) | 같음 |
-| 라운드 마감 T_lim | 논문 미기재 | 5000초 (원저자 `SAFAServer`) | 같음 |
+| 파라미터 | 논문 (SASAFL 논문 §5.2, Fig.6 조건) | 이 실험의 SAFA (`methods/SAFA`) |
+|---|---|---|
+| lag tolerance | 5 | 5 |
+| 학습률 / 배치 | Fig.6(SAFA 비교)에서는 lr 0.001, batch 40. Fig.7에는 SAFA가 없음 | 0.001 / 40 (원저자 클라이언트 코드에 고정, 실행 인자와 무관) |
+| quota | C·K | `int(K·C)` |
+| 충돌 확률 | 논문 미기재 | 클라이언트별 매 라운드 0.1 (원저자 `generate_crash_trace`) |
+| 라운드 마감 T_lim | 논문 미기재 | 5000초 (원저자 `SAFAServer`) |
+| 집계 | SAFA 원 논문 식 (7): 가중치 합 1 | 원저자 코드는 가중치 합 < 1 버그 → **정규화만 고침** (2026-10-28, `SAFAServer.average_aggregation` 주석 참고) |
 
 ## 임의로 정한 파라미터가 없음을 보여주는 표
 
@@ -89,7 +90,6 @@
 | `--comm_hetero` | False | 원저자 기본값 | B |
 | SAFA 충돌 확률 / T_lim | 0.1 / 5000초 | 원저자 SAFA 코드 | B |
 | SAFA(저장소) lr·batch | 0.001 / 40 | 원저자 SAFA 코드 (= 논문 Fig.6 조건) | B |
-| SAFAfix lr·batch | Fig.7 조건과 같음 | §5.1 (Fig.7 조건 적용) | A |
 | **임의 설정 값 (C)** | **없음** | — | — |
 
 ### 이 실험에서 정한 실행 환경 값 (논문에 없음)

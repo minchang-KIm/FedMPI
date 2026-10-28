@@ -147,11 +147,35 @@ class SAFAServer(FedAvgServer.FedAvgServer):
                 continue
             agg_coefficient[id]=coefficient[id]/agg_coefficient_sum
 
+        # [버그 수정 2026-10-28] 집계에 정규화된 가중치 agg_coefficient를 쓴다 (원래 코드는 coefficient[id]를 썼다).
+        #
+        # 1) 원래 코드의 가중치 합은 1보다 작다.
+        #    coefficient는 SAFA.runServer에서 calculate_coefficient(clients_idx)로 "전체 K명" 기준으로 만든 값이다:
+        #    coefficient[k] = n_k / (n_1 + … + n_K)  (n_k = 클라이언트 k의 데이터 수), 전체 K명의 합이 1.
+        #    그런데 여기서는 ids(= 이번 라운드에 충돌하지 않은 클라이언트, 충돌한 자리는 -1)만 더한다.
+        #    그러므로 가중치 합 = (비충돌 클라이언트 데이터 수의 합) / (전체 데이터 수의 합) 이고,
+        #    한 명이라도 충돌하면(generate_crash_trace: 클라이언트마다 매 라운드 확률 0.1) 반드시 1보다 작다.
+        #
+        # 2) 가중치 합이 1이 아니면 결과는 평균이 아니다.
+        #    결과 = (가중치 합) × (비충돌 클라이언트 모델의 가중 평균) 이므로, 모든 파라미터가 매 라운드 (가중치 합)배로 줄어든다.
+        #    예: 데이터 수가 같은 3명 중 1명 충돌, 파라미터 값 1.0, 1.2 → (1/3)·1.0 + (1/3)·1.2 = 0.733.
+        #    두 모델 값(1.0, 1.2)의 어느 쪽보다도 작아서 평균일 수 없다.
+        #    실측(F7_MNIST_SAFA_C0.1_rep1, 수정 전 83라운드): 라운드별 가중치 합 평균 0.910, 최소 0.737.
+        #    그 결과 test loss가 83라운드 내내 2.19–2.49(무작위 추측 수준 ln 10 ≈ 2.30)에 머물러 학습이 되지 않았다.
+        #
+        # 3) 바로 위 코드가 정규화된 가중치 agg_coefficient(= coefficient / 비충돌 합, 합 1)를 계산해 두고
+        #    한 번도 쓰지 않는다. 의도한 가중치는 agg_coefficient였다.
+        #
+        # 4) SAFA 원 논문(Wu et al., IEEE TC 70(5), 2021, arXiv:1910.01355) 식 (7)
+        #    w(t) = Σ_k (n_k / n) · w*_k(t) 와 FedAvg(McMahan et al., 2017)의 집계도
+        #    모두 가중치 합이 1인 가중 평균이다.
+        #
+        # 집계 대상(ids)과 나머지 동작은 바꾸지 않았다. 가중치만 의도대로 정규화한 최소 수정이다.
         for id in ids:
             if id==-1:
                 continue
             for pname, param in self.cache[id].items():
-                global_model_params[pname] += param.data * coefficient[id]
+                global_model_params[pname] += param.data * agg_coefficient[id]
 
         self.model.load_state_dict(global_model_params)
 

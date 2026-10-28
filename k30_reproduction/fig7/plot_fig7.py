@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """논문 Fig. 7 (K=30)과 같은 형식의 그림에 SAFA를 더해 그린다.
 
-그림 2장 (SASAFL 제안 기법 ON / OFF) + 논문 원본(왼쪽)과 나란히 붙인 compare_*.png. 각 그림에 SAFA 저장소 구현(파랑)과 수정판(보라)을 함께 그린다:
+그림 2장 (SASAFL 제안 기법 ON / OFF) + 논문 원본(왼쪽)과 나란히 붙인 compare_*.png:
   fig7_SASAFL-ON.png, fig7_SASAFL-OFF.png
-각 그림: (a) MNIST with K=30, (c) FashionMNIST with K=30. BSA 초록, SASAFL 빨강, SAFA(저장소 구현) 파랑, SAFA(수정판) 보라, C=0.1/0.3/0.5 = 실선/점선/파선.
+각 그림: (a) MNIST with K=30, (c) FashionMNIST with K=30. BSA 초록, SASAFL 빨강, SAFA 파랑, C=0.1/0.3/0.5 = 실선/점선/파선.
 곡선은 완료·진행 중 회차의 라운드별 평균이고, 논문처럼 5라운드마다 표시한다.
 
 --watch: 결과(rounds.csv)가 바뀔 때마다(=라운드가 끝날 때마다) 다시 그린다. 그림은 임시 파일에 그린 뒤 교체한다.
@@ -33,11 +33,10 @@ plt.rcParams.update({
 GREEN, RED, BLUE = "#00a650", "#ff0000", "#0070c0"
 C_STYLE = {0.1: "-", 0.3: ":", 0.5: "--"}
 EVERY = 5
-FIGS = (   # 그림마다 BSA, SASAFL(ON 또는 OFF), SAFA(저장소 구현), SAFA(수정판)를 함께 그린다
+FIGS = (   # 그림마다 BSA, SASAFL(ON 또는 OFF), SAFA를 함께 그린다
     ("fig7_SASAFL-ON.png", "SASAFL_ON"),
     ("fig7_SASAFL-OFF.png", "SASAFL_OFF"),
 )
-PURPLE = "#7030a0"
 
 
 def read_curve(run_dir):
@@ -70,7 +69,7 @@ def mean_curves():
 
 
 def lines_for(sasafl):
-    return (("BSA", "BSA", GREEN), ("SASAFL", sasafl, RED), ("SAFA", "SAFA", BLUE), ("SAFA (fixed)", "SAFAfix", PURPLE))
+    return (("BSA", "BSA", GREEN), ("SASAFL", sasafl, RED), ("SAFA", "SAFA", BLUE))
 
 
 def draw(ax, curves, ds, sasafl, inset):

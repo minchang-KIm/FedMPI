@@ -24,8 +24,7 @@ METHODS = (
     ("BSA", "SemiAsync", 9, None),
     ("SASAFL_ON", "SASAFL", 9, None),             # 제안 기법(참여 수 조정) 동작: 현재 SASAFL.py (f8fd198)
     ("SASAFL_OFF", "SASAFL", 9, SASAFL_OFF_SRC),  # 제안 기법 꺼짐: 원저자 마지막 SASAFL.py (c0b819b, quota=C·K 고정)
-    ("SAFA", "SAFA", 5, None),                    # 저장소(SASAFL 저자) 구현 그대로
-    ("SAFAfix", "SAFAfix", 5, None),              # 원 SAFA 논문에 맞춘 수정판
+    ("SAFA", "SAFA", 5, None),                    # 저장소 구현 (집계 가중치 정규화 버그만 수정, methods/SAFA/SAFAServer.py)
 )
 
 
@@ -35,7 +34,7 @@ def run_name(ds, method, c, rep):
 
 
 def queue():
-    """회차 단위 순서: 1회차 30개 전부 → 2회차 → …"""
+    """회차 단위 순서: 1회차 24개 전부 → 2회차 → …"""
     out = []
     for rep in range(1, REPS + 1):
         for ds, lr in DATASETS:
