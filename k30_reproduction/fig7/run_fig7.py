@@ -166,8 +166,6 @@ def main():
                 (run.out / "result.json").write_text(json.dumps(result, indent=2, ensure_ascii=False))
             log(f"실행 종료: {s['name']} → {result['outcome']}, {result['rounds_done']}/{spec.ROUNDS}라운드, "
                 f"최고 {result['best_acc']}%, {result['wall_min']}분")
-            with (spec.OUT / "COMMANDS.md").open("a") as f:
-                f.write(f"\n## {s['name']} (시도 {attempt}, {result['outcome']})\n\n```\n{cmd_file.read_text() if cmd_file.exists() else '(cmd.txt 없음)'}```\n")
             time.sleep(20)
             if is_done(s["name"]):
                 break
