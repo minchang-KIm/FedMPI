@@ -137,7 +137,14 @@ def main():
     spec.RUNS.mkdir(parents=True, exist_ok=True)
     os.environ["SYNC_SOURCE"] = "0"   # 코드는 git으로 동기화한다 (launch.sh가 tar로 덮어쓰지 않게)
     q = spec.queue()
-    log(f"실행기 시작: 전체 {len(q)}개, 완료 {sum(is_done(s['name']) for s in q)}개")
+    # --first 이름 …: 이 실행들을 먼저 돌린 뒤 원래 순서로 이어 간다 (사용자 요청으로 순서를 당길 때)
+    first = sys.argv[sys.argv.index("--first") + 1:] if "--first" in sys.argv else []
+    if first:
+        unknown = [n for n in first if n not in {s["name"] for s in q}]
+        if unknown:
+            sys.exit(f"알 수 없는 실행 이름: {unknown}")
+        q = [s for n in first for s in q if s["name"] == n] + [s for s in q if s["name"] not in first]
+    log(f"실행기 시작: 전체 {len(q)}개, 완료 {sum(is_done(s['name']) for s in q)}개" + (f", 먼저 돌릴 실행: {first}" if first else ""))
     port = 29900
     for s in q:
         if is_done(s["name"]):
