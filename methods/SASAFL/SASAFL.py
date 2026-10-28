@@ -39,7 +39,6 @@ class SASAFL(object):
         listen_local_update = threading.Thread(target=Server.receive_local_model_from_any_clients, args=(), daemon=True)
         
         global_acc, global_loss = Server.evaluate()
-        Server.last_global_loss = global_loss
         printLog("SERVER", f"{Server.current_round}번째 글로벌 모델 \n\
                                 => test_accuracy: {round(global_acc*100,4)}% \n\
                                 => test_loss: {round(global_loss,4)}")
@@ -65,6 +64,7 @@ class SASAFL(object):
             Server.average_aggregation(picked_client_idx , coefficient)
 
             global_acc, global_loss = Server.evaluate()
+            Server.last_global_loss = global_loss
 
             Server.current_round+=1
             

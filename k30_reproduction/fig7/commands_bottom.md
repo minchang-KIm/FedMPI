@@ -46,7 +46,15 @@
 | 테스트 배치 | 논문 미기재 | `--batch_size`와 같은 32 (원저자 `FedAvgServer.evaluate`) | — (원저자 코드값) |
 | 하드웨어 | Nurion KNL, 노드당 68코어 (§5.1) | Intel i9-14900KF, 노드당 논리 CPU 32개 | ❌ 장비 차이 (대체 불가) |
 
-### 3) SAFA 파라미터
+### 3) 방법별 코드 (2026-10-28 공정 재시작 기준)
+
+| 방법 | 코드 | 원저자 코드와 다른 점 |
+|---|---|---|
+| SASAFL | `methods/SASAFL` = 원저자 마지막 커밋 `c0b819b`와 바이트 단위로 같음 | 없음 (제안 기법 수정 f8fd198 제거, optimizer 수정 없음) |
+| BSA | `methods/SemiAsyncFL` | 통신 지연 sleep 제거. 원저자 커밋 393fef1이 BSA 클라이언트에만 넣고 SASAFL에는 넣지 않은 코드라 공정성을 위해 뺐다 (comm_hetero=False면 0초라 원래도 결과 영향 없음) |
+| SAFA | `methods/SAFA` | SAFA 저자 구현(wingter562/SAFA `semiAysnc_FedAvg.py`)에 맞춰 버그 수정: 글로벌 모델 적용, 클라이언트별 수신 칸, 집계 가중치 합 1, 전체 K개 캐시 집계, CFCFM 추정치·정렬, cross-rounder, 0라운드 처리, 학습 전 동기 수신 |
+
+### 4) SAFA 파라미터
 
 | 파라미터 | 논문 (SASAFL 논문 §5.2, Fig.6 조건) | 이 실험의 SAFA (`methods/SAFA`) |
 |---|---|---|
@@ -55,7 +63,6 @@
 | quota | C·K | `int(K·C)` |
 | 충돌 확률 | 논문 미기재 | 클라이언트별 매 라운드 0.1 (원저자 `generate_crash_trace`) |
 | 라운드 마감 T_lim | 논문 미기재 | 5000초 (원저자 `SAFAServer`) |
-| 집계 | SAFA 원 논문 식 (7): 가중치 합 1 | 원저자 코드는 가중치 합 < 1 버그 → **정규화만 고침** (2026-10-28, `SAFAServer.average_aggregation` 주석 참고) |
 
 ## 임의로 정한 파라미터가 없음을 보여주는 표
 

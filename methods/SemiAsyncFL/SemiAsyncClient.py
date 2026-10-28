@@ -32,8 +32,9 @@ class SemiAsyncClient(FedAvgClient.FedAvgClient):
             flatten_model.buffer = global_model_info[:-1]
             flatten_model.unpack(model_state_dict.values())
             
-            printLog(f"CLIENT {self.id}", f"글로벌 모델을 받기 전 {self.communication_delay}초를 sleep 합니다.")
-            time.sleep(self.communication_delay)
+            # [공정성 수정 2026-10-28] 통신 지연 sleep을 뺐다. 원저자 커밋 393fef1이 BSA(SemiAsyncClient·FedAvgClient)에만
+            # 넣고 SASAFLClient에는 넣지 않은 코드라, comm_hetero=True면 BSA만 느려진다. 논문 BSA 정의(§5.1: 수신 정책과
+            # 참여 수 조정만 SASAFL과 다름)에 없는 차이이므로 SASAFL과 같게 sleep하지 않는다.
 
             self.model.load_state_dict(model_state_dict)
             printLog(f"CLIENT {self.id}", f"로컬 모델 버전 : {int(self.local_model_version)}")
@@ -66,3 +67,8 @@ class SemiAsyncClient(FedAvgClient.FedAvgClient):
 
         self.total_train_time += time.time()-start
     
+
+    def send_local_model_to_server(self):
+        # [공정성 수정 2026-10-28] FedAvgClient.send_local_model_to_server의 통신 지연 sleep 없이 보낸다 (위 주석과 같은 이유).
+        flatten_model=TensorBuffer(list(self.model.state_dict().values()))
+        dist.send(tensor=flatten_model.buffer, dst=0)
