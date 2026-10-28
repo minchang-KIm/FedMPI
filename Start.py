@@ -7,6 +7,7 @@ from methods.FedAsync import FedAsync, FedAsyncClient, FedAsyncServer
 from methods.SemiAsyncPM3 import SemiAsyncPM3, SemiAsyncPM3Client, SemiAsyncPM3Server
 from methods.SASAFL import SASAFL, SASAFLClient, SASAFLServer
 from methods.SAFA import SAFA, SAFAClient, SAFAServer
+from methods.SAFAfix import SAFAfix, SAFAfixClient, SAFAfixServer
 
 from utils.utils import printLog
 
@@ -19,11 +20,20 @@ import torch
 import gc
 
 
-MASTER_ADDR = os.environ['MASTER_ADDR']
-MASTER_PORT = os.environ['MASTER_PORT']
-WORLD_SIZE = int(os.environ['WORLD_SIZE'])
-WORLD_RANK = int(os.environ['RANK'])
-LOCAL_RANK = int(os.environ['LOCAL_RANK'])
+# FL_BACKEND=mpi 이면 mpirun으로 띄운 것으로 보고 rank 정보를 Open MPI 환경변수에서 읽는다 (기본값 gloo는 기존과 동일)
+BACKEND = os.environ.get('FL_BACKEND', 'gloo')
+if BACKEND == 'mpi':
+    MASTER_ADDR = os.environ.get('MASTER_ADDR')
+    MASTER_PORT = os.environ.get('MASTER_PORT')
+    WORLD_SIZE = int(os.environ['OMPI_COMM_WORLD_SIZE'])
+    WORLD_RANK = int(os.environ['OMPI_COMM_WORLD_RANK'])
+    LOCAL_RANK = int(os.environ['OMPI_COMM_WORLD_LOCAL_RANK'])
+else:
+    MASTER_ADDR = os.environ['MASTER_ADDR']
+    MASTER_PORT = os.environ['MASTER_PORT']
+    WORLD_SIZE = int(os.environ['WORLD_SIZE'])
+    WORLD_RANK = int(os.environ['RANK'])
+    LOCAL_RANK = int(os.environ['LOCAL_RANK'])
 
 def init_FL(FLgroup, args): 
     for itr in range(args.repeat):
@@ -81,6 +91,11 @@ def init_FL(FLgroup, args):
             method = SAFA.SAFA(args.lag_tolerance)
             Server = SAFAServer.SAFAServer(WORLD_SIZE-1, args.selection_ratio, args.batch_size, args.round, args.target_acc, args.wandb_on, FLgroup)
             Client = SAFAClient.SAFAClient(WORLD_SIZE-1, args.selection_ratio, args.batch_size, args.local_epochs, args.lr, args.dataset, FLgroup)
+
+        elif args.method=="SAFAfix":
+            method = SAFAfix.SAFAfix(args.lag_tolerance)
+            Server = SAFAfixServer.SAFAfixServer(WORLD_SIZE-1, args.selection_ratio, args.batch_size, args.round, args.target_acc, args.wandb_on, FLgroup)
+            Client = SAFAfixClient.SAFAfixClient(WORLD_SIZE-1, args.selection_ratio, args.batch_size, args.local_epochs, args.lr, args.dataset, FLgroup)
         
         if WORLD_RANK == 0:
             if args.wandb_on == "True":
@@ -115,8 +130,12 @@ def init_FL(FLgroup, args):
         del method
         gc.collect()
         
-def init_process(args, backend='gloo'):
-    FLgroup = dist.init_process_group(backend, rank=WORLD_RANK, world_size=WORLD_SIZE, init_method=f'tcp://{MASTER_ADDR}:{MASTER_PORT}')
+def init_process(args, backend=BACKEND):
+    if backend == 'mpi':
+        # MPI 백엔드는 rank/world size를 MPI가 정한다 (PyTorch가 USE_MPI=1로 빌드돼 있어야 함)
+        FLgroup = dist.init_process_group('mpi')
+    else:
+        FLgroup = dist.init_process_group(backend, rank=WORLD_RANK, world_size=WORLD_SIZE, init_method=f'tcp://{MASTER_ADDR}:{MASTER_PORT}')
     init_FL(FLgroup, args)
 
 if __name__ == "__main__":
@@ -133,7 +152,7 @@ if __name__ == "__main__":
     parser.add_argument("--split", choices=['uniform', 'gaussian'], default='gaussian', type=str)
     parser.add_argument("--comm_hetero", choices=['True', 'False'], default='False')
 
-    parser.add_argument("--method", choices=['FedAvg', 'CHAFL','pow_d','cpow_d', 'SemiAsync', 'SemiAsyncPM1', 'FedAsync', 'SemiAsyncPM3', 'SASAFL', 'SAFA'], default='FedAvg', type=str)
+    parser.add_argument("--method", choices=['FedAvg', 'CHAFL','pow_d','cpow_d', 'SemiAsync', 'SemiAsyncPM1', 'FedAsync', 'SemiAsyncPM3', 'SASAFL', 'SAFA', 'SAFAfix'], default='FedAvg', type=str)
     parser.add_argument("--d", type=int)
     parser.add_argument("--lag_tolerance", type=int, default=2)
     

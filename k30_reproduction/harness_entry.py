@@ -20,7 +20,7 @@ os.chdir(REPO)
 pid_dir = os.environ.get("K30_PID_DIR")
 if pid_dir:
     Path(pid_dir).mkdir(parents=True, exist_ok=True)
-    rank = int(os.environ["RANK"])
+    rank = int(os.environ.get("RANK", os.environ.get("OMPI_COMM_WORLD_RANK", "0")))
     (Path(pid_dir) / f"rank_{rank}.json").write_text(json.dumps({"rank": rank, "pid": os.getpid()}))
 
 faulthandler.register(signal.SIGUSR1, all_threads=True)
@@ -38,7 +38,7 @@ if sasafl_src:
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     sasafl_pkg.SASAFL = module
-    if os.environ.get("RANK") == "0":
+    if os.environ.get("RANK", os.environ.get("OMPI_COMM_WORLD_RANK")) == "0":
         digest = hashlib.sha256(Path(sasafl_src).read_bytes()).hexdigest()
         print(f"[k30] SASAFL.py 교체: {sasafl_src} sha256={digest}", flush=True)
 
