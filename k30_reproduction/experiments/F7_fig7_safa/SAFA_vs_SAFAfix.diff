@@ -1,0 +1,404 @@
+# SAFA(저장소 구현, methods/SAFA) vs SAFA 수정판(methods/SAFAfix) — 바뀐 함수끼리 비교한 diff
+# SAFAfix는 SAFA 클래스를 상속해 아래 함수만 바꾸거나 새로 만들었다. 나머지(version_filter, update_cloud_cache,
+# update_cloud_cache_deprecated, update_version, train, send_local_model_to_server, generate_crash_trace)는 저장소 코드를 그대로 쓴다.
+
+####################################################################################################
+# ① 집계: 가중치 합
+####################################################################################################
+--- methods/SAFA/SAFAServer.py::average_aggregation
++++ methods/SAFAfix/SAFAfixServer.py::average_aggregation_all
+@@ -1,39 +1,9 @@
+-    def average_aggregation(self, ids, coefficient):
++    def average_aggregation_all(self, coefficient):
+         printLog("SERVER", "global aggregation을 진행합니다.")
+-        """
+-        averaged_weights = OrderedDict()
+-        
+-        for idx, client_idx in enumerate(ids):
+-            model = self.model_controller.Model()
+-            model.load_state_dict(self.cache[client_idx])
+-            for key in self.cache[client_idx].keys():
+-                if idx==0:
+-                    averaged_weights[key] = coefficient[client_idx] * self.cache[client_idx][key]
+-                else:
+-                    averaged_weights[key] += coefficient[client_idx] * self.cache[client_idx][key]
+-
+-        self.model.load_state_dict(averaged_weights)
+-        """
+         global_model_params = self.model.state_dict()
+-        for pname, param in global_model_params.items():
+-            global_model_params[pname]=0.0
+-
+-        agg_coefficient={}
+-        agg_coefficient_sum=0
+-        for id in ids:
+-            if id==-1:
+-                continue
+-            agg_coefficient_sum+=coefficient[id]
+-        
+-        for id in ids:
+-            if id==-1:
+-                continue
+-            agg_coefficient[id]=coefficient[id]/agg_coefficient_sum
+-
+-        for id in ids:
+-            if id==-1:
+-                continue
+-            for pname, param in self.cache[id].items():
+-                global_model_params[pname] += param.data * coefficient[id]
+-
++        for pname in global_model_params:
++            global_model_params[pname] = 0.0
++        for c_id in range(1, self.num_clients + 1):
++            for pname, param in self.cache[c_id].items():
++                global_model_params[pname] += param.data * coefficient[c_id]
+         self.model.load_state_dict(global_model_params)
+
+####################################################################################################
+# ② CFCFM: 집계에 넣을 클라이언트 고르기
+####################################################################################################
+--- methods/SAFA/SAFAServer.py::CFCFM
++++ methods/SAFAfix/SAFAfixServer.py::CFCFM_by_arrival
+@@ -1,25 +1,9 @@
+-    def CFCFM(self, make_ids, last_round_pick_ids):
+-
+-        picks=[]
+-        in_time_make_ids = [m_id for m_id in make_ids if m_id not in self.cross_rounders]  # in-time make ids
+-        high_priority_ids = [h_id for h_id in in_time_make_ids if h_id not in last_round_pick_ids]  # compensatory priority
+-        low_priority_ids = [l_id for l_id in in_time_make_ids if l_id in last_round_pick_ids]
+-        printLog("SERVER", f"high_priority_ids: {high_priority_ids}")
+-        printLog("SERVER", f"low_priority_ids: {low_priority_ids}")
+-        # case 0: clients finishing in time not enough for fraction C, just gather them all
+-        if len(in_time_make_ids) <= self.Quota:  # if not enough well-progress clients to meet the quota
+-            return copy.deepcopy(in_time_make_ids)
+-        # case 1: # of priority ids > quota
+-        if len(high_priority_ids) >= self.Quota:
+-            sorted_priority_ids = self.sort_ids_by_perf_desc(high_priority_ids)
+-            picks = sorted_priority_ids[0:int(self.Quota)]
+-        # case 2: # of priority ids <= quota
+-        # the rest are picked by order of performance ("FCFM"), lowest batch overhead first
+-        else:
+-            picks += high_priority_ids  # they have priority
+-            # FCFM
+-            sorted_low_priority_ids =self. sort_ids_by_perf_desc(low_priority_ids)
+-            for i in range(min(self.Quota - len(picks), len(sorted_low_priority_ids))):
+-                picks.append(sorted_low_priority_ids[i])
+-
++    def CFCFM_by_arrival(self, arrival_ids, last_round_pick_ids):
++        in_time_ids = [c_id for c_id in arrival_ids if c_id not in self.cross_rounders]
++        if len(in_time_ids) <= self.Quota:
++            return list(in_time_ids)
++        high_priority_ids = [c_id for c_id in in_time_ids if c_id not in last_round_pick_ids]
++        low_priority_ids = [c_id for c_id in in_time_ids if c_id in last_round_pick_ids]
++        picks = high_priority_ids[:self.Quota]
++        picks += low_priority_ids[:self.Quota - len(picks)]
+         return picks
+
+####################################################################################################
+# ②-1 CFCFM이 쓰던 정렬 (수정판에서는 쓰지 않음)
+####################################################################################################
+--- methods/SAFA/SAFAServer.py::sort_ids_by_perf_desc
++++ (수정판에 없음)
+@@ -1,9 +0,0 @@
+-    def sort_ids_by_perf_desc(self, id_list):
+-        cp_map={}
+-        for id in id_list:
+-            cp_map[id] = self.clients_est_round_T_train[id]
+-
+-        sorted_map = sorted(cp_map.items(), key=lambda x: x[1], reverse=True)
+-        sorted_id_list = [sorted_map[i][0] for i in range(len(id_list))]
+-
+-        return sorted_id_list
+
+####################################################################################################
+# ②-2 학습 시간 추정치 저장 (setup 일부, 같은 텐서 객체를 모든 클라이언트에 저장)
+####################################################################################################
+# 수정판 setup은 super().setup()으로 저장소 SAFAServer.setup을 그대로 실행한 뒤, 마지막 cross_rounders 계산만 다시 한다.
+# 저장소 setup의 학습 시간 추정치 저장(모든 클라이언트에 같은 텐서 T_train_k를 넣는 문제)은 그대로 남지만,
+# 수정판 CFCFM은 이 추정치로 정렬하지 않고 실제 도착 순서를 쓰므로 선택에 영향이 없다.
+--- methods/SAFA/SAFAServer.py::setup (해당 부분)
++++ methods/SAFAfix/SAFAfixServer.py::setup (super().setup() 다음에 덮어씀)
+@@
+         for idx in range(1, self.num_clients+1):
+             req = dist.irecv(tensor=T_train_k)
+             req.wait()
+             self.clients_est_round_T_train[req.source_rank()] = T_train_k   # 같은 텐서 객체 → 값이 모두 같아짐 (수정판도 그대로)
+ ...
+-        self.cross_rounders=[]
+-        for c_id in range(1, self.num_clients):          # 마지막 클라이언트(num_clients) 누락
+-            if self.clients_est_round_T_train[c_id] > self.T:
+-                self.cross_rounders.append(c_id)
++        self.cross_rounders = [c_id for c_id in range(1, self.num_clients + 1)
++                               if self.clients_est_round_T_train[c_id] > self.T]
+
+####################################################################################################
+# ②-3 로컬 모델 받기: 도착 순서 기록
+####################################################################################################
+--- methods/FedAvg/FedAvgServer.py::receive_local_model_from_selected_clients
++++ methods/SAFAfix/SAFAfixServer.py::receive_in_arrival_order
+@@ -1,9 +1,11 @@
+-    def receive_local_model_from_selected_clients(self, selected_client_idx):
+-        reqs=[]
+-        for idx in selected_client_idx:
+-            if idx==-1:
+-                continue
+-            req=dist.irecv(tensor=self.flatten_client_models[idx].buffer)
+-            reqs.append(req)
+-        for req in reqs:
+-            req.wait()
++    def receive_in_arrival_order(self, make_ids):
++        """make_ids의 로컬 모델을 도착하는 순서대로 받고, 그 순서를 돌려준다 (src를 지정하지 않은 recv = 먼저 온 것부터)."""
++        buf = torch.zeros_like(self.flatten_client_models[make_ids[0]].buffer)
++        arrival = []
++        while len(arrival) < len(make_ids):
++            sender = dist.recv(tensor=buf)
++            if sender not in make_ids or sender in arrival:
++                raise RuntimeError(f"예상하지 못한 로컬 모델: CLIENT {sender}")
++            self.flatten_client_models[sender].buffer.copy_(buf)
++            arrival.append(sender)
++        return arrival
+
+####################################################################################################
+# ③ 클라이언트 학습률·배치
+####################################################################################################
+# 수정판 __init__은 super().__init__()으로 저장소 SAFAClient.__init__(lr 0.001, batch 40 고정)을 실행한 뒤 실행 인자 값으로 덮어쓴다.
+--- methods/SAFA/SAFAClient.py::__init__
++++ methods/SAFAfix/SAFAfixClient.py::__init__ (저장소 __init__ 실행 후)
+@@
+     def __init__(self, num_clients, selection_ratio, batch_size, local_epoch, lr, dataset, FLgroup):
+         super().__init__(int(num_clients * selection_ratio), 40, local_epoch, 0.001, dataset, FLgroup)   # 저장소: batch 40, lr 0.001 고정
+         self.num_clients = num_clients
+         self.local_model_version=0
+         self.len_local_dataset = len(dataset)
++        self.batch_size = batch_size   # 수정판: 실행 인자 (--batch_size=32)
++        self.lr = lr                   # 수정판: 실행 인자 (MNIST 0.01, FashionMNIST 0.001)
+
+####################################################################################################
+# ④ 글로벌 모델 받기: 수신 스레드 → 라운드 시작 지시와 함께 동기 수신 (클라이언트)
+####################################################################################################
+--- methods/SAFA/SAFAClient.py::receive_global_model_from_server
++++ methods/SAFAfix/SAFAfixClient.py::receive_round_instruction
+@@ -1,15 +1,13 @@
+-    def receive_global_model_from_server(self, terminate_FL):
+-        model_state_dict = self.model.state_dict()
+-        flatten_model = TensorBuffer(list(self.model.state_dict().values()))
+-        self.global_model_info = torch.zeros(len(flatten_model.buffer)+1)
+-
+-        while True:
+-    
+-            dist.recv(tensor=self.global_model_info, src=0)
+-            global_model_version=int(self.global_model_info[-1].item())
+-            if global_model_version == -1:
+-                terminate_FL.set()
+-                break
+-            
+-            flatten_model.buffer=self.global_model_info[:-1]
++    def receive_round_instruction(self):
++        """반환: False = FL 종료. 지시가 1이면 글로벌 모델을 받아 로컬 모델을 교체한다."""
++        flag = torch.tensor([0])
++        dist.recv(tensor=flag, src=0)
++        if flag.item() == -1:
++            return False
++        if flag.item() == 1:
++            model_state_dict = self.model.state_dict()
++            flatten_model = TensorBuffer(list(model_state_dict.values()))
++            dist.recv(tensor=flatten_model.buffer, src=0)
+             flatten_model.unpack(model_state_dict.values())
++            self.model.load_state_dict(model_state_dict)
++        return True
+
+####################################################################################################
+# ④-1 글로벌 모델 보내기 (서버)
+####################################################################################################
+--- methods/SAFA/SAFAServer.py::send_global_model_to_clients
++++ methods/SAFAfix/SAFAfixServer.py::send_round_instructions
+@@ -1,8 +1,8 @@
+-    def send_global_model_to_clients(self, ids):
++    def send_round_instructions(self, model_ids):
++        """모든 클라이언트에게 이번 라운드 지시를 보낸다: 1 = 글로벌 모델이 뒤따름, 0 = 자기 로컬 모델 유지."""
+         flatten_model = TensorBuffer(list(self.model.state_dict().values()))
+-        global_model_info = flatten_model.buffer.tolist()
+-        global_model_info.append(self.current_round)
+-        global_model_info = torch.tensor(global_model_info)
+-
+-        for id in ids:
+-            dist.send(tensor=flatten_model.buffer, dst=id)
++        for c_id in range(1, self.num_clients + 1):
++            flag = 1 if c_id in model_ids else 0
++            dist.send(tensor=torch.tensor([flag]), dst=c_id)
++            if flag:
++                dist.send(tensor=flatten_model.buffer, dst=c_id)
+
+####################################################################################################
+# ⑥ 종료 신호 (서버)
+####################################################################################################
+--- methods/SAFA/SAFAServer.py::terminate_FL
++++ methods/SAFAfix/SAFAfixServer.py::terminate_FL
+@@ -1,6 +1,3 @@
+     def terminate_FL(self):
+-        temp_global_model=TensorBuffer(list(self.model.state_dict().values()))
+-        global_model_info = torch.zeros(len(temp_global_model.buffer)+1)
+-        global_model_info[-1] = -1
+-        for idx in range(1, self.num_clients+1):
+-            dist.send(tensor=global_model_info, dst=idx)
++        for c_id in range(1, self.num_clients + 1):
++            dist.send(tensor=torch.tensor([-1]), dst=c_id)
+
+####################################################################################################
+# 라운드 진행: 클라이언트
+####################################################################################################
+--- methods/SAFA/SAFA.py::runClient
++++ methods/SAFAfix/SAFAfix.py::runClient
+@@ -1,21 +1,8 @@
+     def runClient(self, Client):
+-        
+-        terminate_FL_flag = threading.Event()
+-        terminate_FL_flag.clear()
+-
+-        listen_global_model = threading.Thread(target=Client.receive_global_model_from_server, args=(terminate_FL_flag,), daemon=True)
+-        listen_global_model.start()
+-
+-        while True:
+-            if terminate_FL_flag.is_set():
+-                break
+-            make_ids_list=torch.tensor([0 for _ in range(0,Client.num_clients)])
++        while Client.receive_round_instruction():
++            make_ids_list = torch.tensor([0 for _ in range(0, Client.num_clients)])
+             dist.broadcast(tensor=make_ids_list, src=0, group=Client.FLgroup)
+-            if terminate_FL_flag.is_set():
+-                break
+             if Client.id in make_ids_list:
+                 Client.train()
+                 Client.send_local_model_to_server()
+-
+-
+         dist.barrier()
+
+####################################################################################################
+# 라운드 진행: 서버
+####################################################################################################
+--- methods/SAFA/SAFA.py::runServer
++++ methods/SAFAfix/SAFAfix.py::runServer
+@@ -1,87 +1,56 @@
+     def runServer(self, Server):
+         current_FL_start = time.time()
+-        clients_idx = [idx for idx in range(1,Server.num_clients+1)]
+-        coefficient = Server.calculate_coefficient(clients_idx)
+-
++        clients_idx = [idx for idx in range(1, Server.num_clients + 1)]
++        coefficient = Server.calculate_coefficient(clients_idx)   # n_k / n, 전체 K개 합 = 1
+         Server.lag_tolerance = self.lag_tolerance
+-
+-        crash_trace, progress_trace = generate_crash_trace(Server.num_clients, Server.target_rounds)
++        crash_trace, _ = generate_crash_trace(Server.num_clients, Server.target_rounds)
+ 
+         picked_ids = []
+-        # FL 프로세스 시작
+         while True:
+-            
+-            current_round_start=time.time()
++            current_round_start = time.time()
++            if Server.current_round == 0:
++                crash_ids = []
++            else:
++                crash_ids = crash_trace[Server.current_round]
++            make_ids = [c_id for c_id in clients_idx if c_id not in crash_ids]
++            printLog("SERVER", f"crashed clients: {crash_ids}")
+ 
+-            crash_ids = crash_trace[Server.current_round]
+-            printLog("SERVER", f"crashed clients: {crash_ids}")
+-            make_ids = [c_id for c_id in range(1, Server.num_clients+1) if c_id not in crash_ids]
+-            printLog("SERVER", f"make clients: {make_ids}")
++            good_ids, deprecated_ids = Server.version_filter(clients_idx, Server.lag_tolerance)
++            latest_ids, _ = Server.version_filter(good_ids, 0)
++            printLog("SERVER", f"latest clients: {latest_ids}")
++            printLog("SERVER", f"deprecated clients: {deprecated_ids}")
++            Server.update_cloud_cache_deprecated(deprecated_ids)
++            Server.update_version(deprecated_ids, Server.current_round - 1)
++            Server.send_round_instructions(latest_ids + deprecated_ids)
+ 
+-            # compensatory first-come-first-merge selection, last-round picks are considered low priority
+-            picked_ids = Server.CFCFM(make_ids, picked_ids)
++            make_ids_list = make_ids + [-1 for _ in range(Server.num_clients - len(make_ids))]
++            dist.broadcast(tensor=torch.tensor(make_ids_list), src=0, group=Server.FLgroup)
++            arrival_ids = Server.receive_in_arrival_order(make_ids)
++            printLog("SERVER", f"arrival order: {arrival_ids}")
++
++            picked_ids = Server.CFCFM_by_arrival(arrival_ids, picked_ids)
++            undrafted_ids = [c_id for c_id in arrival_ids if c_id not in picked_ids]
+             printLog("SERVER", f"picked clients: {picked_ids}")
+-            
+-            undrafted_ids = [c_id for c_id in make_ids if c_id not in picked_ids]
+             printLog("SERVER", f"undrafted clients: {undrafted_ids}")
+ 
+-            # distributing step
+-            # distribute the global model to the edge in a discriminative manner
+-            good_ids, deprecated_ids = Server.version_filter(clients_idx, Server.lag_tolerance)
+-            printLog("SERVER", f"good clients: {good_ids}")
+-            printLog("SERVER", f"deprecated clients: {deprecated_ids}")
+-
+-            latest_ids, straggler_ids = Server.version_filter(good_ids, 0)
+-            printLog("SERVER", f"latest clients: {latest_ids}")
+-
+-            # case 1: deprecated clients
+-            Server.send_global_model_to_clients(deprecated_ids)
+-            Server.update_cloud_cache_deprecated(deprecated_ids)
+-            Server.update_version(deprecated_ids, Server.current_round-1)
+-            # case 2: latest clients
+-            Server.send_global_model_to_clients(latest_ids)
+-            # case 3: non-deprecated stragglers
+-            # Moderately straggling clients remain unsync.
+-
+-            # Local Update            
+-            if Server.current_round==0:
+-                make_ids_list = clients_idx
+-            else:
+-                make_ids_list = make_ids+[-1 for _ in range(Server.num_clients-len(make_ids))]
+-            dist.broadcast(tensor=torch.tensor(make_ids_list), src=0, group=Server.FLgroup)
+-            Server.receive_local_model_from_selected_clients(make_ids_list)
+-
+-
+-
+-            # Aggregation step
+-            # discriminative update of cloud cache and aggregate
+-            # pre-aggregation: update cache from picked clients
+-            Server.update_cloud_cache(picked_ids)        
+-            # SAFA aggregation
+-            Server.average_aggregation(make_ids_list, coefficient)
++            Server.update_cloud_cache(picked_ids)
++            Server.average_aggregation_all(coefficient)
+             global_acc, global_loss = Server.evaluate()
+-            # post=aggregation
+             Server.update_cloud_cache(undrafted_ids)
+-
+-            # update_version
+             Server.update_version(make_ids, Server.current_round)
+ 
+-            printLog("SERVER", f"Version updated: {Server.local_model_version}")
+-            Server.current_round+=1
+-
++            Server.current_round += 1
+             printLog("SERVER", f"{Server.current_round}번째 글로벌 모델 test_accuracy: {round(global_acc*100,4)}%, test_loss: {round(global_loss,4)}")
+-
+-            if Server.wandb_on=="True":
+-                wandb.log({"test_accuracy": round(global_acc*100,4), "test_loss":round(global_loss,4), "runtime_for_one_round":time.time()-current_round_start, "wall_time(m)":(time.time()-current_FL_start)/60})
+-            
+-            if global_acc>=Server.target_accuracy:
++            if Server.wandb_on == "True":
++                wandb.log({"test_accuracy": round(global_acc*100, 4), "test_loss": round(global_loss, 4),
++                           "runtime_for_one_round": time.time() - current_round_start,
++                           "wall_time(m)": (time.time() - current_FL_start) / 60})
++            if global_acc >= Server.target_accuracy:
+                 printLog("SERVER", f"목표한 정확도에 도달했으며, 수행한 라운드 수는 {Server.current_round}회 입니다.")
+-                
+                 break
+-            
+             elif Server.current_round == Server.target_rounds:
+-                printLog(f"SERVER", f"목표한 라운드 수에 도달했으며, 최종 정확도는 {round(global_acc*100,4)}% 입니다.")
++                printLog("SERVER", f"목표한 라운드 수에 도달했으며, 최종 정확도는 {round(global_acc*100,4)}% 입니다.")
+                 break
+         Server.terminate_FL()
+-        printLog(f"SERVER", "FL 프로세스를 종료합니다.")
++        printLog("SERVER", "FL 프로세스를 종료합니다.")
+         dist.barrier()
+
