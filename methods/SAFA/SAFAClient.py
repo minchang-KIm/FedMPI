@@ -42,32 +42,27 @@ class SAFAClient(FedAvgClient.FedAvgClient):
 
         dist.send(tensor=torch.tensor(T_train_k), dst=0)
     
-    def receive_global_model_from_server(self, terminate_FL):
-        model_state_dict = self.model.state_dict()
-        flatten_model = TensorBuffer(list(self.model.state_dict().values()))
-        self.global_model_info = torch.zeros(len(flatten_model.buffer)+1)
+    def receive_round_instruction(self):
+        """라운드 지시를 받는다 (SAFAServer.send_round_instructions). 반환: False = FL 종료.
+        지시가 1이면 글로벌 모델을 받아 로컬 모델을 교체한다 (latest·deprecated 클라이언트의 동기화, SAFA 식 (3)).
 
-        while True:
-    
-            dist.recv(tensor=self.global_model_info, src=0)
-            global_model_version=int(self.global_model_info[-1].item())
-            if global_model_version == -1:
-                terminate_FL.set()
-                break
-            
-            flatten_model.buffer=self.global_model_info[:-1]
+        [버그 수정 2026-10-28] 원래 코드(수신 스레드의 receive_global_model_from_server)의 두 문제를 고쳤다.
+        1) unpack만 하고 load_state_dict를 하지 않아 글로벌 모델이 모델에 적용되지 않았다. TensorBuffer.unpack은
+           `tensor.data = entry.clone()`으로 state_dict 사본만 바꾼다. 다른 클라이언트들은 모두 load_state_dict를 부른다.
+           이 때문에 클라이언트는 자기 모델만 계속 학습했다 (F7_MNIST_SAFA_C0.1_rep1, b9f353a: 최고 37.77%, 마지막 11.39%).
+        2) 별도 스레드가 받아서, 모델 적용과 학습 시작 사이에 순서 보장이 없었다. 이제 학습 전에 같은 스레드에서 받는다.
+        """
+        flag = torch.tensor([0])
+        dist.recv(tensor=flag, src=0)
+        if flag.item() == -1:
+            return False
+        if flag.item() == 1:
+            model_state_dict = self.model.state_dict()
+            flatten_model = TensorBuffer(list(model_state_dict.values()))
+            dist.recv(tensor=flatten_model.buffer, src=0)
             flatten_model.unpack(model_state_dict.values())
-            # [버그 수정 2026-10-28] 받은 글로벌 모델을 실제 모델에 적용한다 (원래 코드에는 이 줄이 없었다).
-            # TensorBuffer.unpack은 `tensor.data = entry.clone()`으로 state_dict 사본의 저장 공간만 바꾸고
-            # 모델 파라미터는 바꾸지 않는다. 그래서 다른 방법(SemiAsyncClient, SASAFLClient, FedAvgClient)은 모두
-            # unpack 뒤에 load_state_dict를 부른다. 이 줄이 없으면 클라이언트는 글로벌 모델을 한 번도 받지 못하고
-            # 자기 로컬 모델만 계속 학습한다(서버는 서로 멀어지는 모델을 평균 → F7_MNIST_SAFA_C0.1_rep1 최고 37.77%, 마지막 11.39%).
-            # SAFA 원 논문(Wu et al., IEEE TC 2021) 식 (3): up-to-date·deprecated 클라이언트는 글로벌 모델로 동기화한다.
             self.model.load_state_dict(model_state_dict)
-            
-
-
-
+        return True
 
     def train(self, terminate_flag=None):
         printLog(f"CLIENT {self.id}", "로컬 학습을 시작합니다.")

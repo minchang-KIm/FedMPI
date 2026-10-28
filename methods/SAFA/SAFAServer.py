@@ -50,7 +50,10 @@ class SAFAServer(FedAvgServer.FedAvgServer):
         for idx in range(1, self.num_clients+1):
             req = dist.irecv(tensor=T_train_k)
             req.wait()
-            self.clients_est_round_T_train[req.source_rank()] = T_train_k
+            # [버그 수정 2026-10-28] 받은 값을 float로 저장한다. 원래 코드는 같은 텐서 객체 T_train_k를 모든 클라이언트에
+            # 넣어서, 마지막에 받은 값 하나로 전부 같아졌다(→ CFCFM 정렬이 rank 번호 순, cross-rounder 판정 무의미).
+            # 저자 구현(wingter562/SAFA semiAysnc_FedAvg.py)의 clients_est_round_T_train은 클라이언트별 값이다.
+            self.clients_est_round_T_train[req.source_rank()] = T_train_k.item()
         
         T_max_train_k = max(self.clients_est_round_T_train.values())
 
@@ -59,7 +62,9 @@ class SAFAServer(FedAvgServer.FedAvgServer):
         printLog(f"SERVER", f"한 라운드의 deadline은 {self.T}입니다.")
 
         self.cross_rounders=[]
-        for c_id in range(1, self.num_clients):
+        # [버그 수정 2026-10-28] 마지막 클라이언트(num_clients)도 검사한다 (원래 range(1, num_clients)로 하나 빠짐).
+        # 저자 구현 get_cross_rounders는 모든 클라이언트를 검사한다.
+        for c_id in range(1, self.num_clients+1):
             if self.clients_est_round_T_train[c_id] > self.T:
                 self.cross_rounders.append(c_id)
         
@@ -72,7 +77,11 @@ class SAFAServer(FedAvgServer.FedAvgServer):
         for id in id_list:
             cp_map[id] = self.clients_est_round_T_train[id]
 
-        sorted_map = sorted(cp_map.items(), key=lambda x: x[1], reverse=True)
+        # [버그 수정 2026-10-28] 빠른 클라이언트(추정 학습 시간이 짧은 쪽)가 앞에 오도록 오름차순으로 정렬한다.
+        # 저자 구현 sort_ids_by_perf_desc는 성능(초당 처리 배치 수, clients_perf_vec)을 내림차순으로 정렬한다
+        # = 먼저 끝나는 클라이언트 우선(First-Come-First-Merge). 이 저장소는 성능 대신 학습 시간을 저장하므로
+        # 같은 순서를 얻으려면 시간 오름차순이어야 한다 (원래 코드는 reverse=True로 가장 느린 클라이언트부터 뽑았다).
+        sorted_map = sorted(cp_map.items(), key=lambda x: x[1])
         sorted_id_list = [sorted_map[i][0] for i in range(len(id_list))]
 
         return sorted_id_list
@@ -210,21 +219,22 @@ class SAFAServer(FedAvgServer.FedAvgServer):
         for id in ids:
             self.local_model_version[id] = version
 
-    def send_global_model_to_clients(self, ids):
+    def send_round_instructions(self, model_ids):
+        # [버그 수정 2026-10-28] 라운드마다 모든 클라이언트에게 지시를 먼저 보낸다: 1 = 글로벌 모델이 뒤따름(동기화), 0 = 로컬 모델 유지.
+        # 원래 코드는 model_ids에게만 글로벌 모델을 보내고, 클라이언트는 별도 수신 스레드에서 받았다. 그 스레드가 모델을
+        # 적용하는 시점과 학습 시작(다른 통신 그룹의 broadcast 뒤) 사이에 순서 보장이 없어, 학습 도중에 파라미터가 바뀔 수 있었다.
+        # 이제 클라이언트는 지시(와 모델)를 받아 적용한 뒤에 학습을 시작한다. 받는 대상(latest·deprecated)은 원래와 같다.
         flatten_model = TensorBuffer(list(self.model.state_dict().values()))
-        global_model_info = flatten_model.buffer.tolist()
-        global_model_info.append(self.current_round)
-        global_model_info = torch.tensor(global_model_info)
+        for c_id in range(1, self.num_clients+1):
+            flag = 1 if c_id in model_ids else 0
+            dist.send(tensor=torch.tensor([flag]), dst=c_id)
+            if flag:
+                dist.send(tensor=flatten_model.buffer, dst=c_id)
 
-        for id in ids:
-            dist.send(tensor=flatten_model.buffer, dst=id)
-            
     def terminate_FL(self):
-        temp_global_model=TensorBuffer(list(self.model.state_dict().values()))
-        global_model_info = torch.zeros(len(temp_global_model.buffer)+1)
-        global_model_info[-1] = -1
+        # 종료 지시 -1 (send_round_instructions와 같은 형식). 클라이언트가 루프를 빠져나와 barrier에 도달한다.
         for idx in range(1, self.num_clients+1):
-            dist.send(tensor=global_model_info, dst=idx)
+            dist.send(tensor=torch.tensor([-1]), dst=idx)
 
 
 

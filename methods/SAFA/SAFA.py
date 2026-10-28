@@ -31,20 +31,10 @@ class SAFA(object):
         self.lag_tolerance = lag_tolerance
     
     def runClient(self, Client):
-        
-        terminate_FL_flag = threading.Event()
-        terminate_FL_flag.clear()
-
-        listen_global_model = threading.Thread(target=Client.receive_global_model_from_server, args=(terminate_FL_flag,), daemon=True)
-        listen_global_model.start()
-
-        while True:
-            if terminate_FL_flag.is_set():
-                break
+        # [버그 수정 2026-10-28] 라운드 지시(와 글로벌 모델)를 학습 전에 받는다 (SAFAClient.receive_round_instruction 참고).
+        while Client.receive_round_instruction():
             make_ids_list=torch.tensor([0 for _ in range(0,Client.num_clients)])
             dist.broadcast(tensor=make_ids_list, src=0, group=Client.FLgroup)
-            if terminate_FL_flag.is_set():
-                break
             if Client.id in make_ids_list:
                 Client.train()
                 Client.send_local_model_to_server()
@@ -67,7 +57,10 @@ class SAFA(object):
             
             current_round_start=time.time()
 
-            crash_ids = crash_trace[Server.current_round]
+            # [버그 수정 2026-10-28] 0라운드는 모든 클라이언트가 학습한다(아래 make_ids_list = clients_idx). 원래 코드는
+            # 0라운드에도 충돌 목록을 빼서 picks/undrafted/버전을 정했기 때문에, 학습하고 모델을 보낸 클라이언트의 캐시·버전이
+            # 갱신되지 않았다. 저자 구현도 0라운드 첫 epoch은 전원이 학습하고 그 모델로 캐시를 시작한다.
+            crash_ids = [] if Server.current_round == 0 else crash_trace[Server.current_round]
             printLog("SERVER", f"crashed clients: {crash_ids}")
             make_ids = [c_id for c_id in range(1, Server.num_clients+1) if c_id not in crash_ids]
             printLog("SERVER", f"make clients: {make_ids}")
@@ -89,11 +82,10 @@ class SAFA(object):
             printLog("SERVER", f"latest clients: {latest_ids}")
 
             # case 1: deprecated clients
-            Server.send_global_model_to_clients(deprecated_ids)
             Server.update_cloud_cache_deprecated(deprecated_ids)
             Server.update_version(deprecated_ids, Server.current_round-1)
-            # case 2: latest clients
-            Server.send_global_model_to_clients(latest_ids)
+            # case 1·2: deprecated·latest clients에게 글로벌 모델, 나머지에게는 "로컬 모델 유지" 지시
+            Server.send_round_instructions(deprecated_ids + latest_ids)
             # case 3: non-deprecated stragglers
             # Moderately straggling clients remain unsync.
 
@@ -112,7 +104,9 @@ class SAFA(object):
             # pre-aggregation: update cache from picked clients
             Server.update_cloud_cache(picked_ids)        
             # SAFA aggregation
-            Server.average_aggregation(make_ids_list, coefficient)
+            # [버그 수정 2026-10-28] 전체 K개 캐시를 n_k/n으로 집계한다 (SAFA 식 (7), 저자 구현 safa_aggregate(cache, ...)).
+            # 원래 코드는 이번 라운드 비충돌 클라이언트의 캐시만 집계했다.
+            Server.average_aggregation(clients_idx, coefficient)
             global_acc, global_loss = Server.evaluate()
             # post=aggregation
             Server.update_cloud_cache(undrafted_ids)
