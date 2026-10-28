@@ -14,7 +14,6 @@ from utils.utils import printLog
 import torch.distributed as dist
 import torch
 import time
-import threading
 
 
 class SAFAfixServer(SAFAServer.SAFAServer):
@@ -43,25 +42,16 @@ class SAFAfixServer(SAFAServer.SAFAServer):
                 dist.send(tensor=flatten_model.buffer, dst=c_id)
 
     def receive_in_arrival_order(self, make_ids):
-        """make_ids의 로컬 모델을 받고 도착 순서를 돌려준다.
-        gloo의 irecv는 wait()를 불러야 완료가 반영되므로, 요청마다 스레드에서 wait()하고 끝난 시각을 기록한다."""
-        done_at = {}
-        lock = threading.Lock()
-
-        def wait_one(c_id, req):
-            req.wait()
-            with lock:
-                done_at[c_id] = time.time()
-
-        threads = []
-        for c_id in make_ids:
-            req = dist.irecv(tensor=self.flatten_client_models[c_id].buffer, src=c_id)
-            t = threading.Thread(target=wait_one, args=(c_id, req), daemon=True)
-            t.start()
-            threads.append(t)
-        for t in threads:
-            t.join()
-        return sorted(make_ids, key=lambda c_id: done_at[c_id])
+        """make_ids의 로컬 모델을 도착하는 순서대로 받고, 그 순서를 돌려준다 (src를 지정하지 않은 recv = 먼저 온 것부터)."""
+        buf = torch.zeros_like(self.flatten_client_models[make_ids[0]].buffer)
+        arrival = []
+        while len(arrival) < len(make_ids):
+            sender = dist.recv(tensor=buf)
+            if sender not in make_ids or sender in arrival:
+                raise RuntimeError(f"예상하지 못한 로컬 모델: CLIENT {sender}")
+            self.flatten_client_models[sender].buffer.copy_(buf)
+            arrival.append(sender)
+        return arrival
 
     def average_aggregation_all(self, coefficient):
         printLog("SERVER", "global aggregation을 진행합니다.")
