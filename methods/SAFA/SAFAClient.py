@@ -57,6 +57,13 @@ class SAFAClient(FedAvgClient.FedAvgClient):
             
             flatten_model.buffer=self.global_model_info[:-1]
             flatten_model.unpack(model_state_dict.values())
+            # [버그 수정 2026-10-28] 받은 글로벌 모델을 실제 모델에 적용한다 (원래 코드에는 이 줄이 없었다).
+            # TensorBuffer.unpack은 `tensor.data = entry.clone()`으로 state_dict 사본의 저장 공간만 바꾸고
+            # 모델 파라미터는 바꾸지 않는다. 그래서 다른 방법(SemiAsyncClient, SASAFLClient, FedAvgClient)은 모두
+            # unpack 뒤에 load_state_dict를 부른다. 이 줄이 없으면 클라이언트는 글로벌 모델을 한 번도 받지 못하고
+            # 자기 로컬 모델만 계속 학습한다(서버는 서로 멀어지는 모델을 평균 → F7_MNIST_SAFA_C0.1_rep1 최고 37.77%, 마지막 11.39%).
+            # SAFA 원 논문(Wu et al., IEEE TC 2021) 식 (3): up-to-date·deprecated 클라이언트는 글로벌 모델로 동기화한다.
+            self.model.load_state_dict(model_state_dict)
             
 
 

@@ -179,6 +179,20 @@ class SAFAServer(FedAvgServer.FedAvgServer):
 
         self.model.load_state_dict(global_model_params)
 
+    def receive_local_model_from_selected_clients(self, selected_client_idx):
+        # [버그 수정 2026-10-28] 클라이언트마다 보낸 쪽(src)을 지정해 받는다.
+        # 상속한 FedAvgServer 구현은 irecv에 src를 주지 않아(아무 쪽에서나 받음) 먼저 도착한 모델이
+        # selected_client_idx 앞 번호의 버퍼에 들어갔다. 그러면 cache[k]에 다른 클라이언트의 모델이 들어가
+        # 데이터 비율 가중치(n_k/n)와 picks/undrafted 구분이 엉뚱한 모델에 적용된다.
+        # 받는 대상과 나머지 동작은 그대로다.
+        reqs=[]
+        for idx in selected_client_idx:
+            if idx==-1:
+                continue
+            reqs.append(dist.irecv(tensor=self.flatten_client_models[idx].buffer, src=idx))
+        for req in reqs:
+            req.wait()
+
     def update_cloud_cache(self, ids):
         model = self.model_controller.Model()
         model_state_dict = model.state_dict()
