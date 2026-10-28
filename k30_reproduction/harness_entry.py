@@ -38,7 +38,7 @@ if sasafl_src:
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     sasafl_pkg.SASAFL = module
-    if os.environ.get("RANK", os.environ.get("OMPI_COMM_WORLD_RANK")) == "0":
+    if os.environ.get("RANK", os.environ.get("OMPI_COMM_WORLD_RANK")) == "0" or os.environ.get("LOCAL_RANK") == "0":
         digest = hashlib.sha256(Path(sasafl_src).read_bytes()).hexdigest()
         print(f"[k30] SASAFL.py 교체: {sasafl_src} sha256={digest}", flush=True)
 

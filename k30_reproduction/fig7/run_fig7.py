@@ -76,6 +76,11 @@ class LiveRun(run_k30.Run):
         written = 0
         for line in proc.stdout:
             logf.write(line)
+            if "SERVER >> FL 프로세스를 종료합니다" in line:
+                # 서버가 끝났다. 저장소 SAFA는 클라이언트가 broadcast에서 멈춰 프로세스가 끝나지 않으므로 2분 뒤 정리한다
+                self.server_finished = True
+                self.last_progress = time.time()
+                self.stall_sec = 120
             m = run_k30.TS_RE.search(line)
             with self.lock:
                 if m:
@@ -112,12 +117,20 @@ class LiveRun(run_k30.Run):
         logf.flush()
 
 
+def cleanup_orphans():
+    """이전 실행기가 죽으며 남긴 Fig.7 실험 프로세스를 두 노드에서 정리한다 (실행 시작 직전에만 부른다)."""
+    sh("pkill -9 -f '[r]dzv_id=F7_' ; true")
+    sh("pkill -9 -f '[r]dzv_id=F7_' ; true", remote=True)
+    time.sleep(3)
+
+
 def is_done(name):
     res = spec.RUNS / name / "result.json"
     if not res.exists():
         return False
     r = json.loads(res.read_text())
-    return r.get("outcome") == "completed" and r.get("rounds_done", 0) >= spec.ROUNDS
+    finished = r.get("outcome") == "completed" or r.get("server_finished", False)
+    return finished and r.get("rounds_done", 0) >= spec.ROUNDS
 
 
 def main():
@@ -130,6 +143,7 @@ def main():
         if is_done(s["name"]):
             continue
         for attempt in (1, 2):
+            cleanup_orphans()
             while True:
                 problems, head = preflight()
                 if not problems:
@@ -146,6 +160,10 @@ def main():
             log(f"실행 시작: {s['name']} (시도 {attempt}/2, git {head[:7]})")
             run = LiveRun(cfg, spec.RUNS, 20 * 60, 2400 * 60, port)
             result = run.run()
+            if getattr(run, "server_finished", False):
+                # 서버가 정상 종료 메시지를 남긴 실행: 클라이언트 정리로 끝났어도 결과는 완료로 본다
+                result["server_finished"] = True
+                (run.out / "result.json").write_text(json.dumps(result, indent=2, ensure_ascii=False))
             log(f"실행 종료: {s['name']} → {result['outcome']}, {result['rounds_done']}/{spec.ROUNDS}라운드, "
                 f"최고 {result['best_acc']}%, {result['wall_min']}분")
             with (spec.OUT / "COMMANDS.md").open("a") as f:

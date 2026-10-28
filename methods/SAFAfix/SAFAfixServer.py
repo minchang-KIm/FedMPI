@@ -14,6 +14,7 @@ from utils.utils import printLog
 import torch.distributed as dist
 import torch
 import time
+import threading
 
 
 class SAFAfixServer(SAFAServer.SAFAServer):
@@ -42,16 +43,25 @@ class SAFAfixServer(SAFAServer.SAFAServer):
                 dist.send(tensor=flatten_model.buffer, dst=c_id)
 
     def receive_in_arrival_order(self, make_ids):
-        reqs = {c_id: dist.irecv(tensor=self.flatten_client_models[c_id].buffer, src=c_id) for c_id in make_ids}
-        arrival = []
-        while len(arrival) < len(make_ids):
-            for c_id, req in reqs.items():
-                if c_id not in arrival and req.is_completed():
-                    arrival.append(c_id)
-            time.sleep(0.005)
-        for req in reqs.values():
+        """make_ids의 로컬 모델을 받고 도착 순서를 돌려준다.
+        gloo의 irecv는 wait()를 불러야 완료가 반영되므로, 요청마다 스레드에서 wait()하고 끝난 시각을 기록한다."""
+        done_at = {}
+        lock = threading.Lock()
+
+        def wait_one(c_id, req):
             req.wait()
-        return arrival
+            with lock:
+                done_at[c_id] = time.time()
+
+        threads = []
+        for c_id in make_ids:
+            req = dist.irecv(tensor=self.flatten_client_models[c_id].buffer, src=c_id)
+            t = threading.Thread(target=wait_one, args=(c_id, req), daemon=True)
+            t.start()
+            threads.append(t)
+        for t in threads:
+            t.join()
+        return sorted(make_ids, key=lambda c_id: done_at[c_id])
 
     def average_aggregation_all(self, coefficient):
         printLog("SERVER", "global aggregation을 진행합니다.")
