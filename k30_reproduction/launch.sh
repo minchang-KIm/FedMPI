@@ -9,7 +9,7 @@
 #   CATEGORIES : 클라이언트당 thread 수 카테고리, 쉼표 구분 (논문 K=30: 1,2,3,4,8)
 #                K는 카테고리 수로 나누어떨어져야 한다. two 모드에서는 카테고리별 인원도 짝수여야 한다.
 # 환경변수: ROUNDS DATASET IID SPLIT LEARNING_RATE BATCH_SIZE LOCAL_EPOCHS TARGET_ACCURACY LAG_TOLERANCE
-#          MASTER_PORT RUN_ID K30_PID_DIR SYNC_SOURCE K30_SASAFL_SRC(두 노드 모두 적용) CMD_FILE(실행 명령 저장)
+#          MASTER_PORT RUN_ID K30_PID_DIR SYNC_SOURCE K30_SASAFL_SRC·K30_TRACE(두 노드 모두 적용) CMD_FILE(실행 명령 저장)
 #          CPU_LIST (single 모드: 이 CPU들에만 고정, 예: 176에서 결함 코어 24(CPU 12,13) 제외 → 0-11,14-31)
 #
 # ── Fig.7(K=30) SASAFL 실험에서 launch.sh가 최종적으로 Start.py에 넘긴 명령 (two 모드) ──────────────
@@ -110,7 +110,7 @@ WORKER_THREADS="$(make_digits "$HALF_CAT")"
 WORKER_IFACE=$(ssh "$WORKER_HOST" "ip -o -4 addr show | awk -v a='$WORKER_ADDR' '\$4 ~ \"^\" a \"/\" {print \$2; exit}'")
 
 if [[ "$SYNC_SOURCE" == "1" ]]; then
-    tar -czf - Start.py methods utils model_controller k30_reproduction/harness_entry.py | \
+    tar -czf - Start.py methods utils model_controller k30_reproduction/harness_entry.py k30_reproduction/trace_hooks.py | \
         ssh "$WORKER_HOST" "mkdir -p '$WORKER_REPO/k30_reproduction' && tar -xzf - -C '$WORKER_REPO'"
 fi
 
@@ -119,7 +119,7 @@ echo "[k30] mode=two method=$METHOD C=$C K=$K categories=$CATEGORIES"
 if [[ -n "${CMD_FILE:-}" ]]; then
     {
         echo "# launch: $0 $*"
-        echo "# env: ROUNDS=$ROUNDS DATASET=$DATASET IID=$IID SPLIT=$SPLIT LEARNING_RATE=$LEARNING_RATE BATCH_SIZE=$BATCH_SIZE LOCAL_EPOCHS=$LOCAL_EPOCHS TARGET_ACCURACY=$TARGET_ACCURACY LAG_TOLERANCE=$LAG_TOLERANCE K30_SASAFL_SRC=${K30_SASAFL_SRC:-} OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1"
+        echo "# env: ROUNDS=$ROUNDS DATASET=$DATASET IID=$IID SPLIT=$SPLIT LEARNING_RATE=$LEARNING_RATE BATCH_SIZE=$BATCH_SIZE LOCAL_EPOCHS=$LOCAL_EPOCHS TARGET_ACCURACY=$TARGET_ACCURACY LAG_TOLERANCE=$LAG_TOLERANCE K30_SASAFL_SRC=${K30_SASAFL_SRC:-} K30_TRACE=${K30_TRACE:-} OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1"
         echo "# [wise-175, node_rank 0: 서버 + $PER_HOST 클라이언트] cwd=$MASTER_REPO"
         echo "$MASTER_PY -m torch.distributed.run --nnodes=2 --nproc_per_node=$((PER_HOST + 1)) --node_rank=0 --rdzv_id=$RUN_ID --rdzv_endpoint=$MASTER_ADDR:$MASTER_PORT --master_addr=$MASTER_ADDR --master_port=$MASTER_PORT $ENTRY ${COMMON_ARGS[*]} --num_threads=$MASTER_THREADS"
         echo "# [wise-176, node_rank 1: $PER_HOST 클라이언트] cwd=$WORKER_REPO"
@@ -134,6 +134,7 @@ ssh "$WORKER_HOST" "
     export GLOO_SOCKET_IFNAME='$WORKER_IFACE' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONUNBUFFERED=1
     export K30_PID_DIR='/tmp/k30_pids_$RUN_ID'
     ${K30_SASAFL_SRC:+export K30_SASAFL_SRC='$K30_SASAFL_SRC'}
+    ${K30_TRACE:+export K30_TRACE='$K30_TRACE'}
     exec '$WORKER_PY' -m torch.distributed.run --nnodes=2 --nproc_per_node=$PER_HOST --node_rank=1 \
         --rdzv_id='$RUN_ID' --rdzv_endpoint='$MASTER_ADDR:$MASTER_PORT' \
         --master_addr='$MASTER_ADDR' --master_port='$MASTER_PORT' \

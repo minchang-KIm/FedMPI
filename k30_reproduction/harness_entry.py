@@ -3,6 +3,7 @@
 
 - rank별 PID를 K30_PID_DIR에 기록 (멈춘 서버의 스택을 받기 위함)
 - SIGUSR1 수신 시 모든 스레드의 Python 스택을 stderr로 덤프
+- K30_TRACE=1이면 trace_hooks.py의 관측 로그를 켠다
 """
 
 import faulthandler
@@ -41,6 +42,12 @@ if sasafl_src:
     if os.environ.get("RANK", os.environ.get("OMPI_COMM_WORLD_RANK")) == "0" or os.environ.get("LOCAL_RANK") == "0":
         digest = hashlib.sha256(Path(sasafl_src).read_bytes()).hexdigest()
         print(f"[k30] SASAFL.py 교체: {sasafl_src} sha256={digest}", flush=True)
+
+# K30_TRACE=1이면 관측 훅을 설치한다 (알고리즘 코드는 그대로, 값만 읽어 run.log에 `TRACE {json}` 줄로 남김)
+if os.environ.get("K30_TRACE") == "1":
+    sys.path.insert(0, str(REPO / "k30_reproduction"))
+    import trace_hooks
+    trace_hooks.install()
 
 sys.argv = [str(REPO / "Start.py")] + sys.argv[1:]
 runpy.run_path(str(REPO / "Start.py"), run_name="__main__")
