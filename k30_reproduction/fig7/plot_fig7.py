@@ -2,7 +2,7 @@
 """논문 Fig. 7 (K=30, SAFA 추가)과 Fig. 8 (CIFAR-10, K=30)과 같은 형식의 그림을 그린다.
 
 Fig.7: F7_fig7_safa/fig7.png — (a) MNIST with K=30, (c) FashionMNIST with K=30. BSA 초록, SASAFL 빨강, SAFA 파랑, 5라운드마다 표시.
-Fig.8: F8_fig8_cifar10/fig8.png — (a) K=30. BSA 초록, SASAFL 빨강, 10라운드마다 표시(논문 캡션).
+Fig.8: F8_fig8_cifar10/fig8.png — (a) K=30. BSA 초록, SASAFL 빨강, SAFA 파랑, 10라운드마다 표시(논문 캡션).
 C=0.1/0.3/0.5 = 실선/점선/파선. 곡선은 완료·진행 중 회차의 라운드별 평균이다.
 논문 원본(왼쪽)과 나란히 붙인 compare_fig7.png, compare_fig8.png도 만든다.
 
@@ -33,7 +33,7 @@ plt.rcParams.update({
 GREEN, RED, BLUE = "#00a650", "#ff0000", "#0070c0"
 C_STYLE = {0.1: "-", 0.3: ":", 0.5: "--"}
 FIG7_LINES = (("BSA", GREEN), ("SASAFL", RED), ("SAFA", BLUE))
-FIG8_LINES = (("BSA", GREEN), ("SASAFL", RED))
+FIG8_LINES = (("BSA", GREEN), ("SASAFL", RED), ("SAFA", BLUE))
 # 패널 설정: (데이터셋, 선, x 최대, x 눈금 간격, y 최대, y 눈금 간격, 표시 간격, 확대 inset)
 PANEL = {
     "MNIST": ("MNIST", FIG7_LINES, 500, 100, 100, 20, 5, True),
