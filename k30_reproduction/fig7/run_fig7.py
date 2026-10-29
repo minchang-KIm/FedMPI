@@ -12,6 +12,7 @@ import json
 import os
 import subprocess
 import sys
+import threading
 import time
 from datetime import datetime
 from pathlib import Path
@@ -26,7 +27,8 @@ CODE_PATHS = ["Start.py", "methods", "utils", "model_controller", "k30_reproduct
               "k30_reproduction/launch.sh", "k30_reproduction/original_code", "k30_reproduction/fig7", "k30_reproduction/run_k30.py",
               "k30_reproduction/trace_hooks.py"]
 PROGRESS = spec.PROGRESS
-MAX_WALL_MIN = {7: 2400, 8: 14 * 24 * 60}   # Fig.8은 3000라운드라 실행 하나가 며칠 걸릴 수 있다
+MAX_WALL_MIN = {7: 2400, 8: 14 * 24 * 60}
+CONCURRENT_FIG8 = ("BSA", "SASAFL")   # Fig.8에서 함께 돌리는 방법   # Fig.8은 3000라운드라 실행 하나가 며칠 걸릴 수 있다
 
 
 def log(msg):
@@ -150,36 +152,68 @@ def main():
             sys.exit(f"알 수 없는 실행 이름: {unknown}")
         q = [s for n in first for s in q if s["name"] == n] + [s for s in q if s["name"] not in first]
     log(f"실행기 시작: 전체 {len(q)}개, 완료 {sum(is_done(s) for s in q)}개" + (f", 먼저 돌릴 실행: {first}" if first else ""))
-    port = 29900
+    port = [29900]
+    port_lock = threading.Lock()
+
+    def next_port():
+        with port_lock:
+            port[0] = 29900 + (port[0] - 29900 + 1) % 90
+            return port[0]
+
+    def wait_preflight():
+        cleanup_orphans()
+        while True:
+            problems, head = preflight()
+            if not problems:
+                return head
+            log(f"실행 전 검사 실패 → 5분 뒤 다시 검사: {'; '.join(problems)}")
+            time.sleep(300)
+
+    def run_one(s, attempt, head):
+        runs_dir = Path(s["runs_dir"])
+        cfg = dict(s)
+        cfg["git_head"] = head
+        cfg["extra_env"] = {"CMD_FILE": str(runs_dir / s["name"] / "cmd.txt")}
+        log(f"실행 시작: {s['name']} (시도 {attempt}/2, git {head[:7]})")
+        run = LiveRun(cfg, runs_dir, 20 * 60, MAX_WALL_MIN[s["fig"]] * 60, next_port())
+        result = run.run()
+        if getattr(run, "server_finished", False):
+            # 서버가 정상 종료 메시지를 남긴 실행: 클라이언트 정리로 끝났어도 결과는 완료로 본다
+            result["server_finished"] = True
+            (run.out / "result.json").write_text(json.dumps(result, indent=2, ensure_ascii=False))
+        log(f"실행 종료: {s['name']} → {result['outcome']}, {result['rounds_done']}/{s['rounds']}라운드, "
+            f"최고 {result['best_acc']}%, {result['wall_min']}분")
+
+    # 묶음: Fig.8의 같은 회차·같은 C의 BSA와 SASAFL은 함께 띄운다 (사용자 지시 2026-10-29).
+    # 두 실행 모두 175에 서버+15 클라이언트, 176에 15 클라이언트. 나머지는 하나씩.
+    groups, seen = [], set()
     for s in q:
-        if is_done(s):
+        if s["name"] in seen:
             continue
-        for attempt in (1, 2):
-            cleanup_orphans()
-            while True:
-                problems, head = preflight()
-                if not problems:
-                    break
-                log(f"실행 전 검사 실패 → 5분 뒤 다시 검사: {'; '.join(problems)}")
-                time.sleep(300)
-            port = 29900 + (port - 29900 + 1) % 90
-            runs_dir = Path(s["runs_dir"])
-            cmd_file = runs_dir / s["name"] / "cmd.txt"
-            os.environ["CMD_FILE"] = str(cmd_file)
-            cfg = dict(s)
-            cfg["git_head"] = head
-            log(f"실행 시작: {s['name']} (시도 {attempt}/2, git {head[:7]})")
-            run = LiveRun(cfg, runs_dir, 20 * 60, MAX_WALL_MIN[s["fig"]] * 60, port)
-            result = run.run()
-            if getattr(run, "server_finished", False):
-                # 서버가 정상 종료 메시지를 남긴 실행: 클라이언트 정리로 끝났어도 결과는 완료로 본다
-                result["server_finished"] = True
-                (run.out / "result.json").write_text(json.dumps(result, indent=2, ensure_ascii=False))
-            log(f"실행 종료: {s['name']} → {result['outcome']}, {result['rounds_done']}/{s['rounds']}라운드, "
-                f"최고 {result['best_acc']}%, {result['wall_min']}분")
+        if s["fig"] == 8 and s["variant"] in CONCURRENT_FIG8:
+            g = [t for t in q if t["fig"] == 8 and t["variant"] in CONCURRENT_FIG8 and t["rep"] == s["rep"] and t["C"] == s["C"]]
+        else:
+            g = [s]
+        seen.update(t["name"] for t in g)
+        groups.append(g)
+
+    for g in groups:
+        todo = [s for s in g if not is_done(s)]
+        if not todo:
+            continue
+        head = wait_preflight()
+        threads = []
+        for s in todo:
+            t = threading.Thread(target=run_one, args=(s, 1, head))
+            t.start()
+            threads.append(t)
+            time.sleep(5)   # 실행 ID(초 단위)와 rendezvous 시작이 겹치지 않게
+        for t in threads:
+            t.join()
+        time.sleep(20)
+        for s in [s for s in todo if not is_done(s)]:   # 실패한 것만 혼자 한 번 더
+            run_one(s, 2, wait_preflight())
             time.sleep(20)
-            if is_done(s):
-                break
     log("FIG7_FIG8_DONE: 전체 실행 완료")
 
 

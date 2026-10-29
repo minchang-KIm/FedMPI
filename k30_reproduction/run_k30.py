@@ -128,9 +128,18 @@ class Run:
         except ProcessLookupError:
             pass
         if self.cfg["mode"] == "two":
-            subprocess.run(["ssh", WORKER_HOST, f"pkill -9 -f 'rdzv_id={run_id}' ; pkill -9 -f k30_reproduction/harness_entry.py ; true"],
+            # 이 실행의 프로세스만 정리한다 (두 실행을 동시에 돌릴 때 다른 실행의 harness_entry를 죽이지 않도록,
+            # 176 쪽 rank별 PID 파일(/tmp/k30_pids_<run_id>)로 골라 죽인다)
+            subprocess.run(["ssh", WORKER_HOST,
+                            f"pkill -9 -f 'rdzv_id={run_id}' ; "
+                            f"for f in /tmp/k30_pids_{run_id}/rank_*.json; do [ -f \"$f\" ] && kill -9 $(grep -o '[0-9]*}}' \"$f\" | tr -d '}}') 2>/dev/null; done ; true"],
                            capture_output=True, timeout=30)
         subprocess.run(["pkill", "-9", "-f", f"rdzv_id={run_id}"], capture_output=True)
+        for f in (self.out / "pids").glob("rank_*.json"):   # 175 쪽도 이 실행의 rank PID만
+            try:
+                os.kill(json.loads(f.read_text())["pid"], signal.SIGKILL)
+            except (ProcessLookupError, ValueError, KeyError, OSError):
+                pass
         proc.wait()
 
     def run(self):
@@ -150,6 +159,7 @@ class Run:
         })
         if cfg.get("sasafl_src"):
             env["K30_SASAFL_SRC"] = str(cfg["sasafl_src"])
+        env.update(cfg.get("extra_env", {}))   # 실행별 환경변수 (동시 실행 시 CMD_FILE 등을 프로세스 전역 os.environ 대신 여기로 넘긴다)
         cmd = ["bash", str(HERE / "launch.sh"), cfg["method"], str(cfg["C"]), str(settings["K"]), cfg["mode"], cfg["cats"]]
         meta = {**cfg, **settings, "rounds": int(env["ROUNDS"]), "cmd": " ".join(cmd), "run_id": run_id,
                 "start": datetime.now().isoformat(timespec="seconds"),
