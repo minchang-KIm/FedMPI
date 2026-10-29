@@ -1,0 +1,20 @@
+{
+  "name": "F7_MNIST_SASAFL_ON_C0.1_rep1",
+  "outcome": "completed",
+  "returncode": 0,
+  "wall_min": 88.3,
+  "rounds_done": 500,
+  "rounds_requested": 500,
+  "best_acc": 98.09,
+  "last_acc": 95.65,
+  "errors": {
+    "is_set_corruption": 0,
+    "segfault": 0,
+    "abort": 0,
+    "connection_closed": 0,
+    "gloo_timeout": 0,
+    "traceback": 0,
+    "child_failed": 0
+  },
+  "server_finished": true
+}

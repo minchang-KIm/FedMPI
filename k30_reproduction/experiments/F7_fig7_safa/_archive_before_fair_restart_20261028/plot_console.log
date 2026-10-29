@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "k30_reproduction/fig7/plot_fig7.py", line 153, in main
+    left = paper.resize((int(paper.width * h / paper.height), h))
+  File "k30_reproduction/fig7/plot_fig7.py", line 124, in render
+    os.replace(tmp, out)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/wise-175/Mando/FedMPI/k30_reproduction/experiments/F7_fig7_safa/fig7_SASAFL-ON_SAFA-repo.tmp.png' -> '/home/wise-175/Mando/FedMPI/k30_reproduction/experiments/F7_fig7_safa/fig7_SASAFL-ON_SAFA-repo.png'
+Traceback (most recent call last):
+  File "k30_reproduction/fig7/plot_fig7.py", line 245, in main
+    render(mean_curves())
+  File "k30_reproduction/fig7/plot_fig7.py", line 129, in render
+    render_compare(curves)
+  File "k30_reproduction/fig7/plot_fig7.py", line 164, in render_compare
+    os.replace(tmp2, out)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/wise-175/Mando/FedMPI/k30_reproduction/experiments/F7_fig7_safa/compare_fig7_SASAFL-ON.tmp.png' -> '/home/wise-175/Mando/FedMPI/k30_reproduction/experiments/F7_fig7_safa/compare_fig7_SASAFL-ON.png'

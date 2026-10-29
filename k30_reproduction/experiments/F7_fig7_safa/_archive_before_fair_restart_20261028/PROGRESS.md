@@ -1,0 +1,24 @@
+- 2026-10-28 10:40 실행기 시작: 전체 300개, 완료 0개
+- 2026-10-28 10:40 실행 시작: F7_MNIST_BSA_C0.1_rep1 (시도 1/2, git 9c298db)
+- 2026-10-28 11:15 실행 종료: F7_MNIST_BSA_C0.1_rep1 → completed, 500/500라운드, 최고 96.1%, 35.4분
+- 2026-10-28 11:16 실행 시작: F7_MNIST_SASAFL_ON_C0.1_rep1 (시도 1/2, git 21569e9)
+- 2026-10-28 12:44 실행 종료: F7_MNIST_SASAFL_ON_C0.1_rep1 → completed, 500/500라운드, 최고 98.09%, 88.3분
+- 2026-10-28 12:44 실행 시작: F7_MNIST_SASAFL_OFF_C0.1_rep1 (시도 1/2, git 21569e9)
+- 2026-10-28 13:55 실행 종료: F7_MNIST_SASAFL_OFF_C0.1_rep1 → completed, 500/500라운드, 최고 93.55%, 70.14분
+- 2026-10-28 13:55 실행 시작: F7_MNIST_SAFA_C0.1_rep1 (시도 1/2, git e2eabf7)
+- 2026-10-28 14:44 사용자 요청: 진행 중이던 F7_MNIST_SAFA_C0.1_rep1(저장소 SAFA, 약 85라운드)을 중지하고 F7_MNIST_SAFAfix_C0.1_rep1을 먼저 실행. 중지된 SAFA는 이후 원래 순서에서 처음부터 다시 돈다.
+- 2026-10-28 14:44 실행기 시작: 전체 300개, 완료 3개, 먼저 돌릴 실행: ['F7_MNIST_SAFAfix_C0.1_rep1']
+- 2026-10-28 14:44 실행 시작: F7_MNIST_SAFAfix_C0.1_rep1 (시도 1/2, git e686dc8)
+- 2026-10-28 18:06 사용자 지시: SAFA 집계 가중치 버그를 methods/SAFA에서 최소 수정(커밋 b9f353a), 별도 방법 SAFAfix 폐기. F7_MNIST_SAFAfix_C0.1_rep1(349라운드에서 중지)은 그림·집계에서 제외. 실행 목록 240개(BSA, SASAFL_ON, SASAFL_OFF, SAFA). 수정 전 SAFA 부분 실행(F7_MNIST_SAFA_C0.1_rep1, 85라운드)은 다음 실행 때 _old_ 폴더로 보존되고 수정된 코드로 처음부터 다시 돈다.
+- 2026-10-28 18:06 실행기 시작: 전체 240개, 완료 3개
+- 2026-10-28 18:06 실행 시작: F7_MNIST_SAFA_C0.1_rep1 (시도 1/2, git b9f353a)
+- 2026-10-28 22:25 실행 종료: F7_MNIST_SAFA_C0.1_rep1 → stalled, 500/500라운드, 최고 37.77%, 258.72분
+- 2026-10-28 22:26 실행 시작: F7_MNIST_BSA_C0.3_rep1 (시도 1/2, git b9f353a)
+- 2026-10-28 23:00 사용자 지시: SAFA 클라이언트가 글로벌 모델을 적용하지 않는 버그와 서버 수신 칸 뒤바뀜 버그 수정(커밋 ef46a2a, 두 노드 동기화). 수정 전 결과 F7_MNIST_SAFA_C0.1_rep1(b9f353a, 최고 37.77%)은 runs/F7_MNIST_SAFA_C0.1_rep1_old_clientsync_bug로 보존하고 다시 돈다. 지금 도는 실행기는 이 실행을 이미 지나쳤으므로, 실행기를 재시작해야 다시 돈다(재시작 시 큐 맨 앞의 미완료 실행).
+- 2026-10-28 23:17 실행 종료: F7_MNIST_BSA_C0.3_rep1 → completed, 500/500라운드, 최고 98.11%, 51.69분
+- 2026-10-28 23:18 실행 전 검사 실패 → 5분 뒤 다시 검사: 175 코드 수정됨: ['M methods/SAFA/SAFA.py', ' M methods/SAFA/SAFAClient.py', ' M methods/SAFA/SAFAServer.py']
+- 2026-10-28 23:23 실행 전 검사 실패 → 5분 뒤 다시 검사: 175 코드 수정됨: ['M methods/SAFA/SAFA.py', ' M methods/SAFA/SAFAClient.py', ' M methods/SAFA/SAFAServer.py']
+- 2026-10-28 23:26 SAFA를 저자 구현(wingter562/SAFA semiAysnc_FedAvg.py)과 대조해 남은 차이 수정(커밋 a1d5287, 두 노드 동기화): 라운드 지시를 학습 전에 동기 수신, CFCFM 추정치 저장·정렬, cross-rounder, 전체 K개 캐시 집계, 0라운드 처리. 수정 전 코드로 돈 SAFA 실행 2개(F7_MNIST_SAFA_C0.1_rep1_old_20261028_180651, _old_clientsync_bug)는 runs/에서 _discarded_buggy_SAFA/로 옮김(그림·집계 제외). F7_MNIST_SAFA_C0.1_rep1은 실행기를 재시작하면 다시 돈다.
+- 2026-10-28 23:26 주의: SAFA 검증용 시험 실행(K=6, 175 단독, 23:05–23:18)이 F7_MNIST_BSA_C0.3_rep1의 마지막 약 100라운드와 겹쳐 라운드 시간이 5.8초 → 6.6–7.0초로 늘었다. 이 실행의 라운드별 정확도는 영향 없음, 벽시계 시간(time-to-accuracy)은 오염됨.
+- 2026-10-28 23:28 실행 시작: F7_MNIST_SASAFL_ON_C0.3_rep1 (시도 1/2, git a1d5287)
+- 2026-10-28 23:50 사용자 지시: F7_MNIST_BSA_C0.3_rep1(시험 실행과 겹쳐 시간 측정 오염)을 _discarded_contaminated/로 옮기고 다시 돌린다. F7_MNIST_SAFA_C0.1_rep1과 함께 현재 실행이 끝난 뒤 실행기 재시작으로 먼저 돈다.

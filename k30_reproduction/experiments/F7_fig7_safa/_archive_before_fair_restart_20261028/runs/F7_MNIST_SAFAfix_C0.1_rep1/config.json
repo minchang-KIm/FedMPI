@@ -1,0 +1,23 @@
+{
+  "name": "F7_MNIST_SAFAfix_C0.1_rep1",
+  "rep": 1,
+  "variant": "SAFAfix",
+  "method": "SAFAfix",
+  "C": 0.1,
+  "K": 30,
+  "dataset": "MNIST",
+  "lr": 0.01,
+  "batch": 32,
+  "epochs": 5,
+  "tau": 5,
+  "rounds": 500,
+  "target": 1.0,
+  "mode": "two",
+  "cats": "1,2,3,4,8",
+  "git_head": "e686dc8c0ed748913c58a3109d1903bfc1ddba11",
+  "cmd": "bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SAFAfix 0.1 30 two 1,2,3,4,8",
+  "run_id": "F7_MNIST_SAFAfix_C0.1_rep1_1793166253",
+  "start": "2026-10-28T14:44:13",
+  "host": "wise-175",
+  "cpu_list": ""
+}

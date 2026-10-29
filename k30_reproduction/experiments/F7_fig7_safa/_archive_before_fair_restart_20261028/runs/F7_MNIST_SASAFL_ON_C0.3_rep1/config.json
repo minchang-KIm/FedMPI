@@ -1,0 +1,23 @@
+{
+  "name": "F7_MNIST_SASAFL_ON_C0.3_rep1",
+  "rep": 1,
+  "variant": "SASAFL_ON",
+  "method": "SASAFL",
+  "C": 0.3,
+  "K": 30,
+  "dataset": "MNIST",
+  "lr": 0.01,
+  "batch": 32,
+  "epochs": 5,
+  "tau": 9,
+  "rounds": 500,
+  "target": 1.0,
+  "mode": "two",
+  "cats": "1,2,3,4,8",
+  "git_head": "a1d5287f3f55694ecc0ec08752bebb4567f9e2ab",
+  "cmd": "bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 two 1,2,3,4,8",
+  "run_id": "F7_MNIST_SASAFL_ON_C0.3_rep1_1793197696",
+  "start": "2026-10-28T23:28:16",
+  "host": "wise-175",
+  "cpu_list": ""
+}

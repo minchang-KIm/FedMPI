@@ -1,0 +1,29 @@
+- 2026-10-29 00:07 실행기 시작: 전체 240개, 완료 0개
+- 2026-10-29 00:08 실행 시작: F7_MNIST_BSA_C0.1_rep1 (시도 1/2, git c8c5eba)
+
+===== F7_MNIST_BSA_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 30 two 1,2,3,4,8
+===== F7_MNIST_BSA_C0.1_rep1 -> {"name": "F7_MNIST_BSA_C0.1_rep1", "outcome": "completed", "returncode": 0, "wall_min": 35.43, "rounds_done": 500, "rounds_requested": 500, "best_acc": 96.39, "last_acc": 88.57, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-29 00:43 실행 종료: F7_MNIST_BSA_C0.1_rep1 → completed, 500/500라운드, 최고 96.39%, 35.43분
+- 2026-10-29 00:43 실행 시작: F7_MNIST_SASAFL_C0.1_rep1 (시도 1/2, git c8c5eba)
+
+===== F7_MNIST_SASAFL_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3,4,8
+===== F7_MNIST_SASAFL_C0.1_rep1 -> {"name": "F7_MNIST_SASAFL_C0.1_rep1", "outcome": "completed", "returncode": 0, "wall_min": 70.21, "rounds_done": 500, "rounds_requested": 500, "best_acc": 94.12, "last_acc": 89.24, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-29 01:54 실행 종료: F7_MNIST_SASAFL_C0.1_rep1 → completed, 500/500라운드, 최고 94.12%, 70.21분
+- 2026-10-29 01:54 실행 시작: F7_MNIST_SAFA_C0.1_rep1 (시도 1/2, git c8c5eba)
+
+===== F7_MNIST_SAFA_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SAFA 0.1 30 two 1,2,3,4,8
+===== F7_MNIST_SAFA_C0.1_rep1 -> {"name": "F7_MNIST_SAFA_C0.1_rep1", "outcome": "completed", "returncode": 0, "wall_min": 249.65, "rounds_done": 500, "rounds_requested": 500, "best_acc": 96.0, "last_acc": 95.74, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-29 06:04 실행 종료: F7_MNIST_SAFA_C0.1_rep1 → completed, 500/500라운드, 최고 96.0%, 249.65분
+- 2026-10-29 06:04 실행 시작: F7_MNIST_BSA_C0.3_rep1 (시도 1/2, git c8c5eba)
+
+===== F7_MNIST_BSA_C0.3_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.3 30 two 1,2,3,4,8
+===== F7_MNIST_BSA_C0.3_rep1 -> {"name": "F7_MNIST_BSA_C0.3_rep1", "outcome": "completed", "returncode": 0, "wall_min": 50.52, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.38, "last_acc": 98.11, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-29 06:55 실행 종료: F7_MNIST_BSA_C0.3_rep1 → completed, 500/500라운드, 최고 98.38%, 50.52분
+- 2026-10-29 06:55 실행 시작: F7_MNIST_SASAFL_C0.3_rep1 (시도 1/2, git c8c5eba)
+
+===== F7_MNIST_SASAFL_C0.3_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 two 1,2,3,4,8
+===== F7_MNIST_SASAFL_C0.3_rep1 -> {"name": "F7_MNIST_SASAFL_C0.3_rep1", "outcome": "completed", "returncode": 0, "wall_min": 97.31, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.11, "last_acc": 97.77, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-29 08:32 실행 종료: F7_MNIST_SASAFL_C0.3_rep1 → completed, 500/500라운드, 최고 98.11%, 97.31분
+- 2026-10-29 08:33 실행 시작: F7_MNIST_SAFA_C0.3_rep1 (시도 1/2, git c8c5eba)
+
+===== F7_MNIST_SAFA_C0.3_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SAFA 0.3 30 two 1,2,3,4,8

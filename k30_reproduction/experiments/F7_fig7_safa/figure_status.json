@@ -1,0 +1,11 @@
+{
+ "updated": "2026-10-29 10:49:07",
+ "reps_per_curve": {
+  "BSA MNIST C=0.1": 1,
+  "BSA MNIST C=0.3": 1,
+  "SAFA MNIST C=0.1": 1,
+  "SAFA MNIST C=0.3": 1,
+  "SASAFL MNIST C=0.1": 1,
+  "SASAFL MNIST C=0.3": 1
+ }
+}

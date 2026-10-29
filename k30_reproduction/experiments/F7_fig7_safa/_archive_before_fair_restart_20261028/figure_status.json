@@ -1,0 +1,9 @@
+{
+ "updated": "2026-10-28 23:56:46",
+ "reps_per_curve": {
+  "BSA MNIST C=0.1": 1,
+  "SASAFL_OFF MNIST C=0.1": 1,
+  "SASAFL_ON MNIST C=0.1": 1,
+  "SASAFL_ON MNIST C=0.3": 1
+ }
+}

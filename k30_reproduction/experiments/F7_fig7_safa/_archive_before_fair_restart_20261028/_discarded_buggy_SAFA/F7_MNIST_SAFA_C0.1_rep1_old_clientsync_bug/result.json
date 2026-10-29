@@ -1,0 +1,20 @@
+{
+  "name": "F7_MNIST_SAFA_C0.1_rep1",
+  "outcome": "stalled",
+  "returncode": -9,
+  "wall_min": 258.72,
+  "rounds_done": 500,
+  "rounds_requested": 500,
+  "best_acc": 37.77,
+  "last_acc": 11.39,
+  "errors": {
+    "is_set_corruption": 0,
+    "segfault": 0,
+    "abort": 0,
+    "connection_closed": 0,
+    "gloo_timeout": 0,
+    "traceback": 0,
+    "child_failed": 0
+  },
+  "server_finished": true
+}

@@ -1,0 +1,39 @@
+- 2026-10-28 10:40 실행기 시작: 전체 300개, 완료 0개
+- 2026-10-28 10:40 실행 시작: F7_MNIST_BSA_C0.1_rep1 (시도 1/2, git 9c298db)
+
+===== F7_MNIST_BSA_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 30 two 1,2,3,4,8
+===== F7_MNIST_BSA_C0.1_rep1 -> {"name": "F7_MNIST_BSA_C0.1_rep1", "outcome": "completed", "returncode": 0, "wall_min": 35.4, "rounds_done": 500, "rounds_requested": 500, "best_acc": 96.1, "last_acc": 93.45, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-28 11:15 실행 종료: F7_MNIST_BSA_C0.1_rep1 → completed, 500/500라운드, 최고 96.1%, 35.4분
+- 2026-10-28 11:16 실행 시작: F7_MNIST_SASAFL_ON_C0.1_rep1 (시도 1/2, git 21569e9)
+
+===== F7_MNIST_SASAFL_ON_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3,4,8
+===== F7_MNIST_SASAFL_ON_C0.1_rep1 -> {"name": "F7_MNIST_SASAFL_ON_C0.1_rep1", "outcome": "completed", "returncode": 0, "wall_min": 88.3, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.09, "last_acc": 95.65, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-28 12:44 실행 종료: F7_MNIST_SASAFL_ON_C0.1_rep1 → completed, 500/500라운드, 최고 98.09%, 88.3분
+- 2026-10-28 12:44 실행 시작: F7_MNIST_SASAFL_OFF_C0.1_rep1 (시도 1/2, git 21569e9)
+
+===== F7_MNIST_SASAFL_OFF_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3,4,8
+===== F7_MNIST_SASAFL_OFF_C0.1_rep1 -> {"name": "F7_MNIST_SASAFL_OFF_C0.1_rep1", "outcome": "completed", "returncode": 0, "wall_min": 70.14, "rounds_done": 500, "rounds_requested": 500, "best_acc": 93.55, "last_acc": 79.76, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-28 13:55 실행 종료: F7_MNIST_SASAFL_OFF_C0.1_rep1 → completed, 500/500라운드, 최고 93.55%, 70.14분
+- 2026-10-28 13:55 실행 시작: F7_MNIST_SAFA_C0.1_rep1 (시도 1/2, git e2eabf7)
+
+===== F7_MNIST_SAFA_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SAFA 0.1 30 two 1,2,3,4,8
+- 2026-10-28 14:44 실행기 시작: 전체 300개, 완료 3개, 먼저 돌릴 실행: ['F7_MNIST_SAFAfix_C0.1_rep1']
+- 2026-10-28 14:44 실행 시작: F7_MNIST_SAFAfix_C0.1_rep1 (시도 1/2, git e686dc8)
+
+===== F7_MNIST_SAFAfix_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SAFAfix 0.1 30 two 1,2,3,4,8
+- 2026-10-28 18:06 실행기 시작: 전체 240개, 완료 3개
+- 2026-10-28 18:06 실행 시작: F7_MNIST_SAFA_C0.1_rep1 (시도 1/2, git b9f353a)
+
+===== F7_MNIST_SAFA_C0.1_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SAFA 0.1 30 two 1,2,3,4,8
+===== F7_MNIST_SAFA_C0.1_rep1 -> {"name": "F7_MNIST_SAFA_C0.1_rep1", "outcome": "stalled", "returncode": -9, "wall_min": 258.72, "rounds_done": 500, "rounds_requested": 500, "best_acc": 37.77, "last_acc": 11.39, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-28 22:25 실행 종료: F7_MNIST_SAFA_C0.1_rep1 → stalled, 500/500라운드, 최고 37.77%, 258.72분
+- 2026-10-28 22:26 실행 시작: F7_MNIST_BSA_C0.3_rep1 (시도 1/2, git b9f353a)
+
+===== F7_MNIST_BSA_C0.3_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.3 30 two 1,2,3,4,8
+===== F7_MNIST_BSA_C0.3_rep1 -> {"name": "F7_MNIST_BSA_C0.3_rep1", "outcome": "completed", "returncode": 0, "wall_min": 51.69, "rounds_done": 500, "rounds_requested": 500, "best_acc": 98.11, "last_acc": 93.09, "errors": {"is_set_corruption": 0, "segfault": 0, "abort": 0, "connection_closed": 0, "gloo_timeout": 0, "traceback": 0, "child_failed": 0}}
+- 2026-10-28 23:17 실행 종료: F7_MNIST_BSA_C0.3_rep1 → completed, 500/500라운드, 최고 98.11%, 51.69분
+- 2026-10-28 23:18 실행 전 검사 실패 → 5분 뒤 다시 검사: 175 코드 수정됨: ['M methods/SAFA/SAFA.py', ' M methods/SAFA/SAFAClient.py', ' M methods/SAFA/SAFAServer.py']
+- 2026-10-28 23:23 실행 전 검사 실패 → 5분 뒤 다시 검사: 175 코드 수정됨: ['M methods/SAFA/SAFA.py', ' M methods/SAFA/SAFAClient.py', ' M methods/SAFA/SAFAServer.py']
+- 2026-10-28 23:28 실행 시작: F7_MNIST_SASAFL_ON_C0.3_rep1 (시도 1/2, git a1d5287)
+
+===== F7_MNIST_SASAFL_ON_C0.3_rep1 : bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.3 30 two 1,2,3,4,8
