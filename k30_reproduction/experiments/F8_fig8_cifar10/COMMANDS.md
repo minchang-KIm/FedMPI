@@ -53,6 +53,52 @@ bash /home/wise-175/Mando/FedMPI/k30_reproduction/fig7/start_fig7.sh   # tmux �
 
 ## 실행별 명령
 
+### F8_CIFAR10_BSA_C0.1_rep1
+
+- 방법 BSA (`--method=SemiAsync`), CIFAR10, C=0.1, lr=0.001, τ=9, 시작 2026-10-29T13:35:52, git `962aa8a`, 상태: 진행 중
+
+wise-175 (실행기가 호출한 launcher):
+
+```bash
+ROUNDS=3000 DATASET=CIFAR10 IID=False SPLIT=gaussian LEARNING_RATE=0.001 BATCH_SIZE=32 LOCAL_EPOCHS=5 TARGET_ACCURACY=1.0 LAG_TOLERANCE=9 K30_SASAFL_SRC= K30_TRACE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 SYNC_SOURCE=0 MASTER_PORT=29901 RUN_ID=F8_CIFAR10_BSA_C0.1_rep1_1793248552 \
+  bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.1 30 two 1,2,3,4,8
+```
+
+wise-175 (node_rank 0: 서버 + 클라이언트 15개, cwd /home/wise-175/Mando/FedMPI):
+
+```bash
+/home/wise-175/anaconda3/envs/FL/bin/python -m torch.distributed.run --nnodes=2 --nproc_per_node=16 --node_rank=0 --rdzv_id=F8_CIFAR10_BSA_C0.1_rep1_1793248552 --rdzv_endpoint=210.107.197.175:29901 --master_addr=210.107.197.175 --master_port=29901 k30_reproduction/harness_entry.py --selection_ratio=0.1 --round=3000 --batch_size=32 --local_epochs=5 --lr=0.001 --target_acc=1.0 --dataset=CIFAR10 --iid=False --split=gaussian --method=SemiAsync --lag_tolerance=9 --wandb_on=False --repeat=1 --cluster_type=KISTI --num_threads=1128438238412431
+```
+
+wise-176 (node_rank 1: 클라이언트 15개, cwd /home/wise-176/Mando/FedMPI, launch.sh가 ssh로 실행):
+
+```bash
+/home/wise-176/miniconda3/envs/FL/bin/python -m torch.distributed.run --nnodes=2 --nproc_per_node=15 --node_rank=1 --rdzv_id=F8_CIFAR10_BSA_C0.1_rep1_1793248552 --rdzv_endpoint=210.107.197.175:29901 --master_addr=210.107.197.175 --master_port=29901 k30_reproduction/harness_entry.py --selection_ratio=0.1 --round=3000 --batch_size=32 --local_epochs=5 --lr=0.001 --target_acc=1.0 --dataset=CIFAR10 --iid=False --split=gaussian --method=SemiAsync --lag_tolerance=9 --wandb_on=False --repeat=1 --cluster_type=KISTI --num_threads=382234144318821
+```
+
+### F8_CIFAR10_SASAFL_C0.1_rep1
+
+- 방법 SASAFL (`--method=SASAFL`), CIFAR10, C=0.1, lr=0.001, τ=9, 시작 2026-10-29T13:35:57, git `962aa8a`, 상태: 진행 중
+
+wise-175 (실행기가 호출한 launcher):
+
+```bash
+ROUNDS=3000 DATASET=CIFAR10 IID=False SPLIT=gaussian LEARNING_RATE=0.001 BATCH_SIZE=32 LOCAL_EPOCHS=5 TARGET_ACCURACY=1.0 LAG_TOLERANCE=9 K30_SASAFL_SRC= K30_TRACE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 SYNC_SOURCE=0 MASTER_PORT=29902 RUN_ID=F8_CIFAR10_SASAFL_C0.1_rep1_1793248557 \
+  bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SASAFL 0.1 30 two 1,2,3,4,8
+```
+
+wise-175 (node_rank 0: 서버 + 클라이언트 15개, cwd /home/wise-175/Mando/FedMPI):
+
+```bash
+/home/wise-175/anaconda3/envs/FL/bin/python -m torch.distributed.run --nnodes=2 --nproc_per_node=16 --node_rank=0 --rdzv_id=F8_CIFAR10_SASAFL_C0.1_rep1_1793248557 --rdzv_endpoint=210.107.197.175:29902 --master_addr=210.107.197.175 --master_port=29902 k30_reproduction/harness_entry.py --selection_ratio=0.1 --round=3000 --batch_size=32 --local_epochs=5 --lr=0.001 --target_acc=1.0 --dataset=CIFAR10 --iid=False --split=gaussian --method=SASAFL --lag_tolerance=9 --wandb_on=False --repeat=1 --cluster_type=KISTI --num_threads=1132314324481828
+```
+
+wise-176 (node_rank 1: 클라이언트 15개, cwd /home/wise-176/Mando/FedMPI, launch.sh가 ssh로 실행):
+
+```bash
+/home/wise-176/miniconda3/envs/FL/bin/python -m torch.distributed.run --nnodes=2 --nproc_per_node=15 --node_rank=1 --rdzv_id=F8_CIFAR10_SASAFL_C0.1_rep1_1793248557 --rdzv_endpoint=210.107.197.175:29902 --master_addr=210.107.197.175 --master_port=29902 k30_reproduction/harness_entry.py --selection_ratio=0.1 --round=3000 --batch_size=32 --local_epochs=5 --lr=0.001 --target_acc=1.0 --dataset=CIFAR10 --iid=False --split=gaussian --method=SASAFL --lag_tolerance=9 --wandb_on=False --repeat=1 --cluster_type=KISTI --num_threads=838433124121842
+```
+
 
 ## 논문 파라미터 vs 이 실험 파라미터 (Fig. 8, CIFAR-10, K=30)
 

@@ -170,7 +170,7 @@ wise-176 (node_rank 1: 클라이언트 15개, cwd /home/wise-176/Mando/FedMPI, l
 
 ### F7_MNIST_SAFA_C0.3_rep1
 
-- 방법 SAFA (`--method=SAFA`), MNIST, C=0.3, lr=0.01, τ=5, 시작 2026-10-29T08:33:24, git `c8c5eba`, 상태: 진행 중
+- 방법 SAFA (`--method=SAFA`), MNIST, C=0.3, lr=0.01, τ=5, 시작 2026-10-29T08:33:24, git `c8c5eba`, 상태: completed 500라운드, 266.67분
 
 wise-175 (실행기가 호출한 launcher):
 
@@ -189,6 +189,29 @@ wise-176 (node_rank 1: 클라이언트 15개, cwd /home/wise-176/Mando/FedMPI, l
 
 ```bash
 /home/wise-176/miniconda3/envs/FL/bin/python -m torch.distributed.run --nnodes=2 --nproc_per_node=15 --node_rank=1 --rdzv_id=F7_MNIST_SAFA_C0.3_rep1_1793230404 --rdzv_endpoint=210.107.197.175:29906 --master_addr=210.107.197.175 --master_port=29906 k30_reproduction/harness_entry.py --selection_ratio=0.3 --round=500 --batch_size=32 --local_epochs=5 --lr=0.01 --target_acc=1.0 --dataset=MNIST --iid=False --split=gaussian --method=SAFA --lag_tolerance=5 --wandb_on=False --repeat=1 --cluster_type=KISTI --num_threads=832844311248123
+```
+
+### F7_MNIST_BSA_C0.5_rep1
+
+- 방법 BSA (`--method=SemiAsync`), MNIST, C=0.5, lr=0.01, τ=9, 시작 2026-10-29T13:00:31, git `fbeb19a`, 상태: 진행 중
+
+wise-175 (실행기가 호출한 launcher):
+
+```bash
+ROUNDS=500 DATASET=MNIST IID=False SPLIT=gaussian LEARNING_RATE=0.01 BATCH_SIZE=32 LOCAL_EPOCHS=5 TARGET_ACCURACY=1.0 LAG_TOLERANCE=9 K30_SASAFL_SRC= K30_TRACE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 SYNC_SOURCE=0 MASTER_PORT=29907 RUN_ID=F7_MNIST_BSA_C0.5_rep1_1793246431 \
+  bash /home/wise-175/Mando/FedMPI/k30_reproduction/launch.sh SemiAsync 0.5 30 two 1,2,3,4,8
+```
+
+wise-175 (node_rank 0: 서버 + 클라이언트 15개, cwd /home/wise-175/Mando/FedMPI):
+
+```bash
+/home/wise-175/anaconda3/envs/FL/bin/python -m torch.distributed.run --nnodes=2 --nproc_per_node=16 --node_rank=0 --rdzv_id=F7_MNIST_BSA_C0.5_rep1_1793246431 --rdzv_endpoint=210.107.197.175:29907 --master_addr=210.107.197.175 --master_port=29907 k30_reproduction/harness_entry.py --selection_ratio=0.5 --round=500 --batch_size=32 --local_epochs=5 --lr=0.01 --target_acc=1.0 --dataset=MNIST --iid=False --split=gaussian --method=SemiAsync --lag_tolerance=9 --wandb_on=False --repeat=1 --cluster_type=KISTI --num_threads=1134883141234228
+```
+
+wise-176 (node_rank 1: 클라이언트 15개, cwd /home/wise-176/Mando/FedMPI, launch.sh가 ssh로 실행):
+
+```bash
+/home/wise-176/miniconda3/envs/FL/bin/python -m torch.distributed.run --nnodes=2 --nproc_per_node=15 --node_rank=1 --rdzv_id=F7_MNIST_BSA_C0.5_rep1_1793246431 --rdzv_endpoint=210.107.197.175:29907 --master_addr=210.107.197.175 --master_port=29907 k30_reproduction/harness_entry.py --selection_ratio=0.5 --round=500 --batch_size=32 --local_epochs=5 --lr=0.01 --target_acc=1.0 --dataset=MNIST --iid=False --split=gaussian --method=SemiAsync --lag_tolerance=9 --wandb_on=False --repeat=1 --cluster_type=KISTI --num_threads=312411884433822
 ```
 
 
